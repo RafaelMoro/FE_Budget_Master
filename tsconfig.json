@@ -17,5 +17,5 @@
     "jsxImportSource": "@emotion/react",
     "strictNullChecks": true
   },
-  "include": ["src"]
+  "include": ["src", "e2e"]
 }

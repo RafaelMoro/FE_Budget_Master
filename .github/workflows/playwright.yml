@@ -28,22 +28,18 @@ jobs:
       uses: pnpm/action-setup@v4
       with:
         version: 8
-
-    - name: Install dependencies
-      run: pnpm install
-    - uses: actions/download-artifact@v2
-      with:
-        name: build
-        path: build
     
     - name: Install Playwright Browsers
       run: pnpm exec playwright install --with-deps
       
     - name: Start server
       run: |
-        pnpm i serve -g
-        serve -s build &
+        pnpm start
         npx wait-on http://localhost:3000
+
+    - name: Create test-user-cred.json
+      run: |
+        echo "{\"user\":\"${{ secrets.USER }}",\"password\":\"${{ secrets.PASSWORD }}"}" > ./playwright/.auth/test-user-cred.json
 
     - name: Run Playwright tests
       run: pnpm exec playwright test

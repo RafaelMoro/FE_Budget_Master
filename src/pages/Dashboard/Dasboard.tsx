@@ -49,7 +49,7 @@ const Dashboard = () => {
           />
         )}
         <ViewAccounts hide={noAccountsCreated} accountsActions={accountActions} />
-        <RecordsBox id="record-box" onScroll={toggleVisibleDesktop} noAccountsCreated={noAccountsCreated}>
+        <RecordsBox id="record-box" data-testid="record-box" onScroll={toggleVisibleDesktop} noAccountsCreated={noAccountsCreated}>
           <RecordList handleOpenCreateAccount={handleOpenCreateAccount} />
         </RecordsBox>
         <SpeedDial

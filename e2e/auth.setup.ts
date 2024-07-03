@@ -7,6 +7,7 @@ const authFile = 'playwright/.auth/user.json';
 setup('authenticate', async ({ page }) => {
   // Perform authentication steps. Replace these actions with your own.
   await page.goto(`${BASE_TEST_URL}/login`);
+  await expect(page.getByRole('heading', { name: /welcome back/i })).toBeVisible();
   await page.getByLabel('Email').fill(test_creds.user);
   await page.getByLabel('Password').fill(test_creds.password);
   await page.getByTestId('login-button').click();

@@ -1,5 +1,7 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { DashboardPage } from './pages/dashboardPage';
+import { BASE_TEST_URL } from './constants';
+import { LandingPage } from './pages/landingPage';
 
 test.skip('Login, create account and create record, then log out.', async ({ page }) => {
   await page.goto('http://localhost:3000/');
@@ -52,6 +54,9 @@ test.skip('Login, create account and create record, then log out.', async ({ pag
 
 test('Login', async ({ page }) => {
   const dashboardPage = new DashboardPage(page);
+  const landingPage = new LandingPage(page);
 
-  dashboardPage.waitLoadDashboard();
+  await page.goto(BASE_TEST_URL);
+  await landingPage.viewDashboardButton.click();
+  await expect(dashboardPage.accountManagementHeading).toBeVisible();
 });

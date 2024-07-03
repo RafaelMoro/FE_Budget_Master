@@ -50,6 +50,8 @@ jobs:
 
     - name: Create test-user-cred.json
       run: |
+        mkdir -p playwright/.auth
+        touch ./playwright/.auth/test-user-cred.json
         echo "{\"user\":\"${{ secrets.USER }}",\"password\":\"${{ secrets.PASSWORD }}"}" > ./playwright/.auth/test-user-cred.json
 
     - name: Run Playwright tests

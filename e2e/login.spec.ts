@@ -1,7 +1,4 @@
-import { test, expect } from '@playwright/test';
-import { BASE_TEST_URL } from './constants';
-import { LandingPage } from './pages/landingPage';
-import { LoginPage } from './pages/loginPage';
+import { test } from '@playwright/test';
 import { DashboardPage } from './pages/dashboardPage';
 
 test.skip('Login, create account and create record, then log out.', async ({ page }) => {
@@ -54,13 +51,7 @@ test.skip('Login, create account and create record, then log out.', async ({ pag
 });
 
 test('Login', async ({ page }) => {
-  const landingPage = new LandingPage(page);
-  const loginPage = new LoginPage(page);
   const dashboardPage = new DashboardPage(page);
 
-  await page.goto(BASE_TEST_URL);
-  await landingPage.logInButton.click();
-
-  await loginPage.login();
   dashboardPage.waitLoadDashboard();
 });

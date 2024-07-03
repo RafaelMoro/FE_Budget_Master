@@ -53,6 +53,7 @@ jobs:
         mkdir -p playwright/.auth
         touch ./playwright/.auth/test-user-cred.json
         echo "{\"user\":\"${{ secrets.USER }}",\"password\":\"${{ secrets.PASSWORD }}"}" > ./playwright/.auth/test-user-cred.json
+        cat ./playwright/.auth/test-user-cred.json
 
     - name: Run Playwright tests
       run: pnpm exec playwright test

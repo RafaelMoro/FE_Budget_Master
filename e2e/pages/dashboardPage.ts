@@ -1,4 +1,5 @@
 import { Page, type Locator, expect } from '@playwright/test';
+import { BASE_TEST_URL } from '../constants';
 
 export class DashboardPage {
   page: Page;
@@ -14,6 +15,7 @@ export class DashboardPage {
   }
 
   async waitLoadDashboard() {
+    await this.page.goto(BASE_TEST_URL);
     await this.page.waitForLoadState('domcontentloaded', { timeout: 15_000 });
     await expect(this.currentMonthAccordeon).toBeVisible();
   }

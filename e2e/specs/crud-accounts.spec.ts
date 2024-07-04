@@ -21,16 +21,16 @@ test.describe('CRUD Accounts', () => {
       await dashboardPage.createAccount({ accountTitle });
     });
 
+    await test.step('THEN: I edit an account', async () => {
+      const dashboardPage = new DashboardPage(page);
+
+      await dashboardPage.modifyAccount({ accountTitle });
+    });
+
     await test.step('THEN: I delete an account', async () => {
       const dashboardPage = new DashboardPage(page);
 
       await dashboardPage.deleteAccount({ accountTitle });
     });
-
-    // await test.step('THEN: I edit an account', async () => {
-    //   const dashboardPage = new DashboardPage(page);
-
-    //   await dashboardPage.modifyAccount();
-    // });
   });
 });

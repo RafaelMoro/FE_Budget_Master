@@ -62,18 +62,18 @@ export class DashboardPage {
     await expect(this.page.getByText(accountTitle)).toBeVisible();
   }
 
-  async modifyAccount() {
+  async modifyAccount({ accountTitle }: { accountTitle: string }) {
     // On dashboard
     await expect(this.currentMonthAccordeon).toBeVisible();
 
     // Click on edit icon button of the account created on createAccount()
-    await this.editAccountIconButton.click();
+    await this.page.getByLabel(`edit-button-account-${accountTitle}`).click();
 
     // await for modal to be opened
     await expect(this.editModalTitle).toBeVisible();
 
     // Edit account's information
-    await this.accountTitleInput.fill('My Account Edited');
+    await this.accountTitleInput.fill(`${accountTitle} edited`);
     await this.accountAmountInput.fill('500');
     await this.page.getByLabel('Green').click();
     await this.page.getByRole('option', { name: 'Dark Red' }).click();
@@ -83,14 +83,14 @@ export class DashboardPage {
     await this.modifyAccountButtonModal.click();
 
     // asset
-    await expect(this.page.getByRole('complementary')).toContainText('My Account edited');
+    await expect(this.page.getByRole('complementary')).toContainText(`${accountTitle} edited`);
     await expect(this.page.getByRole('complementary')).toContainText('$500.00');
     await expect(this.page.getByRole('complementary')).toContainText('Food Voucher');
   }
 
   async deleteAccount({ accountTitle }: { accountTitle: string }) {
-    await expect(this.page.getByRole('heading', { name: /My Account/i })).toBeVisible();
-    await this.page.getByLabel(`delete-button-account-${accountTitle}`).click();
+    await expect(this.currentMonthAccordeon).toBeVisible();
+    await this.page.getByLabel(`delete-button-account-${accountTitle} edited`).click();
 
     // Modal
     await expect(this.page.getByRole('heading')).toContainText('Delete Account');

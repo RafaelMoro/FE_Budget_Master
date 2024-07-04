@@ -16,6 +16,9 @@
 # production
 /build
 
+# playwright
+/playwright/.auth
+
 # misc
 .DS_Store
 .env.local

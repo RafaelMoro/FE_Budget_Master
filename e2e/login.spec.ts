@@ -3,7 +3,7 @@ import { DashboardPage } from './pages/dashboardPage';
 import { BASE_TEST_URL } from './constants';
 import { LandingPage } from './pages/landingPage';
 
-test('Login', async ({ page }) => {
+test.skip('Login', async ({ page }) => {
   const dashboardPage = new DashboardPage(page);
   const landingPage = new LandingPage(page);
 

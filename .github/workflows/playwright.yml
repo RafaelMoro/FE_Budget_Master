@@ -34,7 +34,7 @@ jobs:
       run: |
         mkdir -p playwright/.auth
         touch ./playwright/.auth/test-user-cred.json
-        echo "{\"user\":\"${{ secrets.USER }}\",\"password\":\"${{ secrets.PASSWORD }}\", \"test-frontend-uri\": \"https://fe-budget-master.onrender.com"}" > ./playwright/.auth/test-user-cred.json
+        echo "{\"user\":\"${{ secrets.USER }}\",\"password\":\"${{ secrets.PASSWORD }}\", \"test-frontend-uri\": \"https://fe-budget-master.onrender.com\"}" > ./playwright/.auth/test-user-cred.json
         cat ./playwright/.auth/test-user-cred.json
 
     - name: Run Playwright tests

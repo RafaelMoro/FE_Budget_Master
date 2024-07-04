@@ -11,14 +11,8 @@ jobs:
       - name: Cancel Previous Redundant Builds
         uses: styfle/cancel-workflow-action@0.9.1
 
-  build:
-    name: Build application
-    uses: ./.github/workflows/build.yml
-    secrets: inherit
-
   test:
     name: Run E2E tests
-    needs: [build]
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -39,12 +33,6 @@ jobs:
     
     - name: Install Playwright Browsers
       run: pnpm exec playwright install --with-deps
-      
-    - name: Start server
-      run: |
-        pnpm i serve -g
-        serve -s build &
-        npx wait-on http://localhost:3000
 
     - name: Create test-user-cred.json
       run: |

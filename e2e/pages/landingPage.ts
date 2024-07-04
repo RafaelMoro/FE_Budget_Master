@@ -1,5 +1,5 @@
 import { Page, type Locator } from '@playwright/test';
-import { BASE_TEST_URL } from '../constants';
+import test_creds from '../../playwright/.auth/test-user-cred.json';
 
 export class LandingPage {
   page: Page;
@@ -24,7 +24,7 @@ export class LandingPage {
   }
 
   async navigateToDashboard() {
-    await this.page.goto(BASE_TEST_URL);
+    await this.page.goto(`${test_creds['test-frontend-uri']}`);
     await this.page.waitForLoadState('domcontentloaded', { timeout: 15_000 });
     await this.viewDashboardButton.click();
     await this.page.waitForLoadState('domcontentloaded', { timeout: 15_000 });

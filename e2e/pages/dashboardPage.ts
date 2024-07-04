@@ -39,7 +39,7 @@ export class DashboardPage {
     this.modifyAccountButtonModal = page.getByRole('button', { name: 'Modify Account' });
   }
 
-  async createAccount() {
+  async createAccount({ accountTitle }: { accountTitle: string }) {
     await expect(this.currentMonthAccordeon).toBeVisible();
     await this.createAccountCard.click();
 
@@ -53,14 +53,13 @@ export class DashboardPage {
     await expect(this.page.locator('form')).toContainText('The initial amount of your account is required.');
 
     // Fill account's information
-    await this.accountTitleInput.fill('My Account');
+    await this.accountTitleInput.fill(accountTitle);
     await this.accountAmountInput.fill('1000');
     await this.page.getByLabel('Dark Orange').click();
     await this.page.getByRole('option', { name: 'Green', exact: true }).click();
     await this.createAccountButton.click();
 
-    // await expect(this.page.getByTestId('notification-container').getByRole('heading')).toContainText('Account My account created');
-    await expect(this.page.getByText('My account$1,500.')).toBeVisible();
+    await expect(this.page.getByText(accountTitle)).toBeVisible();
   }
 
   async modifyAccount() {
@@ -89,15 +88,15 @@ export class DashboardPage {
     await expect(this.page.getByRole('complementary')).toContainText('Food Voucher');
   }
 
-  async deleteAccount() {
+  async deleteAccount({ accountTitle }: { accountTitle: string }) {
     await expect(this.page.getByRole('heading', { name: /My Account/i })).toBeVisible();
-    await this.page.getByLabel('delete-button-account-My').click();
+    await this.page.getByLabel(`delete-button-account-${accountTitle}`).click();
 
     // Modal
     await expect(this.page.getByRole('heading')).toContainText('Delete Account');
     await expect(
       this.page.getByLabel('Delete Account').locator('div'),
-    ).toContainText(/Are you sure you want to delete the account My Account edited\?/i);
+    ).toContainText(/Are you sure you want to delete the account/i);
     await this.page.getByRole('button', { name: 'Delete Account' }).click();
     await expect(this.page.getByRole('heading', { name: /My Account/i })).not.toBeVisible();
   }

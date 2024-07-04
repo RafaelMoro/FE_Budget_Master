@@ -41,12 +41,6 @@ jobs:
     
     - name: Install Playwright Browsers
       run: pnpm exec playwright install --with-deps
-      
-    - name: Start server
-      run: |
-        pnpm i serve -g
-        serve -s build &
-        npx wait-on http://localhost:3000
 
     - name: Create test-user-cred.json
       run: |
@@ -56,7 +50,11 @@ jobs:
         cat ./playwright/.auth/test-user-cred.json
 
     - name: Run Playwright tests
-      run: pnpm exec playwright test
+      run: |
+        pnpm start &
+        sleep 10 &&
+        curl http://localhost:3000 &&
+        pnpm e2e
     - uses: actions/upload-artifact@v4
       if: always()
       with:

@@ -88,4 +88,17 @@ export class DashboardPage {
     await expect(this.page.getByRole('complementary')).toContainText('$500.00');
     await expect(this.page.getByRole('complementary')).toContainText('Food Voucher');
   }
+
+  async deleteAccount() {
+    await expect(this.page.getByRole('heading', { name: /My Account/i })).toBeVisible();
+    await this.page.getByLabel('delete-button-account-My').click();
+
+    // Modal
+    await expect(this.page.getByRole('heading')).toContainText('Delete Account');
+    await expect(
+      this.page.getByLabel('Delete Account').locator('div'),
+    ).toContainText(/Are you sure you want to delete the account My Account edited\?/i);
+    await this.page.getByRole('button', { name: 'Delete Account' }).click();
+    await expect(this.page.getByRole('heading', { name: /My Account/i })).not.toBeVisible();
+  }
 }

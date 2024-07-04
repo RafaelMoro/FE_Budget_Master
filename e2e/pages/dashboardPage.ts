@@ -17,6 +17,12 @@ export class DashboardPage {
 
   noRecordsText: Locator;
 
+  editAccountIconButton: Locator;
+
+  editModalTitle: Locator;
+
+  modifyAccountButtonModal: Locator;
+
   constructor(page: Page) {
     this.page = page;
     this.accountManagementHeading = page.getByRole('heading', { name: 'Account management' });
@@ -28,6 +34,9 @@ export class DashboardPage {
     // Account Dialog modal
     this.accountTitleInput = page.getByLabel('Account Title');
     this.accountAmountInput = page.getByLabel('Amount');
+    this.editAccountIconButton = page.getByLabel('edit-button-account-My Account').first();
+    this.editModalTitle = page.getByRole('heading', { name: 'Modify Account:' });
+    this.modifyAccountButtonModal = page.getByRole('button', { name: 'Modify Account' });
   }
 
   async createAccount() {
@@ -52,5 +61,31 @@ export class DashboardPage {
 
     // await expect(this.page.getByTestId('notification-container').getByRole('heading')).toContainText('Account My account created');
     await expect(this.page.getByText('My account$1,500.')).toBeVisible();
+  }
+
+  async modifyAccount() {
+    // On dashboard
+    await expect(this.currentMonthAccordeon).toBeVisible();
+
+    // Click on edit icon button of the account created on createAccount()
+    await this.editAccountIconButton.click();
+
+    // await for modal to be opened
+    await expect(this.editModalTitle).toBeVisible();
+
+    // Edit account's information
+    await this.accountTitleInput.fill('My Account Edited');
+    await this.accountAmountInput.fill('500');
+    await this.page.getByLabel('Green').click();
+    await this.page.getByRole('option', { name: 'Dark Red' }).click();
+    await this.page.getByLabel('Debit').click();
+    await this.page.getByRole('option', { name: 'Food Voucher' }).click();
+
+    await this.modifyAccountButtonModal.click();
+
+    // asset
+    await expect(this.page.getByRole('complementary')).toContainText('My Account edited');
+    await expect(this.page.getByRole('complementary')).toContainText('$500.00');
+    await expect(this.page.getByRole('complementary')).toContainText('Food Voucher');
   }
 }

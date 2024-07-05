@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { getDateInfo } from '../../../../../utils/DateUtils';
+import { getDateInfo, validateMonthOlderRecords } from '../../../../../utils/DateUtils';
 import { GET_EXPENSES_AND_INCOMES_BY_MONTH_ROUTE, NO_EXPENSES_OR_INCOMES_FOUND } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
 import { resetLastMonthBalance, updateTotalExpensesIncomes, useLazyFetchRecordsByMonthYearQuery } from '../../../../../redux/slices/Records';
@@ -10,7 +10,7 @@ import { Error } from '../../../Error';
 import { ShowMultipleRecordLoader } from '../ShowMultipleRecordLoaders';
 import { SelectMonthYear } from '../SelectExpenses/SelectMonthYear';
 import { sumTotalRecords } from '../../../../../utils';
-import { AnyRecord, LazyFetchRecords } from '../../../../../globalInterface';
+import { AbbreviatedMonthsType, AnyRecord, LazyFetchRecords } from '../../../../../globalInterface';
 
 interface OlderRecordsProps {
   color: string;
@@ -26,6 +26,7 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
   const [fetchOlderRecordsMutation, {
     isError, currentData, isFetching,
   }] = useLazyFetchRecordsByMonthYearQuery();
+
   const user = useAppSelector((state) => state.user.userInfo);
   const bearerToken = user?.bearerToken as string;
   // change this
@@ -38,8 +39,20 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
   const handleFetchRecords = async ({ newMonth, newYear }: LazyFetchRecords) => {
     try {
       if (isGuestUser) return;
-      const monthParam = newMonth ?? month;
+
+      const monthParam: AbbreviatedMonthsType = newMonth ?? month;
       const yearParam = newYear ?? year;
+
+      const { isCurrentMonth, isFutureMonth, isLastMonth } = validateMonthOlderRecords({ month: monthParam, year: yearParam });
+      // Do not fetch if isCurrentMonth or isFutureMonth or isLastMonth
+      if (isCurrentMonth || isFutureMonth || isLastMonth) {
+        // modify a state and show it to the user
+        console.log('is current month', isCurrentMonth);
+        console.log('is future month', isFutureMonth);
+        console.log('is last month', isLastMonth);
+        return;
+      }
+
       const olderRecordsRoute = `${GET_EXPENSES_AND_INCOMES_BY_MONTH_ROUTE}/${accountId}/${monthParam}/${yearParam}`;
       const response = await fetchOlderRecordsMutation({ route: olderRecordsRoute, bearerToken }).unwrap();
       // Update total balance of expenses and incomes after fetch of last month records

@@ -100,7 +100,7 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
       loading={isFetching}
       error={isError}
       showMessage={message !== ''}
-      onShowMessage={() => <Error description={message} />}
+      onShowMessage={() => <Error description={message} minHeight="50rem" />}
       onEmptyCb={() => <NoRecordsFound />}
       onErrorCb={() => <Error description="An error has ocurred. Please try again later." />}
       onLoadingCb={() => (

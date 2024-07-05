@@ -38,6 +38,7 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
   const { totalRecords: { olderRecords: olderRecordsTotal } } = recordsState;
   const [message, setMessage] = useState('');
 
+  // Function executed in SelectMonthYear component
   const handleFetchRecords = async ({ newMonth, newYear }: LazyFetchRecords) => {
     try {
       if (isGuestUser) return;

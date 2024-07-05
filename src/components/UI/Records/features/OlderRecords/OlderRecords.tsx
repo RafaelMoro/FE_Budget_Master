@@ -59,10 +59,15 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
     }
   };
 
+  const fetchRecordsOnOpenAccordion = () => {
+    handleFetchRecords({ newMonth: month, newYear: year });
+  };
+
   return (
     <MonthRecords
       color={color}
       openedAccordeon={false}
+      onClickCb={fetchRecordsOnOpenAccordion}
       titleMonthAccordeon="Older Records"
       totalExpense={olderRecordsTotal.expenseTotal}
       totalIncome={olderRecordsTotal.incomeTotal}

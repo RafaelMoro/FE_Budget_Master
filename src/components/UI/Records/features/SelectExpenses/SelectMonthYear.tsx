@@ -8,7 +8,6 @@ import { CompleteMonthsType, LazyFetchRecords } from '../../../../../globalInter
 import { updateAbbreviatedMonth } from '../../../../../hooks/useDate/date.utils';
 
 interface SelectMonthYearProps {
-  updateMonthYear: (values: SelectMonthYearValues) => void;
   fetchRecordsCb?: ({ newMonth, newYear }: LazyFetchRecords) => Promise<void>;
   completeMonth: CompleteMonthsType;
   currentYear: string;
@@ -16,13 +15,9 @@ interface SelectMonthYearProps {
 }
 
 const SelectMonthYear = ({
-  updateMonthYear, completeMonth, currentYear, yearsArray, fetchRecordsCb,
+  completeMonth, currentYear, yearsArray, fetchRecordsCb,
 }: SelectMonthYearProps) => {
   const handleSubmit = (values: SelectMonthYearValues) => {
-    // TODO: check if this pattern is correct.
-    //  TODO: The month and year states are updated later the fetch records, we may need to check select expenses as well
-    // First update month and year
-    updateMonthYear(values);
     // If it fetches, fetch with the new month and year
     if (fetchRecordsCb) {
       const newMonth = updateAbbreviatedMonth({ newMonth: values.month });

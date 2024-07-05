@@ -26,7 +26,7 @@ const SelectExpenses = ({
   modifySelectedExpenses, selectedExpenses = [], closeDrawer, accountId,
 }: SelectExpensesProps) => {
   const {
-    month, completeMonth, year, years, updateMonthAndYear,
+    month, completeMonth, year, years,
   } = useDate();
   const {
     expenses, noExpensesFound, loading, isError, handleFetchRecords,
@@ -47,7 +47,6 @@ const SelectExpenses = ({
       </CloseDrawerContainer>
       { (!isError) && (
         <SelectMonthYear
-          updateMonthYear={updateMonthAndYear}
           fetchRecordsCb={handleFetchRecords}
           completeMonth={completeMonth}
           currentYear={year}

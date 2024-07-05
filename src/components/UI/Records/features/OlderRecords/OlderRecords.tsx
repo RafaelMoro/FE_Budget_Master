@@ -21,7 +21,7 @@ interface OlderRecordsProps {
 const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
   const dispatch = useAppDispatch();
   const {
-    completeMonth, month, year, years, updateMonthAndYear,
+    completeMonth, month, year, years,
   } = useDate({ isOlderRecords: true });
   const [fetchOlderRecordsMutation, {
     isError, currentData, isFetching,
@@ -84,7 +84,6 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
       isOlderRecords
     >
       <SelectMonthYear
-        updateMonthYear={updateMonthAndYear}
         completeMonth={completeMonth}
         currentYear={year}
         yearsArray={years}

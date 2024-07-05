@@ -115,8 +115,8 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
       accountId={accountId}
       records={olderRecords}
       isGuestUser={isGuestUser}
-      loading={isFetching}
-      error={isError}
+      loading={isGuestUser ? false : isFetching}
+      error={isGuestUser ? false : isError}
       showMessage={message !== ''}
       onShowMessage={() => <Error description={message} minHeight="50rem" />}
       onEmptyCb={() => <NoRecordsFound />}

@@ -1,1 +1,1 @@
-export { useDate } from './useDate';
+export { useDate } from './getDateInfo';

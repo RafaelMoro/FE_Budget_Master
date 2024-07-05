@@ -2,7 +2,7 @@ import { IconButton, Typography } from '@mui/material';
 
 import { useEffect } from 'react';
 import { useAllExpenses } from '../../../../../hooks/useAllExpenses';
-import { useDate } from '../../../../../utils/DateUtils';
+import { getDateInfo } from '../../../../../utils/DateUtils';
 import { ERROR_MESSAGE_GENERAL } from '../../../../../constants';
 import { ExpensePaid } from '../../../../../globalInterface';
 
@@ -27,7 +27,7 @@ const SelectExpenses = ({
 }: SelectExpensesProps) => {
   const {
     month, completeMonth, year, years,
-  } = useDate();
+  } = getDateInfo();
   const {
     expenses, noExpensesFound, loading, isError, handleFetchRecords,
   } = useAllExpenses({ month, year, accountId });

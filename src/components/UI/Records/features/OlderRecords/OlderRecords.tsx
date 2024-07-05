@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { useDate } from '../../../../../utils/DateUtils';
+import { getDateInfo } from '../../../../../utils/DateUtils';
 import { GET_EXPENSES_AND_INCOMES_BY_MONTH_ROUTE, NO_EXPENSES_OR_INCOMES_FOUND } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
 import { resetLastMonthBalance, updateTotalExpensesIncomes, useLazyFetchRecordsByMonthYearQuery } from '../../../../../redux/slices/Records';
@@ -22,7 +22,7 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
   const dispatch = useAppDispatch();
   const {
     completeMonth, month, year, years,
-  } = useDate({ isOlderRecords: true });
+  } = getDateInfo({ isOlderRecords: true });
   const [fetchOlderRecordsMutation, {
     isError, currentData, isFetching,
   }] = useLazyFetchRecordsByMonthYearQuery();

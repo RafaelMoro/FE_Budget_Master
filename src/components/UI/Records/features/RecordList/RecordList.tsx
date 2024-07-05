@@ -14,7 +14,7 @@ import {
   GET_EXPENSES_AND_INCOMES_BY_MONTH_ROUTE, NO_EXPENSES_OR_INCOMES_FOUND,
 } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
-import { useDate } from '../../../../../utils/DateUtils';
+import { getDateInfo } from '../../../../../utils/DateUtils';
 import { useGuestUser } from '../../../../../hooks/useGuestUser/useGuestUser';
 import {
   useFetchRecordsByMonthYearQuery,
@@ -38,7 +38,7 @@ const RecordList = ({ handleOpenCreateAccount }: RecordListProps) => {
   const dispatch = useAppDispatch();
   const {
     month, completeCurrentMonth, completeLastMonth, year, lastMonth,
-  } = useDate();
+  } = getDateInfo();
   const { isGuestUser, recordsCurrentMonthLocalStorage, recordsLastMonthLocalStorage } = useGuestUser();
   const user = useAppSelector((state) => state.user.userInfo);
   const accountsFetchStatus = useAppSelector((state) => state.accounts.accountsFetchStatus);

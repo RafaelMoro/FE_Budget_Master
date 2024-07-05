@@ -4,11 +4,11 @@ import { UseAllExpensesProps } from './interface';
 import { useAppSelector } from '../../redux/hooks';
 import { useLazyGetExpensesQuery } from '../../redux/slices/Records/actions/expenses.api';
 import { Expense, LazyFetchRecords } from '../../globalInterface';
-import { useDate } from '../../utils/DateUtils';
+import { getDateInfo } from '../../utils/DateUtils';
 import { getLocalRecords } from './utils';
 
 const useAllExpenses = ({ month, year, accountId }: UseAllExpensesProps) => {
-  const { month: currentMonth, lastMonth } = useDate();
+  const { month: currentMonth, lastMonth } = getDateInfo();
   const userReduxState = useAppSelector((state) => state.user);
   const isGuestUser: boolean = userReduxState?.userInfo?.user?.firstName === 'Guest';
   const recordsLocalStorage = useAppSelector((state) => state.records.recordsLocalStorage);

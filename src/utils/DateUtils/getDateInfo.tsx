@@ -15,7 +15,7 @@ interface UseDateProps {
   isOlderRecords?: boolean;
 }
 
-const useDate = ({ isOlderRecords }: UseDateProps = {}) => {
+const getDateInfo = ({ isOlderRecords }: UseDateProps = {}) => {
   const dateOfToday = dayjs().tz('America/Mexico_City');
   const currentMonthNumber = dateOfToday.month();
   const currentMonth = ABBREVIATED_MONTHS[currentMonthNumber];
@@ -45,4 +45,4 @@ const useDate = ({ isOlderRecords }: UseDateProps = {}) => {
   };
 };
 
-export { useDate };
+export { getDateInfo };

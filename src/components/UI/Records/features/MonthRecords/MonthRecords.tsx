@@ -22,14 +22,16 @@ interface MonthRecordsProps {
   loading: boolean;
   error: boolean;
   isGuestUser: boolean;
+  showMessage?: boolean;
+  onShowMessage?: () => ReactElement;
   onEmptyCb: () => ReactElement;
   onErrorCb: () => ReactElement;
   onLoadingCb: () => ReactElement;
 }
 
 const MonthRecords = ({
-  color, openedAccordeon, titleMonthAccordeon, accountId, isGuestUser, isOlderRecords,
-  records, loading, error, onEmptyCb, onLoadingCb, onErrorCb, totalExpense, totalIncome,
+  color, openedAccordeon, titleMonthAccordeon, accountId, isGuestUser, isOlderRecords, showMessage,
+  records, loading, error, onEmptyCb, onLoadingCb, onErrorCb, totalExpense, totalIncome, onShowMessage,
   onClickCb = () => {}, children,
 }: MonthRecordsProps) => (
   <MonthAccordeon
@@ -56,6 +58,8 @@ const MonthRecords = ({
       records={records}
       loading={loading}
       error={error}
+      showMessage={showMessage}
+      onShowMessage={onShowMessage}
       onEmptyRecords={onEmptyCb}
       onErrorRecords={onErrorCb}
       onLoadingRecords={onLoadingCb}

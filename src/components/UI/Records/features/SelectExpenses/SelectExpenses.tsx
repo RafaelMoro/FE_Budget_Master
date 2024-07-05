@@ -1,5 +1,6 @@
 import { IconButton, Typography } from '@mui/material';
 
+import { useEffect } from 'react';
 import { useAllExpenses } from '../../../../../hooks/useAllExpenses';
 import { useDate } from '../../../../../hooks/useDate';
 import { ERROR_MESSAGE_GENERAL } from '../../../../../constants';
@@ -30,6 +31,12 @@ const SelectExpenses = ({
   const {
     expenses, noExpensesFound, loading, isError, handleFetchRecords,
   } = useAllExpenses({ month, year, accountId });
+
+  // Fetch records on mount
+  useEffect(() => {
+    handleFetchRecords({ newMonth: month, newYear: year });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

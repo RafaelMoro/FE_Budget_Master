@@ -170,7 +170,7 @@ const RecordList = ({ handleOpenCreateAccount }: RecordListProps) => {
         onLoadingCb={() => (
           <ShowMultipleRecordLoader numberOfSkeletons={3} keyMap="older-records" />
         )}
-        seeMoreUI
+        isOlderRecords
       />
     </List>
   );

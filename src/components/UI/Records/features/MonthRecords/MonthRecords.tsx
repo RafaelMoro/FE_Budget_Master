@@ -17,7 +17,7 @@ interface MonthRecordsProps {
   totalExpense: string;
   totalIncome: string;
   onClickCb?: () => Promise<void> | void;
-  seeMoreUI?: boolean;
+  isOlderRecords?: boolean;
   accountId: string;
   records: AnyRecord[];
   loading: boolean;
@@ -29,7 +29,7 @@ interface MonthRecordsProps {
 }
 
 const MonthRecords = ({
-  color, openedAccordeon, titleMonthAccordeon, accountId, isGuestUser, seeMoreUI,
+  color, openedAccordeon, titleMonthAccordeon, accountId, isGuestUser, isOlderRecords,
   records, loading, error, onEmptyCb, onLoadingCb, onErrorCb, totalExpense, totalIncome,
   onClickCb = () => {},
 }: MonthRecordsProps) => {
@@ -45,7 +45,7 @@ const MonthRecords = ({
       accountId={accountId}
       onClickCallback={onClickCb}
     >
-      { (seeMoreUI) && (
+      { (isOlderRecords) && (
       <SelectMonthYear
         updateMonthYear={updateMonthAndYear}
         completeMonth={completeMonth}

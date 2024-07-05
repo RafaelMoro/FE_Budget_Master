@@ -4,7 +4,7 @@ import { SelectMonthYearBox } from '../Features.styled';
 import { SelectInput } from '../../../SelectInput';
 import { MONTHS } from '../../../../../constants';
 import { SecondaryButton } from '../../../../../styles';
-import { CompleteMonthsType, LazyFetchRecords } from '../../../../../globalInterface';
+import { AbbreviatedMonthsType, CompleteMonthsType, LazyFetchRecords } from '../../../../../globalInterface';
 import { updateAbbreviatedMonth } from '../../../../../utils/DateUtils/date.utils';
 
 interface SelectMonthYearProps {
@@ -20,7 +20,7 @@ const SelectMonthYear = ({
   const handleSubmit = (values: SelectMonthYearValues) => {
     // If it fetches, fetch with the new month and year
     if (fetchRecordsCb) {
-      const newMonth = updateAbbreviatedMonth({ newMonth: values.month });
+      const newMonth: AbbreviatedMonthsType = updateAbbreviatedMonth({ newMonth: values.month });
       fetchRecordsCb({ newMonth, newYear: values.year });
     }
   };

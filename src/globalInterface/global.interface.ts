@@ -202,6 +202,6 @@ export interface SelectFormikProps {
 }
 
 export interface LazyFetchRecords {
-  newMonth?: string;
+  newMonth?: AbbreviatedMonthsType;
   newYear?: string;
 }

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { getDateInfo, validateMonthOlderRecords } from '../../../../../utils/DateUtils';
 import { GET_EXPENSES_AND_INCOMES_BY_MONTH_ROUTE, NO_EXPENSES_OR_INCOMES_FOUND } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
-import { resetLastMonthBalance, updateTotalExpensesIncomes, useLazyFetchRecordsByMonthYearQuery } from '../../../../../redux/slices/Records';
+import { resetOlderRecordsBalance, updateTotalExpensesIncomes, useLazyFetchRecordsByMonthYearQuery } from '../../../../../redux/slices/Records';
 
 import { MonthRecords } from '../MonthRecords';
 import { NoRecordsFound } from '../NoRecordsFound';
@@ -70,7 +70,7 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
       if (response && response?.records) {
         const { records } = response;
         if (response?.message === NO_EXPENSES_OR_INCOMES_FOUND) {
-          dispatch(resetLastMonthBalance());
+          dispatch(resetOlderRecordsBalance());
           return;
         }
         const { expenseTotal, incomeTotal } = sumTotalRecords(records);

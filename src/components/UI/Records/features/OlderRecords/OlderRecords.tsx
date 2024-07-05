@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { useState } from 'react';
-import { getDateInfo, validateMonthOlderRecords } from '../../../../../utils/DateUtils';
+import { getDateInfo } from '../../../../../utils/DateUtils';
 import { GET_EXPENSES_AND_INCOMES_BY_MONTH_ROUTE, NO_EXPENSES_OR_INCOMES_FOUND } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
 import { resetOlderRecordsBalance, updateTotalExpensesIncomes, useLazyFetchRecordsByMonthYearQuery } from '../../../../../redux/slices/Records';
@@ -12,6 +12,7 @@ import { ShowMultipleRecordLoader } from '../ShowMultipleRecordLoaders';
 import { SelectMonthYear } from '../SelectExpenses/SelectMonthYear';
 import { sumTotalRecords } from '../../../../../utils';
 import { AbbreviatedMonthsType, AnyRecord, LazyFetchRecords } from '../../../../../globalInterface';
+import { showMessageOnDate } from './OlderRecords.utils';
 
 interface OlderRecordsProps {
   color: string;
@@ -45,19 +46,11 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
 
       const monthParam: AbbreviatedMonthsType = newMonth ?? month;
       const yearParam = newYear ?? year;
+      const completeMonthParam = newCompleteMonth ?? completeMonth;
 
-      const { isCurrentMonth, isFutureMonth, isLastMonth } = validateMonthOlderRecords({ month: monthParam, year: yearParam });
-      // Do not fetch if isCurrentMonth or isFutureMonth or isLastMonth
-      if (isCurrentMonth) {
-        setMessage(`${newCompleteMonth} records are shown above. Please select an older month.`);
-        return;
-      }
-      if (isLastMonth) {
-        setMessage(`${newCompleteMonth} records are shown above. Please select an older month.`);
-        return;
-      }
-      if (isFutureMonth) {
-        setMessage(`You are selecting a date in the future: ${newCompleteMonth} ${yearParam}. Please select an older month.`);
+      const newMessage = showMessageOnDate({ monthParam, yearParam, completeMonth: completeMonthParam });
+      if (newMessage) {
+        setMessage(newMessage);
         return;
       }
 

@@ -13,6 +13,7 @@ import { SelectMonthYear } from '../SelectExpenses/SelectMonthYear';
 import { sumTotalRecords } from '../../../../../utils';
 import { AbbreviatedMonthsType, AnyRecord, LazyFetchRecords } from '../../../../../globalInterface';
 import { showMessageOnDate } from './OlderRecords.utils';
+import { getOlderLocalRecords } from '../../../../../hooks/useAllExpenses/utils';
 
 interface OlderRecordsProps {
   color: string;
@@ -25,15 +26,18 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
   const {
     completeMonth, month, year, years,
   } = getDateInfo({ isOlderRecords: true });
+
   const [fetchOlderRecordsMutation, {
     isError, currentData, isFetching,
   }] = useLazyFetchRecordsByMonthYearQuery();
 
   const user = useAppSelector((state) => state.user.userInfo);
   const bearerToken = user?.bearerToken as string;
-  // change this
-  const olderRecordsLocalStorage: AnyRecord[] = [];
-  const olderRecords = isGuestUser ? olderRecordsLocalStorage : (currentData?.records ?? []);
+  // Local storage records
+  const recordsLocalStorage = useAppSelector((state) => state.records.recordsLocalStorage);
+  const recordsLocalStorageSelectedAccount = recordsLocalStorage?.find((record) => record.account === accountId);
+  const [olderLocalRecords, setOlderLocalRecords] = useState<AnyRecord[]>([]);
+  const olderRecords = isGuestUser ? olderLocalRecords : (currentData?.records ?? []);
 
   const recordsState = useAppSelector((state) => state.records);
   const { totalRecords: { olderRecords: olderRecordsTotal } } = recordsState;
@@ -42,8 +46,6 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
   // Function executed in SelectMonthYear component
   const handleFetchRecords = async ({ newMonth, newYear, completeMonth: newCompleteMonth }: LazyFetchRecords) => {
     try {
-      if (isGuestUser) return;
-
       const monthParam: AbbreviatedMonthsType = newMonth ?? month;
       const yearParam = newYear ?? year;
       const completeMonthParam = newCompleteMonth ?? completeMonth;
@@ -76,9 +78,31 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
     }
   };
 
+  const getLocalRecords = ({ newMonth, newYear }: LazyFetchRecords) => {
+    const monthParam = newMonth ?? month;
+    const yearParam = newYear ?? year;
+    const fetchedLocalRecords = getOlderLocalRecords({
+      month: monthParam,
+      year: yearParam,
+      recordsLocalStorageSelectedAccount,
+    });
+    setOlderLocalRecords(fetchedLocalRecords);
+  };
+
   const fetchRecordsOnOpenAccordion = () => {
+    if (isGuestUser) {
+      const fetchedLocalRecords = getOlderLocalRecords({
+        month,
+        year,
+        recordsLocalStorageSelectedAccount,
+      });
+      setOlderLocalRecords(fetchedLocalRecords);
+      return;
+    }
     handleFetchRecords({ newMonth: month, newYear: year });
   };
+
+  const handleGetRecords = isGuestUser ? getLocalRecords : handleFetchRecords;
 
   return (
     <MonthRecords
@@ -106,7 +130,7 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
         completeMonth={completeMonth}
         currentYear={year}
         yearsArray={years}
-        fetchRecordsCb={handleFetchRecords}
+        fetchRecordsCb={handleGetRecords}
       />
     </MonthRecords>
   );

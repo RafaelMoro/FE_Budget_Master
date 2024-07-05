@@ -24,7 +24,7 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
     completeMonth, month, year, years, updateMonthAndYear,
   } = useDate({ isOlderRecords: true });
   const [fetchOlderRecordsMutation, {
-    isError, currentData, isLoading,
+    isError, currentData, isFetching,
   }] = useLazyFetchRecordsByMonthYearQuery();
   const user = useAppSelector((state) => state.user.userInfo);
   const bearerToken = user?.bearerToken as string;
@@ -70,7 +70,7 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
       accountId={accountId}
       records={olderRecords}
       isGuestUser={isGuestUser}
-      loading={isLoading}
+      loading={isFetching}
       error={isError}
       onEmptyCb={() => <NoRecordsFound />}
       onErrorCb={() => <Error hideIcon description="An error has ocurred. Please try again later." />}

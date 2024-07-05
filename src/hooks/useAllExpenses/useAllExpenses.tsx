@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { GET_EXPENSES } from '../../components/UI/Records/constants';
 import { UseAllExpensesProps } from './interface';
 import { useAppSelector } from '../../redux/hooks';
@@ -49,21 +49,22 @@ const useAllExpenses = ({ month, year, accountId }: UseAllExpensesProps) => {
     }
   };
 
-  useEffect(() => {
-    if (isGuestUser && recordsLocalStorage) {
-      const fetchedLocalRecords = getLocalRecords({
-        month,
-        lastMonth,
-        currentMonth,
-        year,
-        recordsLocalStorageSelectedAccount,
-        turnOnNoExpensesFound,
-        turnOffNoExpensesFound,
-        noExpensesFound,
-      });
-      setLocalRecords(fetchedLocalRecords);
-    }
-  }, [currentMonth, isGuestUser, lastMonth, month, noExpensesFound, recordsLocalStorage, recordsLocalStorageSelectedAccount, year]);
+  const handleGetLocalRecords = ({ newMonth, newYear }: LazyFetchRecords) => {
+    const monthParam = newMonth ?? month;
+    const yearParam = newYear ?? year;
+    const fetchedLocalRecords = getLocalRecords({
+      month: monthParam,
+      lastMonth,
+      currentMonth,
+      year: yearParam,
+      recordsLocalStorageSelectedAccount,
+      turnOnNoExpensesFound,
+      turnOffNoExpensesFound,
+      noExpensesFound,
+    });
+    setLocalRecords(fetchedLocalRecords);
+  };
+  const handleGetRecords = isGuestUser ? handleGetLocalRecords : handleFetchRecords;
 
   // Be sure that there's not transfer records in the list
   const onlyExpensesIncomes = useMemo(
@@ -78,7 +79,7 @@ const useAllExpenses = ({ month, year, accountId }: UseAllExpensesProps) => {
     noExpensesFound,
     isError,
     loading: isFetching,
-    handleFetchRecords,
+    handleFetchRecords: handleGetRecords,
   };
 };
 

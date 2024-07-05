@@ -78,9 +78,20 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
     }
   };
 
-  const getLocalRecords = ({ newMonth, newYear }: LazyFetchRecords) => {
+  const getLocalRecords = ({ newMonth, newYear, completeMonth: newCompleteMonth }: LazyFetchRecords) => {
     const monthParam = newMonth ?? month;
     const yearParam = newYear ?? year;
+    const completeMonthParam = newCompleteMonth ?? completeMonth;
+
+    const newMessage = showMessageOnDate({ monthParam, yearParam, completeMonth: completeMonthParam });
+    if (newMessage) {
+      setMessage(newMessage);
+      return;
+    }
+
+    // Reset message
+    setMessage('');
+
     const fetchedLocalRecords = getOlderLocalRecords({
       month: monthParam,
       year: yearParam,

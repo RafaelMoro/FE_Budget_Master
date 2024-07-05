@@ -28,7 +28,7 @@ const SelectExpenses = ({
     month, completeMonth, year, years, updateMonthAndYear,
   } = useDate();
   const {
-    expenses, noExpensesFound, loading, isError,
+    expenses, noExpensesFound, loading, isError, handleFetchRecords,
   } = useAllExpenses({ month, year, accountId });
 
   return (
@@ -41,6 +41,7 @@ const SelectExpenses = ({
       { (!isError) && (
         <SelectMonthYear
           updateMonthYear={updateMonthAndYear}
+          fetchRecordsCb={handleFetchRecords}
           completeMonth={completeMonth}
           currentYear={year}
           yearsArray={years}

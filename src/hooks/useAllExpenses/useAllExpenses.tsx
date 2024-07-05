@@ -2,8 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { GET_EXPENSES } from '../../components/UI/Records/constants';
 import { UseAllExpensesProps } from './interface';
 import { useAppSelector } from '../../redux/hooks';
-import { useGetExpensesQuery } from '../../redux/slices/Records/actions/expenses.api';
-import { Expense } from '../../globalInterface';
+import { useLazyGetExpensesQuery } from '../../redux/slices/Records/actions/expenses.api';
+import { Expense, LazyFetchRecords } from '../../globalInterface';
 import { useDate } from '../useDate';
 import { getLocalRecords } from './utils';
 
@@ -15,14 +15,39 @@ const useAllExpenses = ({ month, year, accountId }: UseAllExpensesProps) => {
   const bearerToken = userReduxState.userInfo?.bearerToken as string;
   const selectedAccount = useAppSelector((state) => state.accounts.accountSelected);
   const selectedAccountId = accountId ?? selectedAccount?._id;
-  const fullRoute = `${GET_EXPENSES}/${selectedAccountId}/${month}/${year}`;
   const recordsLocalStorageSelectedAccount = recordsLocalStorage?.find((record) => record.account === selectedAccountId);
+
+  const [fetchOlderRecordsMutation, {
+    isError, currentData, isFetching,
+  }] = useLazyGetExpensesQuery();
 
   const [localRecords, setLocalRecords] = useState<Expense[]>([]);
   const [noExpensesFound, setNoExpensesFound] = useState<boolean>(false);
 
   const turnOnNoExpensesFound = () => setNoExpensesFound(true);
   const turnOffNoExpensesFound = () => setNoExpensesFound(false);
+
+  const handleFetchRecords = async ({ newMonth, newYear }: LazyFetchRecords) => {
+    try {
+      if (!bearerToken || !selectedAccountId || isGuestUser) return;
+
+      const monthParam = newMonth ?? month;
+      const yearParam = newYear ?? year;
+      const olderRecordsRoute = `${GET_EXPENSES}/${selectedAccountId}/${monthParam}/${yearParam}`;
+      const response = await fetchOlderRecordsMutation({ route: olderRecordsRoute, bearerToken }).unwrap();
+
+      // Update total balance of expenses and incomes after fetch of last month records
+      if (response?.message === 'No expenses found.') {
+        turnOnNoExpensesFound();
+      }
+      if (!response?.message) {
+        turnOffNoExpensesFound();
+      }
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(`Error ocurred while fetching related expenses: ${err}`);
+    }
+  };
 
   useEffect(() => {
     if (isGuestUser && recordsLocalStorage) {
@@ -40,20 +65,7 @@ const useAllExpenses = ({ month, year, accountId }: UseAllExpensesProps) => {
     }
   }, [currentMonth, isGuestUser, lastMonth, month, noExpensesFound, recordsLocalStorage, recordsLocalStorageSelectedAccount, year]);
 
-  const { isFetching, isError, currentData } = useGetExpensesQuery(
-    { route: fullRoute, bearerToken },
-    { skip: (!bearerToken || !selectedAccountId || isGuestUser) },
-  );
-
-  useEffect(() => {
-    if (currentData?.message === 'No expenses found.') {
-      turnOnNoExpensesFound();
-    }
-    if (!currentData?.message) {
-      turnOffNoExpensesFound();
-    }
-  }, [currentData]);
-
+  // Be sure that there's not transfer records in the list
   const onlyExpensesIncomes = useMemo(
     () => (currentData?.records ?? []).filter((record) => record.typeOfRecord === 'expense'),
     [currentData?.records],
@@ -66,6 +78,7 @@ const useAllExpenses = ({ month, year, accountId }: UseAllExpensesProps) => {
     noExpensesFound,
     isError,
     loading: isFetching,
+    handleFetchRecords,
   };
 };
 

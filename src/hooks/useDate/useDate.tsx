@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
@@ -7,8 +6,6 @@ import {
   ABBREVIATED_MONTHS, AbbreviatedMonthsType, CompleteMonthsType, MONTHS,
 } from '../../globalInterface';
 import { createYearsArray } from '../../utils/CreateYearsArray';
-import { SelectMonthYearValues } from '../../components/UI/Records/interface';
-import { updateAbbreviatedMonth } from './date.utils';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -33,34 +30,18 @@ const useDate = ({ isOlderRecords }: UseDateProps = {}) => {
   const currentYear = String(dateOfToday.year());
   const years: string[] = createYearsArray(currentYear);
 
-  const [month, setMonth] = useState<AbbreviatedMonthsType>(isOlderRecords ? beforeLastMonth : currentMonth);
-  const [completeMonth, setCompleteMonth] = useState<CompleteMonthsType>(isOlderRecords ? completeBeforeLastMonth : completeCurrentMonth);
-  const [year, setYear] = useState<string>(currentYear);
-
-  const updateYear = (newValue: string) => setYear(newValue);
-  const updateMonth = (newMonth: AbbreviatedMonthsType) => setMonth(newMonth);
-  const updateCompleteMonth = (newMonth: CompleteMonthsType) => setCompleteMonth(newMonth);
-
-  const updateMonthAndYear = ({ month: newMonth, year: newYear }: SelectMonthYearValues) => {
-    const updatedMonth = updateAbbreviatedMonth({ newMonth });
-    updateMonth(updatedMonth);
-    updateCompleteMonth(newMonth);
-    updateYear(newYear);
-  };
+  const month: AbbreviatedMonthsType = isOlderRecords ? beforeLastMonth : currentMonth;
+  const completeMonth: CompleteMonthsType = isOlderRecords ? completeBeforeLastMonth : completeCurrentMonth;
 
   return {
     month,
     completeMonth,
     lastMonth,
     beforeLastMonth,
-    year,
     years,
+    year: currentYear,
     completeCurrentMonth,
     completeLastMonth,
-    updateYear,
-    updateMonth,
-    updateCompleteMonth,
-    updateMonthAndYear,
   };
 };
 

@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { useDate } from '../../../../../hooks/useDate';
+import { useDate } from '../../../../../utils/DateUtils';
 import { GET_EXPENSES_AND_INCOMES_BY_MONTH_ROUTE, NO_EXPENSES_OR_INCOMES_FOUND } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
 import { resetLastMonthBalance, updateTotalExpensesIncomes, useLazyFetchRecordsByMonthYearQuery } from '../../../../../redux/slices/Records';

@@ -39,7 +39,7 @@ import { RecordsLocalStorage } from '../../utils/LocalStorage/interface';
 import { isCreateExpense, updateEditedRecordStatus, updateRecordPaymentStatus } from './utils';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { useDate } from '../useDate';
+import { useDate } from '../../utils/DateUtils';
 import { useNotification } from '../useNotification';
 import {
   updateTotalExpense,

@@ -4,7 +4,7 @@ import { UseAllExpensesProps } from './interface';
 import { useAppSelector } from '../../redux/hooks';
 import { useLazyGetExpensesQuery } from '../../redux/slices/Records/actions/expenses.api';
 import { Expense, LazyFetchRecords } from '../../globalInterface';
-import { useDate } from '../useDate';
+import { useDate } from '../../utils/DateUtils';
 import { getLocalRecords } from './utils';
 
 const useAllExpenses = ({ month, year, accountId }: UseAllExpensesProps) => {

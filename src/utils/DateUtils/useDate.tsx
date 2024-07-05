@@ -5,7 +5,7 @@ import timezone from 'dayjs/plugin/timezone';
 import {
   ABBREVIATED_MONTHS, AbbreviatedMonthsType, CompleteMonthsType, MONTHS,
 } from '../../globalInterface';
-import { createYearsArray } from '../../utils/CreateYearsArray';
+import { createYearsArray } from '../CreateYearsArray';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);

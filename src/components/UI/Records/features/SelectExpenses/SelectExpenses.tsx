@@ -2,7 +2,7 @@ import { IconButton, Typography } from '@mui/material';
 
 import { useEffect } from 'react';
 import { useAllExpenses } from '../../../../../hooks/useAllExpenses';
-import { useDate } from '../../../../../hooks/useDate';
+import { useDate } from '../../../../../utils/DateUtils';
 import { ERROR_MESSAGE_GENERAL } from '../../../../../constants';
 import { ExpensePaid } from '../../../../../globalInterface';
 

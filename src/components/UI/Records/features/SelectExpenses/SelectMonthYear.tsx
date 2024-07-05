@@ -5,7 +5,7 @@ import { SelectInput } from '../../../SelectInput';
 import { MONTHS } from '../../../../../constants';
 import { SecondaryButton } from '../../../../../styles';
 import { CompleteMonthsType, LazyFetchRecords } from '../../../../../globalInterface';
-import { updateAbbreviatedMonth } from '../../../../../hooks/useDate/date.utils';
+import { updateAbbreviatedMonth } from '../../../../../utils/DateUtils/date.utils';
 
 interface SelectMonthYearProps {
   fetchRecordsCb?: ({ newMonth, newYear }: LazyFetchRecords) => Promise<void>;

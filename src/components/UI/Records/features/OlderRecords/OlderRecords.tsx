@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { useDate } from '../../../../../hooks';
+import { useDate } from '../../../../../hooks/useDate';
 import { GET_EXPENSES_AND_INCOMES_BY_MONTH_ROUTE, NO_EXPENSES_OR_INCOMES_FOUND } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
 import { resetLastMonthBalance, updateTotalExpensesIncomes, useLazyFetchRecordsByMonthYearQuery } from '../../../../../redux/slices/Records';
@@ -10,7 +10,7 @@ import { Error } from '../../../Error';
 import { ShowMultipleRecordLoader } from '../ShowMultipleRecordLoaders';
 import { SelectMonthYear } from '../SelectExpenses/SelectMonthYear';
 import { sumTotalRecords } from '../../../../../utils';
-import { AnyRecord } from '../../../../../globalInterface';
+import { AnyRecord, LazyFetchRecords } from '../../../../../globalInterface';
 
 interface OlderRecordsProps {
   color: string;
@@ -35,7 +35,7 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
   const recordsState = useAppSelector((state) => state.records);
   const { totalRecords: { olderRecords: olderRecordsTotal } } = recordsState;
 
-  const handleFetchRecords = async ({ newMonth, newYear }: { newMonth?: string; newYear?:string; } = {}) => {
+  const handleFetchRecords = async ({ newMonth, newYear }: LazyFetchRecords) => {
     try {
       if (isGuestUser) return;
       const monthParam = newMonth ?? month;
@@ -66,7 +66,6 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
       titleMonthAccordeon="Older Records"
       totalExpense={olderRecordsTotal.expenseTotal}
       totalIncome={olderRecordsTotal.incomeTotal}
-      onClickCb={handleFetchRecords}
       accountId={accountId}
       records={olderRecords}
       isGuestUser={isGuestUser}

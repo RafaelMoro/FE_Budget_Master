@@ -200,3 +200,8 @@ export interface SelectFormikProps {
   dataTestId: string;
   disabled?: boolean;
 }
+
+export interface LazyFetchRecords {
+  newMonth?: string;
+  newYear?: string;
+}

@@ -5,9 +5,10 @@ import timezone from 'dayjs/plugin/timezone';
 
 import {
   ABBREVIATED_MONTHS, AbbreviatedMonthsType, CompleteMonthsType, MONTHS,
-} from '../globalInterface';
-import { createYearsArray } from '../utils/CreateYearsArray';
-import { SelectMonthYearValues } from '../components/UI/Records/interface';
+} from '../../globalInterface';
+import { createYearsArray } from '../../utils/CreateYearsArray';
+import { SelectMonthYearValues } from '../../components/UI/Records/interface';
+import { updateAbbreviatedMonth } from './date.utils';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -41,8 +42,8 @@ const useDate = ({ isOlderRecords }: UseDateProps = {}) => {
   const updateCompleteMonth = (newMonth: CompleteMonthsType) => setCompleteMonth(newMonth);
 
   const updateMonthAndYear = ({ month: newMonth, year: newYear }: SelectMonthYearValues) => {
-    const monthIndex = MONTHS.indexOf(newMonth);
-    updateMonth(ABBREVIATED_MONTHS[monthIndex]);
+    const updatedMonth = updateAbbreviatedMonth({ newMonth });
+    updateMonth(updatedMonth);
     updateCompleteMonth(newMonth);
     updateYear(newYear);
   };

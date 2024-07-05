@@ -4,14 +4,12 @@ import { SelectMonthYearBox } from '../Features.styled';
 import { SelectInput } from '../../../SelectInput';
 import { MONTHS } from '../../../../../constants';
 import { SecondaryButton } from '../../../../../styles';
-import { ABBREVIATED_MONTHS, CompleteMonthsType } from '../../../../../globalInterface';
+import { CompleteMonthsType, LazyFetchRecords } from '../../../../../globalInterface';
+import { updateAbbreviatedMonth } from '../../../../../hooks/useDate/date.utils';
 
 interface SelectMonthYearProps {
   updateMonthYear: (values: SelectMonthYearValues) => void;
-  fetchRecordsCb?: ({ newMonth, newYear }?: {
-    newMonth?: string;
-    newYear?: string;
-  }) => Promise<void>;
+  fetchRecordsCb?: ({ newMonth, newYear }: LazyFetchRecords) => Promise<void>;
   completeMonth: CompleteMonthsType;
   currentYear: string;
   yearsArray: string[];
@@ -27,9 +25,7 @@ const SelectMonthYear = ({
     updateMonthYear(values);
     // If it fetches, fetch with the new month and year
     if (fetchRecordsCb) {
-      // TODO: Think if this is the best approach on formatting the month and if it's not responsability of useDate
-      const monthIndex = MONTHS.indexOf(values.month);
-      const newMonth = ABBREVIATED_MONTHS[monthIndex];
+      const newMonth = updateAbbreviatedMonth({ newMonth: values.month });
       fetchRecordsCb({ newMonth, newYear: values.year });
     }
   };

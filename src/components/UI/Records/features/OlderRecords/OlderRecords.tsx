@@ -35,11 +35,13 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
   const recordsState = useAppSelector((state) => state.records);
   const { totalRecords: { olderRecords: olderRecordsTotal } } = recordsState;
 
-  const handleFetchRecords = async () => {
+  const handleFetchRecords = async ({ newMonth, newYear }: { newMonth?: string; newYear?:string; } = {}) => {
     try {
       if (isGuestUser) return;
-      const recordsLastMonthRoute = `${GET_EXPENSES_AND_INCOMES_BY_MONTH_ROUTE}/${accountId}/${month}/${year}`;
-      const response = await fetchOlderRecordsMutation({ route: recordsLastMonthRoute, bearerToken }).unwrap();
+      const monthParam = newMonth ?? month;
+      const yearParam = newYear ?? year;
+      const olderRecordsRoute = `${GET_EXPENSES_AND_INCOMES_BY_MONTH_ROUTE}/${accountId}/${monthParam}/${yearParam}`;
+      const response = await fetchOlderRecordsMutation({ route: olderRecordsRoute, bearerToken }).unwrap();
       // Update total balance of expenses and incomes after fetch of last month records
       if (response && response?.records) {
         const { records } = response;
@@ -82,6 +84,7 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
         completeMonth={completeMonth}
         currentYear={year}
         yearsArray={years}
+        fetchRecordsCb={handleFetchRecords}
       />
     </MonthRecords>
   );

@@ -8,7 +8,7 @@ import { AbbreviatedMonthsType, CompleteMonthsType, LazyFetchRecords } from '../
 import { updateAbbreviatedMonth } from '../../../../../utils/DateUtils/date.utils';
 
 interface SelectMonthYearProps {
-  fetchRecordsCb?: ({ newMonth, newYear }: LazyFetchRecords) => Promise<void>;
+  fetchRecordsCb?: ({ newMonth, newYear, completeMonth }: LazyFetchRecords) => Promise<void>;
   completeMonth: CompleteMonthsType;
   currentYear: string;
   yearsArray: string[];
@@ -21,7 +21,7 @@ const SelectMonthYear = ({
     // If it fetches, fetch with the new month and year
     if (fetchRecordsCb) {
       const newMonth: AbbreviatedMonthsType = updateAbbreviatedMonth({ newMonth: values.month });
-      fetchRecordsCb({ newMonth, newYear: values.year });
+      fetchRecordsCb({ newMonth, newYear: values.year, completeMonth: values.month });
     }
   };
   return (

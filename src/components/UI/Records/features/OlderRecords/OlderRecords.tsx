@@ -39,7 +39,7 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
   const [message, setMessage] = useState('');
 
   // Function executed in SelectMonthYear component
-  const handleFetchRecords = async ({ newMonth, newYear }: LazyFetchRecords) => {
+  const handleFetchRecords = async ({ newMonth, newYear, completeMonth: newCompleteMonth }: LazyFetchRecords) => {
     try {
       if (isGuestUser) return;
 
@@ -49,15 +49,15 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
       const { isCurrentMonth, isFutureMonth, isLastMonth } = validateMonthOlderRecords({ month: monthParam, year: yearParam });
       // Do not fetch if isCurrentMonth or isFutureMonth or isLastMonth
       if (isCurrentMonth) {
-        setMessage(`The ${monthParam} records are shown above. Please select an older month.`);
+        setMessage(`${newCompleteMonth} records are shown above. Please select an older month.`);
         return;
       }
       if (isLastMonth) {
-        setMessage(`The ${monthParam} records are shown above. Please select an older month.`);
+        setMessage(`${newCompleteMonth} records are shown above. Please select an older month.`);
         return;
       }
       if (isFutureMonth) {
-        setMessage(`You are selecting a date in the future: ${monthParam} ${yearParam}. Please select an older month.`);
+        setMessage(`You are selecting a date in the future: ${newCompleteMonth} ${yearParam}. Please select an older month.`);
         return;
       }
 

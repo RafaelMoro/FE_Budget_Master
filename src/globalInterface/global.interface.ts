@@ -174,6 +174,7 @@ export interface MonthTotal {
 export interface RecordsTotal {
   currentMonth: MonthTotal;
   lastMonth: MonthTotal;
+  olderRecords: MonthTotal;
 }
 
 export interface GlobalNotification {

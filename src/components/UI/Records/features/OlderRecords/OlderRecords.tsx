@@ -32,6 +32,9 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
   const olderRecordsLocalStorage: AnyRecord[] = [];
   const olderRecords = isGuestUser ? olderRecordsLocalStorage : (currentData?.records ?? []);
 
+  const recordsState = useAppSelector((state) => state.records);
+  const { totalRecords: { olderRecords: olderRecordsTotal } } = recordsState;
+
   const handleFetchRecords = async () => {
     try {
       if (isGuestUser) return;
@@ -46,7 +49,7 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
         }
         const { expenseTotal, incomeTotal } = sumTotalRecords(records);
         // missing older records
-        dispatch(updateTotalExpensesIncomes({ expenseTotalCounter: expenseTotal, incomeTotalCounter: incomeTotal, period: 'LastMonth' }));
+        dispatch(updateTotalExpensesIncomes({ expenseTotalCounter: expenseTotal, incomeTotalCounter: incomeTotal, period: 'OlderRecords' }));
       }
     } catch (err) {
       // eslint-disable-next-line no-console
@@ -59,8 +62,8 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
       color={color}
       openedAccordeon={false}
       titleMonthAccordeon="Older Records"
-      totalExpense="0.00"
-      totalIncome="0.00"
+      totalExpense={olderRecordsTotal.expenseTotal}
+      totalIncome={olderRecordsTotal.incomeTotal}
       onClickCb={handleFetchRecords}
       accountId={accountId}
       records={olderRecords}

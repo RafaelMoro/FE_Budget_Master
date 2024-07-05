@@ -25,6 +25,7 @@ import {
 } from '../../../../../redux/slices/Records';
 import { AppColors } from '../../../../../styles';
 import { List } from '../../Records.styled';
+import { OlderRecords } from '../OlderRecords';
 
 const ERROR_TITLE = 'Error.';
 const ERROR_DESCRIPTION = 'Please try again later. If the error persists, contact support with the error code.';
@@ -153,24 +154,10 @@ const RecordList = ({ handleOpenCreateAccount }: RecordListProps) => {
           <ShowMultipleRecordLoader numberOfSkeletons={3} keyMap="last-month" />
         )}
       />
-      <MonthRecords
+      <OlderRecords
         color={color}
-        openedAccordeon={false}
-        titleMonthAccordeon="Older Records"
-        totalExpense="0.00"
-        totalIncome="0.00"
-        onClickCb={() => {}}
         accountId={accountId}
-        records={[]}
         isGuestUser={isGuestUser}
-        loading={false}
-        error={false}
-        onEmptyCb={() => <NoRecordsFound />}
-        onErrorCb={() => <Error hideIcon description="An error has ocurred. Please try again later." />}
-        onLoadingCb={() => (
-          <ShowMultipleRecordLoader numberOfSkeletons={3} keyMap="older-records" />
-        )}
-        isOlderRecords
       />
     </List>
   );

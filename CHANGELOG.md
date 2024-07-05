@@ -1,3 +1,21 @@
+## v1.2.1 (2024-07-02)
+
+### Pull Requests
+[#30](https://github.com/RafaelMoro/FE_Personal_Finances/pull/30) | Add unit tests Action into the workflows
+
+
+## v1.2.0 (2024-07-02)
+
+### Pull Requests
+[#27](https://github.com/RafaelMoro/FE_Personal_Finances/pull/27) | Add unit tests
+
+
+## v1.1.1 (2024-06-30)
+
+### Pull Requests
+[#29](https://github.com/RafaelMoro/FE_Personal_Finances/pull/29) | Multiple Fixes: Error on edit transfer, select expenses drawer, wrong signed on status
+
+
 ## v1.1.0 (2024-06-29)
 
 ### Pull Requests

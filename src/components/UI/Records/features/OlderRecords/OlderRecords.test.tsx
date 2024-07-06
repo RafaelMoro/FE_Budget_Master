@@ -59,7 +59,7 @@ describe('Older Records', () => {
     const selectMonthComboBox = within(selectMonthTestId).getByRole('combobox');
     const selectYearTestId = screen.getByTestId('select-month');
     const selectYearComboBox = within(selectYearTestId).getByRole('combobox');
-    const searchExpensesButton = screen.getByRole('button', { name: /search expenses/i });
+    const searchExpensesButton = screen.getByRole('button', { name: /search records/i });
     const loadingSkeletons = screen.getAllByTestId('record-loading-skeleton');
 
     expect(totalExpenseText).toBeInTheDocument();
@@ -163,7 +163,7 @@ describe('Older Records', () => {
     expect(await screen.findByText(futureMonthName)).toBeInTheDocument();
 
     // Click on search expenses button
-    const searchExpensesButton = screen.getByRole('button', { name: /search expenses/i });
+    const searchExpensesButton = screen.getByRole('button', { name: /search records/i });
     userEvent.click(searchExpensesButton);
 
     const errorMessage = new RegExp(`You are selecting a date in the future: ${futureMonthName} 2024`);
@@ -200,7 +200,7 @@ describe('Older Records', () => {
     expect(await screen.findByText(currentMonthName)).toBeInTheDocument();
 
     // Click on search expenses button
-    const searchExpensesButton = screen.getByRole('button', { name: /search expenses/i });
+    const searchExpensesButton = screen.getByRole('button', { name: /search records/i });
     userEvent.click(searchExpensesButton);
 
     const errorMessage = new RegExp(`${currentMonthName} records are shown above. Please select an older month.`);
@@ -237,7 +237,7 @@ describe('Older Records', () => {
     expect(await screen.findByText(lastMonthName)).toBeInTheDocument();
 
     // Click on search expenses button
-    const searchExpensesButton = screen.getByRole('button', { name: /search expenses/i });
+    const searchExpensesButton = screen.getByRole('button', { name: /search records/i });
     userEvent.click(searchExpensesButton);
 
     const errorMessage = new RegExp(`${lastMonthName} records are shown above. Please select an older month.`);
@@ -283,7 +283,7 @@ describe('Older Records', () => {
     expect(await screen.findByText(passedMonthName)).toBeInTheDocument();
 
     // Click on search expenses button
-    const searchExpensesButton = screen.getByRole('button', { name: /search expenses/i });
+    const searchExpensesButton = screen.getByRole('button', { name: /search records/i });
     userEvent.click(searchExpensesButton);
 
     await screen.findAllByText('$0.00');

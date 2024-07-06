@@ -11,13 +11,14 @@ import { useGuestUser } from '../../../../../hooks';
 interface SelectMonthYearProps {
   fetchRecordsCb?: ({ newMonth, newYear, completeMonth }: LazyFetchRecords) => Promise<void> | void;
   isDashboard?: boolean;
+  buttonText?: string;
   completeMonth: CompleteMonthsType;
   currentYear: string;
   yearsArray: string[];
 }
 
 const SelectMonthYear = ({
-  completeMonth, currentYear, yearsArray, fetchRecordsCb, isDashboard = false,
+  completeMonth, currentYear, yearsArray, fetchRecordsCb, isDashboard = false, buttonText = 'Search expenses',
 }: SelectMonthYearProps) => {
   const { isGuestUser } = useGuestUser();
   const handleSubmit = (values: SelectMonthYearValues) => {
@@ -51,7 +52,7 @@ const SelectMonthYear = ({
             stringOptions={yearsArray}
             colorOptions={[]}
           />
-          <SecondaryButton onClick={submitForm}>Search expenses</SecondaryButton>
+          <SecondaryButton onClick={submitForm}>{buttonText}</SecondaryButton>
         </SelectMonthYearBox>
       )}
     </Formik>

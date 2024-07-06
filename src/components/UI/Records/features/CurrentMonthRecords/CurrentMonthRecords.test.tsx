@@ -4,7 +4,9 @@ import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 
 import { CurrentMonthRecords } from './CurrentMonthRecords';
-import { olderRecordsResponse, olderRecordsResponseEmptyRecords, userInitialState } from '../../Record.mocks';
+import {
+  failedOlderRecordsResponse, olderRecordsResponse, olderRecordsResponseEmptyRecords, userInitialState,
+} from '../../Record.mocks';
 import { renderWithProviders } from '../../../../../tests/CustomWrapperRedux';
 import { getCurrentDate } from '../../../../../utils';
 
@@ -41,7 +43,7 @@ describe('Current month records', () => {
     expect(icon).toBeInTheDocument();
   });
 
-  test('Show current month records expanded with empty records', async () => {
+  test('Show current month records with empty records', async () => {
     fetchMock.once(JSON.stringify(olderRecordsResponseEmptyRecords));
     renderWithProviders(
       <Router location={history.location} navigator={history}>
@@ -57,7 +59,7 @@ describe('Current month records', () => {
     expect(createRecordButton).toBeInTheDocument();
   });
 
-  test('Show current month records expanded with records', async () => {
+  test('Show current month records with records', async () => {
     fetchMock.once(JSON.stringify(olderRecordsResponse));
     renderWithProviders(
       <Router location={history.location} navigator={history}>
@@ -71,5 +73,18 @@ describe('Current month records', () => {
 
     expect(firstRecordTitle).toBeInTheDocument();
     expect(secondRecordtitle).toBeInTheDocument();
+  });
+
+  test('Show curent month records with an error', async () => {
+    fetchMock.mockResponse(() => Promise.reject(JSON.stringify(failedOlderRecordsResponse)));
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <CurrentMonthRecords color="blue" accountId="some-account-id" isGuestUser={false} />
+      </Router>,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    const errorText = await screen.findByText(/An error has ocurred. Please try again later\./i);
+    expect(errorText).toBeInTheDocument();
   });
 });

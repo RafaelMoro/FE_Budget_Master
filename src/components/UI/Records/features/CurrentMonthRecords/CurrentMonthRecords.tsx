@@ -15,8 +15,6 @@ interface CurrentMonthRecordsProps {
   accountId: string;
   isGuestUser: boolean;
 }
-const ERROR_TITLE = 'Error.';
-const ERROR_DESCRIPTION = 'Please try again later. If the error persists, contact support with the error code.';
 
 const CurrentMonthRecords = ({
   color, accountId, isGuestUser,
@@ -65,7 +63,7 @@ const CurrentMonthRecords = ({
       error={isGuestUser ? false : isError}
       isGuestUser={isGuestUser}
       onEmptyCb={() => <NoRecordsFound />}
-      onErrorCb={() => <Error hideIcon title={ERROR_TITLE} description={ERROR_DESCRIPTION} />}
+      onErrorCb={() => <Error hideIcon description="An error has ocurred. Please try again later." />}
       onLoadingCb={() => (
         <ShowMultipleRecordLoader numberOfSkeletons={3} keyMap="current-month" />
       )}

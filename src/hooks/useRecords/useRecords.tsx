@@ -39,7 +39,7 @@ import { RecordsLocalStorage } from '../../utils/LocalStorage/interface';
 import { isCreateExpense, updateEditedRecordStatus, updateRecordPaymentStatus } from './utils';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { useDate } from '../useDate';
+import { getDateInfo } from '../../utils/DateUtils';
 import { useNotification } from '../useNotification';
 import {
   updateTotalExpense,
@@ -77,7 +77,7 @@ const useRecords = ({
   const totalRecords = useAppSelector((state) => state.records.totalRecords);
   const userReduxState = useAppSelector((state) => state.user);
   const bearerToken = userReduxState.userInfo?.bearerToken as string;
-  const { month: currentMonth, lastMonth } = useDate();
+  const { month: currentMonth, lastMonth } = getDateInfo();
 
   const showErrorNotification = ({ errorMessage, action, goToDashboard = false }: ShowErrorNotificationProps) => {
     const actions: Actions = {

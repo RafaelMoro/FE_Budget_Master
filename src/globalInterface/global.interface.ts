@@ -174,6 +174,7 @@ export interface MonthTotal {
 export interface RecordsTotal {
   currentMonth: MonthTotal;
   lastMonth: MonthTotal;
+  olderRecords: MonthTotal;
 }
 
 export interface GlobalNotification {
@@ -198,4 +199,10 @@ export interface SelectFormikProps {
   form: SelectFormikFormProps;
   dataTestId: string;
   disabled?: boolean;
+}
+
+export interface LazyFetchRecords {
+  newMonth?: AbbreviatedMonthsType;
+  completeMonth?: CompleteMonthsType;
+  newYear?: string;
 }

@@ -32,3 +32,12 @@ export const validateMonthOlderRecords = ({ month, year }: ValidateMonthOlderRec
     isFutureMonth,
   };
 };
+
+export const getFutureDate = () => {
+  const now = new Date();
+  const currentMonth = now.getMonth();
+  const futureMonth = currentMonth + 1;
+  const futureMonthName = MONTHS[futureMonth];
+
+  return { futureMonth, futureMonthName };
+};

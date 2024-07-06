@@ -11,7 +11,7 @@ import {
   failedOlderRecordsResponse, olderRecordsResponse, olderRecordsResponseEmptyRecords, userInitialState,
 } from '../../Record.mocks';
 import { OlderRecords } from './OlderRecords';
-import { MONTHS } from '../../../../../globalInterface';
+import { getFutureDate } from '../../../../../utils';
 
 describe('Older Records', () => {
   beforeEach(() => {
@@ -132,10 +132,7 @@ describe('Older Records', () => {
   });
 
   test('Show older records, click a month beyond the current month, click on search expenses and should show error', async () => {
-    const now = new Date();
-    const currentMonth = now.getMonth();
-    const futureMonth = currentMonth + 1;
-    const futureMonthName = MONTHS[futureMonth];
+    const { futureMonth, futureMonthName } = getFutureDate();
 
     fetchMock.once(JSON.stringify(olderRecordsResponse));
     renderWithProviders(

@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../../../../tests/CustomWrapperRedux';
 import { LastMonthRecords } from './LastMonthRecords';
-import { userInitialState } from '../../Record.mocks';
+import { olderRecordsResponseEmptyRecords, userInitialState } from '../../Record.mocks';
 import { getLastMonthDate } from '../../../../../utils';
 
 describe('Last Month Records', () => {
@@ -57,5 +57,27 @@ describe('Last Month Records', () => {
     expect(totalExpenseText).toBeInTheDocument();
     expect(totalIncomeText).toBeInTheDocument();
     expect(loadingSkeletons).toHaveLength(3);
+  });
+
+  test('Show older records expanded with empty records', async () => {
+    fetchMock.once(JSON.stringify(olderRecordsResponseEmptyRecords));
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <LastMonthRecords color="blue" accountId="some-account-id" isGuestUser={false} />
+      </Router>,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    const accordion = screen.getByRole('button', {
+      name: `Last month: ${lastMonthName}`,
+    });
+
+    userEvent.click(accordion);
+
+    const noRecordsFoundText = await screen.findByText(/you have not created records for this month\./i);
+    const createRecordButton = screen.getByRole('button', { name: /create record/i });
+
+    expect(noRecordsFoundText).toBeInTheDocument();
+    expect(createRecordButton).toBeInTheDocument();
   });
 });

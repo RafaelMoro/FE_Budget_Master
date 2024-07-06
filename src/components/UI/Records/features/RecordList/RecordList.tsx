@@ -18,14 +18,13 @@ import { getDateInfo } from '../../../../../utils/DateUtils';
 import { useGuestUser } from '../../../../../hooks/useGuestUser/useGuestUser';
 import {
   useFetchRecordsByMonthYearQuery,
-  useLazyFetchRecordsByMonthYearQuery,
   resetTotalBalanceRecords,
-  resetLastMonthBalance,
   updateTotalExpensesIncomes,
 } from '../../../../../redux/slices/Records';
 import { AppColors } from '../../../../../styles';
 import { List } from '../../Records.styled';
 import { OlderRecords } from '../OlderRecords';
+import { LastMonthRecords } from '../LastMonthRecords';
 
 const ERROR_TITLE = 'Error.';
 const ERROR_DESCRIPTION = 'Please try again later. If the error persists, contact support with the error code.';
@@ -37,9 +36,9 @@ interface RecordListProps {
 const RecordList = ({ handleOpenCreateAccount }: RecordListProps) => {
   const dispatch = useAppDispatch();
   const {
-    month, completeCurrentMonth, completeLastMonth, year, lastMonth,
+    month, completeCurrentMonth, year,
   } = getDateInfo();
-  const { isGuestUser, recordsCurrentMonthLocalStorage, recordsLastMonthLocalStorage } = useGuestUser();
+  const { isGuestUser, recordsCurrentMonthLocalStorage } = useGuestUser();
   const user = useAppSelector((state) => state.user.userInfo);
   const accountsFetchStatus = useAppSelector((state) => state.accounts.accountsFetchStatus);
   const recordsState = useAppSelector((state) => state.records);
@@ -57,13 +56,8 @@ const RecordList = ({ handleOpenCreateAccount }: RecordListProps) => {
     currentData: responseFetchRecords, isSuccess: isSuccessThisMonthRecs,
   } = useFetchRecordsByMonthYearQuery({ route: recordsRoute, bearerToken }, { skip: (!bearerToken || !accountId || isGuestUser) });
 
-  const [fetchLastMonthRecordsMutation, {
-    isFetching: isFetchingLastMonthRecs, isError: isErrorLastMonthRecs, currentData: responseLastMonthRecs,
-  }] = useLazyFetchRecordsByMonthYearQuery();
-
   const color = selectedAccount?.backgroundColorUI?.color ?? AppColors.black;
   const currentRecords = isGuestUser ? recordsCurrentMonthLocalStorage : (responseFetchRecords?.records ?? []);
-  const lastMonthRecords = isGuestUser ? recordsLastMonthLocalStorage : (responseLastMonthRecs?.records ?? []);
 
   /** Update total balance of expenses and incomes after fetch of current month records */
   useEffect(() => {
@@ -78,26 +72,6 @@ const RecordList = ({ handleOpenCreateAccount }: RecordListProps) => {
       dispatch(updateTotalExpensesIncomes({ expenseTotalCounter: expenseTotal, incomeTotalCounter: incomeTotal, period: 'CurrentMonth' }));
     }
   }, [dispatch, isSuccessThisMonthRecs, responseFetchRecords, responseFetchRecords?.message, responseFetchRecords?.records]);
-
-  const handleFetchLastMonthRecords = async () => {
-    try {
-      if (isGuestUser) return;
-      const recordsLastMonthRoute = `${GET_EXPENSES_AND_INCOMES_BY_MONTH_ROUTE}/${accountId}/${lastMonth}/${year}`;
-      const response = await fetchLastMonthRecordsMutation({ route: recordsLastMonthRoute, bearerToken }).unwrap();
-      // Update total balance of expenses and incomes after fetch of last month records
-      if (response && response?.records) {
-        const { records } = response;
-        if (response?.message === NO_EXPENSES_OR_INCOMES_FOUND) {
-          dispatch(resetLastMonthBalance());
-          return;
-        }
-        const { expenseTotal, incomeTotal } = sumTotalRecords(records);
-        dispatch(updateTotalExpensesIncomes({ expenseTotalCounter: expenseTotal, incomeTotalCounter: incomeTotal, period: 'LastMonth' }));
-      }
-    } catch (err) {
-      console.error(`Error ocurred while fetching last month records: ${err}`);
-    }
-  };
 
   if (accountsFetchStatus === 'isUninitialized' && !isGuestUser) {
     return (
@@ -136,23 +110,10 @@ const RecordList = ({ handleOpenCreateAccount }: RecordListProps) => {
           <ShowMultipleRecordLoader numberOfSkeletons={3} keyMap="current-month" />
         )}
       />
-      <MonthRecords
+      <LastMonthRecords
         color={color}
-        openedAccordeon={false}
-        titleMonthAccordeon={`Last month: ${completeLastMonth}`}
-        totalExpense={totalRecords.lastMonth.expenseTotal}
-        totalIncome={totalRecords.lastMonth.incomeTotal}
-        onClickCb={handleFetchLastMonthRecords}
         accountId={accountId}
-        records={lastMonthRecords}
         isGuestUser={isGuestUser}
-        loading={isGuestUser ? false : isFetchingLastMonthRecs}
-        error={isGuestUser ? false : isErrorLastMonthRecs}
-        onEmptyCb={() => <NoRecordsFound />}
-        onErrorCb={() => <Error hideIcon description="An error has ocurred. Please try again later." />}
-        onLoadingCb={() => (
-          <ShowMultipleRecordLoader numberOfSkeletons={3} keyMap="last-month" />
-        )}
       />
       <OlderRecords
         color={color}

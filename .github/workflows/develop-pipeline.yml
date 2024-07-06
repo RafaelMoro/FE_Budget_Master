@@ -74,7 +74,7 @@ jobs:
           VERSION=$(node -p "require('./package.json').version") 
           echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
           git tag -a v${VERSION} -m 'Release tag ${VERSION}'
-          git push -f origin --follow-tags --atomic
+          git push -f origin HEAD --follow-tags --atomic
           echo "LATEST_TAG=v${VERSION}" >> $GITHUB_ENV
           echo "$(git branch)"
           

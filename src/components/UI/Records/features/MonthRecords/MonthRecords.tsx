@@ -45,12 +45,12 @@ const MonthRecords = ({
       <ShowTotalContianer>
         <FlexContainer gap={2}>
           <Typography>Total Expense: </Typography>
-          <RecordExpense>{totalExpense}</RecordExpense>
+          <RecordExpense data-testid="total-expense-number">{totalExpense}</RecordExpense>
         </FlexContainer>
         { (isOlderRecords && children) && children }
         <FlexContainer gap={2}>
           <Typography>Total Income: </Typography>
-          <RecordIncome>{totalIncome}</RecordIncome>
+          <RecordIncome data-testid="total-income-number">{totalIncome}</RecordIncome>
         </FlexContainer>
       </ShowTotalContianer>
     ) }

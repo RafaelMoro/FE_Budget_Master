@@ -11,7 +11,9 @@ import {
   failedOlderRecordsResponse, olderRecordsResponse, olderRecordsResponseEmptyRecords, userInitialState,
 } from '../../Record.mocks';
 import { OlderRecords } from './OlderRecords';
-import { getCurrentDate, getFutureDate, getLastMonthDate } from '../../../../../utils';
+import {
+  getCurrentDate, getFutureDate, getLastMonthDate, getTwoMonthBeforeLastMonth,
+} from '../../../../../utils';
 
 describe('Older Records', () => {
   beforeEach(() => {
@@ -240,5 +242,53 @@ describe('Older Records', () => {
 
     const errorMessage = new RegExp(`${lastMonthName} records are shown above. Please select an older month.`);
     await screen.findByText(errorMessage);
+  });
+
+  test(`Show older records, then click the option of the month before of the before last month,
+    then click on search expenses and should reset the total income and expense`, async () => {
+    const { passedMonth, passedMonthName } = getTwoMonthBeforeLastMonth();
+
+    fetchMock
+      .once(JSON.stringify(olderRecordsResponse))
+      .once(JSON.stringify(olderRecordsResponseEmptyRecords));
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} />
+      </Router>,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    // Click accordion
+    const accordion = screen.getByRole('button', {
+      name: /older records/i,
+    });
+    userEvent.click(accordion);
+    await screen.findByText(/Casa a solesta gym/i);
+
+    const totalExpenseNumber = screen.getByTestId('total-expense-number');
+    const totalIncomeNumber = screen.getByTestId('total-income-number');
+    expect(totalExpenseNumber).toHaveTextContent('$150.09');
+    expect(totalIncomeNumber).toHaveTextContent('$110.24');
+    expect(screen.queryByText(/you have not created records for this month\./i)).not.toBeInTheDocument();
+
+    // Change month on combobox
+    const selectMonthTestId = screen.getByTestId('select-month');
+    const selectMonthButton = within(selectMonthTestId).getByRole('combobox');
+    fireEvent.mouseDown(selectMonthButton);
+    const listbox = within(screen.getByRole('presentation')).getByRole(
+      'listbox',
+    );
+    const options = within(listbox).getAllByRole('option');
+    fireEvent.click(options[passedMonth]);
+    expect(await screen.findByText(passedMonthName)).toBeInTheDocument();
+
+    // Click on search expenses button
+    const searchExpensesButton = screen.getByRole('button', { name: /search expenses/i });
+    userEvent.click(searchExpensesButton);
+
+    await screen.findAllByText('$0.00');
+    expect(totalExpenseNumber).toHaveTextContent('$0.00');
+    expect(totalIncomeNumber).toHaveTextContent('$0.00');
+    expect(await screen.findByText(/you have not created records for this month\./i)).toBeInTheDocument();
   });
 });

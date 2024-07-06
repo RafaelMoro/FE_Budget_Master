@@ -57,3 +57,11 @@ export const getLastMonthDate = () => {
 
   return { lastMonth, lastMonthName };
 };
+
+export const getTwoMonthBeforeLastMonth = () => {
+  const now = new Date();
+  const passedMonth = now.getMonth() - 3;
+  const passedMonthName = MONTHS[passedMonth];
+
+  return { passedMonth, passedMonthName };
+};

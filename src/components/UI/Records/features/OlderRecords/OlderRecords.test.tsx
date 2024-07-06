@@ -5,7 +5,9 @@ import { createMemoryHistory } from 'history';
 import fetchMock from 'jest-fetch-mock';
 
 import { renderWithProviders } from '../../../../../tests/CustomWrapperRedux';
-import { olderRecordsResponse, olderRecordsResponseEmptyRecords, userInitialState } from '../../Record.mocks';
+import {
+  failedOlderRecordsResponse, olderRecordsResponse, olderRecordsResponseEmptyRecords, userInitialState,
+} from '../../Record.mocks';
 import { OlderRecords } from './OlderRecords';
 
 describe('Older Records', () => {
@@ -105,5 +107,24 @@ describe('Older Records', () => {
 
     expect(firstRecordTitle).toBeInTheDocument();
     expect(secondRecordtitle).toBeInTheDocument();
+  });
+
+  test('Show older records expanded with an error', async () => {
+    fetchMock.mockResponse(() => Promise.reject(JSON.stringify(failedOlderRecordsResponse)));
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} />
+      </Router>,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    const accordion = screen.getByRole('button', {
+      name: /older records/i,
+    });
+
+    userEvent.click(accordion);
+
+    const errorText = await screen.findByText(/An error has ocurred. Please try again later\./i);
+    expect(errorText).toBeInTheDocument();
   });
 });

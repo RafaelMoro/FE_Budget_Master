@@ -300,3 +300,13 @@ export const olderRecordsResponse = {
   success: true,
   version: '2.0.0',
 };
+export const failedOlderRecordsResponse = {
+  data: null,
+  error: {
+    statusCode: 401,
+    message: 'Unauthorized',
+  },
+  message: null,
+  success: false,
+  version: '2.0.0',
+};

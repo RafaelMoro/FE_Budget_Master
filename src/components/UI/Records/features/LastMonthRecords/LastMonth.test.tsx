@@ -6,7 +6,9 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../../../../tests/CustomWrapperRedux';
 import { LastMonthRecords } from './LastMonthRecords';
-import { olderRecordsResponse, olderRecordsResponseEmptyRecords, userInitialState } from '../../Record.mocks';
+import {
+  failedOlderRecordsResponse, olderRecordsResponse, olderRecordsResponseEmptyRecords, userInitialState,
+} from '../../Record.mocks';
 import { getLastMonthDate } from '../../../../../utils';
 
 describe('Last Month Records', () => {
@@ -101,5 +103,24 @@ describe('Last Month Records', () => {
 
     expect(firstRecordTitle).toBeInTheDocument();
     expect(secondRecordtitle).toBeInTheDocument();
+  });
+
+  test('Show last month records expanded with an error', async () => {
+    fetchMock.mockResponse(() => Promise.reject(JSON.stringify(failedOlderRecordsResponse)));
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <LastMonthRecords color="blue" accountId="some-account-id" isGuestUser={false} />
+      </Router>,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    const accordion = screen.getByRole('button', {
+      name: `Last month: ${lastMonthName}`,
+    });
+
+    userEvent.click(accordion);
+
+    const errorText = await screen.findByText(/An error has ocurred. Please try again later\./i);
+    expect(errorText).toBeInTheDocument();
   });
 });

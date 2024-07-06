@@ -1,0 +1,49 @@
+name: Playwright Tests
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - e2e
+jobs:
+
+  avoid_redundancy:
+    name: Cancel Previous Redundant Builds
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel Previous Redundant Builds
+        uses: styfle/cancel-workflow-action@0.9.1
+
+  test:
+    name: Run E2E tests
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Set up pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 8
+
+    - name: Install dependencies
+      run: pnpm install
+    
+    - name: Install Playwright Browsers
+      run: pnpm exec playwright install --with-deps
+
+    - name: Create test-user-cred.json
+      run: |
+        mkdir -p playwright/.auth
+        touch ./playwright/.auth/test-user-cred.json
+        echo "{\"user\":\"${{ secrets.USER }}\",\"password\":\"${{ secrets.PASSWORD }}\", \"test-frontend-uri\": \"https://fe-budget-master.onrender.com\"}" > ./playwright/.auth/test-user-cred.json
+        cat ./playwright/.auth/test-user-cred.json
+
+    - name: Run Playwright tests
+      run: pnpm exec playwright test
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 1

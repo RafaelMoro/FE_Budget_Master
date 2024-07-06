@@ -8,7 +8,7 @@ interface TogglePasswordAdornmentProps {
 
 const TogglePasswordAdornment = ({ toggleShowPassword, showPassword }: TogglePasswordAdornmentProps) => (
   <InputAdornment position="end">
-    <IconButton onClick={toggleShowPassword}>
+    <IconButton data-testid="show-hide-password-button" onClick={toggleShowPassword}>
       { (showPassword) ? (<AppIcon icon="VisibilityOff" size="1.5rem" />) : (<AppIcon icon="Visibility" size="2rem" />) }
     </IconButton>
   </InputAdornment>

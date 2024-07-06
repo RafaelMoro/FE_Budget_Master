@@ -61,6 +61,7 @@ export const expensesApiSlice = budgetMasterApi.injectEndpoints({
 
 export const {
   useGetExpensesQuery,
+  useLazyGetExpensesQuery,
   useCreateExpenseMutation,
   useEditExpenseMutation,
   useUpdatePaidMultipleExpensesMutation,

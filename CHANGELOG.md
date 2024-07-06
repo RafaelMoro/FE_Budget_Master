@@ -1,3 +1,9 @@
+## v1.3.0 (2024-07-06)
+
+### Pull Requests
+[#34](https://github.com/RafaelMoro/FE_Budget_Master/pull/34) | Add old records accordion
+
+
 ## v1.2.1 (2024-07-02)
 
 ### Pull Requests

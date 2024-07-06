@@ -16,7 +16,8 @@ export const recordsApiSlice = budgetMasterApi.injectEndpoints({
       }),
       providesTags: [RECORD_TAG],
       transformResponse: (response: IncomeAndExpensesResponse) => {
-        const { data, message } = response;
+        const data = response?.data;
+        const message = response?.message;
         // records could be null, setting an empty array if it's null
         const records = data?.records ?? [];
         return { records, message };

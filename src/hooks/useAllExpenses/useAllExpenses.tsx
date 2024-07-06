@@ -1,22 +1,25 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { GET_EXPENSES } from '../../components/UI/Records/constants';
 import { UseAllExpensesProps } from './interface';
 import { useAppSelector } from '../../redux/hooks';
-import { useGetExpensesQuery } from '../../redux/slices/Records/actions/expenses.api';
-import { Expense } from '../../globalInterface';
-import { useDate } from '../useDate';
+import { useLazyGetExpensesQuery } from '../../redux/slices/Records/actions/expenses.api';
+import { Expense, LazyFetchRecords } from '../../globalInterface';
+import { getDateInfo } from '../../utils/DateUtils';
 import { getLocalRecords } from './utils';
 
 const useAllExpenses = ({ month, year, accountId }: UseAllExpensesProps) => {
-  const { month: currentMonth, lastMonth } = useDate();
+  const { month: currentMonth, lastMonth } = getDateInfo();
   const userReduxState = useAppSelector((state) => state.user);
   const isGuestUser: boolean = userReduxState?.userInfo?.user?.firstName === 'Guest';
   const recordsLocalStorage = useAppSelector((state) => state.records.recordsLocalStorage);
   const bearerToken = userReduxState.userInfo?.bearerToken as string;
   const selectedAccount = useAppSelector((state) => state.accounts.accountSelected);
   const selectedAccountId = accountId ?? selectedAccount?._id;
-  const fullRoute = `${GET_EXPENSES}/${selectedAccountId}/${month}/${year}`;
   const recordsLocalStorageSelectedAccount = recordsLocalStorage?.find((record) => record.account === selectedAccountId);
+
+  const [fetchOlderRecordsMutation, {
+    isError, currentData, isFetching,
+  }] = useLazyGetExpensesQuery();
 
   const [localRecords, setLocalRecords] = useState<Expense[]>([]);
   const [noExpensesFound, setNoExpensesFound] = useState<boolean>(false);
@@ -24,36 +27,46 @@ const useAllExpenses = ({ month, year, accountId }: UseAllExpensesProps) => {
   const turnOnNoExpensesFound = () => setNoExpensesFound(true);
   const turnOffNoExpensesFound = () => setNoExpensesFound(false);
 
-  useEffect(() => {
-    if (isGuestUser && recordsLocalStorage) {
-      const fetchedLocalRecords = getLocalRecords({
-        month,
-        lastMonth,
-        currentMonth,
-        year,
-        recordsLocalStorageSelectedAccount,
-        turnOnNoExpensesFound,
-        turnOffNoExpensesFound,
-        noExpensesFound,
-      });
-      setLocalRecords(fetchedLocalRecords);
-    }
-  }, [currentMonth, isGuestUser, lastMonth, month, noExpensesFound, recordsLocalStorage, recordsLocalStorageSelectedAccount, year]);
+  const handleFetchRecords = async ({ newMonth, newYear }: LazyFetchRecords) => {
+    try {
+      if (!bearerToken || !selectedAccountId || isGuestUser) return;
 
-  const { isFetching, isError, currentData } = useGetExpensesQuery(
-    { route: fullRoute, bearerToken },
-    { skip: (!bearerToken || !selectedAccountId || isGuestUser) },
-  );
+      const monthParam = newMonth ?? month;
+      const yearParam = newYear ?? year;
+      const olderRecordsRoute = `${GET_EXPENSES}/${selectedAccountId}/${monthParam}/${yearParam}`;
+      const response = await fetchOlderRecordsMutation({ route: olderRecordsRoute, bearerToken }).unwrap();
 
-  useEffect(() => {
-    if (currentData?.message === 'No expenses found.') {
-      turnOnNoExpensesFound();
+      // Update total balance of expenses and incomes after fetch of last month records
+      if (response?.message === 'No expenses found.') {
+        turnOnNoExpensesFound();
+      }
+      if (!response?.message) {
+        turnOffNoExpensesFound();
+      }
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(`Error ocurred while fetching related expenses: ${err}`);
     }
-    if (!currentData?.message) {
-      turnOffNoExpensesFound();
-    }
-  }, [currentData]);
+  };
 
+  const handleGetLocalRecords = ({ newMonth, newYear }: LazyFetchRecords) => {
+    const monthParam = newMonth ?? month;
+    const yearParam = newYear ?? year;
+    const fetchedLocalRecords = getLocalRecords({
+      month: monthParam,
+      lastMonth,
+      currentMonth,
+      year: yearParam,
+      recordsLocalStorageSelectedAccount,
+      turnOnNoExpensesFound,
+      turnOffNoExpensesFound,
+      noExpensesFound,
+    });
+    setLocalRecords(fetchedLocalRecords);
+  };
+  const handleGetRecords = isGuestUser ? handleGetLocalRecords : handleFetchRecords;
+
+  // Be sure that there's not transfer records in the list
   const onlyExpensesIncomes = useMemo(
     () => (currentData?.records ?? []).filter((record) => record.typeOfRecord === 'expense'),
     [currentData?.records],
@@ -66,6 +79,7 @@ const useAllExpenses = ({ month, year, accountId }: UseAllExpensesProps) => {
     noExpensesFound,
     isError,
     loading: isFetching,
+    handleFetchRecords: handleGetRecords,
   };
 };
 

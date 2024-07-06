@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { Divider, Typography } from '@mui/material';
 import { AnyRecord } from '../../../../../globalInterface';
 import { MonthAccordeon } from '../MonthAccordeon';
@@ -14,21 +14,25 @@ interface MonthRecordsProps {
   titleMonthAccordeon: string;
   totalExpense: string;
   totalIncome: string;
+  children?: ReactNode;
   onClickCb?: () => Promise<void> | void;
+  isOlderRecords?: boolean;
   accountId: string;
   records: AnyRecord[];
   loading: boolean;
   error: boolean;
   isGuestUser: boolean;
+  showMessage?: boolean;
+  onShowMessage?: () => ReactElement;
   onEmptyCb: () => ReactElement;
   onErrorCb: () => ReactElement;
   onLoadingCb: () => ReactElement;
 }
 
 const MonthRecords = ({
-  color, openedAccordeon, titleMonthAccordeon, accountId, isGuestUser,
-  records, loading, error, onEmptyCb, onLoadingCb, onErrorCb, totalExpense, totalIncome,
-  onClickCb = () => {},
+  color, openedAccordeon, titleMonthAccordeon, accountId, isGuestUser, isOlderRecords, showMessage,
+  records, loading, error, onEmptyCb, onLoadingCb, onErrorCb, totalExpense, totalIncome, onShowMessage,
+  onClickCb = () => {}, children,
 }: MonthRecordsProps) => (
   <MonthAccordeon
     color={color}
@@ -41,18 +45,22 @@ const MonthRecords = ({
       <ShowTotalContianer>
         <FlexContainer gap={2}>
           <Typography>Total Expense: </Typography>
-          <RecordExpense>{totalExpense}</RecordExpense>
+          <RecordExpense data-testid="total-expense-number">{totalExpense}</RecordExpense>
         </FlexContainer>
+        { (isOlderRecords && children) && children }
         <FlexContainer gap={2}>
           <Typography>Total Income: </Typography>
-          <RecordIncome>{totalIncome}</RecordIncome>
+          <RecordIncome data-testid="total-income-number">{totalIncome}</RecordIncome>
         </FlexContainer>
       </ShowTotalContianer>
     ) }
+    { (isGuestUser && isOlderRecords && children) && children }
     <ShowRecords
       records={records}
       loading={loading}
       error={error}
+      showMessage={showMessage}
+      onShowMessage={onShowMessage}
       onEmptyRecords={onEmptyCb}
       onErrorRecords={onErrorCb}
       onLoadingRecords={onLoadingCb}

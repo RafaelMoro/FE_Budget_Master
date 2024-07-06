@@ -5,7 +5,7 @@ import {
   AppColors, TableCell, responsiveBreakpoints,
 } from '../../../../styles';
 import { appTheme } from '../../../../styles/theme';
-import { SelectExpensesCellProps } from '../interface';
+import { SelectExpensesCellProps, SelectMonthYearBoxProps } from '../interface';
 
 /** SelectExpenses */
 export const SelectExpensesContainer = styled.div`
@@ -67,7 +67,7 @@ export const SelectExpensesToolbar = styled(Toolbar)`
 `;
 
 /** SelectExpensesTable */
-export const SelectMonthYearBox = styled.div`
+export const SelectMonthYearBox = styled('div', { shouldForwardProp: (prop) => prop !== 'isDashboard' && prop !== 'isGuestUser' })`
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -78,6 +78,8 @@ export const SelectMonthYearBox = styled.div`
     justify-content: center;
     gap: 5rem;
     margin-top: 2rem;
+    ${({ isDashboard, isGuestUser }: SelectMonthYearBoxProps) => ((isDashboard && isGuestUser) && 'margin-bottom: 5rem;')}
+    ${({ isDashboard, isGuestUser }: SelectMonthYearBoxProps) => ((isDashboard && !isGuestUser) && 'margin: 0 0 2rem 0')}
   }
 `;
 
@@ -90,6 +92,7 @@ export const ShowTotalContianer = styled.div`
   display: flex;
   gap: 1rem;
   justify-content: space-between;
+  align-items: center;
   padding-bottom: 2rem;
 `;
 

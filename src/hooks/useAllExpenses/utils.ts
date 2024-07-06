@@ -12,6 +12,11 @@ interface GetLocalRecordsProps {
   turnOffNoExpensesFound: () => void;
   noExpensesFound: boolean;
 }
+interface GetOlderLocalRecordsProps {
+  month: AbbreviatedMonthsType;
+  year: string;
+  recordsLocalStorageSelectedAccount: RecordsLocalStorage | undefined;
+}
 
 export const getLocalRecords = ({
   month, lastMonth, currentMonth, year, recordsLocalStorageSelectedAccount, turnOnNoExpensesFound, turnOffNoExpensesFound, noExpensesFound,
@@ -44,4 +49,21 @@ export const getLocalRecords = ({
 
   if (recordsFormatted.length === 0) turnOnNoExpensesFound();
   return recordsFormatted;
+};
+
+export const getOlderLocalRecords = ({ recordsLocalStorageSelectedAccount, month, year }: GetOlderLocalRecordsProps) => {
+  const recordsFormatted: Expense[] = (recordsLocalStorageSelectedAccount?.records?.olderRecords ?? [])
+    .map((record) => {
+      if (record.isPaid === undefined) {
+        const recordFormatted: Expense = { ...record, date: new Date(record.date), isPaid: false };
+        return recordFormatted;
+      }
+      const newRecord: Expense = { ...record, date: new Date(record.date), isPaid: record.isPaid };
+      return newRecord;
+    });
+
+  const recordsFormattedOlderRecords: Expense[] = recordsFormatted.filter(
+    (record) => record.date.getMonth() === new Date(`${year}-${month}-01`).getMonth(),
+  );
+  return recordsFormattedOlderRecords;
 };

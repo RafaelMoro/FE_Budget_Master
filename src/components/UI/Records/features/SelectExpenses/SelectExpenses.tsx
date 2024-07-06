@@ -1,10 +1,10 @@
 import { IconButton, Typography } from '@mui/material';
 
+import { useEffect } from 'react';
 import { useAllExpenses } from '../../../../../hooks/useAllExpenses';
-import { useDate } from '../../../../../hooks/useDate';
+import { getDateInfo } from '../../../../../utils/DateUtils';
 import { ERROR_MESSAGE_GENERAL } from '../../../../../constants';
-import { SelectMonthYearValues } from '../../interface';
-import { ABBREVIATED_MONTHS, ExpensePaid, MONTHS } from '../../../../../globalInterface';
+import { ExpensePaid } from '../../../../../globalInterface';
 
 import { SelectMonthYear } from './SelectMonthYear';
 import { Error } from '../../../Error';
@@ -26,18 +26,17 @@ const SelectExpenses = ({
   modifySelectedExpenses, selectedExpenses = [], closeDrawer, accountId,
 }: SelectExpensesProps) => {
   const {
-    month, completeMonth, year, years, updateYear, updateMonth, updateCompleteMonth,
-  } = useDate();
+    month, completeMonth, year, years,
+  } = getDateInfo();
   const {
-    expenses, noExpensesFound, loading, isError,
+    expenses, noExpensesFound, loading, isError, handleFetchRecords,
   } = useAllExpenses({ month, year, accountId });
 
-  const updateMonthAndYear = ({ month: newMonth, year: newYear }: SelectMonthYearValues) => {
-    const monthIndex = MONTHS.indexOf(newMonth);
-    updateMonth(ABBREVIATED_MONTHS[monthIndex]);
-    updateCompleteMonth(newMonth);
-    updateYear(newYear);
-  };
+  // Fetch records on mount
+  useEffect(() => {
+    handleFetchRecords({ newMonth: month, newYear: year });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -48,7 +47,7 @@ const SelectExpenses = ({
       </CloseDrawerContainer>
       { (!isError) && (
         <SelectMonthYear
-          updateMonthYear={updateMonthAndYear}
+          fetchRecordsCb={handleFetchRecords}
           completeMonth={completeMonth}
           currentYear={year}
           yearsArray={years}

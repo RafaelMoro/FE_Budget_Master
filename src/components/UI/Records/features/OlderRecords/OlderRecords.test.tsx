@@ -5,7 +5,7 @@ import { createMemoryHistory } from 'history';
 import fetchMock from 'jest-fetch-mock';
 
 import { renderWithProviders } from '../../../../../tests/CustomWrapperRedux';
-import { olderRecordsResponseEmptyRecords, userInitialState } from '../../Record.mocks';
+import { olderRecordsResponse, olderRecordsResponseEmptyRecords, userInitialState } from '../../Record.mocks';
 import { OlderRecords } from './OlderRecords';
 
 describe('Older Records', () => {
@@ -54,8 +54,6 @@ describe('Older Records', () => {
     const selectYearComboBox = within(selectYearTestId).getByRole('combobox');
     const searchExpensesButton = screen.getByRole('button', { name: /search expenses/i });
     const loadingSkeletons = screen.getAllByTestId('record-loading-skeleton');
-    // const noRecordsFoundText = screen.getByText(/you have not created records for this month\./i);
-    // const createRecordButton = screen.getByRole('button', { name: /create record/i });
 
     expect(totalExpenseText).toBeInTheDocument();
     expect(totalIncomeText).toBeInTheDocument();
@@ -85,5 +83,27 @@ describe('Older Records', () => {
 
     expect(noRecordsFoundText).toBeInTheDocument();
     expect(createRecordButton).toBeInTheDocument();
+  });
+
+  test('Show older records expanded with records', async () => {
+    fetchMock.once(JSON.stringify(olderRecordsResponse));
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} />
+      </Router>,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    const accordion = screen.getByRole('button', {
+      name: /older records/i,
+    });
+
+    userEvent.click(accordion);
+
+    const firstRecordTitle = await screen.findByText(/Casa a solesta gym/i);
+    const secondRecordtitle = screen.getByText(/Solesta gym a casa/i);
+
+    expect(firstRecordTitle).toBeInTheDocument();
+    expect(secondRecordtitle).toBeInTheDocument();
   });
 });

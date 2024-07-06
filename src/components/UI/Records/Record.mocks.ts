@@ -281,6 +281,16 @@ export const createCategoriesResponse = {
   version: '2.0.0',
 };
 
+export const olderRecordsResponseEmptyRecords = {
+  data: {
+    records: [],
+  },
+  error: null,
+  message: null,
+  success: true,
+  version: '2.0.0',
+};
+
 export const olderRecordsResponse = {
   data: {
     records: [mockExpense, mockIncome],

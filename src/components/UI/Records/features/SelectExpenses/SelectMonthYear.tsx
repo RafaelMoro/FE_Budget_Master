@@ -6,17 +6,20 @@ import { MONTHS } from '../../../../../constants';
 import { SecondaryButton } from '../../../../../styles';
 import { AbbreviatedMonthsType, CompleteMonthsType, LazyFetchRecords } from '../../../../../globalInterface';
 import { updateAbbreviatedMonth } from '../../../../../utils/DateUtils/date.utils';
+import { useGuestUser } from '../../../../../hooks';
 
 interface SelectMonthYearProps {
   fetchRecordsCb?: ({ newMonth, newYear, completeMonth }: LazyFetchRecords) => Promise<void> | void;
+  isDashboard?: boolean;
   completeMonth: CompleteMonthsType;
   currentYear: string;
   yearsArray: string[];
 }
 
 const SelectMonthYear = ({
-  completeMonth, currentYear, yearsArray, fetchRecordsCb,
+  completeMonth, currentYear, yearsArray, fetchRecordsCb, isDashboard = false,
 }: SelectMonthYearProps) => {
+  const { isGuestUser } = useGuestUser();
   const handleSubmit = (values: SelectMonthYearValues) => {
     // If it fetches, fetch with the new month and year
     if (fetchRecordsCb) {
@@ -24,13 +27,14 @@ const SelectMonthYear = ({
       fetchRecordsCb({ newMonth, newYear: values.year, completeMonth: values.month });
     }
   };
+
   return (
     <Formik
       initialValues={{ month: completeMonth, year: currentYear }}
       onSubmit={(values) => handleSubmit(values)}
     >
       {({ submitForm }) => (
-        <SelectMonthYearBox>
+        <SelectMonthYearBox isDashboard={isDashboard} isGuestUser={isGuestUser}>
           <SelectInput
             labelId="select-month"
             dataTestId="select-month"

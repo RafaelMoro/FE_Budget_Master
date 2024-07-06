@@ -107,3 +107,8 @@ export interface GetMockExpenseProps {
   tag?: string[];
   shortName?: string;
 }
+
+export interface SelectMonthYearBoxProps {
+  isDashboard: boolean;
+  isGuestUser?: boolean;
+}

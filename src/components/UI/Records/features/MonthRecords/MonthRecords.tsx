@@ -41,19 +41,20 @@ const MonthRecords = ({
     accountId={accountId}
     onClickCallback={onClickCb}
   >
-    { (isOlderRecords && children) && children }
     { (!isGuestUser) && (
       <ShowTotalContianer>
         <FlexContainer gap={2}>
           <Typography>Total Expense: </Typography>
           <RecordExpense>{totalExpense}</RecordExpense>
         </FlexContainer>
+        { (isOlderRecords && children) && children }
         <FlexContainer gap={2}>
           <Typography>Total Income: </Typography>
           <RecordIncome>{totalIncome}</RecordIncome>
         </FlexContainer>
       </ShowTotalContianer>
     ) }
+    { (isGuestUser && isOlderRecords && children) && children }
     <ShowRecords
       records={records}
       loading={loading}

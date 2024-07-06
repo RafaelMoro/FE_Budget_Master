@@ -142,6 +142,7 @@ const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
         currentYear={year}
         yearsArray={years}
         fetchRecordsCb={handleGetRecords}
+        isDashboard
       />
     </MonthRecords>
   );

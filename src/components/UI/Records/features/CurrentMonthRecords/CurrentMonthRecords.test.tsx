@@ -4,7 +4,7 @@ import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 
 import { CurrentMonthRecords } from './CurrentMonthRecords';
-import { userInitialState } from '../../Record.mocks';
+import { olderRecordsResponseEmptyRecords, userInitialState } from '../../Record.mocks';
 import { renderWithProviders } from '../../../../../tests/CustomWrapperRedux';
 import { getCurrentDate } from '../../../../../utils';
 
@@ -39,5 +39,21 @@ describe('Current month records', () => {
     expect(loadingSkeletons).toHaveLength(3);
     expect(screen.getByText(`Current month: ${currentMonthName}`)).toBeInTheDocument();
     expect(icon).toBeInTheDocument();
+  });
+
+  test('Show current month records expanded with empty records', async () => {
+    fetchMock.once(JSON.stringify(olderRecordsResponseEmptyRecords));
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <CurrentMonthRecords color="blue" accountId="some-account-id" isGuestUser={false} />
+      </Router>,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    const noRecordsFoundText = await screen.findByText(/you have not created records for this month\./i);
+    const createRecordButton = screen.getByRole('button', { name: /create record/i });
+
+    expect(noRecordsFoundText).toBeInTheDocument();
+    expect(createRecordButton).toBeInTheDocument();
   });
 });

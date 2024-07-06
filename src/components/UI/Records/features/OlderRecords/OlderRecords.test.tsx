@@ -11,6 +11,7 @@ import {
   failedOlderRecordsResponse, olderRecordsResponse, olderRecordsResponseEmptyRecords, userInitialState,
 } from '../../Record.mocks';
 import { OlderRecords } from './OlderRecords';
+import { MONTHS } from '../../../../../globalInterface';
 
 describe('Older Records', () => {
   beforeEach(() => {
@@ -131,6 +132,11 @@ describe('Older Records', () => {
   });
 
   test('Show older records, click a month beyond the current month, click on search expenses and should show error', async () => {
+    const now = new Date();
+    const currentMonth = now.getMonth();
+    const futureMonth = currentMonth + 1;
+    const futureMonthName = MONTHS[futureMonth];
+
     fetchMock.once(JSON.stringify(olderRecordsResponse));
     renderWithProviders(
       <Router location={history.location} navigator={history}>
@@ -154,13 +160,14 @@ describe('Older Records', () => {
       'listbox',
     );
     const options = within(listbox).getAllByRole('option');
-    fireEvent.click(options[7]);
-    expect(await screen.findByText(/august/i)).toBeInTheDocument();
+    fireEvent.click(options[futureMonth]);
+    expect(await screen.findByText(futureMonthName)).toBeInTheDocument();
 
     // Click on search expenses button
     const searchExpensesButton = screen.getByRole('button', { name: /search expenses/i });
     userEvent.click(searchExpensesButton);
 
-    await screen.findByText(/You are selecting a date in the future: August 2024/i);
+    const errorMessage = new RegExp(`You are selecting a date in the future: ${futureMonthName} 2024`);
+    await screen.findByText(errorMessage);
   });
 });

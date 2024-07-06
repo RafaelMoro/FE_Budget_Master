@@ -280,3 +280,13 @@ export const createCategoriesResponse = {
   success: true,
   version: '2.0.0',
 };
+
+export const olderRecordsResponse = {
+  data: {
+    records: [mockExpense, mockIncome],
+  },
+  error: null,
+  message: null,
+  success: true,
+  version: '2.0.0',
+};

@@ -6,7 +6,7 @@ interface ShowMultipleRecordLoaderProps {
 }
 
 const ShowMultipleRecordLoader = ({ keyMap, numberOfSkeletons = 1 }: ShowMultipleRecordLoaderProps) => {
-  const skeletons = [RecordLoading];
+  const skeletons = [];
 
   if (numberOfSkeletons > 1) {
     for (let index = 0; index < numberOfSkeletons; index += 1) {

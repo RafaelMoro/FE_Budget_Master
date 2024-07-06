@@ -4,7 +4,7 @@ import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 
 import { CurrentMonthRecords } from './CurrentMonthRecords';
-import { olderRecordsResponseEmptyRecords, userInitialState } from '../../Record.mocks';
+import { olderRecordsResponse, olderRecordsResponseEmptyRecords, userInitialState } from '../../Record.mocks';
 import { renderWithProviders } from '../../../../../tests/CustomWrapperRedux';
 import { getCurrentDate } from '../../../../../utils';
 
@@ -55,5 +55,21 @@ describe('Current month records', () => {
 
     expect(noRecordsFoundText).toBeInTheDocument();
     expect(createRecordButton).toBeInTheDocument();
+  });
+
+  test('Show current month records expanded with records', async () => {
+    fetchMock.once(JSON.stringify(olderRecordsResponse));
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <CurrentMonthRecords color="blue" accountId="some-account-id" isGuestUser={false} />
+      </Router>,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    const firstRecordTitle = await screen.findByText(/Casa a solesta gym/i);
+    const secondRecordtitle = screen.getByText(/Solesta gym a casa/i);
+
+    expect(firstRecordTitle).toBeInTheDocument();
+    expect(secondRecordtitle).toBeInTheDocument();
   });
 });

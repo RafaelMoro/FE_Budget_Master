@@ -219,8 +219,9 @@ export const accountsInitialState: AccountsInitialState = {
   accountsFetchStatus: 'isUninitialized',
 };
 
-export const getAccountsState = ({ state }: { state: AccountsState }) => ({
+export const getAccountsState = ({ state, accounts }: { state: AccountsState; accounts: AccountUI[] | null }) => ({
   ...accountsInitialState,
+  accounts,
   accountsFetchStatus: state,
 });
 

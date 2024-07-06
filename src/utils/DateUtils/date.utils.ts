@@ -49,3 +49,11 @@ export const getCurrentDate = () => {
 
   return { currentMonth, currentMonthName };
 };
+
+export const getLastMonthDate = () => {
+  const now = new Date();
+  const lastMonth = now.getMonth() - 1;
+  const lastMonthName = MONTHS[lastMonth];
+
+  return { lastMonth, lastMonthName };
+};

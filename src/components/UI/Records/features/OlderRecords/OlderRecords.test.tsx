@@ -11,7 +11,7 @@ import {
   failedOlderRecordsResponse, olderRecordsResponse, olderRecordsResponseEmptyRecords, userInitialState,
 } from '../../Record.mocks';
 import { OlderRecords } from './OlderRecords';
-import { getCurrentDate, getFutureDate } from '../../../../../utils';
+import { getCurrentDate, getFutureDate, getLastMonthDate } from '../../../../../utils';
 
 describe('Older Records', () => {
   beforeEach(() => {
@@ -202,6 +202,43 @@ describe('Older Records', () => {
     userEvent.click(searchExpensesButton);
 
     const errorMessage = new RegExp(`${currentMonthName} records are shown above. Please select an older month.`);
+    await screen.findByText(errorMessage);
+  });
+
+  test('Show older records, then click the last month option, then click on search expenses and should show error', async () => {
+    const { lastMonth, lastMonthName } = getLastMonthDate();
+
+    fetchMock.once(JSON.stringify(olderRecordsResponse));
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} />
+      </Router>,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    // Click accordion
+    const accordion = screen.getByRole('button', {
+      name: /older records/i,
+    });
+    userEvent.click(accordion);
+    await screen.findByText(/Casa a solesta gym/i);
+
+    // Change month on combobox
+    const selectMonthTestId = screen.getByTestId('select-month');
+    const selectMonthButton = within(selectMonthTestId).getByRole('combobox');
+    fireEvent.mouseDown(selectMonthButton);
+    const listbox = within(screen.getByRole('presentation')).getByRole(
+      'listbox',
+    );
+    const options = within(listbox).getAllByRole('option');
+    fireEvent.click(options[lastMonth]);
+    expect(await screen.findByText(lastMonthName)).toBeInTheDocument();
+
+    // Click on search expenses button
+    const searchExpensesButton = screen.getByRole('button', { name: /search expenses/i });
+    userEvent.click(searchExpensesButton);
+
+    const errorMessage = new RegExp(`${lastMonthName} records are shown above. Please select an older month.`);
     await screen.findByText(errorMessage);
   });
 });

@@ -1,5 +1,5 @@
 import { AnyRecord, Category, IndebtedPeople } from '../../../globalInterface';
-import { AccountsInitialState } from '../../../redux/slices/Accounts/interface';
+import { AccountsInitialState, AccountsState } from '../../../redux/slices/Accounts/interface';
 import { CategoriesInitialState } from '../../../redux/slices/Categories/interface';
 import { UserInitialState } from '../../../redux/slices/User/interface';
 import { AccountUI } from '../Account/Account.interface';
@@ -218,6 +218,11 @@ export const accountsInitialState: AccountsInitialState = {
   // This flag will let know records if they can fetch and give feedback to the user
   accountsFetchStatus: 'isUninitialized',
 };
+
+export const getAccountsState = ({ state }: { state: AccountsState }) => ({
+  ...accountsInitialState,
+  accountsFetchStatus: state,
+});
 
 export const mockIndebtedPerson: IndebtedPeople = {
   name: 'John',

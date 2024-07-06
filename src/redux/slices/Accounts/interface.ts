@@ -1,7 +1,7 @@
 import { AccountUI, CreateAccount, ModifyAccountValues } from '../../../components/UI/Account/Account.interface';
 import { Account, GeneralResponse } from '../../../globalInterface';
 
-type AccountsState = 'isUninitialized' | 'loading' | 'success';
+export type AccountsState = 'isUninitialized' | 'loading' | 'success';
 
 export interface AccountsInitialState {
   accounts: AccountUI[] | null;

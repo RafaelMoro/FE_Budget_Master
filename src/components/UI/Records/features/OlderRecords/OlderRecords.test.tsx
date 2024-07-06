@@ -1,4 +1,6 @@
-import { screen, within } from '@testing-library/react';
+import {
+  fireEvent, screen, within,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
@@ -126,5 +128,39 @@ describe('Older Records', () => {
 
     const errorText = await screen.findByText(/An error has ocurred. Please try again later\./i);
     expect(errorText).toBeInTheDocument();
+  });
+
+  test('Show older records, click a month beyond the current month, click on search expenses and should show error', async () => {
+    fetchMock.once(JSON.stringify(olderRecordsResponse));
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} />
+      </Router>,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    // Click accordion
+    const accordion = screen.getByRole('button', {
+      name: /older records/i,
+    });
+    userEvent.click(accordion);
+    await screen.findByText(/Casa a solesta gym/i);
+
+    // Change month on combobox
+    const selectMonthTestId = screen.getByTestId('select-month');
+    const selectMonthButton = within(selectMonthTestId).getByRole('combobox');
+    fireEvent.mouseDown(selectMonthButton);
+    const listbox = within(screen.getByRole('presentation')).getByRole(
+      'listbox',
+    );
+    const options = within(listbox).getAllByRole('option');
+    fireEvent.click(options[7]);
+    expect(await screen.findByText(/august/i)).toBeInTheDocument();
+
+    // Click on search expenses button
+    const searchExpensesButton = screen.getByRole('button', { name: /search expenses/i });
+    userEvent.click(searchExpensesButton);
+
+    await screen.findByText(/You are selecting a date in the future: August 2024/i);
   });
 });

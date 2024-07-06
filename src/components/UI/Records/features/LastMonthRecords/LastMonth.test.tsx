@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../../../../tests/CustomWrapperRedux';
 import { LastMonthRecords } from './LastMonthRecords';
-import { olderRecordsResponseEmptyRecords, userInitialState } from '../../Record.mocks';
+import { olderRecordsResponse, olderRecordsResponseEmptyRecords, userInitialState } from '../../Record.mocks';
 import { getLastMonthDate } from '../../../../../utils';
 
 describe('Last Month Records', () => {
@@ -59,7 +59,7 @@ describe('Last Month Records', () => {
     expect(loadingSkeletons).toHaveLength(3);
   });
 
-  test('Show older records expanded with empty records', async () => {
+  test('Show last month records expanded with empty records', async () => {
     fetchMock.once(JSON.stringify(olderRecordsResponseEmptyRecords));
     renderWithProviders(
       <Router location={history.location} navigator={history}>
@@ -79,5 +79,27 @@ describe('Last Month Records', () => {
 
     expect(noRecordsFoundText).toBeInTheDocument();
     expect(createRecordButton).toBeInTheDocument();
+  });
+
+  test('Show last month records expanded with records', async () => {
+    fetchMock.once(JSON.stringify(olderRecordsResponse));
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <LastMonthRecords color="blue" accountId="some-account-id" isGuestUser={false} />
+      </Router>,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    const accordion = screen.getByRole('button', {
+      name: `Last month: ${lastMonthName}`,
+    });
+
+    userEvent.click(accordion);
+
+    const firstRecordTitle = await screen.findByText(/Casa a solesta gym/i);
+    const secondRecordtitle = screen.getByText(/Solesta gym a casa/i);
+
+    expect(firstRecordTitle).toBeInTheDocument();
+    expect(secondRecordtitle).toBeInTheDocument();
   });
 });

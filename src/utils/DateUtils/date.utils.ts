@@ -41,3 +41,11 @@ export const getFutureDate = () => {
 
   return { futureMonth, futureMonthName };
 };
+
+export const getCurrentDate = () => {
+  const now = new Date();
+  const currentMonth = now.getMonth();
+  const currentMonthName = MONTHS[currentMonth];
+
+  return { currentMonth, currentMonthName };
+};

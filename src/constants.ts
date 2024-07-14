@@ -10,6 +10,7 @@ export const DELETE_METHOD = 'DELETE';
 export const NETWORK_CATCH_ERROR = 'Network Error';
 export const JWT_EXPIRED_CATCH_ERROR = 'jwt expired';
 export const ERROR_CATCH_USER_CREATED = 'Try with other email.';
+export const EXPENSES_NOT_FOUND = 'Expenses not found.';
 
 export const ERROR_TITLE_GENERAL = 'Error';
 export const ERROR_MESSAGE_GENERAL = 'Oops! Something went wrong. Try again later.';

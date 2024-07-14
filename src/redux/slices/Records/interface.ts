@@ -21,7 +21,7 @@ export interface GetRecordByMonthAndYearProps {
 
 export interface GetExpensesResponse extends Omit<GeneralResponse, 'data'> {
   data: {
-    records: Expense[];
+    expenses: Expense[];
   };
 }
 

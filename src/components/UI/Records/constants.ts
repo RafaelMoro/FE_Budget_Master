@@ -7,7 +7,6 @@ export const TRANSFER_ROUTE = 'records/transfer';
 export const UPDATE_MULTIPLE_EXPENSES = '/expenses/multiple';
 
 export const NO_EXPENSES_OR_INCOMES_FOUND = 'No incomes or expenses found.';
-export const NO_EXPENSES_FOUND = 'Expenses not found.';
 
 export const MAX_LENGTH_TITLE = 30;
 export const MAX_LENGTH_DESCRIPTION = 50;

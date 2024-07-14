@@ -68,8 +68,8 @@ const useAllExpenses = ({ month, year, accountId }: UseAllExpensesProps) => {
 
   // Be sure that there's not transfer records in the list
   const onlyExpensesIncomes = useMemo(
-    () => (currentData?.records ?? []).filter((record) => record.typeOfRecord === 'expense'),
-    [currentData?.records],
+    () => (currentData?.expenses ?? []).filter((record) => record.typeOfRecord === 'expense'),
+    [currentData?.expenses],
   );
 
   const recordsToShow = isGuestUser ? localRecords : onlyExpensesIncomes;

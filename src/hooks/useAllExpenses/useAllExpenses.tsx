@@ -6,6 +6,7 @@ import { useLazyGetExpensesQuery } from '../../redux/slices/Records/actions/expe
 import { Expense, LazyFetchRecords } from '../../globalInterface';
 import { getDateInfo } from '../../utils/DateUtils';
 import { getLocalRecords } from './utils';
+import { EXPENSES_NOT_FOUND } from '../../constants';
 
 const useAllExpenses = ({ month, year, accountId }: UseAllExpensesProps) => {
   const { month: currentMonth, lastMonth } = getDateInfo();
@@ -37,7 +38,7 @@ const useAllExpenses = ({ month, year, accountId }: UseAllExpensesProps) => {
       const response = await fetchOlderRecordsMutation({ route: olderRecordsRoute, bearerToken }).unwrap();
 
       // Update total balance of expenses and incomes after fetch of last month records
-      if (response?.message === 'No expenses found.') {
+      if (response?.message === EXPENSES_NOT_FOUND) {
         turnOnNoExpensesFound();
       }
       if (!response?.message) {

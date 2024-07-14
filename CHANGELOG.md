@@ -1,3 +1,9 @@
+## v1.3.1 (2024-07-14)
+
+### Pull Requests
+[#37](https://github.com/RafaelMoro/FE_Budget_Master/pull/37) | Adapt FE to the changes of the refactor of the BE
+
+
 ## v1.3.0 (2024-07-06)
 
 ### Pull Requests

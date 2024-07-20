@@ -180,4 +180,37 @@ describe('Header', () => {
       expect(history.location.pathname).toBe(LOGIN_ROUTE);
     });
   });
+
+  test(`Given a guest user in the landing page, he clicks on the button 'get personalized experience',
+    then a modal is shown, then he clicks on the button 'Register'`, async () => {
+    const guestUserState = getUserMock({ isGuestUser: true });
+    const userInterfaceState = getInitialUserInterfaceState({ newWindowSize: 'Desktop' });
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <Header isLandingPage />
+      </Router>,
+      { preloadedState: { userInterface: userInterfaceState, user: guestUserState } },
+    );
+    const getPersonalizedExperienceButton = screen.getByRole('button', { name: /get personalized experience/i });
+
+    expect(screen.queryByRole('button', { name: /log in/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /register/i })).not.toBeInTheDocument();
+    // Expect show personalized button in landing page.
+    expect(getPersonalizedExperienceButton).toBeInTheDocument();
+
+    userEvent.click(getPersonalizedExperienceButton);
+
+    // Expect modal shown.
+    expect(await screen.findByRole('heading', { name: /secure your data/i })).toBeInTheDocument();
+    expect(screen.getByText(/save your progress by creating an account or continue your journey by signing in/i)).toBeInTheDocument();
+    const registerButton = screen.getByRole('button', { name: /register/i });
+    expect(screen.getByRole('button', { name: /log in/i })).toBeInTheDocument();
+    expect(registerButton).toBeInTheDocument();
+
+    userEvent.click(registerButton);
+
+    await waitFor(() => {
+      expect(history.location.pathname).toBe(REGISTER_ROUTE);
+    });
+  });
 });

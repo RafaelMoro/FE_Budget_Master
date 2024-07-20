@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { LinearProgress, Typography } from '@mui/material';
 import { AppColors, Chip } from '../../../styles';
+import { ProgressProps } from './Budget.interface';
 
 export const BudgetContainer = styled.div`
   padding: 3rem;
@@ -32,6 +33,23 @@ export const BudgetChip = styled(Chip)`
   max-width: 13.5rem;
 `;
 
-export const Progress = styled(LinearProgress)`
+export const Progress = styled(LinearProgress, { shouldForwardProp: (props) => props !== 'hasProgressMedium' && props !== 'hasProgressHigh' })`
   grid-column: 1 / 3;
+  span {
+    background-color: ${AppColors.positive};
+    ${({ hasProgressMedium }: ProgressProps) => hasProgressMedium && `background-color: ${AppColors.warning};`}
+    ${({ hasProgressHigh }: ProgressProps) => hasProgressHigh && `background-color: ${AppColors.negative};`}
+  }
+`;
+
+export const ProgressLabelContainer = styled.div`
+  grid-column: 1 / 3;
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const ProgressLabel = styled(Typography)`
+  color: ${AppColors.positive};
+    ${({ hasProgressMedium }: ProgressProps) => hasProgressMedium && `color: ${AppColors.warning};`}
+    ${({ hasProgressHigh }: ProgressProps) => hasProgressHigh && `color: ${AppColors.negative};`}
 `;

@@ -14,6 +14,20 @@ describe('Header', () => {
     jest.spyOn(console, 'error').mockImplementation(() => {});
   });
   const history = createMemoryHistory();
+  test('Show Header for Mobile', () => {
+    const userInterfaceState = getInitialUserInterfaceState({ newWindowSize: 'Mobile' });
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <Header />
+      </Router>,
+      { preloadedState: { userInterface: userInterfaceState } },
+    );
+
+    expect(screen.getByRole('heading', { name: /budget master/i })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: /budget master logo/i })).toBeInTheDocument();
+    expect(screen.getByTestId('hamburguer-menu-header')).toBeInTheDocument();
+  });
+
   test('Show Header in Landing page for Mobile', () => {
     const userInterfaceState = getInitialUserInterfaceState({ newWindowSize: 'Mobile' });
     renderWithProviders(

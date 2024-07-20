@@ -71,7 +71,7 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
             </FlexContainer>
           ) }
           { (isMobile && !userLoggedOn) && (
-            <IconButton onClick={toggleHamburguerDrawer}>
+            <IconButton data-testid="hamburguer-menu-header" onClick={toggleHamburguerDrawer}>
               <AppIcon icon="HamburguerMenu" fillColor={isLandingPage ? AppColors.white : AppColors.primary} />
             </IconButton>
           )}

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import { AppColors } from '../../../styles';
+import { Typography } from '@mui/material';
+import { AppColors, Chip } from '../../../styles';
 
 export const BudgetContainer = styled.div`
   padding: 3rem;
@@ -14,4 +15,18 @@ export const BudgetContainer = styled.div`
   &:hover {
       box-shadow: 0 .8rem 1.6rem 0 rgba(0, 0, 0, 0.2);
     }
+`;
+
+export const LimitText = styled(Typography)`
+  justify-self: end;
+`;
+
+export const DateText = styled(Typography)`
+  grid-column: 1 / 3;
+`;
+
+export const BudgetChip = styled(Chip)`
+  background-color: ${AppColors.white};
+  color: ${AppColors.primary};
+  border: 1px solid ${AppColors.primary};
 `;

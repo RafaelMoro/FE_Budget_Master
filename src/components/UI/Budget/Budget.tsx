@@ -1,7 +1,8 @@
 import { Typography } from '@mui/material';
 import { BudgetUI } from '../../../globalInterface';
-import { BudgetContainer } from './Budget.styled';
-import { BudgetChip, DateText, LimitText } from '../../../pages/Budgets/BudgetsPage.styled';
+import {
+  BudgetContainer, BudgetChip, DateText, LimitText,
+} from './Budget.styled';
 
 /**
  * Todos:

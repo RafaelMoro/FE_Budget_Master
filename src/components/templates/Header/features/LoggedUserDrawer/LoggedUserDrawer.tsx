@@ -1,4 +1,4 @@
-import { Drawer, Typography } from '@mui/material';
+import { Drawer } from '@mui/material';
 import { AppIcon } from '../../../../UI/Icons';
 import { CloseIconButton, DrawerMenu } from '../../Header.styled';
 import { TransparentButton } from '../../../../../styles';
@@ -16,7 +16,7 @@ const LoggedUserDrawer = ({ open, toggleDrawer, signOut }: LoggedUserDrawerProps
         <AppIcon icon="Close" />
       </CloseIconButton>
       <TransparentButton data-testid="log-out-button" onClick={signOut}>
-        <Typography>Log out</Typography>
+        Log out
       </TransparentButton>
     </DrawerMenu>
   </Drawer>

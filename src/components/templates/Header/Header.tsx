@@ -11,7 +11,7 @@ import { HeaderProps } from './Header.interface';
 
 import { AppIcon } from '../../UI/Icons';
 import { BrandLogoName } from '../BrandLogoName';
-import { GuestUserModal, NotLoggedDrawer } from './features';
+import { GuestUserModal, LoggedUserDrawer, NotLoggedDrawer } from './features';
 import {
   AnchorButton, AppColors, FlexContainer, PrimaryButton, SecondaryButton,
 } from '../../../styles';
@@ -27,9 +27,12 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
   const isMobile = windowSize === 'Mobile';
 
   const [openNotLoggedDrawer, setOpenNotLoggedDrawer] = useState(false);
+  const [openLoggedDrawer, setOpenLoggedDrawer] = useState(false);
   const [openGuestUserModal, setOpenGuestUserModal] = useState(false);
   const toggleGuestUserModal = () => setOpenGuestUserModal((prevState) => !prevState);
   const toggleNotLoggedDrawer = () => setOpenNotLoggedDrawer((prevState) => !prevState);
+  const toggleLoggedDrawer = () => setOpenLoggedDrawer((prevState) => !prevState);
+  const toggleHamburguerMenu = !isGuestUser && userLoggedOn ? toggleLoggedDrawer : toggleNotLoggedDrawer;
 
   const activeDashboardPage = location.pathname === DASHBOARD_ROUTE;
   const activeBudgetsPage = location.pathname === BUDGETS_ROUTE;
@@ -44,11 +47,6 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
               <HeaderNavAnchor active={activeDashboardPage} to={DASHBOARD_ROUTE}>Accounts</HeaderNavAnchor>
               <HeaderNavAnchor active={activeBudgetsPage} to="/budgets">Budgets</HeaderNavAnchor>
             </HeaderNav>
-          ) }
-          { (!isGuestUser && userLoggedOn) && (
-            <IconButton aria-label="sign-out-button" onClick={signOut}>
-              <AppIcon fillColor={isLandingPage ? AppColors.white : AppColors.primary} icon="LogOut" />
-            </IconButton>
           ) }
           { (isGuestUser && !isMobile) && (
             <GuestUserButton
@@ -70,14 +68,15 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
               </AnchorButton>
             </FlexContainer>
           ) }
-          { (isMobile && !userLoggedOn) && (
-            <IconButton data-testid="hamburguer-menu-header" onClick={toggleNotLoggedDrawer}>
+          { (isMobile) && (
+            <IconButton data-testid="hamburguer-menu-header" onClick={toggleHamburguerMenu}>
               <AppIcon icon="HamburguerMenu" fillColor={isLandingPage ? AppColors.white : AppColors.primary} />
             </IconButton>
           )}
         </HeaderContainer>
       </HeaderShadow>
       <NotLoggedDrawer open={openNotLoggedDrawer} toggleDrawer={toggleNotLoggedDrawer} />
+      <LoggedUserDrawer open={openLoggedDrawer} toggleDrawer={toggleLoggedDrawer} signOut={signOut} />
       <GuestUserModal open={openGuestUserModal} onClose={toggleGuestUserModal} />
     </>
   );

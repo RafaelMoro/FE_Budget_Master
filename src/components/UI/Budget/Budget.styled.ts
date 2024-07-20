@@ -5,6 +5,7 @@ import { ProgressProps } from './Budget.interface';
 
 export const BudgetContainer = styled.div`
   padding: 3rem;
+  max-width: 35rem;
   background-color: ${AppColors.white};
   box-shadow: 0 .4rem .8rem rgba(0, 0, 0, 0.2);
   transition: 0.3s;
@@ -18,11 +19,7 @@ export const BudgetContainer = styled.div`
     }
 `;
 
-export const LimitText = styled(Typography)`
-  justify-self: end;
-`;
-
-export const DateText = styled(Typography)`
+export const TextTwoColumns = styled(Typography)`
   grid-column: 1 / 3;
 `;
 
@@ -48,7 +45,7 @@ export const ProgressLabelContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const ProgressLabel = styled(Typography)`
+export const ProgressLabel = styled(Typography, { shouldForwardProp: (props) => props !== 'hasProgressMedium' && props !== 'hasProgressHigh' })`
   color: ${AppColors.positive};
     ${({ hasProgressMedium }: ProgressProps) => hasProgressMedium && `color: ${AppColors.warning};`}
     ${({ hasProgressHigh }: ProgressProps) => hasProgressHigh && `color: ${AppColors.negative};`}

@@ -1,16 +1,10 @@
-import { Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { BudgetUI } from '../../../globalInterface';
 import {
-  BudgetContainer, BudgetChip, DateText, LimitText,
+  BudgetContainer, BudgetChip, TextTwoColumns,
 } from './Budget.styled';
 import { calculateProgress } from './Budget.util';
 import { ProgressBudget } from './features';
-
-/**
- * Todos:
- * Mostrar progress.
- *
-*/
 
 interface BudgetProps {
   budget: BudgetUI;
@@ -20,27 +14,49 @@ const Budget = ({
   budget,
 }: BudgetProps) => {
   const {
-    name, description, typeBudget, limit, currentAmount, currentAmountFormatted, limitFormatted, startDateFormatted, endDateFormatted, period,
+    name,
+    description: budgetDescription,
+    typeBudget,
+    limit,
+    currentAmount,
+    currentAmountFormatted,
+    limitFormatted,
+    startDateFormatted,
+    endDateFormatted,
+    period,
   } = budget;
   const dateText = `From ${startDateFormatted} to ${endDateFormatted}`;
   const progress = calculateProgress({ limit, currentAmount });
+  const [title, setTitle] = useState(name);
+  const [description, setDescription] = useState(budgetDescription);
+
+  useEffect(() => {
+    if (name.length > 50) {
+      setTitle(`${name.slice(0, 50)}...`);
+    }
+  }, [name]);
+
+  useEffect(() => {
+    if (budgetDescription.length > 115) {
+      setDescription(`${budgetDescription.slice(0, 115)}...`);
+    }
+  }, [budgetDescription]);
 
   return (
     <BudgetContainer>
-      <DateText variant="body2" align="center">
+      <TextTwoColumns variant="body2" align="center">
         {dateText}
-      </DateText>
-      <Typography variant="h4">{name}</Typography>
-      <LimitText>
+      </TextTwoColumns>
+      <TextTwoColumns variant="h4">{title}</TextTwoColumns>
+      <TextTwoColumns align="center">
         Limit:
         {' '}
         {limitFormatted}
-      </LimitText>
+      </TextTwoColumns>
       <ProgressBudget currentAmountFormatted={currentAmountFormatted} progress={progress} />
       <BudgetChip label={typeBudget} />
       <BudgetChip label={period} />
-      <Typography>{description}</Typography>
-
+      <TextTwoColumns>{description}</TextTwoColumns>
     </BudgetContainer>
   );
 };

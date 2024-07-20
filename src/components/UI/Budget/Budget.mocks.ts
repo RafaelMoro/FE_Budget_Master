@@ -1,0 +1,37 @@
+import { BudgetUI } from '../../../globalInterface';
+
+export const currentBudget: BudgetUI = {
+  name: 'Tragadera y demas comida que se me ocurra comprar.',
+  description: 'Este es un presupuesto para toda la comida rapida, botana, dulces y alcohol.',
+  typeBudget: 'one-time',
+  period: 'weekly',
+  startDate: new Date('2024-07-20T12:08:00'),
+  startDateFormatted: 'Jul 20',
+  endDate: new Date('2024-07-27T12:08:00'),
+  endDateFormatted: 'Jul 27',
+  currentAmount: 200,
+  currentAmountFormatted: '$200.00',
+  limit: 1000,
+  limitFormatted: '$1,000.00',
+  isActive: true,
+  nextResetDate: new Date('2024-07-27T12:08:00'),
+  previousPrevious: [],
+};
+
+export const mockBudget: BudgetUI = {
+  name: 'Fast food and beverages.',
+  description: 'This budget is to control the amount of money spent in fast food',
+  typeBudget: 'one-time',
+  period: 'weekly',
+  startDate: new Date('2024-07-20T12:08:00'),
+  startDateFormatted: 'Jul 20',
+  endDate: new Date('2024-07-27T12:08:00'),
+  endDateFormatted: 'Jul 27',
+  currentAmount: 200,
+  currentAmountFormatted: '$200.00',
+  limit: 1000,
+  limitFormatted: '$1,000.00',
+  isActive: true,
+  nextResetDate: new Date('2024-07-27T12:08:00'),
+  previousPrevious: [],
+};

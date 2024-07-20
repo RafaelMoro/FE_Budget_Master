@@ -233,4 +233,26 @@ describe('Header', () => {
       expect(history.location.pathname).toBe(REGISTER_ROUTE);
     });
   });
+
+  test('Given a logged user in Desktop, he clicks on the log out button, then the sign in and register button appears', async () => {
+    const loggedUserState = getUserMock({ isGuestUser: false });
+    const userInterfaceState = getInitialUserInterfaceState({ newWindowSize: 'Desktop' });
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <Header />
+      </Router>,
+      { preloadedState: { userInterface: userInterfaceState, user: loggedUserState } },
+    );
+
+    const signOutButton = screen.getByRole('button', { name: /sign-out-button/i });
+    expect(signOutButton).toBeInTheDocument();
+
+    userEvent.click(signOutButton);
+
+    await waitFor(() => {
+      expect(history.location.pathname).toBe('/');
+    });
+    expect(screen.getByRole('button', { name: /log in/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /register/i })).toBeInTheDocument();
+  });
 });

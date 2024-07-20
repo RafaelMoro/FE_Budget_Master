@@ -29,4 +29,5 @@ export const BudgetChip = styled(Chip)`
   background-color: ${AppColors.white};
   color: ${AppColors.primary};
   border: 1px solid ${AppColors.primary};
+  max-width: 13.5rem;
 `;

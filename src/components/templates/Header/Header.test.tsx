@@ -102,7 +102,7 @@ describe('Header', () => {
     expect(screen.getByRole('button', { name: /register/i })).toBeInTheDocument();
   });
 
-  test('Show Header in Landing page for Destop with guest user', () => {
+  test("Show the button 'Get personalized experience' in a landing page in Desktop", () => {
     const guestUserState = getUserMock({ isGuestUser: true });
     const userInterfaceState = getInitialUserInterfaceState({ newWindowSize: 'Desktop' });
     renderWithProviders(
@@ -114,6 +114,19 @@ describe('Header', () => {
 
     expect(screen.queryByRole('button', { name: /log in/i })).not.toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /register/i })).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /get personalized experience/i })).toBeInTheDocument();
+  });
+
+  test("Show the button 'Get personalized experience' in a non landing page in Desktop", () => {
+    const guestUserState = getUserMock({ isGuestUser: true });
+    const userInterfaceState = getInitialUserInterfaceState({ newWindowSize: 'Desktop' });
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <Header />
+      </Router>,
+      { preloadedState: { userInterface: userInterfaceState, user: guestUserState } },
+    );
+
     expect(screen.getByRole('button', { name: /get personalized experience/i })).toBeInTheDocument();
   });
 });

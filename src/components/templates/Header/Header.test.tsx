@@ -42,6 +42,27 @@ describe('Header', () => {
     expect(screen.getByTestId('hamburguer-menu-header')).toBeInTheDocument();
   });
 
+  test('Given a logged user in Mobile, he clicks on the log out button, then the hamburguer menu icon appears', async () => {
+    const loggedUserState = getUserMock({ isGuestUser: false });
+    const userInterfaceState = getInitialUserInterfaceState({ newWindowSize: 'Mobile' });
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <Header />
+      </Router>,
+      { preloadedState: { userInterface: userInterfaceState, user: loggedUserState } },
+    );
+
+    const signOutButton = screen.getByRole('button', { name: /sign-out-button/i });
+    expect(signOutButton).toBeInTheDocument();
+
+    userEvent.click(signOutButton);
+
+    await waitFor(() => {
+      expect(history.location.pathname).toBe('/');
+    });
+    expect(screen.getByTestId('hamburguer-menu-header')).toBeInTheDocument();
+  });
+
   test('Given a user in mobile, he clicks on hamburguer menu, then he clicks on Log in link and send him into Login page', async () => {
     const userInterfaceState = getInitialUserInterfaceState({ newWindowSize: 'Mobile' });
     renderWithProviders(

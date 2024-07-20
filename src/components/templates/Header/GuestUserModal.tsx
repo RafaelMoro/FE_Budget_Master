@@ -30,7 +30,7 @@ const GuestUserModal = ({ open, onClose }: GuestUserModalProps) => {
         <Typography>Save your progress by creating an account or continue your journey by signing in</Typography>
         <FlexContainer gap={3} justifyContent="space-between">
           <AnchorButton to={LOGIN_ROUTE}>
-            <SecondaryButton variant="contained" size="medium">Sign in</SecondaryButton>
+            <SecondaryButton variant="contained" size="medium">Log in</SecondaryButton>
           </AnchorButton>
           <AnchorButton to={REGISTER_ROUTE} state={locationState}>
             <PrimaryButton variant="contained" size="medium">Register</PrimaryButton>

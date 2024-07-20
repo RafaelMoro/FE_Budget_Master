@@ -18,20 +18,29 @@ export const currentBudget: BudgetUI = {
   previousPrevious: [],
 };
 
-export const mockBudget: BudgetUI = {
-  name: 'Fast food and beverages.',
-  description: 'This budget is to control the amount of money spent in fast food',
-  typeBudget: 'one-time',
-  period: 'weekly',
-  startDate: new Date('2024-07-20T12:08:00'),
-  startDateFormatted: 'Jul 20',
-  endDate: new Date('2024-07-27T12:08:00'),
-  endDateFormatted: 'Jul 27',
-  currentAmount: 200,
-  currentAmountFormatted: '$200.00',
-  limit: 1000,
-  limitFormatted: '$1,000.00',
-  isActive: true,
-  nextResetDate: new Date('2024-07-27T12:08:00'),
-  previousPrevious: [],
+export const getMockBudget = ({ hasLargeTitle, hasLargeDescription }: { hasLargeTitle?: boolean, hasLargeDescription?: boolean } = {}): BudgetUI => {
+  const defaultTitle = 'Fast food and beverages.';
+  const largeTitle = 'This is a very long title that should be truncated on the budget when shown.';
+
+  const defaultDescription = 'This budget is to control the amount of money spent in fast food';
+  // eslint-disable-next-line max-len
+  const largeDescription = "This is a very long description that should be truncated on the budget when shown. Seems like it's still missing some words so the description can be truncated";
+
+  return {
+    name: hasLargeTitle ? largeTitle : defaultTitle,
+    description: hasLargeDescription ? largeDescription : defaultDescription,
+    typeBudget: 'one-time',
+    period: 'weekly',
+    startDate: new Date('2024-07-20T12:08:00'),
+    startDateFormatted: 'Jul 20',
+    endDate: new Date('2024-07-27T12:08:00'),
+    endDateFormatted: 'Jul 27',
+    currentAmount: 200,
+    currentAmountFormatted: '$200.00',
+    limit: 1000,
+    limitFormatted: '$1,000.00',
+    isActive: true,
+    nextResetDate: new Date('2024-07-27T12:08:00'),
+    previousPrevious: [],
+  };
 };

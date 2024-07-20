@@ -1,22 +1,22 @@
-import { Drawer, IconButton, Typography } from '@mui/material';
+import { IconButton } from '@mui/material';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { useLogin, useGuestUser } from '@hooks';
-import { useAppSelector } from '@redux/hooks';
+import { useAppSelector } from '../../../redux/hooks';
+import { useLogin, useGuestUser } from '../../../hooks';
 import {
   BUDGETS_ROUTE, DASHBOARD_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE,
-} from '@pages/RoutesConstants';
-import {
-  AnchorButton, AppColors, FlexContainer, PrimaryButton, SecondaryButton,
-} from '@styles';
+} from '../../../pages/RoutesConstants';
 import { HeaderProps } from './Header.interface';
 
 import { AppIcon } from '../../UI/Icons';
 import { BrandLogoName } from '../BrandLogoName';
-import { GuestUserModal } from './features';
+import { GuestUserModal, NotLoggedDrawer } from './features';
 import {
-  CloseIconButton, DrawerMenu, DrawerMenuLink, GuestUserButton, HeaderContainer, HeaderNav, HeaderNavAnchor, HeaderShadow,
+  AnchorButton, AppColors, FlexContainer, PrimaryButton, SecondaryButton,
+} from '../../../styles';
+import {
+  GuestUserButton, HeaderContainer, HeaderNav, HeaderNavAnchor, HeaderShadow,
 } from './Header.styled';
 
 const Header = ({ isLandingPage = false }: HeaderProps) => {
@@ -26,10 +26,10 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
   const windowSize = useAppSelector((state) => state.userInterface.windowSize);
   const isMobile = windowSize === 'Mobile';
 
-  const [openHamburguerDrawer, setOpenHamburguerDrawer] = useState(false);
+  const [openNotLoggedDrawer, setOpenNotLoggedDrawer] = useState(false);
   const [openGuestUserModal, setOpenGuestUserModal] = useState(false);
   const toggleGuestUserModal = () => setOpenGuestUserModal((prevState) => !prevState);
-  const toggleHamburguerDrawer = () => setOpenHamburguerDrawer((prevState) => !prevState);
+  const toggleNotLoggedDrawer = () => setOpenNotLoggedDrawer((prevState) => !prevState);
 
   const activeDashboardPage = location.pathname === DASHBOARD_ROUTE;
   const activeBudgetsPage = location.pathname === BUDGETS_ROUTE;
@@ -71,25 +71,13 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
             </FlexContainer>
           ) }
           { (isMobile && !userLoggedOn) && (
-            <IconButton data-testid="hamburguer-menu-header" onClick={toggleHamburguerDrawer}>
+            <IconButton data-testid="hamburguer-menu-header" onClick={toggleNotLoggedDrawer}>
               <AppIcon icon="HamburguerMenu" fillColor={isLandingPage ? AppColors.white : AppColors.primary} />
             </IconButton>
           )}
         </HeaderContainer>
       </HeaderShadow>
-      <Drawer anchor="bottom" open={openHamburguerDrawer}>
-        <DrawerMenu>
-          <CloseIconButton onClick={toggleHamburguerDrawer}>
-            <AppIcon icon="Close" />
-          </CloseIconButton>
-          <DrawerMenuLink to={LOGIN_ROUTE}>
-            <Typography>Log in</Typography>
-          </DrawerMenuLink>
-          <DrawerMenuLink to={REGISTER_ROUTE}>
-            <Typography>Register</Typography>
-          </DrawerMenuLink>
-        </DrawerMenu>
-      </Drawer>
+      <NotLoggedDrawer open={openNotLoggedDrawer} toggleDrawer={toggleNotLoggedDrawer} />
       <GuestUserModal open={openGuestUserModal} onClose={toggleGuestUserModal} />
     </>
   );

@@ -1,3 +1,9 @@
+## v1.4.0 (2024-07-20)
+
+### Pull Requests
+[#39](https://github.com/RafaelMoro/FE_Budget_Master/pull/39) | Delete storybook
+
+
 ## v1.3.1 (2024-07-14)
 
 ### Pull Requests

@@ -10,6 +10,7 @@ import {
 export const HeaderShadow = styled.header`
   padding: 2rem;
   max-height: 11.3rem;
+  background-color: ${({ isLandingPage }: HeaderShadowProps) => (isLandingPage ? 'transparent' : AppColors.white)};
   ${(props: HeaderShadowProps) => (!props.isLandingPage && 'box-shadow: 0 .2rem .4rem rgba(0, 0, 0, 0.2); margin-bottom: 2rem;')}
 `;
 

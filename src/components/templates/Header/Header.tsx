@@ -1,12 +1,15 @@
 import { Drawer, IconButton, Typography } from '@mui/material';
 import { useState } from 'react';
-
 import { useLocation } from 'react-router-dom';
-import { useLogin, useGuestUser } from '../../../hooks';
-import { useAppSelector } from '../../../redux/hooks';
+
+import { useLogin, useGuestUser } from '@hooks';
+import { useAppSelector } from '@redux/hooks';
 import {
   BUDGETS_ROUTE, DASHBOARD_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE,
-} from '../../../pages/RoutesConstants';
+} from '@pages/RoutesConstants';
+import {
+  AnchorButton, AppColors, FlexContainer, PrimaryButton, SecondaryButton,
+} from '@styles';
 import { HeaderProps } from './Header.interface';
 
 import { AppIcon } from '../../UI/Icons';
@@ -15,9 +18,6 @@ import { GuestUserModal } from './features';
 import {
   CloseIconButton, DrawerMenu, DrawerMenuLink, GuestUserButton, HeaderContainer, HeaderNav, HeaderNavAnchor, HeaderShadow,
 } from './Header.styled';
-import {
-  AnchorButton, AppColors, FlexContainer, PrimaryButton, SecondaryButton,
-} from '../../../styles';
 
 const Header = ({ isLandingPage = false }: HeaderProps) => {
   const location = useLocation();

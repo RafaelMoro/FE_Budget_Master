@@ -28,7 +28,7 @@ describe('Header', () => {
     expect(screen.getByTestId('hamburguer-menu-header')).toBeInTheDocument();
   });
 
-  test('User clicks on hamburguer menu, click on Log in link and send him into Login page', async () => {
+  test('Given a user in mobile, he clicks on hamburguer menu, then he clicks on Log in link and send him into Login page', async () => {
     const userInterfaceState = getInitialUserInterfaceState({ newWindowSize: 'Mobile' });
     renderWithProviders(
       <Router location={history.location} navigator={history}>

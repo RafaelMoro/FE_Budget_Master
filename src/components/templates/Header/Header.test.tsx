@@ -4,7 +4,7 @@ import { createMemoryHistory } from 'history';
 
 import { Header } from './Header';
 import { renderWithProviders } from '../../../tests/CustomWrapperRedux';
-import { getInitialUserInterfaceState } from '../../../tests/Global.mocks';
+import { getInitialUserInterfaceState, getUserMock } from '../../../tests/Global.mocks';
 
 describe('Header', () => {
   beforeEach(() => {
@@ -38,5 +38,20 @@ describe('Header', () => {
     expect(screen.queryByTestId('hamburguer-menu-header')).not.toBeInTheDocument();
     expect(screen.getByRole('button', { name: /log in/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /register/i })).toBeInTheDocument();
+  });
+
+  test('Show Header in Landing page for Destop with guest user', () => {
+    const guestUserState = getUserMock({ isGuestUser: true });
+    const userInterfaceState = getInitialUserInterfaceState({ newWindowSize: 'Desktop' });
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <Header isLandingPage />
+      </Router>,
+      { preloadedState: { userInterface: userInterfaceState, user: guestUserState } },
+    );
+
+    expect(screen.queryByRole('button', { name: /log in/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /register/i })).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /get personalized experience/i })).toBeInTheDocument();
   });
 });

@@ -8,3 +8,7 @@ export interface HeaderShadowProps {
 export interface GuestUserButtonProps {
   isLandingPage: boolean;
 }
+
+export interface HeaderNavAnchorProps {
+  active: boolean;
+}

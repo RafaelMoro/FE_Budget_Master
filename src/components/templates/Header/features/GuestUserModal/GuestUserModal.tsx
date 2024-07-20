@@ -6,10 +6,10 @@ import { useLocation } from 'react-router-dom';
 
 import {
   AnchorButton, FlexContainer, PrimaryButton, SecondaryButton,
-} from '../../../styles';
-import { LOGIN_ROUTE, REGISTER_ROUTE } from '../../../pages/RoutesConstants';
-import { CloseModalBox, GuestUserModalBox, GuestUserModalTitle } from './Header.styled';
-import { AppIcon } from '../../UI/Icons';
+} from '../../../../../styles';
+import { LOGIN_ROUTE, REGISTER_ROUTE } from '../../../../../pages/RoutesConstants';
+import { CloseModalBox, GuestUserModalBox, GuestUserModalTitle } from '../../Header.styled';
+import { AppIcon } from '../../../../UI/Icons';
 
 interface GuestUserModalProps {
   open: boolean;

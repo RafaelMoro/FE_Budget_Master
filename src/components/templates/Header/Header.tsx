@@ -11,7 +11,7 @@ import { HeaderProps } from './Header.interface';
 
 import { AppIcon } from '../../UI/Icons';
 import { BrandLogoName } from '../BrandLogoName';
-import { GuestUserModal } from './GuestUserModal';
+import { GuestUserModal } from './features';
 import {
   CloseIconButton, DrawerMenu, DrawerMenuLink, GuestUserButton, HeaderContainer, HeaderNav, HeaderNavAnchor, HeaderShadow,
 } from './Header.styled';

@@ -32,6 +32,11 @@ export const HeaderNavAnchor = styled(Anchor, { shouldForwardProp: (props) => pr
   font-size: ${globalConfiguration.mobile.fontSizes.H5};
   font-weight: bold;
   ${({ active }: HeaderNavAnchorProps) => active && `border-bottom: 1px solid ${AppColors.primary};`}
+  transition: color 0.3s;
+
+  :hover {
+    color: ${AppColors.primary};
+  }
 
   @media ${responsiveBreakpoints.tablet} {
     font-size: ${globalConfiguration.tablet.fontSizes.H5};

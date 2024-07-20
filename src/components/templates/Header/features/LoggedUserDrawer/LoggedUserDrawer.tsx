@@ -15,8 +15,8 @@ const LoggedUserDrawer = ({ open, toggleDrawer, signOut }: LoggedUserDrawerProps
       <CloseIconButton onClick={toggleDrawer}>
         <AppIcon icon="Close" />
       </CloseIconButton>
-      <TransparentButton onClick={signOut}>
-        <Typography>Sign out</Typography>
+      <TransparentButton data-testid="log-out-button" onClick={signOut}>
+        <Typography>Log out</Typography>
       </TransparentButton>
     </DrawerMenu>
   </Drawer>

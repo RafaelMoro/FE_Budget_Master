@@ -48,6 +48,11 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
               <HeaderNavAnchor active={activeBudgetsPage} to="/budgets">Budgets</HeaderNavAnchor>
             </HeaderNav>
           ) }
+          { (!isGuestUser && userLoggedOn && !isMobile) && (
+            <IconButton aria-label="sign-out-button" onClick={signOut}>
+              <AppIcon fillColor={isLandingPage ? AppColors.white : AppColors.primary} icon="LogOut" />
+            </IconButton>
+          ) }
           { (isGuestUser && !isMobile) && (
             <GuestUserButton
               isLandingPage={isLandingPage}

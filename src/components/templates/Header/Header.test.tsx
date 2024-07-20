@@ -52,10 +52,12 @@ describe('Header', () => {
       { preloadedState: { userInterface: userInterfaceState, user: loggedUserState } },
     );
 
-    const signOutButton = screen.getByRole('button', { name: /sign-out-button/i });
-    expect(signOutButton).toBeInTheDocument();
+    const hamburguerMenu = screen.getByTestId('hamburguer-menu-header');
+    expect(hamburguerMenu).toBeInTheDocument();
 
-    userEvent.click(signOutButton);
+    userEvent.click(hamburguerMenu);
+    expect(await screen.findByTestId('log-out-button')).toBeInTheDocument();
+    userEvent.click(screen.getByTestId('log-out-button'));
 
     await waitFor(() => {
       expect(history.location.pathname).toBe('/');

@@ -4,7 +4,9 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useLogin, useGuestUser } from '../../../hooks';
 import { useAppSelector } from '../../../redux/hooks';
-import { DASHBOARD_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from '../../../pages/RoutesConstants';
+import {
+  BUDGETS_ROUTE, DASHBOARD_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE,
+} from '../../../pages/RoutesConstants';
 import { HeaderProps } from './Header.interface';
 
 import { AppIcon } from '../../UI/Icons';
@@ -30,7 +32,7 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
   const toggleHamburguerDrawer = () => setOpenHamburguerDrawer((prevState) => !prevState);
 
   const activeDashboardPage = location.pathname === DASHBOARD_ROUTE;
-  const activeBudgetsPage = location.pathname === '/budgets';
+  const activeBudgetsPage = location.pathname === BUDGETS_ROUTE;
 
   return (
     <>

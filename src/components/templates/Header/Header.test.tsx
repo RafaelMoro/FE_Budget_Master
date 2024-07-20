@@ -102,21 +102,6 @@ describe('Header', () => {
     expect(screen.getByRole('button', { name: /register/i })).toBeInTheDocument();
   });
 
-  test("Show the button 'Get personalized experience' in a landing page in Desktop", () => {
-    const guestUserState = getUserMock({ isGuestUser: true });
-    const userInterfaceState = getInitialUserInterfaceState({ newWindowSize: 'Desktop' });
-    renderWithProviders(
-      <Router location={history.location} navigator={history}>
-        <Header isLandingPage />
-      </Router>,
-      { preloadedState: { userInterface: userInterfaceState, user: guestUserState } },
-    );
-
-    expect(screen.queryByRole('button', { name: /log in/i })).not.toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: /register/i })).not.toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /get personalized experience/i })).toBeInTheDocument();
-  });
-
   test("Show the button 'Get personalized experience' in a non landing page in Desktop", () => {
     const guestUserState = getUserMock({ isGuestUser: true });
     const userInterfaceState = getInitialUserInterfaceState({ newWindowSize: 'Desktop' });
@@ -130,7 +115,7 @@ describe('Header', () => {
     expect(screen.getByRole('button', { name: /get personalized experience/i })).toBeInTheDocument();
   });
 
-  test(`Given a guest user, he clicks on the button 'get personalized experience',
+  test(`Given a guest user in the landing page, he clicks on the button 'get personalized experience',
     then a modal is shown, then he clicks on the button 'Log in'`, async () => {
     const guestUserState = getUserMock({ isGuestUser: true });
     const userInterfaceState = getInitialUserInterfaceState({ newWindowSize: 'Desktop' });
@@ -144,6 +129,40 @@ describe('Header', () => {
 
     expect(screen.queryByRole('button', { name: /log in/i })).not.toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /register/i })).not.toBeInTheDocument();
+    // Expect show personalized button in landing page.
+    expect(getPersonalizedExperienceButton).toBeInTheDocument();
+
+    userEvent.click(getPersonalizedExperienceButton);
+
+    // Expect modal shown.
+    expect(await screen.findByRole('heading', { name: /secure your data/i })).toBeInTheDocument();
+    expect(screen.getByText(/save your progress by creating an account or continue your journey by signing in/i)).toBeInTheDocument();
+    const logInButton = screen.getByRole('button', { name: /log in/i });
+    expect(logInButton).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /register/i })).toBeInTheDocument();
+
+    userEvent.click(logInButton);
+
+    await waitFor(() => {
+      expect(history.location.pathname).toBe(LOGIN_ROUTE);
+    });
+  });
+
+  test(`Given a guest user in a non landing page, he clicks on the button 'get personalized experience',
+    then a modal is shown, then he clicks on the button 'Log in'`, async () => {
+    const guestUserState = getUserMock({ isGuestUser: true });
+    const userInterfaceState = getInitialUserInterfaceState({ newWindowSize: 'Desktop' });
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <Header />
+      </Router>,
+      { preloadedState: { userInterface: userInterfaceState, user: guestUserState } },
+    );
+    const getPersonalizedExperienceButton = screen.getByRole('button', { name: /get personalized experience/i });
+
+    expect(screen.queryByRole('button', { name: /log in/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /register/i })).not.toBeInTheDocument();
+    // Expect show personalized button in landing page.
     expect(getPersonalizedExperienceButton).toBeInTheDocument();
 
     userEvent.click(getPersonalizedExperienceButton);

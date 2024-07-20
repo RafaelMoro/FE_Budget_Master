@@ -94,6 +94,30 @@ export interface Category {
   icon: string;
 }
 
+export type TypeBudget = 'one-time' | 'periodic';
+export type PeriodBudget = 'weekly' | 'bi-weekly' | 'montly' | 'daily' | 'yearly';
+
+export interface Budget {
+  name: string;
+  typeBudget: TypeBudget;
+  description: string;
+  startDate: Date;
+  endDate: Date;
+  limit: number;
+  currentAmount: number;
+  period: PeriodBudget;
+  nextResetDate: Date;
+  isActive: boolean;
+  previousPrevious: Date[];
+}
+
+export interface BudgetUI extends Budget {
+  limitFormatted: string;
+  currentAmountFormatted: string;
+  startDateFormatted: string;
+  endDateFormatted: string;
+}
+
 export type TypeOfRecord = 'expense' | 'income' | 'transfer';
 
 export interface TransferRecord {

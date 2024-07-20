@@ -13,7 +13,7 @@ const currentBudget: BudgetUI = {
   startDateFormatted: 'Jul 20',
   endDate: new Date('2024-07-27T12:08:00'),
   endDateFormatted: 'Jul 27',
-  currentAmount: 0,
+  currentAmount: 150,
   currentAmountFormatted: '$0.00',
   limit: 1000,
   limitFormatted: '$1,000.00',

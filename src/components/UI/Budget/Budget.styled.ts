@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Typography } from '@mui/material';
+import { LinearProgress, Typography } from '@mui/material';
 import { AppColors, Chip } from '../../../styles';
 
 export const BudgetContainer = styled.div`
@@ -30,4 +30,8 @@ export const BudgetChip = styled(Chip)`
   color: ${AppColors.primary};
   border: 1px solid ${AppColors.primary};
   max-width: 13.5rem;
+`;
+
+export const Progress = styled(LinearProgress)`
+  grid-column: 1 / 3;
 `;

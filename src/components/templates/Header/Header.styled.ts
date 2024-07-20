@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 import { IconButton, Typography } from '@mui/material';
-import { GuestUserButtonProps, HeaderNavAnchorProps, HeaderShadowProps } from './Header.interface';
+import {
+  DrawerMenuLinkProps, GuestUserButtonProps, HeaderNavAnchorProps, HeaderShadowProps,
+} from './Header.interface';
 import {
   Anchor, AppColors, globalConfiguration, responsiveBreakpoints, SecondaryButton,
 } from '../../../styles';
@@ -89,6 +91,14 @@ export const CloseIconButton = styled(IconButton)`
 export const DrawerMenuLink = styled(Anchor)`
   text-decoration: none;
   color: ${AppColors.black};
+  cursor: pointer;
+`;
+
+export const ActiveDrawerMenuLink = styled(Anchor, { shouldForwardProp: (props) => props !== 'active' })`
+  text-decoration: none;
+  color: ${({ active }: DrawerMenuLinkProps) => (active ? AppColors.primary : AppColors.black)};
+  border-bottom: 1px solid black;
+  border-color: ${({ active }: DrawerMenuLinkProps) => (active ? AppColors.primary : AppColors.black)};
   cursor: pointer;
 `;
 

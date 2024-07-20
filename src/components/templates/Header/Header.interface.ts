@@ -12,3 +12,7 @@ export interface GuestUserButtonProps {
 export interface HeaderNavAnchorProps {
   active: boolean;
 }
+
+export interface DrawerMenuLinkProps {
+  active?: boolean;
+}

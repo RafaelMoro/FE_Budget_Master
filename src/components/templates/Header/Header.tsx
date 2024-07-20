@@ -81,7 +81,13 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
         </HeaderContainer>
       </HeaderShadow>
       <NotLoggedDrawer open={openNotLoggedDrawer} toggleDrawer={toggleNotLoggedDrawer} />
-      <LoggedUserDrawer open={openLoggedDrawer} toggleDrawer={toggleLoggedDrawer} signOut={signOut} />
+      <LoggedUserDrawer
+        open={openLoggedDrawer}
+        activeBudgetsPage={activeBudgetsPage}
+        activeDashboardPage={activeDashboardPage}
+        toggleDrawer={toggleLoggedDrawer}
+        signOut={signOut}
+      />
       <GuestUserModal open={openGuestUserModal} onClose={toggleGuestUserModal} />
     </>
   );

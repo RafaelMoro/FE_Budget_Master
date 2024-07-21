@@ -1,11 +1,12 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { Budget } from './Budget';
 import { getMockBudget } from './Budget.mocks';
+import { renderWithProviders } from '../../../tests/CustomWrapperRedux';
 
 describe('Budget', () => {
   test('Show Budget with title, description, limit, progress bar, amount and porcentage', () => {
     const mockBudget = getMockBudget();
-    render(<Budget budget={mockBudget} />);
+    renderWithProviders(<Budget budget={mockBudget} />);
 
     expect(screen.getByText('Fast food and beverages.')).toBeInTheDocument();
     expect(screen.getByText('This budget is to control the amount of money spent in fast food')).toBeInTheDocument();
@@ -17,7 +18,7 @@ describe('Budget', () => {
 
   test('Given a budget with large title and description, show budget with title and description truncated', () => {
     const mockBudget = getMockBudget({ hasLargeTitle: true, hasLargeDescription: true });
-    render(<Budget budget={mockBudget} />);
+    renderWithProviders(<Budget budget={mockBudget} />);
 
     expect(screen.getByText('This is a very long title that should be truncated...')).toBeInTheDocument();
     // eslint-disable-next-line max-len

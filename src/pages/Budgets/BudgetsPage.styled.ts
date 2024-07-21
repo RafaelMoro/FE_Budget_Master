@@ -6,7 +6,7 @@ export const Main = styled.main`
   background-color: ${AppColors.bgColorWhite};
 `;
 
-export const BudgetList = styled.section`
+export const BudgetListContainer = styled.section`
   padding: 0 2rem;
   width: 100%;
   max-width: 155rem;

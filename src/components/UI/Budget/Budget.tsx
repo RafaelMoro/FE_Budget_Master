@@ -4,7 +4,8 @@ import { Drawer } from '@mui/material';
 import { useAppSelector } from '../../../redux/hooks';
 import { BudgetUI } from '../../../globalInterface';
 import { calculateProgress } from './Budget.util';
-import { BudgetDetailsDrawer, ProgressBudget } from './features';
+import { BudgetDetailsDrawer } from './features/BudgetDetailsDrawer';
+import { ProgressBudget } from './features/ProgressBudget';
 import {
   BudgetContainer, TextTwoColumns,
   Title,

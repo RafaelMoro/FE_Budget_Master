@@ -2,7 +2,7 @@ import { BudgetsResponse } from '../../../components/UI/Budget/Budget.interface'
 import { transformBudgetUI } from '../../../components/UI/Budget/Budget.util';
 import { Budget, RequestBearerTokenProps } from '../../../globalInterface';
 import { budgetMasterApi } from '../../budgetMaster.api';
-import { BUDGETS_TAG, GET_BUDGETS } from '../../constants';
+import { BUDGETS_NOT_FOUND_MESSAGE, BUDGETS_TAG, GET_BUDGETS } from '../../constants';
 
 export const budgetsApiSlice = budgetMasterApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -15,6 +15,8 @@ export const budgetsApiSlice = budgetMasterApi.injectEndpoints({
       }),
       providesTags: [BUDGETS_TAG],
       transformResponse: (response: BudgetsResponse) => {
+        if (!response.data && response.message === BUDGETS_NOT_FOUND_MESSAGE) return [];
+
         const budgets: Budget[] = response.data?.budgets;
         const transformedBudgets = transformBudgetUI({ budgets });
         return transformedBudgets;

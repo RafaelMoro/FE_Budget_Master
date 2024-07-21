@@ -6,6 +6,9 @@ export const BUDGETS_TAG = 'Budgets';
 /** Fixed cached keys */
 export const LOGIN_FIXED_CACHED_KEY = 'login-info';
 
+/** Backend Messages */
+export const BUDGETS_NOT_FOUND_MESSAGE = 'Budgets not found';
+
 /** Backend Endpoints */
 export const GET_CATEGORIES = '/categories';
 export const GET_BUDGETS = '/budgets';

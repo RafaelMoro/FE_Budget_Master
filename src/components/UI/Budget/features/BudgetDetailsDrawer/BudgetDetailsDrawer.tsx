@@ -1,16 +1,20 @@
-import { IconButton } from '@mui/material';
+import { IconButton, Typography } from '@mui/material';
 import { AppIcon } from '../../../Icons';
+import { BudgetUI } from '../../../../../globalInterface';
 
 interface BudgetDetailsDrawerProps {
-  toggleDrawer: () => void
+  dateText: string;
+  toggleDrawer: () => void;
+  budget: BudgetUI;
 }
 
-const BudgetDetailsDrawer = ({ toggleDrawer }: BudgetDetailsDrawerProps) => (
+const BudgetDetailsDrawer = ({ toggleDrawer, budget, dateText }: BudgetDetailsDrawerProps) => (
   <>
     <IconButton onClick={toggleDrawer}>
       <AppIcon icon="Close" />
     </IconButton>
-    <p>Drawer</p>
+    <Typography>{dateText}</Typography>
+    <Typography variant="h4">{budget.name}</Typography>
   </>
 );
 

@@ -75,7 +75,7 @@ const Budget = ({
         anchor={!isMobile ? 'right' : 'bottom'}
         open={openBudgetDetailsDrawer}
       >
-        <BudgetDetailsDrawer toggleDrawer={toggleBudgetDetailsDrawer} />
+        <BudgetDetailsDrawer dateText={dateText} budget={budget} toggleDrawer={toggleBudgetDetailsDrawer} />
       </Drawer>
     </>
   );

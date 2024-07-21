@@ -12,5 +12,7 @@ export const BudgetList = styled.section`
   max-width: 155rem;
   margin: 2rem auto 0 auto;
   display: flex;
+  flex-direction: column;
+  gap: 2rem;
   justify-content: center;
 `;

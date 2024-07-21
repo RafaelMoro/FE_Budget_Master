@@ -15,7 +15,25 @@ export const currentBudget: BudgetUI = {
   limitFormatted: '$1,000.00',
   isActive: true,
   nextResetDate: new Date('2024-07-27T12:08:00'),
-  previousPrevious: [],
+  previousPeriods: [],
+};
+
+export const periodicBudget: BudgetUI = {
+  name: 'Groceries',
+  description: 'This budget is to have control on the amount of money spent on groceries.',
+  typeBudget: 'periodic',
+  period: 'bi-weekly',
+  startDate: new Date('2024-07-20T12:08:00'),
+  startDateFormatted: 'Jul 20',
+  endDate: new Date('2024-08-03T12:08:00'),
+  endDateFormatted: 'Aug 03',
+  currentAmount: 634.5,
+  currentAmountFormatted: '$634.50',
+  limit: 2000,
+  limitFormatted: '$2,000.00',
+  isActive: true,
+  nextResetDate: new Date('2024-08-03T12:08:00'),
+  previousPeriods: ['2024-06-22T12:08:00 | 2024-07-06T12:08:00', '2024-07-06T12:08:00 | 2024-07-20T12:08:00'],
 };
 
 export const getMockBudget = ({ hasLargeTitle, hasLargeDescription }: { hasLargeTitle?: boolean, hasLargeDescription?: boolean } = {}): BudgetUI => {
@@ -41,6 +59,6 @@ export const getMockBudget = ({ hasLargeTitle, hasLargeDescription }: { hasLarge
     limitFormatted: '$1,000.00',
     isActive: true,
     nextResetDate: new Date('2024-07-27T12:08:00'),
-    previousPrevious: [],
+    previousPeriods: [],
   };
 };

@@ -108,7 +108,7 @@ export interface Budget {
   period: PeriodBudget;
   nextResetDate: Date;
   isActive: boolean;
-  previousPrevious: Date[];
+  previousPeriods: string[];
 }
 
 export interface BudgetUI extends Budget {

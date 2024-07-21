@@ -8,10 +8,8 @@ import { currentBudget, periodicBudget } from '../../Budget.mocks';
 const BudgetList = () => {
   const user = useAppSelector((state) => state.user);
   const bearerToken = user.userInfo?.bearerToken as string;
-  const { data, isError, isFetching } = useFetchBudgetsQuery({ bearerToken }, { skip: !bearerToken });
+  const { data } = useFetchBudgetsQuery({ bearerToken }, { skip: !bearerToken });
   console.log('data:', data);
-  console.log('isError:', isError);
-  console.log('isFetching:', isFetching);
 
   return (
     <BudgetListContainer>

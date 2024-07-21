@@ -1,5 +1,6 @@
 import { BudgetsResponse } from '../../../components/UI/Budget/Budget.interface';
-import { RequestBearerTokenProps } from '../../../globalInterface';
+import { transformBudgetUI } from '../../../components/UI/Budget/Budget.util';
+import { Budget, RequestBearerTokenProps } from '../../../globalInterface';
 import { budgetMasterApi } from '../../budgetMaster.api';
 import { BUDGETS_TAG, GET_BUDGETS } from '../../constants';
 
@@ -13,7 +14,11 @@ export const budgetsApiSlice = budgetMasterApi.injectEndpoints({
         },
       }),
       providesTags: [BUDGETS_TAG],
-      transformResponse: (response: BudgetsResponse) => response.data?.budgets,
+      transformResponse: (response: BudgetsResponse) => {
+        const budgets: Budget[] = response.data?.budgets;
+        const transformedBudgets = transformBudgetUI({ budgets });
+        return transformedBudgets;
+      },
     }),
   }),
 });

@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react';
 import { renderWithProviders } from '../../../../../tests/CustomWrapperRedux';
 import { BudgetList } from './BudgetList';
 import { getInitialUserInterfaceState, getUserMock } from '../../../../../tests/Global.mocks';
-import { successfulResponseFetchBudgets } from '../../Budget.mocks';
+import { successfulResponseFetchBudgets, unsuccessfulResponseFetchBudgets } from '../../Budget.mocks';
 
 describe('Budget List', () => {
   beforeEach(() => {
@@ -46,5 +46,16 @@ describe('Budget List', () => {
     expect(screen.getByRole('progressbar')).toBeInTheDocument();
     expect(screen.getByText('$200.00')).toBeInTheDocument();
     expect(screen.getByText('20%')).toBeInTheDocument();
+  });
+
+  test('Show budget list with error message', async () => {
+    fetchMock.mockRejectedValueOnce(JSON.stringify(unsuccessfulResponseFetchBudgets));
+    const userMock = getUserMock({ isGuestUser: false });
+    renderWithProviders(
+      <BudgetList />,
+      { preloadedState: { user: userMock } },
+    );
+
+    expect(await screen.findByText('Oops! Something went wrong. Try again later.')).toBeInTheDocument();
   });
 });

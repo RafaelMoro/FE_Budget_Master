@@ -90,3 +90,14 @@ export const successfulResponseFetchBudgets = {
   success: true,
   version: '2.0.0',
 };
+
+export const unsuccessfulResponseFetchBudgets = {
+  data: null,
+  error: {
+    statusCode: 401,
+    message: 'Unauthorized',
+  },
+  message: null,
+  success: false,
+  version: '2.0.0',
+};

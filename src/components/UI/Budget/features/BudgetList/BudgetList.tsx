@@ -5,7 +5,7 @@ import { BudgetListContainer } from '../../../../../pages/Budgets/BudgetsPage.st
 import { Budget } from '../../Budget';
 import { Error } from '../../../Error';
 import { ERROR_MESSAGE_GENERAL } from '../../../../../constants';
-import { HorizontalLoader } from '../../../HorizontalLoader';
+import { BudgetSkeleton } from '../BudgetSkeleton';
 
 const BudgetList = () => {
   const user = useAppSelector((state) => state.user);
@@ -20,7 +20,7 @@ const BudgetList = () => {
 
   return (
     <BudgetListContainer>
-      { (isLoading) && <HorizontalLoader /> }
+      { (isLoading) && <BudgetSkeleton /> }
       { (data && data.length > 0) && data.map((budget) => (
         <Budget key={budget._id} budget={budget} />
       )) }

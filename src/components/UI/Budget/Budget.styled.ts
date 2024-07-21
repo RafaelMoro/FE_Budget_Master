@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import { LinearProgress, Typography } from '@mui/material';
 import { AppColors, Chip, responsiveBreakpoints } from '../../../styles';
-import { ProgressProps } from './Budget.interface';
+import { ContentPlaceholderProps, ProgressProps } from './Budget.interface';
+import { blinkAnimation } from '../../../styles/animations/blink';
 
 export const BudgetContainer = styled.div`
   padding: 3rem;
@@ -21,6 +22,15 @@ export const BudgetContainer = styled.div`
   @media (${responsiveBreakpoints.desktop}) {
     max-width: 50rem;
   }
+`;
+
+export const ContentPlaceholder = styled('div', { shouldForwardProp: (props) => props !== 'isTwoColumns' })`
+  width: 100%;
+  height: 2rem;
+  background-color: ${AppColors.grey};
+  border-radius: 10px;
+  ${({ isTwoColumns }: ContentPlaceholderProps) => (isTwoColumns && 'grid-column: 1 / 3;')}
+  ${blinkAnimation}
 `;
 
 export const Title = styled(Typography)`

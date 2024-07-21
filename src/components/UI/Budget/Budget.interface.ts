@@ -5,6 +5,10 @@ export interface ProgressProps {
   hasProgressHigh: boolean;
 }
 
+export interface ContentPlaceholderProps {
+  isTwoColumns: boolean;
+}
+
 export interface BudgetsResponse extends Omit<GeneralResponse, 'data'> {
   data: {
     budgets: Budget[];

@@ -6,7 +6,7 @@ describe('BudgetDetailsDrawer', () => {
   test('Show Budget Details Drawer with a one time budget', () => {
     const toggleDrawer = jest.fn();
     const mockBudget = getMockBudget();
-    const dateText = 'From Jul 10 to Jul 27';
+    const dateText = `From ${mockBudget.startDateFormatted} to ${mockBudget.endDateFormatted}`;
     const progress = 20;
     render(<BudgetDetailsDrawer dateText={dateText} progress={progress} budget={mockBudget} toggleDrawer={toggleDrawer} />);
 

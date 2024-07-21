@@ -1,4 +1,5 @@
 import { BudgetUI, TypeBudget } from '../../../globalInterface';
+import { transformDateToMonthDay } from '../../../utils';
 
 export const currentBudget: BudgetUI = {
   _id: '1',
@@ -55,6 +56,14 @@ export const getMockBudget = ({
 }: GetMockBudgetProps = {}): BudgetUI => {
   const defaultTitle = 'Fast food and beverages.';
   const largeTitle = 'This is a very long title that should be truncated on the budget when shown.';
+  const today = new Date();
+  const todayString = today.toLocaleString();
+  const startDateFormatted = transformDateToMonthDay(todayString);
+
+  const endDate = new Date();
+  endDate.setDate(today.getDate() + 7);
+  const endDateString = endDate.toLocaleString();
+  const endDateFormatted = transformDateToMonthDay(endDateString);
 
   const defaultDescription = 'This budget is to control the amount of money spent in fast food';
   // eslint-disable-next-line max-len
@@ -67,16 +76,16 @@ export const getMockBudget = ({
     description: hasLargeDescription ? largeDescription : defaultDescription,
     typeBudget,
     period: 'weekly',
-    startDate: '2024-07-20T12:08:00',
-    startDateFormatted: 'Jul 20',
-    endDate: '2024-07-27T12:08:00',
-    endDateFormatted: 'Jul 27',
+    startDate: todayString,
+    startDateFormatted,
+    endDate: endDateString,
+    endDateFormatted,
     currentAmount: 200,
     currentAmountFormatted: '$200.00',
     limit: 1000,
     limitFormatted: '$1,000.00',
     isActive: true,
-    nextResetDate: '2024-07-27T12:08:00',
+    nextResetDate: endDateString,
     previousPeriods,
   };
 };

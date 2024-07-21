@@ -65,3 +65,10 @@ export const getTwoMonthBeforeLastMonth = () => {
 
   return { passedMonth, passedMonthName };
 };
+
+export const getRemainingDays = (endDate: Date) => {
+  const today = new Date();
+  const difference = endDate.getTime() - today.getTime();
+  const restingDays = Math.floor(difference / (1000 * 60 * 60 * 24));
+  return restingDays;
+};

@@ -3,10 +3,11 @@ import { Header } from '../../components/templates';
 import { Budget } from '../../components/UI/Budget';
 import { BudgetList, Main } from './BudgetsPage.styled';
 import { currentBudget, periodicBudget } from '../../components/UI/Budget/Budget.mocks';
-import { useSyncLoginInfo } from '../../hooks';
+import { useResizeWindow, useSyncLoginInfo } from '../../hooks';
 
 const BudgetsPage = () => {
   useSyncLoginInfo();
+  useResizeWindow();
 
   return (
     <Main>

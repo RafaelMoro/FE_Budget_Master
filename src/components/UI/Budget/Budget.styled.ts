@@ -24,6 +24,10 @@ export const BudgetContainer = styled.div`
   }
 `;
 
+export const ErrorContainer = styled.div`
+  margin-top: 3rem;
+`;
+
 export const ContentPlaceholder = styled('div', { shouldForwardProp: (props) => props !== 'isTwoColumns' })`
   width: 100%;
   height: 2rem;

@@ -6,6 +6,7 @@ import { Budget } from '../../Budget';
 import { Error } from '../../../Error';
 import { ERROR_MESSAGE_GENERAL } from '../../../../../constants';
 import { BudgetSkeleton } from '../BudgetSkeleton';
+import { ErrorContainer } from '../../Budget.styled';
 
 const BudgetList = () => {
   const user = useAppSelector((state) => state.user);
@@ -16,7 +17,9 @@ const BudgetList = () => {
 
   if (isError) {
     return (
-      <Error description={ERROR_MESSAGE_GENERAL} />
+      <ErrorContainer>
+        <Error description={ERROR_MESSAGE_GENERAL} />
+      </ErrorContainer>
     );
   }
 

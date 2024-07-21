@@ -66,9 +66,19 @@ export const getTwoMonthBeforeLastMonth = () => {
   return { passedMonth, passedMonthName };
 };
 
-export const getRemainingDays = (endDate: Date) => {
+export const getRemainingDays = (endDate: string) => {
+  const endDateFormatted = new Date(endDate);
   const today = new Date();
-  const difference = endDate.getTime() - today.getTime();
+  const difference = endDateFormatted.getTime() - today.getTime();
   const restingDays = Math.floor(difference / (1000 * 60 * 60 * 24));
   return restingDays;
+};
+
+export const transformDateToMonthDay = (dateToFormat: string) => {
+  // Transforming into date because came as string due non serializable redux state
+  const date = new Date(dateToFormat);
+  const month = date.getMonth();
+  const day = date.getDate();
+
+  return `${MONTHS[month]} ${day}`;
 };

@@ -10,6 +10,8 @@ import { BudgetSkeleton } from '../BudgetSkeleton';
 const BudgetList = () => {
   const user = useAppSelector((state) => state.user);
   const bearerToken = user.userInfo?.bearerToken as string;
+  const windowSize = useAppSelector((state) => state.userInterface.windowSize);
+  const isMobile = windowSize === 'Mobile';
   const { data, isError, isLoading } = useFetchBudgetsQuery({ bearerToken }, { skip: !bearerToken });
 
   if (isError) {
@@ -20,7 +22,13 @@ const BudgetList = () => {
 
   return (
     <BudgetListContainer>
-      { (isLoading) && <BudgetSkeleton /> }
+      { (isLoading && isMobile) && <BudgetSkeleton /> }
+      { (isLoading && !isMobile) && (
+        <>
+          <BudgetSkeleton />
+          <BudgetSkeleton />
+        </>
+      ) }
       { (data && data.length > 0) && data.map((budget) => (
         <Budget key={budget._id} budget={budget} />
       )) }

@@ -1,7 +1,6 @@
-import { INCOME_ROUTE } from '../../../../components/UI/Records/constants';
 import { POST_METHOD, PUT_METHOD } from '../../../../constants';
 import { budgetMasterApi } from '../../../budgetMaster.api';
-import { RECORD_TAG } from '../../../constants';
+import { RECORD_TAG, INCOME_ROUTE } from '../../../constants';
 
 export const incomesApiSlice = budgetMasterApi.injectEndpoints({
   endpoints: (builder) => ({

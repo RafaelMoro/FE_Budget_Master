@@ -1,6 +1,8 @@
 import { BudgetUI, TypeBudget } from '../../../globalInterface';
 
 export const currentBudget: BudgetUI = {
+  _id: '1',
+  __v: 0,
   name: 'Tragadera y demas comida que se me ocurra comprar.',
   description: 'Este es un presupuesto para toda la comida rapida, botana, dulces y alcohol.',
   typeBudget: 'one-time',
@@ -19,6 +21,8 @@ export const currentBudget: BudgetUI = {
 };
 
 export const periodicBudget: BudgetUI = {
+  _id: '2',
+  __v: 0,
   name: 'Groceries',
   description: 'This budget is to have control on the amount of money spent on groceries.',
   typeBudget: 'periodic',
@@ -57,6 +61,8 @@ export const getMockBudget = ({
   const largeDescription = "This is a very long description that should be truncated on the budget when shown. Seems like it's still missing some words so the description can be truncated";
 
   return {
+    _id: '1',
+    __v: 0,
     name: hasLargeTitle ? largeTitle : defaultTitle,
     description: hasLargeDescription ? largeDescription : defaultDescription,
     typeBudget,

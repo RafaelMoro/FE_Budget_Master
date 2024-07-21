@@ -98,6 +98,8 @@ export type TypeBudget = 'one-time' | 'periodic';
 export type PeriodBudget = 'weekly' | 'bi-weekly' | 'montly' | 'daily' | 'yearly';
 
 export interface Budget {
+  _id: string
+  __v: number;
   name: string;
   typeBudget: TypeBudget;
   description: string;

@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import { NoAccountsFound } from './NoAccountsFound';
+import { NotElementFound } from './NotElementFound';
 
 describe('<NoAccountsFound />', () => {
   test('When the user has no accounts, show an image, create account button and text indicating that no accounts were found', () => {
-    const handleOpenCreateAccount = jest.fn();
-    render(<NoAccountsFound handleOpenCreateAccount={handleOpenCreateAccount} />);
+    const onClickCb = jest.fn();
+    render(<NotElementFound description="You have not created accounts yet. Start now!" buttonText="Create account" onClickCb={onClickCb} />);
 
     const picture = screen.getByAltText('No Accounts Found');
     const message = screen.getByText('You have not created accounts yet. Start now!');

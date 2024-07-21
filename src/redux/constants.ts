@@ -8,4 +8,5 @@ export const LOGIN_FIXED_CACHED_KEY = 'login-info';
 
 /** Backend Endpoints */
 export const GET_CATEGORIES = '/categories';
+export const GET_BUDGETS = '/budgets';
 export const GET_EXPENSES = '/expenses';

@@ -1,8 +1,7 @@
 import { BudgetsResponse } from '../../../components/UI/Budget/Budget.interface';
-import { GET_BUDGETS } from '../../../components/UI/Records/constants';
 import { RequestBearerTokenProps } from '../../../globalInterface';
 import { budgetMasterApi } from '../../budgetMaster.api';
-import { BUDGETS_TAG } from '../../constants';
+import { BUDGETS_TAG, GET_BUDGETS } from '../../constants';
 
 export const budgetsApiSlice = budgetMasterApi.injectEndpoints({
   endpoints: (builder) => ({

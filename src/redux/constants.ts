@@ -14,3 +14,4 @@ export const GET_BUDGETS = '/budgets';
 export const EXPENSE_ROUTE = '/expenses';
 export const INCOME_ROUTE = '/incomes';
 export const GET_EXPENSES = '/expenses';
+export const TRANSFER_ROUTE = 'records/transfer';

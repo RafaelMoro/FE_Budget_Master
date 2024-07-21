@@ -11,6 +11,7 @@ export const GET_CATEGORIES = '/categories';
 export const GET_BUDGETS = '/budgets';
 
 // Records
+export const GET_EXPENSES_AND_INCOMES_BY_MONTH_ROUTE = 'records/expenses-and-incomes';
 export const EXPENSE_ROUTE = '/expenses';
 export const INCOME_ROUTE = '/incomes';
 export const GET_EXPENSES = '/expenses';

@@ -1,7 +1,8 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { useState } from 'react';
 import { getDateInfo } from '../../../../../utils/DateUtils';
-import { GET_EXPENSES_AND_INCOMES_BY_MONTH_ROUTE, NO_EXPENSES_OR_INCOMES_FOUND } from '../../constants';
+import { NO_EXPENSES_OR_INCOMES_FOUND } from '../../constants';
+import { GET_EXPENSES_AND_INCOMES_BY_MONTH_ROUTE } from '../../../../../redux/constants';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
 import { resetOlderRecordsBalance, updateTotalExpensesIncomes, useLazyFetchRecordsByMonthYearQuery } from '../../../../../redux/slices/Records';
 

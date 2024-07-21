@@ -19,7 +19,6 @@ const Budget = ({
 }: BudgetProps) => {
   const {
     name,
-    description: budgetDescription,
     typeBudget,
     limit,
     currentAmount,
@@ -35,7 +34,6 @@ const Budget = ({
   const progress = calculateProgress({ limit, currentAmount });
 
   const [title, setTitle] = useState(name);
-  const [description, setDescription] = useState(budgetDescription);
   const [openBudgetDetailsDrawer, setBudgetDetailsDrawer] = useState(false);
 
   const toggleBudgetDetailsDrawer = () => {
@@ -47,12 +45,6 @@ const Budget = ({
       setTitle(`${name.slice(0, 50)}...`);
     }
   }, [name]);
-
-  useEffect(() => {
-    if (budgetDescription.length > 115) {
-      setDescription(`${budgetDescription.slice(0, 115)}...`);
-    }
-  }, [budgetDescription]);
 
   return (
     <>
@@ -69,7 +61,6 @@ const Budget = ({
         <ProgressBudget currentAmountFormatted={currentAmountFormatted} progress={progress} />
         <BudgetChip label={typeBudget} />
         <BudgetChip label={period} />
-        <TextTwoColumns>{description}</TextTwoColumns>
       </BudgetContainer>
       <Drawer
         anchor={!isMobile ? 'right' : 'bottom'}

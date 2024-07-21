@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { AppColors } from '../../styles';
+import { AppColors, responsiveBreakpoints } from '../../styles';
 
 export const Main = styled.main`
   min-height: 100vh;
@@ -15,4 +15,9 @@ export const BudgetList = styled.section`
   flex-direction: column;
   gap: 2rem;
   justify-content: center;
+
+  @media ${responsiveBreakpoints.tabletAndDesktop} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 `;

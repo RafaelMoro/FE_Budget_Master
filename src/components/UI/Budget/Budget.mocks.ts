@@ -1,4 +1,4 @@
-import { BudgetUI } from '../../../globalInterface';
+import { BudgetUI, TypeBudget } from '../../../globalInterface';
 
 export const currentBudget: BudgetUI = {
   name: 'Tragadera y demas comida que se me ocurra comprar.',
@@ -36,7 +36,19 @@ export const periodicBudget: BudgetUI = {
   previousPeriods: ['2024-06-22T12:08:00 | 2024-07-06T12:08:00', '2024-07-06T12:08:00 | 2024-07-20T12:08:00'],
 };
 
-export const getMockBudget = ({ hasLargeTitle, hasLargeDescription }: { hasLargeTitle?: boolean, hasLargeDescription?: boolean } = {}): BudgetUI => {
+interface GetMockBudgetProps {
+  hasLargeTitle?: boolean;
+  hasLargeDescription?: boolean;
+  typeBudget?: TypeBudget;
+  previousPeriods?: string[];
+}
+
+export const getMockBudget = ({
+  hasLargeTitle,
+  hasLargeDescription,
+  typeBudget = 'one-time',
+  previousPeriods = [],
+}: GetMockBudgetProps = {}): BudgetUI => {
   const defaultTitle = 'Fast food and beverages.';
   const largeTitle = 'This is a very long title that should be truncated on the budget when shown.';
 
@@ -47,7 +59,7 @@ export const getMockBudget = ({ hasLargeTitle, hasLargeDescription }: { hasLarge
   return {
     name: hasLargeTitle ? largeTitle : defaultTitle,
     description: hasLargeDescription ? largeDescription : defaultDescription,
-    typeBudget: 'one-time',
+    typeBudget,
     period: 'weekly',
     startDate: new Date('2024-07-20T12:08:00'),
     startDateFormatted: 'Jul 20',
@@ -59,6 +71,6 @@ export const getMockBudget = ({ hasLargeTitle, hasLargeDescription }: { hasLarge
     limitFormatted: '$1,000.00',
     isActive: true,
     nextResetDate: new Date('2024-07-27T12:08:00'),
-    previousPeriods: [],
+    previousPeriods,
   };
 };

@@ -1,7 +1,7 @@
-import { EXPENSE_ROUTE, UPDATE_MULTIPLE_EXPENSES } from '../../../../components/UI/Records/constants';
+import { UPDATE_MULTIPLE_EXPENSES } from '../../../../components/UI/Records/constants';
 import { POST_METHOD, PUT_METHOD } from '../../../../constants';
 import { budgetMasterApi } from '../../../budgetMaster.api';
-import { RECORD_TAG } from '../../../constants';
+import { RECORD_TAG, EXPENSE_ROUTE } from '../../../constants';
 import { CreateExpenseMutationProps, GetExpensesResponse } from '../interface';
 
 export const expensesApiSlice = budgetMasterApi.injectEndpoints({

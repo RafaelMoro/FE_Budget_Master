@@ -6,7 +6,8 @@ import {
   sortByDate,
 } from '../../utils';
 import { UPDATE_AMOUNT_ACCOUNT_LOCAL_SUCCESS_RESPONSE, UPDATE_AMOUNT_ACCOUNT_SUCCESS_RESPONSE } from './constants';
-import { EXPENSE_ROUTE, INCOME_ROUTE } from '../../components/UI/Records/constants';
+import { INCOME_ROUTE } from '../../components/UI/Records/constants';
+import { EXPENSE_ROUTE } from '../../redux/constants';
 import { DASHBOARD_ROUTE } from '../../pages/RoutesConstants';
 
 import { SystemStateEnum } from '../../enums';

@@ -5,3 +5,6 @@ export const BUDGETS_TAG = 'Budgets';
 
 /** Fixed cached keys */
 export const LOGIN_FIXED_CACHED_KEY = 'login-info';
+
+/** Backend Endpoints */
+export const GET_CATEGORIES = '/categories';

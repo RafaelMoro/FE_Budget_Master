@@ -186,6 +186,8 @@ const RecordTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
       indebtedPeople,
       account: selectedAccount?._id,
       typeOfRecord: 'expense',
+      // @TODO: Change this when creating an expense with linked budget
+      linkedBudgets: [],
     } : {
       ...restValues,
       amount: amountToNumber,

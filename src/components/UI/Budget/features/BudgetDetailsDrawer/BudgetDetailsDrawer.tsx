@@ -1,11 +1,12 @@
-import { List, Typography } from '@mui/material';
+import { List, Typography, IconButton } from '@mui/material';
 import { AppIcon } from '../../../Icons';
 import { BudgetUI } from '../../../../../globalInterface';
 import { getRemainingDays } from '../../../../../utils';
 import { ProgressBudget } from '../ProgressBudget';
 import { BudgetChip, TextTwoColumns } from '../../Budget.styled';
 import {
-  DaysLeftText, DrawerCloseIconButton, DrawerContainer, Title,
+  BudgetDateDrawer,
+  DaysLeftText, DrawerCloseIconButton, DrawerContainer, IconsContainer, Title,
 } from './BudgetDetailsDrawer.styled';
 
 interface BudgetDetailsDrawerProps {
@@ -25,8 +26,16 @@ const BudgetDetailsDrawer = ({
       <DrawerCloseIconButton onClick={toggleDrawer}>
         <AppIcon icon="Close" />
       </DrawerCloseIconButton>
-      <TextTwoColumns align="center" variant="body2">{dateText}</TextTwoColumns>
+      <BudgetDateDrawer align="center" variant="body2">{dateText}</BudgetDateDrawer>
       <Title variant="h4">{budget.name}</Title>
+      <IconsContainer>
+        <IconButton>
+          <AppIcon icon="Edit" />
+        </IconButton>
+        <IconButton>
+          <AppIcon icon="Delete" />
+        </IconButton>
+      </IconsContainer>
       <Typography>
         Limit:
         {' '}

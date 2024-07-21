@@ -10,11 +10,28 @@ export const DrawerContainer = styled.div`
 
 export const DrawerCloseIconButton = styled(IconButton)`
   grid-column: 1 / 3;
+  grid-row: 1 / 2;
   justify-self: end;
 `;
+
+export const BudgetDateDrawer = styled(Typography)`
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+  align-self: center;
+  justify-self: center;
+`;
+
+export const IconsContainer = styled.div`
+  grid-column: 1 / 3;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 4rem;
+
+`;
+
 export const Title = styled(Typography)`
   grid-column: 1 / 3;
-  margin-bottom: 4rem;
 `;
 
 export const DaysLeftText = styled(Typography)`

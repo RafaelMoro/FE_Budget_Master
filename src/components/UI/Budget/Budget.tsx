@@ -6,7 +6,7 @@ import { BudgetUI } from '../../../globalInterface';
 import { calculateProgress } from './Budget.util';
 import { BudgetDetailsDrawer, ProgressBudget } from './features';
 import {
-  BudgetContainer, BudgetChip, TextTwoColumns,
+  BudgetContainer, TextTwoColumns,
   Title,
 } from './Budget.styled';
 
@@ -19,14 +19,12 @@ const Budget = ({
 }: BudgetProps) => {
   const {
     name,
-    typeBudget,
     limit,
     currentAmount,
     currentAmountFormatted,
     limitFormatted,
     startDateFormatted,
     endDateFormatted,
-    period,
   } = budget;
   const windowSize = useAppSelector((state) => state.userInterface.windowSize);
   const isMobile = windowSize === 'Mobile';
@@ -59,8 +57,6 @@ const Budget = ({
           {limitFormatted}
         </TextTwoColumns>
         <ProgressBudget currentAmountFormatted={currentAmountFormatted} progress={progress} />
-        <BudgetChip label={typeBudget} />
-        <BudgetChip label={period} />
       </BudgetContainer>
       <Drawer
         anchor={!isMobile ? 'right' : 'bottom'}

@@ -25,6 +25,7 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
   const { isGuestUser, userLoggedOn } = useGuestUser();
   const windowSize = useAppSelector((state) => state.userInterface.windowSize);
   const isMobile = windowSize === 'Mobile';
+  const isDesktop = windowSize === 'Desktop';
 
   const [openNotLoggedDrawer, setOpenNotLoggedDrawer] = useState(false);
   const [openLoggedDrawer, setOpenLoggedDrawer] = useState(false);
@@ -48,7 +49,7 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
               <HeaderNavAnchor active={activeBudgetsPage} to="/budgets">Budgets</HeaderNavAnchor>
             </HeaderNav>
           ) }
-          { (!isGuestUser && userLoggedOn && !isMobile) && (
+          { (!isGuestUser && userLoggedOn && isDesktop) && (
             <IconButton aria-label="sign-out-button" onClick={signOut}>
               <AppIcon fillColor={isLandingPage ? AppColors.white : AppColors.primary} icon="LogOut" />
             </IconButton>
@@ -73,7 +74,7 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
               </AnchorButton>
             </FlexContainer>
           ) }
-          { (isMobile) && (
+          { (!isDesktop) && (
             <IconButton data-testid="hamburguer-menu-header" onClick={toggleHamburguerMenu}>
               <AppIcon icon="HamburguerMenu" fillColor={isLandingPage ? AppColors.white : AppColors.primary} />
             </IconButton>

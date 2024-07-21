@@ -29,7 +29,7 @@ export const AppColors = {
   bgColorWhite: 'f8f8f8',
   bgColorDark: '#66440D',
   bgColorGrey: '#dbcaca',
-  grey: '#9F9B94',
+  grey: '#d6d6d6',
   subtitleColor: '#4b5055',
   validationError: '#d32f2f',
 };

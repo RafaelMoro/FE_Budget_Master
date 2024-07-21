@@ -80,3 +80,13 @@ export const getMockBudget = ({
     previousPeriods,
   };
 };
+
+export const successfulResponseFetchBudgets = {
+  data: {
+    budgets: [getMockBudget()],
+  },
+  error: null,
+  message: null,
+  success: true,
+  version: '2.0.0',
+};

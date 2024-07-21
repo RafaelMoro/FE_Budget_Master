@@ -1,11 +1,20 @@
 import styled from '@emotion/styled';
 import { IconButton, Typography } from '@mui/material';
+import { responsiveBreakpoints } from '../../../../../styles';
 
 export const DrawerContainer = styled.div`
   padding: 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 2rem;
+
+  @media ${responsiveBreakpoints.tablet} {
+    min-width: 40rem;
+  }
+
+  @media ${responsiveBreakpoints.desktop} {
+    min-width: 60rem;
+  }
 `;
 
 export const DrawerCloseIconButton = styled(IconButton)`

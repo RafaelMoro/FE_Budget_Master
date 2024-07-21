@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { LinearProgress, Typography } from '@mui/material';
-import { AppColors, Chip } from '../../../styles';
+import { AppColors, Chip, responsiveBreakpoints } from '../../../styles';
 import { ProgressProps } from './Budget.interface';
 
 export const BudgetContainer = styled.div`
@@ -17,6 +17,20 @@ export const BudgetContainer = styled.div`
   &:hover {
       box-shadow: 0 .8rem 1.6rem 0 rgba(0, 0, 0, 0.2);
     }
+
+  @media (${responsiveBreakpoints.desktop}) {
+    max-width: 50rem;
+  }
+`;
+
+export const Title = styled(Typography)`
+  grid-column: 1 / 3;
+  cursor: pointer;
+  transition: 0.3s color;
+
+  :hover {
+    color: ${AppColors.primary};
+  }
 `;
 
 export const TextTwoColumns = styled(Typography)`

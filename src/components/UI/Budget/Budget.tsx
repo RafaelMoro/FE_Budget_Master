@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { BudgetUI } from '../../../globalInterface';
 import {
   BudgetContainer, BudgetChip, TextTwoColumns,
+  Title,
 } from './Budget.styled';
 import { calculateProgress } from './Budget.util';
 import { ProgressBudget } from './features';
@@ -47,7 +48,7 @@ const Budget = ({
       <TextTwoColumns variant="body2" align="center">
         {dateText}
       </TextTwoColumns>
-      <TextTwoColumns variant="h4">{title}</TextTwoColumns>
+      <Title variant="h4">{title}</Title>
       <TextTwoColumns align="center">
         Limit:
         {' '}

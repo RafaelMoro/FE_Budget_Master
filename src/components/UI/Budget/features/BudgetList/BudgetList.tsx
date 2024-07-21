@@ -7,6 +7,7 @@ import { Error } from '../../../Error';
 import { ERROR_MESSAGE_GENERAL } from '../../../../../constants';
 import { BudgetSkeleton } from '../BudgetSkeleton';
 import { ErrorContainer } from '../../Budget.styled';
+import { NotElementFound } from '../../../../templates/NotFoundElement';
 
 const BudgetList = () => {
   const user = useAppSelector((state) => state.user);
@@ -20,6 +21,16 @@ const BudgetList = () => {
       <ErrorContainer>
         <Error description={ERROR_MESSAGE_GENERAL} />
       </ErrorContainer>
+    );
+  }
+
+  if (data && data.length === 0) {
+    return (
+      <NotElementFound
+        description="You have not created budgets yet. Start now!"
+        buttonText="Create budget"
+        onClickCb={() => console.log('Create budget')}
+      />
     );
   }
 

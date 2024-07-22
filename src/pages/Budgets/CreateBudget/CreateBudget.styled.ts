@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { IconButton } from '@mui/material';
+import { IconButton, Typography } from '@mui/material';
 import { AppColors } from '../../../styles';
 
 export const Main = styled.main`
@@ -13,4 +13,8 @@ export const Main = styled.main`
 export const GoBackIconButton = styled(IconButton)`
   color: ${AppColors.grey};
   justify-self: end;
+`;
+
+export const CreateBudgeTitle = styled(Typography)`
+  margin-bottom: 3rem;
 `;

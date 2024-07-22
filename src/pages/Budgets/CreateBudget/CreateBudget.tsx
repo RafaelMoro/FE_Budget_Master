@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { BUDGETS_ROUTE } from '../../RoutesConstants';
 import { AppIcon } from '../../../components/UI/Icons';
 import { BudgetForm } from '../../../components/UI/Budget/features';
-import { Main } from '../BudgetsPage.styled';
-import { GoBackIconButton } from './CreateBudget.styled';
+import { CreateBudgeTitle, GoBackIconButton, Main } from './CreateBudget.styled';
 
 const CreateBudget = () => {
   const navigate = useNavigate();
@@ -12,9 +11,10 @@ const CreateBudget = () => {
 
   return (
     <Main>
-      <GoBackIconButton aria-label="sign-out-button" onClick={handleGoBack}>
+      <GoBackIconButton aria-label="go-back-button" onClick={handleGoBack}>
         <AppIcon icon="Close" />
       </GoBackIconButton>
+      <CreateBudgeTitle align="center" variant="h1">Create budget: </CreateBudgeTitle>
       <BudgetForm />
     </Main>
   );

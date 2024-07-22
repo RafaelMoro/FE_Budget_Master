@@ -6,10 +6,14 @@ import { useRef } from 'react';
 
 import { CreateBudgetValues } from '../../Budget.interface';
 import { CreateBudgetSchema } from '../../../../../validationsSchemas/budget.schema';
-import { InputForm, PrimaryButton } from '../../../../../styles';
+import {
+  InputForm, PrimaryButton,
+} from '../../../../../styles';
 import { FormContainer } from '../../Budget.styled';
 import { useCurrencyField } from '../../../../Other/CurrencyField/useCurrencyField';
 import { CurrencyField } from '../../../../Other';
+import { TYPE_BUDGET_OPTIONS } from '../../Budget.constants';
+import { SelectInput } from '../../../SelectInput';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -64,6 +68,13 @@ const BudgetForm = () => {
             type="text"
             variant="standard"
             label="Description (Optional)"
+          />
+          <SelectInput
+            labelId="select-type-budget"
+            dataTestId="select-type-budget"
+            labelName="Type of budget"
+            fieldName="typeBudget"
+            stringOptions={TYPE_BUDGET_OPTIONS}
           />
           <CurrencyField
             setFieldValue={setFieldValue}

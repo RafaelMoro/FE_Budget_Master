@@ -12,7 +12,7 @@ import {
 import { FormContainer } from '../../Budget.styled';
 import { useCurrencyField } from '../../../../Other/CurrencyField/useCurrencyField';
 import { CurrencyField } from '../../../../Other';
-import { TYPE_BUDGET_OPTIONS } from '../../Budget.constants';
+import { PERIOD_BUDGET_OPTIONS, TYPE_BUDGET_OPTIONS } from '../../Budget.constants';
 import { SelectInput } from '../../../SelectInput';
 
 dayjs.extend(utc);
@@ -69,13 +69,6 @@ const BudgetForm = () => {
             variant="standard"
             label="Description (Optional)"
           />
-          <SelectInput
-            labelId="select-type-budget"
-            dataTestId="select-type-budget"
-            labelName="Type of budget"
-            fieldName="typeBudget"
-            stringOptions={TYPE_BUDGET_OPTIONS}
-          />
           <CurrencyField
             setFieldValue={setFieldValue}
             amount={initialAmount.current}
@@ -89,6 +82,20 @@ const BudgetForm = () => {
             updateAmount={updateCurrentAmount}
             fieldName="currentAmount"
             labelName="Current amount"
+          />
+          <SelectInput
+            labelId="select-type-budget"
+            dataTestId="select-type-budget"
+            labelName="Type of budget"
+            fieldName="typeBudget"
+            stringOptions={TYPE_BUDGET_OPTIONS}
+          />
+          <SelectInput
+            labelId="select-period-budget"
+            dataTestId="select-period-budget"
+            labelName="Peridiocity of the budget"
+            fieldName="period"
+            stringOptions={PERIOD_BUDGET_OPTIONS}
           />
           <PrimaryButton onClick={submitForm}>Create budget</PrimaryButton>
         </FormContainer>

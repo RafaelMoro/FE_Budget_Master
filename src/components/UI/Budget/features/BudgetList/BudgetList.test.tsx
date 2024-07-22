@@ -1,4 +1,6 @@
 import { screen } from '@testing-library/react';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 import { renderWithProviders } from '../../../../../tests/CustomWrapperRedux';
 import { BudgetList } from './BudgetList';
 import { getInitialUserInterfaceState, getUserMock } from '../../../../../tests/Global.mocks';
@@ -10,11 +12,14 @@ describe('Budget List', () => {
     jest.clearAllMocks();
     jest.spyOn(console, 'error').mockImplementation(() => {});
   });
+  const history = createMemoryHistory();
 
   test('Show budget list with loading skeleton', () => {
     const userMock = getUserMock({ isGuestUser: false });
     renderWithProviders(
-      <BudgetList />,
+      <Router location={history.location} navigator={history}>
+        <BudgetList />
+      </Router>,
       { preloadedState: { user: userMock } },
     );
 
@@ -25,7 +30,9 @@ describe('Budget List', () => {
     const userMock = getUserMock({ isGuestUser: false });
     const userInterfaceMock = getInitialUserInterfaceState({ newWindowSize: 'Desktop' });
     renderWithProviders(
-      <BudgetList />,
+      <Router location={history.location} navigator={history}>
+        <BudgetList />
+      </Router>,
       { preloadedState: { user: userMock, userInterface: userInterfaceMock } },
     );
 
@@ -37,7 +44,9 @@ describe('Budget List', () => {
     fetchMock.once(JSON.stringify(successfulResponseFetchBudgets));
     const userMock = getUserMock({ isGuestUser: false });
     renderWithProviders(
-      <BudgetList />,
+      <Router location={history.location} navigator={history}>
+        <BudgetList />
+      </Router>,
       { preloadedState: { user: userMock } },
     );
 
@@ -52,7 +61,9 @@ describe('Budget List', () => {
     fetchMock.mockRejectedValueOnce(JSON.stringify(unsuccessfulResponseFetchBudgets));
     const userMock = getUserMock({ isGuestUser: false });
     renderWithProviders(
-      <BudgetList />,
+      <Router location={history.location} navigator={history}>
+        <BudgetList />
+      </Router>,
       { preloadedState: { user: userMock } },
     );
 

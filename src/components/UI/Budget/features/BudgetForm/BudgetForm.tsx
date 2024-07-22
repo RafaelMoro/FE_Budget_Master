@@ -41,8 +41,9 @@ const BudgetForm = () => {
   };
 
   const handleSubmit = async (values: CreateBudgetValues) => {
+    const newValues = { ...values, nextResetDate: values.endDate };
     // eslint-disable-next-line no-console
-    console.log(values);
+    console.log(newValues);
 
     // Transform limit and amount into number
   };
@@ -58,18 +59,23 @@ const BudgetForm = () => {
       {({ submitForm, setFieldValue }) => (
         <FormContainer>
           <Field
+            component={DatePickerValue}
+            setFieldValueCb={setFieldValue}
+            name="startDate"
+            label="Start date"
+          />
+          <Field
+            component={DatePickerValue}
+            setFieldValueCb={setFieldValue}
+            name="endDate"
+            label="End date"
+          />
+          <Field
             component={InputForm}
             name="name"
             type="text"
             variant="standard"
             label="Name"
-          />
-          <Field
-            component={InputForm}
-            name="description"
-            type="text"
-            variant="standard"
-            label="Description (Optional)"
           />
           <CurrencyField
             setFieldValue={setFieldValue}
@@ -86,16 +92,11 @@ const BudgetForm = () => {
             labelName="Current amount"
           />
           <Field
-            component={DatePickerValue}
-            setFieldValueCb={setFieldValue}
-            name="startDate"
-            label="Start date"
-          />
-          <Field
-            component={DatePickerValue}
-            setFieldValueCb={setFieldValue}
-            name="endDate"
-            label="End date"
+            component={InputForm}
+            name="description"
+            type="text"
+            variant="standard"
+            label="Description (Optional)"
           />
           <SelectInput
             labelId="select-type-budget"
@@ -107,7 +108,7 @@ const BudgetForm = () => {
           <SelectInput
             labelId="select-period-budget"
             dataTestId="select-period-budget"
-            labelName="Peridiocity of the budget"
+            labelName="Periodicity of the budget"
             fieldName="period"
             stringOptions={PERIOD_BUDGET_OPTIONS}
           />

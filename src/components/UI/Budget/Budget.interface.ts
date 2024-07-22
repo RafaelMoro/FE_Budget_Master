@@ -24,8 +24,8 @@ export interface CreateBudgetValues {
   description: string;
   startDate: Dayjs;
   endDate: Dayjs;
-  limit: number;
-  currentAmount: number;
+  limit: string;
+  currentAmount: string;
   period: PeriodBudget;
   nextResetDate: Dayjs;
   isActive: boolean;

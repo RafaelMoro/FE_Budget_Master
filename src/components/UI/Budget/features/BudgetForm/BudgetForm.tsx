@@ -2,11 +2,14 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import { Field, Formik } from 'formik';
+import { useRef } from 'react';
 
 import { CreateBudgetValues } from '../../Budget.interface';
 import { CreateBudgetSchema } from '../../../../../validationsSchemas/budget.schema';
 import { InputForm, PrimaryButton } from '../../../../../styles';
 import { FormContainer } from '../../Budget.styled';
+import { useCurrencyField } from '../../../../Other/CurrencyField/useCurrencyField';
+import { CurrencyField } from '../../../../Other';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -18,17 +21,24 @@ const BudgetForm = () => {
     description: '',
     startDate: dayjs().tz('America/Mexico_City'),
     endDate: dayjs().tz('America/Mexico_City'),
-    limit: 0,
-    currentAmount: 0,
+    limit: '',
+    currentAmount: '',
     period: 'bi-weekly',
     nextResetDate: dayjs().tz('America/Mexico_City'),
     isActive: true,
     previousPeriods: [],
   };
+  const { updateAmount, initialAmount } = useCurrencyField();
+  const currentAmount = useRef('');
+  const updateCurrentAmount = (amount: string) => {
+    currentAmount.current = amount;
+  };
 
-  const handleSubmit = (values: CreateBudgetValues) => {
+  const handleSubmit = async (values: CreateBudgetValues) => {
     // eslint-disable-next-line no-console
-    console.log('values', values);
+    console.log(values);
+
+    // Transform limit and amount into number
   };
 
   return (
@@ -39,7 +49,7 @@ const BudgetForm = () => {
       enableReinitialize
       validateOnMount
     >
-      {({ submitForm }) => (
+      {({ submitForm, setFieldValue }) => (
         <FormContainer>
           <Field
             component={InputForm}
@@ -55,7 +65,21 @@ const BudgetForm = () => {
             variant="standard"
             label="Description (Optional)"
           />
-          <PrimaryButton onSubmit={submitForm}>Create budget</PrimaryButton>
+          <CurrencyField
+            setFieldValue={setFieldValue}
+            amount={initialAmount.current}
+            updateAmount={updateAmount}
+            fieldName="limit"
+            labelName="Budget limit"
+          />
+          <CurrencyField
+            setFieldValue={setFieldValue}
+            amount={currentAmount.current}
+            updateAmount={updateCurrentAmount}
+            fieldName="currentAmount"
+            labelName="Current amount"
+          />
+          <PrimaryButton onClick={submitForm}>Create budget</PrimaryButton>
         </FormContainer>
       )}
     </Formik>

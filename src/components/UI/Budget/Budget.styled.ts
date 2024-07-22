@@ -37,6 +37,11 @@ export const ContentPlaceholder = styled('div', { shouldForwardProp: (props) => 
   ${blinkAnimation}
 `;
 
+export const BudgetsTitle = styled(Typography)`
+  grid-column: 1 / 3;
+  margin: 3rem 0;
+`;
+
 export const Title = styled(Typography)`
   grid-column: 1 / 3;
   cursor: pointer;

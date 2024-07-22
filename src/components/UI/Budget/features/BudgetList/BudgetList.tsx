@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import { useNavigate } from 'react-router-dom';
-import { Typography } from '@mui/material';
 import { useAppSelector } from '../../../../../redux/hooks';
 import { useFetchBudgetsQuery } from '../../../../../redux/slices/Budgets/budgets.api';
 import { BudgetListContainer } from '../../../../../pages/Budgets/BudgetsPage.styled';
@@ -8,7 +7,7 @@ import { Budget } from '../../Budget';
 import { Error } from '../../../Error';
 import { ERROR_MESSAGE_GENERAL } from '../../../../../constants';
 import { BudgetSkeleton } from '../BudgetSkeleton';
-import { ErrorContainer } from '../../Budget.styled';
+import { BudgetsTitle, ErrorContainer } from '../../Budget.styled';
 import { NotElementFound } from '../../../../templates/NotFoundElement';
 import { CREATE_BUDGET_ROUTE } from '../../../../../pages/RoutesConstants';
 
@@ -42,7 +41,7 @@ const BudgetList = () => {
 
   return (
     <BudgetListContainer>
-      <Typography variant="h2" align="center">Budgets:</Typography>
+      <BudgetsTitle variant="h2" align="center">Budgets:</BudgetsTitle>
       { (isLoading && isMobile) && <BudgetSkeleton /> }
       { (isLoading && !isMobile) && (
         <>

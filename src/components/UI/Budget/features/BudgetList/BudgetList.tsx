@@ -27,7 +27,7 @@ const BudgetList = () => {
   if (data && data.length === 0) {
     return (
       <NotElementFound
-        description="You have not created budgets yet. Start now!"
+        description="Start your journey to financial freedom. Set up your budget now!"
         buttonText="Create budget"
         onClickCb={() => console.log('Create budget')}
       />

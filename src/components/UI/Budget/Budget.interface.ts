@@ -31,3 +31,39 @@ export interface CreateBudgetValues {
   isActive: boolean;
   previousPeriods: string[];
 }
+
+export interface FirstPartCreateBudgetValues {
+  name: string;
+  typeBudget: TypeBudget;
+  limit: string;
+  currentAmount: string;
+}
+
+export interface SecondPartCreateBudgetValues {
+  description: string;
+  startDate: Dayjs;
+  endDate: Dayjs;
+  nextResetDate: Dayjs;
+  period: PeriodBudget;
+  isActive: boolean;
+  previousPeriods: string[];
+}
+
+export interface GoNextProps {
+  data: FirstPartCreateBudgetValues | SecondPartCreateBudgetValues;
+  skipUpdateData: boolean;
+  shouldSubmitForm: boolean;
+}
+
+export interface FirstPartBudgetFormProps {
+  goNext: (props: GoNextProps) => void;
+  counterView: number;
+  direction: number;
+}
+
+export interface SecondPartBudgetFormProps {
+  goNext: (props: GoNextProps) => void;
+  goBack: () => void;
+  counterView: number;
+  direction: number;
+}

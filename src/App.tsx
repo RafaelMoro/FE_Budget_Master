@@ -16,8 +16,9 @@ import { NotFound } from './pages/NotFound';
 import { LandingPage } from './pages/LandingPage';
 import { store } from './redux/store';
 import { appTheme } from './styles/theme';
-import { BUDGETS_ROUTE } from './pages/RoutesConstants';
+import { BUDGETS_ROUTE, CREATE_BUDGET_ROUTE } from './pages/RoutesConstants';
 import { BudgetsPage } from './pages/Budgets';
+import { CreateBudget } from './pages/Budgets/CreateBudget';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<Login />} />
             <Route path={BUDGETS_ROUTE} element={<BudgetsPage />} />
+            <Route path={CREATE_BUDGET_ROUTE} element={<CreateBudget />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password/:token" element={<ResetPassword />} />
             <Route path="/register" element={<CreateAccount />} />

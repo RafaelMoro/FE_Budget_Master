@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { LinearProgress, Typography } from '@mui/material';
+import { Form } from 'formik';
 import {
   AppColors, Chip, PrimaryButton, responsiveBreakpoints,
 } from '../../../styles';
@@ -91,4 +92,10 @@ export const ProgressLabel = styled(Typography, { shouldForwardProp: (props) => 
   color: ${AppColors.positive};
     ${({ hasProgressMedium }: ProgressProps) => hasProgressMedium && `color: ${AppColors.warning};`}
     ${({ hasProgressHigh }: ProgressProps) => hasProgressHigh && `color: ${AppColors.negative};`}
+`;
+
+export const FormContainer = styled(Form)`
+  display: grid;
+  padding: 0 1rem 0 1rem;
+  gap: 2rem;
 `;

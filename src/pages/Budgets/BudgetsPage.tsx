@@ -1,4 +1,3 @@
-import { Typography } from '@mui/material';
 import { Header } from '../../components/templates';
 import { Main } from './BudgetsPage.styled';
 import { useResizeWindow, useSyncLoginInfo } from '../../hooks';
@@ -11,7 +10,6 @@ const BudgetsPage = () => {
   return (
     <Main>
       <Header />
-      <Typography variant="h2" align="center">Budgets:</Typography>
       <BudgetList />
     </Main>
   );

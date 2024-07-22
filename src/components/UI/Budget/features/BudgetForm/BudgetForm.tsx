@@ -4,16 +4,18 @@ import timezone from 'dayjs/plugin/timezone';
 import { Field, Formik } from 'formik';
 import { useRef } from 'react';
 
+import { PERIOD_BUDGET_OPTIONS, TYPE_BUDGET_OPTIONS } from '../../Budget.constants';
 import { CreateBudgetValues } from '../../Budget.interface';
 import { CreateBudgetSchema } from '../../../../../validationsSchemas/budget.schema';
-import {
-  InputForm, PrimaryButton,
-} from '../../../../../styles';
+
 import { FormContainer } from '../../Budget.styled';
 import { useCurrencyField } from '../../../../Other/CurrencyField/useCurrencyField';
 import { CurrencyField } from '../../../../Other';
-import { PERIOD_BUDGET_OPTIONS, TYPE_BUDGET_OPTIONS } from '../../Budget.constants';
 import { SelectInput } from '../../../SelectInput';
+import { DatePickerValue } from '../../../DatePickerValue';
+import {
+  InputForm, PrimaryButton,
+} from '../../../../../styles';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -82,6 +84,18 @@ const BudgetForm = () => {
             updateAmount={updateCurrentAmount}
             fieldName="currentAmount"
             labelName="Current amount"
+          />
+          <Field
+            component={DatePickerValue}
+            setFieldValueCb={setFieldValue}
+            name="startDate"
+            label="Start date"
+          />
+          <Field
+            component={DatePickerValue}
+            setFieldValueCb={setFieldValue}
+            name="endDate"
+            label="End date"
           />
           <SelectInput
             labelId="select-type-budget"

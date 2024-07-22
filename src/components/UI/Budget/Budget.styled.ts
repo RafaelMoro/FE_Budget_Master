@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 import { LinearProgress, Typography } from '@mui/material';
-import { AppColors, Chip, responsiveBreakpoints } from '../../../styles';
+import {
+  AppColors, Chip, PrimaryButton, responsiveBreakpoints,
+} from '../../../styles';
 import { ContentPlaceholderProps, ProgressProps } from './Budget.interface';
 import { blinkAnimation } from '../../../styles/animations/blink';
 
@@ -40,6 +42,13 @@ export const ContentPlaceholder = styled('div', { shouldForwardProp: (props) => 
 export const BudgetsTitle = styled(Typography)`
   grid-column: 1 / 3;
   margin: 3rem 0;
+`;
+
+export const CreateBudgetButton = styled(PrimaryButton)`
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+  justify-self: end;
+  max-height: 4.4rem;
 `;
 
 export const Title = styled(Typography)`

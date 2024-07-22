@@ -7,7 +7,7 @@ import { Budget } from '../../Budget';
 import { Error } from '../../../Error';
 import { ERROR_MESSAGE_GENERAL } from '../../../../../constants';
 import { BudgetSkeleton } from '../BudgetSkeleton';
-import { BudgetsTitle, ErrorContainer } from '../../Budget.styled';
+import { BudgetsTitle, CreateBudgetButton, ErrorContainer } from '../../Budget.styled';
 import { NotElementFound } from '../../../../templates/NotFoundElement';
 import { CREATE_BUDGET_ROUTE } from '../../../../../pages/RoutesConstants';
 
@@ -41,7 +41,7 @@ const BudgetList = () => {
 
   return (
     <BudgetListContainer>
-      <BudgetsTitle variant="h2" align="center">Budgets:</BudgetsTitle>
+      <BudgetsTitle variant="h3" align="center">Budgets:</BudgetsTitle>
       { (isLoading && isMobile) && <BudgetSkeleton /> }
       { (isLoading && !isMobile) && (
         <>
@@ -52,6 +52,7 @@ const BudgetList = () => {
       { (data && data.length > 0) && data.map((budget) => (
         <Budget key={budget._id} budget={budget} />
       )) }
+      <CreateBudgetButton onClick={navigateCreateBudget}>Create budget</CreateBudgetButton>
     </BudgetListContainer>
   );
 };

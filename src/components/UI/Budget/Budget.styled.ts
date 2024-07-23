@@ -1,13 +1,15 @@
 import styled from '@emotion/styled';
 import { LinearProgress, Typography } from '@mui/material';
+import { motion } from 'framer-motion';
 import { Form } from 'formik';
+
 import {
   AppColors, Chip, PrimaryButton, responsiveBreakpoints,
 } from '../../../styles';
 import { ContentPlaceholderProps, ProgressProps } from './Budget.interface';
 import { blinkAnimation } from '../../../styles/animations/blink';
 
-export const BudgetContainer = styled.div`
+export const BudgetContainer = styled(motion.article)`
   padding: 3rem;
   max-width: 35rem;
   background-color: ${AppColors.white};

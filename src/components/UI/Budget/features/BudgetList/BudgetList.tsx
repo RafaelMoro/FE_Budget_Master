@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { useNavigate } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { useAppSelector } from '../../../../../redux/hooks';
 import { useFetchBudgetsQuery } from '../../../../../redux/slices/Budgets/budgets.api';
 import { BudgetListContainer } from '../../../../../pages/Budgets/BudgetsPage.styled';
@@ -40,20 +41,22 @@ const BudgetList = () => {
   }
 
   return (
-    <BudgetListContainer>
-      <BudgetsTitle variant="h3" align="center">Budgets:</BudgetsTitle>
-      { (isLoading && isMobile) && <BudgetSkeleton /> }
-      { (isLoading && !isMobile) && (
+    <AnimatePresence>
+      <BudgetListContainer>
+        <BudgetsTitle variant="h3" align="center">Budgets:</BudgetsTitle>
+        { (isLoading && isMobile) && <BudgetSkeleton /> }
+        { (isLoading && !isMobile) && (
         <>
           <BudgetSkeleton />
           <BudgetSkeleton />
         </>
-      ) }
-      { (data && data.length > 0) && data.map((budget) => (
-        <Budget key={budget._id} budget={budget} />
-      )) }
-      <CreateBudgetButton onClick={navigateCreateBudget}>Create budget</CreateBudgetButton>
-    </BudgetListContainer>
+        ) }
+        { (data && data.length > 0) && data.map((budget) => (
+          <Budget key={budget._id} budget={budget} />
+        )) }
+        <CreateBudgetButton onClick={navigateCreateBudget}>Create budget</CreateBudgetButton>
+      </BudgetListContainer>
+    </AnimatePresence>
   );
 };
 

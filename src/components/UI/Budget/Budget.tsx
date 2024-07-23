@@ -47,7 +47,7 @@ const Budget = ({
 
   return (
     <>
-      <BudgetContainer onClick={toggleBudgetDetailsDrawer}>
+      <BudgetContainer onClick={toggleBudgetDetailsDrawer} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
         <TextTwoColumns variant="body2" align="center">
           {dateText}
         </TextTwoColumns>

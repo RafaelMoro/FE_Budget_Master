@@ -1,11 +1,12 @@
 import { ReactElement, ReactNode } from 'react';
 import { Divider, Typography } from '@mui/material';
+import { AnimatePresence } from 'framer-motion';
 import { AnyRecord } from '../../../../../globalInterface';
 import { MonthAccordeon } from '../MonthAccordeon';
 import { ShowRecords } from '../ShowRecords';
 import { Record } from '../../Record';
 import { FlexContainer } from '../../../../../styles';
-import { RecordExpense, RecordIncome } from '../../Records.styled';
+import { RecordExpense, RecordIncome, RecordMapWrapper } from '../../Records.styled';
 import { ShowTotalContianer } from '../Features.styled';
 
 interface MonthRecordsProps {
@@ -28,6 +29,8 @@ interface MonthRecordsProps {
   onErrorCb: () => ReactElement;
   onLoadingCb: () => ReactElement;
 }
+const base = 4;
+const t = (d: number) => d * base;
 
 const MonthRecords = ({
   color, openedAccordeon, titleMonthAccordeon, accountId, isGuestUser, isOlderRecords, showMessage,
@@ -55,28 +58,49 @@ const MonthRecords = ({
       </ShowTotalContianer>
     ) }
     { (isGuestUser && isOlderRecords && children) && children }
-    <ShowRecords
-      records={records}
-      loading={loading}
-      error={error}
-      showMessage={showMessage}
-      onShowMessage={onShowMessage}
-      onEmptyRecords={onEmptyCb}
-      onErrorRecords={onErrorCb}
-      onLoadingRecords={onLoadingCb}
-      renderRecords={
+    <AnimatePresence>
+      <ShowRecords
+        records={records}
+        loading={loading}
+        error={error}
+        showMessage={showMessage}
+        onShowMessage={onShowMessage}
+        onEmptyRecords={onEmptyCb}
+        onErrorRecords={onErrorCb}
+        onLoadingRecords={onLoadingCb}
+        renderRecords={
           (record: AnyRecord, index: number) => (
-            <div key={record._id}>
+            <RecordMapWrapper
+              key={record._id}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{
+                height: 'auto',
+                opacity: 1,
+                transition: {
+                  type: 'spring',
+                  bounce: 0.3,
+                  opacity: { delay: t(0.025) },
+                },
+              }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{
+                duration: t(0.15),
+                type: 'spring',
+                bounce: 0,
+                opacity: { duration: t(0.03) },
+              }}
+            >
               { (index === 0) && (<Divider />) }
               <Record
                 backgroundColor={color}
                 record={record}
               />
               <Divider />
-            </div>
+            </RecordMapWrapper>
           )
         }
-    />
+      />
+    </AnimatePresence>
   </MonthAccordeon>
 );
 

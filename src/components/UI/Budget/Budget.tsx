@@ -10,6 +10,7 @@ import {
   BudgetContainer, TextTwoColumns,
   Title,
 } from './Budget.styled';
+import { DeleteBudgetModal } from './features/DeleteBudgetModal/DeleteBudgetModal';
 
 interface BudgetProps {
   budget: BudgetUI;
@@ -34,10 +35,12 @@ const Budget = ({
 
   const [title, setTitle] = useState(name);
   const [openBudgetDetailsDrawer, setBudgetDetailsDrawer] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   const toggleBudgetDetailsDrawer = () => {
     setBudgetDetailsDrawer((prevState) => !prevState);
   };
+  const toggleDeleteModal = () => setOpenDeleteModal((prevState) => !prevState);
 
   useEffect(() => {
     if (name.length > 50) {
@@ -63,8 +66,19 @@ const Budget = ({
         anchor={!isMobile ? 'right' : 'bottom'}
         open={openBudgetDetailsDrawer}
       >
-        <BudgetDetailsDrawer progress={progress} dateText={dateText} budget={budget} toggleDrawer={toggleBudgetDetailsDrawer} />
+        <BudgetDetailsDrawer
+          progress={progress}
+          dateText={dateText}
+          budget={budget}
+          toggleDrawer={toggleBudgetDetailsDrawer}
+          toggleDeleteModal={toggleDeleteModal}
+        />
       </Drawer>
+      <DeleteBudgetModal
+        open={openDeleteModal}
+        onClose={toggleDeleteModal}
+        budget={budget}
+      />
     </>
   );
 };

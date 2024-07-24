@@ -14,10 +14,11 @@ interface BudgetDetailsDrawerProps {
   dateText: string;
   progress: number;
   toggleDrawer: () => void;
+  toggleDeleteModal: () => void;
 }
 
 const BudgetDetailsDrawer = ({
-  toggleDrawer, budget, dateText, progress,
+  toggleDrawer, budget, dateText, progress, toggleDeleteModal,
 }: BudgetDetailsDrawerProps) => {
   const restingDays = getRemainingDays(budget.endDate);
 
@@ -32,7 +33,7 @@ const BudgetDetailsDrawer = ({
         <IconButton>
           <AppIcon icon="Edit" />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={toggleDeleteModal}>
           <AppIcon icon="Delete" />
         </IconButton>
       </IconsContainer>

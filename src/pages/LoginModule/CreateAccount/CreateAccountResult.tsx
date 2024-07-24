@@ -3,12 +3,11 @@ import {
   CheckCircleOutlineOutlined,
 } from '@mui/icons-material';
 
-import { ErrorCreateAccountProps, CreateAccountResultProps, LoadingCreateAccountProps } from './interface';
+import { ErrorCreateAccountProps, CreateAccountResultProps } from './interface';
 import { LOGIN_ROUTE } from '../../RoutesConstants';
 import { Error } from '../../../components/UI';
-import { HorizontalLoader } from '../../../components/UI/HorizontalLoader';
 import { AnimateBox } from '../../../animations';
-import { LoaderContainer, MessageContainer, AnchorContainer } from '../../../styles/LoginModule.styled';
+import { MessageContainer, AnchorContainer } from '../../../styles/LoginModule.styled';
 import {
   AppColors, AnchorButton, PrimaryButton, SecondaryButton,
 } from '../../../styles';
@@ -16,19 +15,6 @@ import {
 const {
   positive,
 } = AppColors;
-
-const LoadingCreateAccount = ({ counterView, direction }: LoadingCreateAccountProps) => {
-  if (counterView !== 2) return null;
-  return (
-    <AnimateBox direction={direction}>
-      <LoaderContainer>
-        <HorizontalLoader />
-        <Typography>Your account is being created. Please wait...</Typography>
-      </LoaderContainer>
-    </AnimateBox>
-  );
-};
-
 const SuccessCreateAccount = () => (
   <MessageContainer>
     <CheckCircleOutlineOutlined sx={{ fontSize: '4.5rem', fill: positive }} />
@@ -63,5 +49,5 @@ const CreateAccountResult = ({
 };
 
 export {
-  CreateAccountResult, SuccessCreateAccount, ErrorCreateAccount, LoadingCreateAccount,
+  CreateAccountResult, SuccessCreateAccount, ErrorCreateAccount,
 };

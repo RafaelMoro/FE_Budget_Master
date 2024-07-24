@@ -49,14 +49,6 @@ export const FormActionButtons = styled.div`
   justify-content: space-between;
 `;
 
-export const LoaderContainer = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-
-`;
-
 export const MessageContainer = styled.div`
   display: grid;
   place-items: center;

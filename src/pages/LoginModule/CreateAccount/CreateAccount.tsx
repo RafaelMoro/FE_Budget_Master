@@ -12,7 +12,7 @@ import { useCreateLocalCategoriesMutation, useCreateUserMutation } from '../../.
 import { useAnimateBox } from '../../../hooks/useAnimateBox';
 
 import {
-  CreateAccountResult, SuccessCreateAccount, ErrorCreateAccount, LoadingCreateAccount,
+  CreateAccountResult, SuccessCreateAccount, ErrorCreateAccount,
 } from './CreateAccountResult';
 import { PersonalInformation } from './PersonalInformation';
 import { UserAndPassword } from './UserAndPassword';
@@ -21,6 +21,7 @@ import {
 } from '../../../styles/LoginModule.styled';
 import { saveInfoToLocalStorage } from '../../../utils';
 import { useLogin } from '../../../hooks';
+import { LoadingFormAnimated } from '../../../components/templates/LoadingFormAnimated/LoadingFormAnimated';
 
 const initialValuesCreateAccountForm = {
   email: '',
@@ -98,7 +99,7 @@ const CreateAccount = ():ReactElement => {
           counterView={counterView}
           direction={direction}
         />
-        <LoadingCreateAccount counterView={counterView} direction={direction} />
+        <LoadingFormAnimated text="Your account is being created. Please wait..." order={2} counterView={counterView} direction={direction} />
         { (!isLoadingUser || isLoadingCategories) && (
           <CreateAccountResult
             counterView={counterView}

@@ -4,17 +4,19 @@ import { Actions, GeneralError } from '../../globalInterface';
 import { BUDGETS_ROUTE } from '../../pages/RoutesConstants';
 import { useNotification } from '../useNotification';
 import { ShowErrorNotificationBudgetProps } from './useBudgets.interface';
-import { useCreateBudgetMutation } from '../../redux/slices/Budgets/budgets.api';
-import { CreateBudgetValuesApiRequest } from '../../components/UI/Budget/Budget.interface';
+import { useCreateBudgetMutation, useDeleteBudgetMutation } from '../../redux/slices/Budgets/budgets.api';
+import { CreateBudgetValuesApiRequest, DeleteBudgetValues } from '../../components/UI/Budget/Budget.interface';
 import { useAppSelector } from '../../redux/hooks';
 
 const useBudgets = () => {
   const navigate = useNavigate();
   const { updateGlobalNotification } = useNotification({});
+
   const [
     createBudgetMutation,
     { isLoading: isLoadingCreateBudget, isError: isErrorCreateBudget },
   ] = useCreateBudgetMutation();
+  const [deleteBudgetMutation] = useDeleteBudgetMutation();
 
   const userReduxState = useAppSelector((state) => state.user);
   const bearerToken = userReduxState.userInfo?.bearerToken as string;
@@ -54,8 +56,19 @@ const useBudgets = () => {
     }
   };
 
+  const deleteBudget = async ({ values }: { values: DeleteBudgetValues }) => {
+    try {
+      await deleteBudgetMutation({ values, bearerToken });
+    } catch (err) {
+      const errorCatched = err as GeneralError;
+      // eslint-disable-next-line no-console
+      console.error('Error while deleting budget: ', errorCatched?.data?.message);
+    }
+  };
+
   return {
     createBudget,
+    deleteBudget,
     isLoadingCreateBudget,
     isErrorCreateBudget,
   };

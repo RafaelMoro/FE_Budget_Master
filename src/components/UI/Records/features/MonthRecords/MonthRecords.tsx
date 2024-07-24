@@ -1,6 +1,5 @@
 import { ReactElement, ReactNode } from 'react';
 import { Divider, Typography } from '@mui/material';
-import { AnimatePresence } from 'framer-motion';
 import { AnyRecord } from '../../../../../globalInterface';
 import { MonthAccordeon } from '../MonthAccordeon';
 import { ShowRecords } from '../ShowRecords';
@@ -8,7 +7,6 @@ import { Record } from '../../Record';
 import { FlexContainer } from '../../../../../styles';
 import { RecordExpense, RecordIncome } from '../../Records.styled';
 import { ShowTotalContianer } from '../Features.styled';
-import { AnimateAccordion } from './AnimateAccordion';
 
 interface MonthRecordsProps {
   color: string;
@@ -57,32 +55,28 @@ const MonthRecords = ({
       </ShowTotalContianer>
     ) }
     { (isGuestUser && isOlderRecords && children) && children }
-    <AnimatePresence>
-      <ShowRecords
-        records={records}
-        loading={loading}
-        error={error}
-        showMessage={showMessage}
-        onShowMessage={onShowMessage}
-        onEmptyRecords={onEmptyCb}
-        onErrorRecords={onErrorCb}
-        onLoadingRecords={onLoadingCb}
-        renderRecords={
+    <ShowRecords
+      records={records}
+      loading={loading}
+      error={error}
+      showMessage={showMessage}
+      onShowMessage={onShowMessage}
+      onEmptyRecords={onEmptyCb}
+      onErrorRecords={onErrorCb}
+      onLoadingRecords={onLoadingCb}
+      renderRecords={
           (record: AnyRecord, index: number) => (
-            <AnimateAccordion
-              key={record._id}
-            >
+            <div key={record._id}>
               { (index === 0) && (<Divider />) }
               <Record
                 backgroundColor={color}
                 record={record}
               />
               <Divider />
-            </AnimateAccordion>
+            </div>
           )
         }
-      />
-    </AnimatePresence>
+    />
   </MonthAccordeon>
 );
 

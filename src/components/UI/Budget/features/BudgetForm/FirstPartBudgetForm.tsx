@@ -16,20 +16,23 @@ import { BUDGETS_ROUTE } from '../../../../../pages/RoutesConstants';
 import { FirstPartBudgetFormProps, FirstPartCreateBudgetValues } from '../../Budget.interface';
 import { TYPE_BUDGET_OPTIONS } from '../../Budget.constants';
 
-const initialValues: FirstPartCreateBudgetValues = {
-  name: '',
-  typeBudget: 'one-time',
-  limit: '',
-  currentAmount: '',
-};
-
 const FirstPartBudgetForm = ({
-  counterView, direction, goNext, toggleIsPeriodic,
+  data, counterView, direction, goNext, toggleIsPeriodic,
 }: FirstPartBudgetFormProps) => {
+  const {
+    name, typeBudget, limit, currentAmount,
+  } = data;
+  const initialValues: FirstPartCreateBudgetValues = {
+    name,
+    typeBudget,
+    limit,
+    currentAmount,
+  };
+
   const { updateAmount, initialAmount } = useCurrencyField();
-  const currentAmount = useRef('');
+  const currentAmountRef = useRef('');
   const updateCurrentAmount = (amount: string) => {
-    currentAmount.current = amount;
+    currentAmountRef.current = amount;
   };
 
   if (counterView !== 0) return null;
@@ -68,7 +71,7 @@ const FirstPartBudgetForm = ({
             />
             <CurrencyField
               setFieldValue={setFieldValue}
-              amount={currentAmount.current}
+              amount={currentAmountRef.current}
               updateAmount={updateCurrentAmount}
               fieldName="currentAmount"
               labelName="Current amount"

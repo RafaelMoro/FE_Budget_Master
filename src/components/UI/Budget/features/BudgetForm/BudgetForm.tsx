@@ -57,7 +57,13 @@ const BudgetForm = () => {
 
   return (
     <>
-      <FirstPartBudgetForm counterView={counterView} direction={direction} goNext={goNext} toggleIsPeriodic={togglePeriodic} />
+      <FirstPartBudgetForm
+        data={formData.current}
+        counterView={counterView}
+        direction={direction}
+        goNext={goNext}
+        toggleIsPeriodic={togglePeriodic}
+      />
       <SecondPartBudgetForm
         isPeriodic={isPeriodic}
         counterView={counterView}

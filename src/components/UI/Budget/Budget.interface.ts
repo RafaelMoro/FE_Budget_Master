@@ -56,6 +56,7 @@ export interface GoNextProps {
 }
 
 export interface FirstPartBudgetFormProps {
+  data: CreateBudgetValues;
   counterView: number;
   direction: number;
   goNext: (props: GoNextProps) => void;

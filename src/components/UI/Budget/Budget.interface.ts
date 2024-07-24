@@ -43,6 +43,10 @@ CreateBudgetValues,
   currentAmount: number;
 }
 
+export interface DeleteBudgetValues {
+  budgetId: string;
+}
+
 export interface BudgetDetailsViewValues {
   name: string;
   typeBudget: TypeBudget;

@@ -227,6 +227,7 @@ export interface SelectFormikProps {
   form: SelectFormikFormProps;
   dataTestId: string;
   disabled?: boolean;
+  onClickCb?: () => void;
 }
 
 export interface LazyFetchRecords {

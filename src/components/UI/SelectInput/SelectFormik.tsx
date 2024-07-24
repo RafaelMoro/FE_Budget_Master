@@ -5,13 +5,16 @@ import { Select } from '../../../styles';
 import { SelectFormikProps } from '../../../globalInterface';
 
 const SelectFormik = ({
-  children, form, field, dataTestId, disabled = false,
+  children, form, field, dataTestId, disabled = false, onClickCb,
 }: SelectFormikProps) => {
   const { name, value } = field;
   const { setFieldValue } = form;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleChange = (event: SelectChangeEvent<any>) => setFieldValue(name, event.target.value);
+  const handleChange = (event: SelectChangeEvent<any>) => {
+    setFieldValue(name, event.target.value);
+    if (onClickCb) onClickCb();
+  };
 
   return (
     <Select

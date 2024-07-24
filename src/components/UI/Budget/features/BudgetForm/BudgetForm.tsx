@@ -5,6 +5,7 @@ import { useRef, useState } from 'react';
 
 import {
   CreateBudgetValues, BudgetDetailsViewValues, GoNextProps, BudgetPeriodViewValues,
+  GoBackBudgetPeriodViewProps,
 } from '../../Budget.interface';
 import { useAnimateBox } from '../../../../../hooks';
 import { BudgetDetailsView } from './BudgetDetailsView';
@@ -49,6 +50,12 @@ const BudgetForm = () => {
     formData.current = { ...current, ...newInfo };
   };
 
+  // This function persists the data of BudgetPeriodView is the user decides to return to BudgetDetailsView
+  const goBackBudgetPeriodView = ({ data }: GoBackBudgetPeriodViewProps) => {
+    updateData(data);
+    goPreviousView();
+  };
+
   const goNext = ({ data, shouldSubmitForm = false, skipUpdateData = true }: GoNextProps) => {
     if (!skipUpdateData) updateData(data);
     if (shouldSubmitForm) handleSubmit(formData.current);
@@ -65,10 +72,11 @@ const BudgetForm = () => {
         toggleIsPeriodic={togglePeriodic}
       />
       <BudgetPeriodView
+        data={formData.current}
         isPeriodic={isPeriodic}
         counterView={counterView}
         direction={direction}
-        goBack={goPreviousView}
+        goBack={goBackBudgetPeriodView}
         goNext={goNext}
       />
     </>

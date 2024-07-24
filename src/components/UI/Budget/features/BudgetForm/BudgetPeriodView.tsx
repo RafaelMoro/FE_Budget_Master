@@ -16,24 +16,27 @@ import { PERIOD_BUDGET_OPTIONS } from '../../Budget.constants';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-const initialValues: BudgetPeriodViewValues = {
-  description: '',
-  startDate: dayjs().tz('America/Mexico_City'),
-  endDate: dayjs().tz('America/Mexico_City'),
-  period: 'bi-weekly',
-  nextResetDate: dayjs().tz('America/Mexico_City'),
-  isActive: true,
-  previousPeriods: [],
-};
-
 const BudgetPeriodView = ({
-  direction, counterView, isPeriodic, goBack, goNext,
+  data, direction, counterView, isPeriodic, goBack, goNext,
 }: BudgetPeriodViewProps) => {
+  const {
+    description, startDate, endDate, period, nextResetDate, isActive, previousPeriods,
+  } = data;
+  const initialValues: BudgetPeriodViewValues = {
+    description,
+    startDate,
+    endDate,
+    period,
+    nextResetDate,
+    isActive,
+    previousPeriods,
+  };
+
   // The validate function receives automatically the value of the field
-  const validateEndDate = (endDate: Dayjs) => {
+  const validateEndDate = (endDateRceived: Dayjs) => {
     let error;
     const todayDate = dayjs().tz('America/Mexico_City');
-    const differenceTodaysDate = endDate.diff(todayDate, 'days');
+    const differenceTodaysDate = endDateRceived.diff(todayDate, 'days');
 
     if (differenceTodaysDate < 0) {
       error = 'The end date cannot be before today';
@@ -49,7 +52,9 @@ const BudgetPeriodView = ({
       onSubmit={(values) => goNext({ data: values, skipUpdateData: false, shouldSubmitForm: true })}
       validateOnMount
     >
-      {({ submitForm, errors, setFieldValue }) => (
+      {({
+        submitForm, errors, setFieldValue, values,
+      }) => (
         <AnimateBox direction={direction}>
           <FormContainer>
             <Field
@@ -60,13 +65,13 @@ const BudgetPeriodView = ({
               label="Description (Optional)"
             />
             { (isPeriodic) && (
-              <SelectInput
-                labelId="select-period-budget"
-                dataTestId="select-period-budget"
-                labelName="Periodicity of the budget"
-                fieldName="period"
-                stringOptions={PERIOD_BUDGET_OPTIONS}
-              />
+            <SelectInput
+              labelId="select-period-budget"
+              dataTestId="select-period-budget"
+              labelName="Periodicity of the budget"
+              fieldName="period"
+              stringOptions={PERIOD_BUDGET_OPTIONS}
+            />
             ) }
             <Field
               component={DatePickerValue}
@@ -85,7 +90,7 @@ const BudgetPeriodView = ({
             <ErrorParagraphValidation variant="subText">{errors.endDate as string}</ErrorParagraphValidation>
             ) }
             <FormActionButtons>
-              <CancelButton variant="contained" onClick={goBack} size="medium">Return</CancelButton>
+              <CancelButton variant="contained" onClick={() => goBack({ data: values })} size="medium">Return</CancelButton>
               <PrimaryButton variant="contained" onClick={submitForm} size="medium">Create Budget</PrimaryButton>
             </FormActionButtons>
           </FormContainer>

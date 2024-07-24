@@ -55,6 +55,10 @@ export interface GoNextProps {
   shouldSubmitForm: boolean;
 }
 
+export interface GoBackBudgetPeriodViewProps {
+  data: BudgetPeriodViewValues;
+}
+
 export interface BudgetDetailsViewProps {
   data: CreateBudgetValues;
   counterView: number;
@@ -64,9 +68,11 @@ export interface BudgetDetailsViewProps {
 }
 
 export interface BudgetPeriodViewProps {
+  data: CreateBudgetValues;
   counterView: number;
   direction: number;
   goNext: (props: GoNextProps) => void;
-  goBack: () => void;
+  // This function persists the data of BudgetPeriodView is the user decides to return to BudgetDetailsView
+  goBack: ({ data }: GoBackBudgetPeriodViewProps) => void
   isPeriodic: boolean;
 }

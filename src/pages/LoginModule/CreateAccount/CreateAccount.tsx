@@ -11,9 +11,6 @@ import { GeneralError } from '../../../globalInterface';
 import { useCreateLocalCategoriesMutation, useCreateUserMutation } from '../../../redux/slices/User/actions/createUser';
 import { useAnimateBox } from '../../../hooks/useAnimateBox';
 
-import {
-  CreateAccountResult, SuccessCreateAccount, ErrorCreateAccount,
-} from './CreateAccountResult';
 import { PersonalInformation } from './PersonalInformation';
 import { UserAndPassword } from './UserAndPassword';
 import {

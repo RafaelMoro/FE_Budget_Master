@@ -13,16 +13,16 @@ import { useCurrencyField } from '../../../../Other/CurrencyField/useCurrencyFie
 import { SelectInput } from '../../../SelectInput';
 import { FormActionButtons } from '../../../../../styles/LoginModule.styled';
 import { BUDGETS_ROUTE } from '../../../../../pages/RoutesConstants';
-import { FirstPartBudgetFormProps, FirstPartCreateBudgetValues } from '../../Budget.interface';
+import { BudgetDetailsViewProps, BudgetDetailsViewValues } from '../../Budget.interface';
 import { TYPE_BUDGET_OPTIONS } from '../../Budget.constants';
 
-const FirstPartBudgetForm = ({
+const BudgetDetailsView = ({
   data, counterView, direction, goNext, toggleIsPeriodic,
-}: FirstPartBudgetFormProps) => {
+}: BudgetDetailsViewProps) => {
   const {
     name, typeBudget, limit, currentAmount,
   } = data;
-  const initialValues: FirstPartCreateBudgetValues = {
+  const initialValues: BudgetDetailsViewValues = {
     name,
     typeBudget,
     limit,
@@ -89,4 +89,4 @@ const FirstPartBudgetForm = ({
   );
 };
 
-export { FirstPartBudgetForm };
+export { BudgetDetailsView };

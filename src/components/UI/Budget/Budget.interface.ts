@@ -32,7 +32,7 @@ export interface CreateBudgetValues {
   previousPeriods: string[];
 }
 
-export interface FirstPartCreateBudgetValues {
+export interface BudgetDetailsViewValues {
   name: string;
   typeBudget: TypeBudget;
   limit: string;
@@ -50,12 +50,12 @@ export interface SecondPartCreateBudgetValues {
 }
 
 export interface GoNextProps {
-  data: FirstPartCreateBudgetValues | SecondPartCreateBudgetValues;
+  data: BudgetDetailsViewValues | SecondPartCreateBudgetValues;
   skipUpdateData: boolean;
   shouldSubmitForm: boolean;
 }
 
-export interface FirstPartBudgetFormProps {
+export interface BudgetDetailsViewProps {
   data: CreateBudgetValues;
   counterView: number;
   direction: number;

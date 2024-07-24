@@ -56,14 +56,16 @@ export interface GoNextProps {
 }
 
 export interface FirstPartBudgetFormProps {
-  goNext: (props: GoNextProps) => void;
   counterView: number;
   direction: number;
+  goNext: (props: GoNextProps) => void;
+  toggleIsPeriodic: () => void;
 }
 
 export interface SecondPartBudgetFormProps {
-  goNext: (props: GoNextProps) => void;
-  goBack: () => void;
   counterView: number;
   direction: number;
+  goNext: (props: GoNextProps) => void;
+  goBack: () => void;
+  isPeriodic: boolean;
 }

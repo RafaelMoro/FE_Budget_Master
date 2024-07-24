@@ -27,7 +27,7 @@ const initialValues: SecondPartCreateBudgetValues = {
 };
 
 const SecondPartBudgetForm = ({
-  direction, counterView, goBack, goNext,
+  direction, counterView, isPeriodic, goBack, goNext,
 }: SecondPartBudgetFormProps) => {
   // The validate function receives automatically the value of the field
   const validateEndDate = (endDate: Dayjs) => {
@@ -59,13 +59,15 @@ const SecondPartBudgetForm = ({
               variant="standard"
               label="Description (Optional)"
             />
-            <SelectInput
-              labelId="select-period-budget"
-              dataTestId="select-period-budget"
-              labelName="Periodicity of the budget"
-              fieldName="period"
-              stringOptions={PERIOD_BUDGET_OPTIONS}
-            />
+            { (isPeriodic) && (
+              <SelectInput
+                labelId="select-period-budget"
+                dataTestId="select-period-budget"
+                labelName="Periodicity of the budget"
+                fieldName="period"
+                stringOptions={PERIOD_BUDGET_OPTIONS}
+              />
+            ) }
             <Field
               component={DatePickerValue}
               setFieldValueCb={setFieldValue}

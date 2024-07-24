@@ -23,7 +23,9 @@ const initialValues: FirstPartCreateBudgetValues = {
   currentAmount: '',
 };
 
-const FirstPartBudgetForm = ({ goNext, counterView, direction }: FirstPartBudgetFormProps) => {
+const FirstPartBudgetForm = ({
+  counterView, direction, goNext, toggleIsPeriodic,
+}: FirstPartBudgetFormProps) => {
   const { updateAmount, initialAmount } = useCurrencyField();
   const currentAmount = useRef('');
   const updateCurrentAmount = (amount: string) => {
@@ -54,6 +56,7 @@ const FirstPartBudgetForm = ({ goNext, counterView, direction }: FirstPartBudget
               dataTestId="select-type-budget"
               labelName="Type of budget"
               fieldName="typeBudget"
+              onClickCb={toggleIsPeriodic}
               stringOptions={TYPE_BUDGET_OPTIONS}
             />
             <CurrencyField

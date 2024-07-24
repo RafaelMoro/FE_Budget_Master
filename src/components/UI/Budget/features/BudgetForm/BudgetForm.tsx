@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import {
   CreateBudgetValues, FirstPartCreateBudgetValues, GoNextProps, SecondPartCreateBudgetValues,
@@ -33,6 +33,8 @@ const BudgetForm = () => {
     // resetCounterView,
   } = useAnimateBox();
   const formData = useRef<CreateBudgetValues>(initialValues);
+  const [isPeriodic, setIsPeriodic] = useState(false);
+  const togglePeriodic = () => setIsPeriodic((prevState) => !prevState);
 
   const handleSubmit = async (values: CreateBudgetValues) => {
     const newValues = { ...values, nextResetDate: values.endDate };
@@ -55,8 +57,9 @@ const BudgetForm = () => {
 
   return (
     <>
-      <FirstPartBudgetForm counterView={counterView} direction={direction} goNext={goNext} />
+      <FirstPartBudgetForm counterView={counterView} direction={direction} goNext={goNext} toggleIsPeriodic={togglePeriodic} />
       <SecondPartBudgetForm
+        isPeriodic={isPeriodic}
         counterView={counterView}
         direction={direction}
         goBack={goPreviousView}

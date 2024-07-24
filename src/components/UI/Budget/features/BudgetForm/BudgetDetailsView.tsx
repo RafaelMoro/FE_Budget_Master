@@ -2,19 +2,18 @@ import { Field, Formik } from 'formik';
 import { useRef } from 'react';
 
 import { BudgetSchema } from '../../../../../validationsSchemas/budget.schema';
-
-import { AnimateBox } from '../../../../../animations';
-import { FormContainer } from '../../Budget.styled';
-import {
-  AnchorButton, CancelButton, InputForm, PrimaryButton,
-} from '../../../../../styles';
-import { CurrencyField } from '../../../../Other';
-import { useCurrencyField } from '../../../../Other/CurrencyField/useCurrencyField';
-import { SelectInput } from '../../../SelectInput';
-import { FormActionButtons } from '../../../../../styles/LoginModule.styled';
 import { BUDGETS_ROUTE } from '../../../../../pages/RoutesConstants';
 import { BudgetDetailsViewProps, BudgetDetailsViewValues } from '../../Budget.interface';
 import { TYPE_BUDGET_OPTIONS } from '../../Budget.constants';
+
+import { AnimateBox } from '../../../../../animations';
+import { CurrencyField } from '../../../../Other';
+import { useCurrencyField } from '../../../../Other/CurrencyField/useCurrencyField';
+import { SelectInput } from '../../../SelectInput';
+import { FormContainer } from '../../Budget.styled';
+import {
+  AnchorButton, CancelButton, FlexContainer, InputForm, PrimaryButton,
+} from '../../../../../styles';
 
 const BudgetDetailsView = ({
   data, counterView, direction, goNext, toggleIsPeriodic,
@@ -76,12 +75,12 @@ const BudgetDetailsView = ({
               fieldName="currentAmount"
               labelName="Current amount"
             />
-            <FormActionButtons>
+            <FlexContainer justifyContent="space-between">
               <AnchorButton to={BUDGETS_ROUTE}>
                 <CancelButton variant="contained" size="medium">Cancel</CancelButton>
               </AnchorButton>
               <PrimaryButton variant="contained" onClick={submitForm} size="medium">Next</PrimaryButton>
-            </FormActionButtons>
+            </FlexContainer>
           </FormContainer>
         </AnimateBox>
       )}

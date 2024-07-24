@@ -2,16 +2,17 @@ import dayjs, { Dayjs } from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import { Field, Formik } from 'formik';
-import { AnimateBox } from '../../../../../animations';
-import { FormContainer } from '../../Budget.styled';
-import { DatePickerValue } from '../../../DatePickerValue';
-import {
-  CancelButton, ErrorParagraphValidation, InputForm, PrimaryButton,
-} from '../../../../../styles';
-import { BudgetPeriodViewProps, BudgetPeriodViewValues } from '../../Budget.interface';
-import { FormActionButtons } from '../../../../../styles/LoginModule.styled';
-import { SelectInput } from '../../../SelectInput';
+
 import { PERIOD_BUDGET_OPTIONS } from '../../Budget.constants';
+import { BudgetPeriodViewProps, BudgetPeriodViewValues } from '../../Budget.interface';
+
+import { AnimateBox } from '../../../../../animations';
+import { SelectInput } from '../../../SelectInput';
+import { DatePickerValue } from '../../../DatePickerValue';
+import { FormContainer } from '../../Budget.styled';
+import {
+  CancelButton, ErrorParagraphValidation, FlexContainer, InputForm, PrimaryButton,
+} from '../../../../../styles';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -89,10 +90,10 @@ const BudgetPeriodView = ({
             { (errors.endDate) && (
             <ErrorParagraphValidation variant="subText">{errors.endDate as string}</ErrorParagraphValidation>
             ) }
-            <FormActionButtons>
+            <FlexContainer justifyContent="space-between">
               <CancelButton variant="contained" onClick={() => goBack({ data: values })} size="medium">Return</CancelButton>
               <PrimaryButton variant="contained" onClick={submitForm} size="medium">Create Budget</PrimaryButton>
-            </FormActionButtons>
+            </FlexContainer>
           </FormContainer>
         </AnimateBox>
       )}

@@ -32,6 +32,17 @@ export interface CreateBudgetValues {
   previousPeriods: string[];
 }
 
+export interface CreateBudgetValuesApiRequest extends Omit<
+CreateBudgetValues,
+'startDate' | 'endDate' | 'nextResetDate' | 'limit' | 'currentAmount'
+> {
+  startDate: Date;
+  endDate: Date;
+  nextResetDate: Date;
+  limit: number;
+  currentAmount: number;
+}
+
 export interface BudgetDetailsViewValues {
   name: string;
   typeBudget: TypeBudget;

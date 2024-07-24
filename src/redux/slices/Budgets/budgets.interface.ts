@@ -1,6 +1,6 @@
-import { CreateBudgetValues } from '../../../components/UI/Budget/Budget.interface';
+import { CreateBudgetValuesApiRequest } from '../../../components/UI/Budget/Budget.interface';
 
 export interface CreateBudgetMutationProps {
-  values: CreateBudgetValues;
+  values: CreateBudgetValuesApiRequest;
   bearerToken: string;
 }

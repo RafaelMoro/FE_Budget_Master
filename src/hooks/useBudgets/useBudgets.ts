@@ -5,13 +5,16 @@ import { BUDGETS_ROUTE } from '../../pages/RoutesConstants';
 import { useNotification } from '../useNotification';
 import { ShowErrorNotificationBudgetProps } from './useBudgets.interface';
 import { useCreateBudgetMutation } from '../../redux/slices/Budgets/budgets.api';
-import { CreateBudgetValues } from '../../components/UI/Budget/Budget.interface';
+import { CreateBudgetValuesApiRequest } from '../../components/UI/Budget/Budget.interface';
 import { useAppSelector } from '../../redux/hooks';
 
 const useBudgets = () => {
   const navigate = useNavigate();
   const { updateGlobalNotification } = useNotification({});
-  const [createBudgetMutation] = useCreateBudgetMutation();
+  const [
+    createBudgetMutation,
+    { isLoading: isLoadingCreateBudget, isError: isErrorCreateBudget },
+  ] = useCreateBudgetMutation();
 
   const userReduxState = useAppSelector((state) => state.user);
   const bearerToken = userReduxState.userInfo?.bearerToken as string;
@@ -38,7 +41,7 @@ const useBudgets = () => {
     }
   };
 
-  const createBudget = async ({ values }: { values: CreateBudgetValues }) => {
+  const createBudget = async ({ values }: { values: CreateBudgetValuesApiRequest }) => {
     try {
       await createBudgetMutation({ values, bearerToken });
     } catch (err) {
@@ -53,6 +56,8 @@ const useBudgets = () => {
 
   return {
     createBudget,
+    isLoadingCreateBudget,
+    isErrorCreateBudget,
   };
 };
 

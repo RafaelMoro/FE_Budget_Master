@@ -39,7 +39,7 @@ export interface BudgetDetailsViewValues {
   currentAmount: string;
 }
 
-export interface SecondPartCreateBudgetValues {
+export interface BudgetPeriodViewValues {
   description: string;
   startDate: Dayjs;
   endDate: Dayjs;
@@ -50,7 +50,7 @@ export interface SecondPartCreateBudgetValues {
 }
 
 export interface GoNextProps {
-  data: BudgetDetailsViewValues | SecondPartCreateBudgetValues;
+  data: BudgetDetailsViewValues | BudgetPeriodViewValues;
   skipUpdateData: boolean;
   shouldSubmitForm: boolean;
 }
@@ -63,7 +63,7 @@ export interface BudgetDetailsViewProps {
   toggleIsPeriodic: () => void;
 }
 
-export interface SecondPartBudgetFormProps {
+export interface BudgetPeriodViewProps {
   counterView: number;
   direction: number;
   goNext: (props: GoNextProps) => void;

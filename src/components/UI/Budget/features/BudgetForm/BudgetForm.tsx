@@ -4,11 +4,11 @@ import timezone from 'dayjs/plugin/timezone';
 import { useRef, useState } from 'react';
 
 import {
-  CreateBudgetValues, BudgetDetailsViewValues, GoNextProps, SecondPartCreateBudgetValues,
+  CreateBudgetValues, BudgetDetailsViewValues, GoNextProps, BudgetPeriodViewValues,
 } from '../../Budget.interface';
 import { useAnimateBox } from '../../../../../hooks';
 import { BudgetDetailsView } from './BudgetDetailsView';
-import { SecondPartBudgetForm } from './SecondPartBudgetForm';
+import { BudgetPeriodView } from './BudgetPeriodView';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -44,7 +44,7 @@ const BudgetForm = () => {
     // Transform limit and amount into number
   };
 
-  const updateData = (newInfo: BudgetDetailsViewValues | SecondPartCreateBudgetValues) => {
+  const updateData = (newInfo: BudgetDetailsViewValues | BudgetPeriodViewValues) => {
     const { current } = formData;
     formData.current = { ...current, ...newInfo };
   };
@@ -64,7 +64,7 @@ const BudgetForm = () => {
         goNext={goNext}
         toggleIsPeriodic={togglePeriodic}
       />
-      <SecondPartBudgetForm
+      <BudgetPeriodView
         isPeriodic={isPeriodic}
         counterView={counterView}
         direction={direction}

@@ -8,7 +8,7 @@ import { DatePickerValue } from '../../../DatePickerValue';
 import {
   CancelButton, ErrorParagraphValidation, InputForm, PrimaryButton,
 } from '../../../../../styles';
-import { SecondPartBudgetFormProps, SecondPartCreateBudgetValues } from '../../Budget.interface';
+import { BudgetPeriodViewProps, BudgetPeriodViewValues } from '../../Budget.interface';
 import { FormActionButtons } from '../../../../../styles/LoginModule.styled';
 import { SelectInput } from '../../../SelectInput';
 import { PERIOD_BUDGET_OPTIONS } from '../../Budget.constants';
@@ -16,7 +16,7 @@ import { PERIOD_BUDGET_OPTIONS } from '../../Budget.constants';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-const initialValues: SecondPartCreateBudgetValues = {
+const initialValues: BudgetPeriodViewValues = {
   description: '',
   startDate: dayjs().tz('America/Mexico_City'),
   endDate: dayjs().tz('America/Mexico_City'),
@@ -26,9 +26,9 @@ const initialValues: SecondPartCreateBudgetValues = {
   previousPeriods: [],
 };
 
-const SecondPartBudgetForm = ({
+const BudgetPeriodView = ({
   direction, counterView, isPeriodic, goBack, goNext,
-}: SecondPartBudgetFormProps) => {
+}: BudgetPeriodViewProps) => {
   // The validate function receives automatically the value of the field
   const validateEndDate = (endDate: Dayjs) => {
     let error;
@@ -95,4 +95,4 @@ const SecondPartBudgetForm = ({
   );
 };
 
-export { SecondPartBudgetForm };
+export { BudgetPeriodView };

@@ -21,7 +21,7 @@ import {
 } from '../../../styles/LoginModule.styled';
 import { saveInfoToLocalStorage } from '../../../utils';
 import { useLogin } from '../../../hooks';
-import { LoadingFormAnimated } from '../../../components/templates/LoadingFormAnimated/LoadingFormAnimated';
+import { LoadingFormAnimated } from '../../../components/templates';
 
 const initialValuesCreateAccountForm = {
   email: '',

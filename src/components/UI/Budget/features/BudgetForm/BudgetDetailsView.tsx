@@ -73,7 +73,7 @@ const BudgetDetailsView = ({
               amount={currentAmountRef.current}
               updateAmount={updateCurrentAmount}
               fieldName="currentAmount"
-              labelName="Current amount"
+              labelName="Amount Spent"
             />
             <FlexContainer justifyContent="space-between">
               <AnchorButton to={BUDGETS_ROUTE}>

@@ -14,6 +14,7 @@ import {
   CreateExpenseValues, CreateIncomeValues,
 } from '../../components/UI/Records/interface';
 import {
+  Actions,
   Category, ExpensePaid, ExpensePaidRedux, GeneralError, RecordRedux,
   TypeOfRecord,
 } from '../../globalInterface';
@@ -21,7 +22,6 @@ import {
   UseRecordsProps, UpdateAmountAccountProps, ShowErrorNotificationProps,
   UpdateAmountAccountOnEditProps, EditIncomeProps, EditExpenseProps,
   UpdateTotalCurrencyProps,
-  Actions,
   CreateTransferProps,
   GetNewRecordsClassifiedByAgeProps,
   GetRecordAgeStatusResponse,

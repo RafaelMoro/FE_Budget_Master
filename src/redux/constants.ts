@@ -11,7 +11,7 @@ export const BUDGETS_NOT_FOUND_MESSAGE = 'Budgets not found';
 
 /** Backend Endpoints */
 export const GET_CATEGORIES = '/categories';
-export const GET_BUDGETS = '/budgets';
+export const BUDGETS_ROUTE_BE = '/budgets';
 
 // Records
 export const GET_EXPENSES_AND_INCOMES_BY_MONTH_ROUTE = 'records/expenses-and-incomes';

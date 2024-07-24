@@ -12,11 +12,6 @@ export interface UseRecordsProps {
   closeDrawer?: () => void;
 }
 
-export interface Actions {
-  create: string;
-  edit: string;
-}
-
 export interface UpdateAmountAccountProps {
   amount: number;
   isExpense: boolean;

@@ -10,6 +10,11 @@ export interface UserInfo {
   sub: string;
 }
 
+export interface Actions {
+  create: string;
+  edit: string;
+}
+
 export interface User {
   user: UserInfo;
   bearerToken: string;

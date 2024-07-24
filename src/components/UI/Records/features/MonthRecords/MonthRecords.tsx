@@ -6,8 +6,9 @@ import { MonthAccordeon } from '../MonthAccordeon';
 import { ShowRecords } from '../ShowRecords';
 import { Record } from '../../Record';
 import { FlexContainer } from '../../../../../styles';
-import { RecordExpense, RecordIncome, RecordMapWrapper } from '../../Records.styled';
+import { RecordExpense, RecordIncome } from '../../Records.styled';
 import { ShowTotalContianer } from '../Features.styled';
+import { AnimateAccordion } from './AnimateAccordion';
 
 interface MonthRecordsProps {
   color: string;
@@ -29,8 +30,6 @@ interface MonthRecordsProps {
   onErrorCb: () => ReactElement;
   onLoadingCb: () => ReactElement;
 }
-const base = 4;
-const t = (d: number) => d * base;
 
 const MonthRecords = ({
   color, openedAccordeon, titleMonthAccordeon, accountId, isGuestUser, isOlderRecords, showMessage,
@@ -70,25 +69,8 @@ const MonthRecords = ({
         onLoadingRecords={onLoadingCb}
         renderRecords={
           (record: AnyRecord, index: number) => (
-            <RecordMapWrapper
+            <AnimateAccordion
               key={record._id}
-              initial={{ height: 0, opacity: 0 }}
-              animate={{
-                height: 'auto',
-                opacity: 1,
-                transition: {
-                  type: 'spring',
-                  bounce: 0.3,
-                  opacity: { delay: t(0.025) },
-                },
-              }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{
-                duration: t(0.15),
-                type: 'spring',
-                bounce: 0,
-                opacity: { duration: t(0.03) },
-              }}
             >
               { (index === 0) && (<Divider />) }
               <Record
@@ -96,7 +78,7 @@ const MonthRecords = ({
                 record={record}
               />
               <Divider />
-            </RecordMapWrapper>
+            </AnimateAccordion>
           )
         }
       />

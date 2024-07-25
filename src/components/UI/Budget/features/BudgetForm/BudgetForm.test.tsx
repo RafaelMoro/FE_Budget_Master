@@ -54,4 +54,19 @@ describe('Budget form', () => {
 
     expect(await screen.findByText(/budget name must be at least 3 characters/i)).toBeInTheDocument();
   });
+
+  test('Given a user entering a 21 character budget name, should show error validation', async () => {
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <BudgetForm />
+      </Router>,
+    );
+    const nextButton = screen.getByRole('button', { name: /next/i });
+    const budgetNameInput = screen.getByRole('textbox', { name: /name/i });
+
+    userEvent.type(budgetNameInput, 'An extremely very long budget name');
+    userEvent.click(nextButton);
+
+    expect(await screen.findByText(/budget name must be at most 20 characters/i)).toBeInTheDocument();
+  });
 });

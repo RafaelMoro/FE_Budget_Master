@@ -16,7 +16,7 @@ const useBudgets = () => {
     createBudgetMutation,
     { isLoading: isLoadingCreateBudget, isError: isErrorCreateBudget },
   ] = useCreateBudgetMutation();
-  const [deleteBudgetMutation] = useDeleteBudgetMutation();
+  const [deleteBudgetMutation, { isLoading: isLoadingDeleteBudget }] = useDeleteBudgetMutation();
 
   const userReduxState = useAppSelector((state) => state.user);
   const bearerToken = userReduxState.userInfo?.bearerToken as string;
@@ -70,6 +70,7 @@ const useBudgets = () => {
     createBudget,
     deleteBudget,
     isLoadingCreateBudget,
+    isLoadingDeleteBudget,
     isErrorCreateBudget,
   };
 };

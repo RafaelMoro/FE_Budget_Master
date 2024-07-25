@@ -3,6 +3,7 @@ import { Container, Title, WarnText } from './DeleteBudgetModal.styled';
 import { BudgetUI } from '../../../../../globalInterface';
 import { CancelButton, SecondaryButton } from '../../../../../styles';
 import { LoadingSpinner } from '../../../LoadingSpinner';
+import { useBudgets } from '../../../../../hooks/useBudgets/useBudgets';
 
 interface DeleteBudgetModalProps {
   open: boolean;
@@ -12,8 +13,12 @@ interface DeleteBudgetModalProps {
 
 const DeleteBudgetModal = ({ open, onClose, budget }: DeleteBudgetModalProps) => {
   const { name } = budget;
-  // Change this for the loading flag of the mutation
-  const loading = true;
+  const { deleteBudget, isLoadingDeleteBudget: isLoading } = useBudgets();
+
+  const handleDelete = () => {
+    deleteBudget({ values: { budgetId: budget._id } });
+  };
+
   return (
     <Dialog open={open} onClose={onClose}>
       <Container>
@@ -27,8 +32,8 @@ const DeleteBudgetModal = ({ open, onClose, budget }: DeleteBudgetModalProps) =>
         </Title>
         <WarnText>You cannot reverse this action.</WarnText>
         <SecondaryButton onClick={onClose}>Cancel</SecondaryButton>
-        <CancelButton>
-          { (loading) ? (<LoadingSpinner />) : 'Delete' }
+        <CancelButton onClick={handleDelete}>
+          { (isLoading) ? (<LoadingSpinner />) : 'Delete' }
         </CancelButton>
       </Container>
     </Dialog>

@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { BUDGETS_ROUTE } from '../../RoutesConstants';
 import { AppIcon } from '../../../components/UI/Icons';
 import { BudgetForm } from '../../../components/UI/Budget/features';
-import { CreateBudgeTitle, GoBackIconButton, Main } from './CreateBudget.styled';
+import { CreateBudgeTitle, GoBackIconButton, Main } from './BudgetEditorPage.styled';
 
-const CreateBudget = () => {
+const BudgetEditorPage = () => {
   const navigate = useNavigate();
   const handleGoBack = () => navigate(BUDGETS_ROUTE);
 
@@ -20,4 +20,4 @@ const CreateBudget = () => {
   );
 };
 
-export { CreateBudget };
+export { BudgetEditorPage };

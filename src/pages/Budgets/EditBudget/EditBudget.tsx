@@ -4,7 +4,7 @@ import { BUDGETS_ROUTE } from '../../RoutesConstants';
 import { BudgetForm } from '../../../components/UI/Budget/features';
 import { AppIcon } from '../../../components/UI/Icons';
 import { Main } from '../BudgetsPage.styled';
-import { CreateBudgeTitle, GoBackIconButton } from '../CreateBudget/CreateBudget.styled';
+import { CreateBudgeTitle, GoBackIconButton } from '../BudgetEditorPage/BudgetEditorPage.styled';
 
 const EditBudget = () => {
   const navigate = useNavigate();

@@ -1,10 +1,10 @@
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { screen } from '@testing-library/react';
-
 import userEvent from '@testing-library/user-event';
+
 import { renderWithProviders } from '../../../tests/CustomWrapperRedux';
-import { CreateBudget } from './CreateBudget';
+import { BudgetEditorPage } from './BudgetEditorPage';
 
 /**
  * The tests that expect successful or unsuccessful views will be taken care of in E2E tests.
@@ -18,7 +18,7 @@ describe('Create budget page', () => {
   test('Should show the create budget page', () => {
     renderWithProviders(
       <Router location={history.location} navigator={history}>
-        <CreateBudget />
+        <BudgetEditorPage />
       </Router>,
     );
 
@@ -34,7 +34,7 @@ describe('Create budget page', () => {
   test('Giver a user filling the forms, then the loading screen is shown, and the success screen is shown', async () => {
     renderWithProviders(
       <Router location={history.location} navigator={history}>
-        <CreateBudget />
+        <BudgetEditorPage />
       </Router>,
     );
 

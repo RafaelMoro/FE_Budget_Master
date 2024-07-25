@@ -4,6 +4,7 @@ export const REGISTER_ROUTE = '/register';
 export const DASHBOARD_ROUTE = '/dashboard';
 export const BUDGETS_ROUTE = '/budgets';
 export const CREATE_BUDGET_ROUTE = '/create-budget';
+export const EDIT_CREATE_BUDGET_ROUTE = '/edit-budget';
 export const LANDING_ROUTE = '/';
 export const CREATE_RECORD_ROUTE = '/create-record';
 export const EDIT_RECORD_ROUTE = '/edit-record';

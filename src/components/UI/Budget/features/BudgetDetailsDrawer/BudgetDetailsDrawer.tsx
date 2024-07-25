@@ -1,4 +1,6 @@
 import { List, Typography, IconButton } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
 import { AppIcon } from '../../../Icons';
 import { BudgetUI } from '../../../../../globalInterface';
 import { getRemainingDays } from '../../../../../utils';
@@ -8,6 +10,7 @@ import {
   BudgetDateDrawer,
   DaysLeftText, DrawerCloseIconButton, DrawerContainer, IconsContainer, Title,
 } from './BudgetDetailsDrawer.styled';
+import { EDIT_CREATE_BUDGET_ROUTE } from '../../../../../pages/RoutesConstants';
 
 interface BudgetDetailsDrawerProps {
   budget: BudgetUI;
@@ -20,7 +23,11 @@ interface BudgetDetailsDrawerProps {
 const BudgetDetailsDrawer = ({
   toggleDrawer, budget, dateText, progress, toggleDeleteModal,
 }: BudgetDetailsDrawerProps) => {
+  const navigate = useNavigate();
   const restingDays = getRemainingDays(budget.endDate);
+  const handleEditBudget = () => {
+    navigate(EDIT_CREATE_BUDGET_ROUTE, { state: { budget } });
+  };
 
   return (
     <DrawerContainer>
@@ -30,7 +37,7 @@ const BudgetDetailsDrawer = ({
       <BudgetDateDrawer align="center" variant="body2">{dateText}</BudgetDateDrawer>
       <Title variant="h4">{budget.name}</Title>
       <IconsContainer>
-        <IconButton>
+        <IconButton onClick={handleEditBudget}>
           <AppIcon icon="Edit" />
         </IconButton>
         <IconButton onClick={toggleDeleteModal}>

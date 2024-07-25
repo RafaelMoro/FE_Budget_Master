@@ -127,6 +127,14 @@ export interface BudgetUI extends Budget {
   endDateFormatted: string;
 }
 
+export interface BudgetHistory {
+  _id: string;
+  __v: number;
+  budget: string;
+  sub: string;
+  records: string[];
+}
+
 export type TypeOfRecord = 'expense' | 'income' | 'transfer';
 
 export interface TransferRecord {

@@ -39,4 +39,19 @@ describe('Budget form', () => {
     expect(screen.getByText(/budget limit is required/i)).toBeInTheDocument();
     expect(screen.getByText(/amount spent is required/i)).toBeInTheDocument();
   });
+
+  test('Given a user entering a 2 character budget name, should show error validation', async () => {
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <BudgetForm />
+      </Router>,
+    );
+    const nextButton = screen.getByRole('button', { name: /next/i });
+    const budgetNameInput = screen.getByRole('textbox', { name: /name/i });
+
+    userEvent.type(budgetNameInput, 'Li');
+    userEvent.click(nextButton);
+
+    expect(await screen.findByText(/budget name must be at least 3 characters/i)).toBeInTheDocument();
+  });
 });

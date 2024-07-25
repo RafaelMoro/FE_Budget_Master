@@ -121,6 +121,7 @@ describe('Budget form', () => {
     // Await on the second form to be shown.
     expect(await screen.findByRole('textbox', { name: /description \(optional\)/i })).toBeInTheDocument();
     const changeDateButtons = screen.getAllByRole('button', { name: /choose date/i });
+    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
     const [changeStartDateButton, changeEndDateButton] = changeDateButtons;
 
     userEvent.click(changeEndDateButton);

@@ -6,6 +6,9 @@ import { renderWithProviders } from '../../../tests/CustomWrapperRedux';
 import { CreateBudget } from './CreateBudget';
 
 describe('Create budget page', () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
   const history = createMemoryHistory();
   test('Should show the create budget page', () => {
     renderWithProviders(

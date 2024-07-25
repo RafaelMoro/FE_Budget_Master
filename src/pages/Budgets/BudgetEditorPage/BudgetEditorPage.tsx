@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { BUDGETS_ROUTE } from '../../RoutesConstants';
 import { AppIcon } from '../../../components/UI/Icons';
@@ -7,6 +7,8 @@ import { CreateBudgeTitle, GoBackIconButton, Main } from './BudgetEditorPage.sty
 
 const BudgetEditorPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location.state);
   const handleGoBack = () => navigate(BUDGETS_ROUTE);
 
   return (

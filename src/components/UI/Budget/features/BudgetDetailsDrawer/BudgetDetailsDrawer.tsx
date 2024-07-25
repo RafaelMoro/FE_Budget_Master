@@ -10,7 +10,7 @@ import {
   BudgetDateDrawer,
   DaysLeftText, DrawerCloseIconButton, DrawerContainer, IconsContainer, Title,
 } from './BudgetDetailsDrawer.styled';
-import { EDIT_CREATE_BUDGET_ROUTE } from '../../../../../pages/RoutesConstants';
+import { BUDGET_EDITOR_PAGE_ROUTE } from '../../../../../pages/RoutesConstants';
 
 interface BudgetDetailsDrawerProps {
   budget: BudgetUI;
@@ -26,7 +26,7 @@ const BudgetDetailsDrawer = ({
   const navigate = useNavigate();
   const restingDays = getRemainingDays(budget.endDate);
   const handleEditBudget = () => {
-    navigate(EDIT_CREATE_BUDGET_ROUTE, { state: { budget } });
+    navigate(BUDGET_EDITOR_PAGE_ROUTE, { state: { budget } });
   };
 
   return (

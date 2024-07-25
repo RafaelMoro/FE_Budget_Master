@@ -10,7 +10,7 @@ import { ERROR_MESSAGE_GENERAL } from '../../../../../constants';
 import { BudgetSkeleton } from '../BudgetSkeleton';
 import { BudgetsTitle, CreateBudgetButton, ErrorContainer } from '../../Budget.styled';
 import { NotElementFound } from '../../../../templates/NotFoundElement';
-import { CREATE_BUDGET_ROUTE } from '../../../../../pages/RoutesConstants';
+import { BUDGET_EDITOR_PAGE_ROUTE } from '../../../../../pages/RoutesConstants';
 
 const BudgetList = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const BudgetList = () => {
   const isMobile = windowSize === 'Mobile';
   const { data, isError, isLoading } = useFetchBudgetsQuery({ bearerToken }, { skip: !bearerToken });
 
-  const navigateCreateBudget = () => navigate(CREATE_BUDGET_ROUTE);
+  const navigateCreateBudget = () => navigate(BUDGET_EDITOR_PAGE_ROUTE);
 
   if (isError) {
     return (

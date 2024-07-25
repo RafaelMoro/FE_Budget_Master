@@ -100,23 +100,6 @@ export const successfulResponseFetchBudgets = {
   version: '2.0.0',
 };
 
-export const successfulResponseCreateBudget = {
-  version: '2.0.0',
-  success: true,
-  message: null,
-  data: {
-    budget: getMockBudget(),
-    budgetHistory: {
-      _id: '1',
-      __v: 0,
-      budget: '1',
-      sub: '1',
-      records: [],
-    },
-  },
-  error: null,
-};
-
 export const unsuccessfulResponseFetchBudgets = {
   data: null,
   error: {

@@ -9,14 +9,14 @@ import { getMockBudget, successfulResponseDeleteBudget } from '../../Budget.mock
 import { renderWithProviders } from '../../../../../tests/CustomWrapperRedux';
 
 describe('DeleteBudgetModal', () => {
+  const onCloseFn = jest.fn();
+  const budget = getMockBudget();
   const history = createMemoryHistory();
   beforeEach(() => {
     fetchMock.resetMocks();
     jest.clearAllMocks();
     jest.spyOn(console, 'error').mockImplementation(() => {});
 
-    const onCloseFn = jest.fn();
-    const budget = getMockBudget();
     renderWithProviders(
       <Router location={history.location} navigator={history}>
         <DeleteBudgetModal
@@ -43,5 +43,12 @@ describe('DeleteBudgetModal', () => {
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalled();
     });
+  });
+
+  test('Given a user clicks on the cancel button, the modal should be closed', async () => {
+    const cancelButton = screen.getByRole('button', { name: /cancel/i });
+    userEvent.click(cancelButton);
+
+    expect(onCloseFn).toHaveBeenCalled();
   });
 });

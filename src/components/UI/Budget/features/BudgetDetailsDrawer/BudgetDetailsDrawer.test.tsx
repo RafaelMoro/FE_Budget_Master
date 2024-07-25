@@ -1,8 +1,11 @@
 import { render, screen } from '@testing-library/react';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 import { BudgetDetailsDrawer } from './BudgetDetailsDrawer';
 import { getMockBudget } from '../../Budget.mocks';
 
 describe('BudgetDetailsDrawer', () => {
+  const history = createMemoryHistory();
   test('Show Budget Details Drawer with a one time budget', () => {
     const toggleDrawer = jest.fn();
     const toggleDeleteModal = jest.fn();
@@ -11,13 +14,15 @@ describe('BudgetDetailsDrawer', () => {
     const progress = 20;
 
     render(
-      <BudgetDetailsDrawer
-        toggleDeleteModal={toggleDeleteModal}
-        dateText={dateText}
-        progress={progress}
-        budget={mockBudget}
-        toggleDrawer={toggleDrawer}
-      />,
+      <Router location={history.location} navigator={history}>
+        <BudgetDetailsDrawer
+          toggleDeleteModal={toggleDeleteModal}
+          dateText={dateText}
+          progress={progress}
+          budget={mockBudget}
+          toggleDrawer={toggleDrawer}
+        />
+      </Router>,
     );
 
     expect(screen.getByText(dateText)).toBeInTheDocument();
@@ -40,13 +45,15 @@ describe('BudgetDetailsDrawer', () => {
     const mockBudget = getMockBudget({ typeBudget: 'periodic', previousPeriods });
 
     render(
-      <BudgetDetailsDrawer
-        toggleDeleteModal={toggleDeleteModal}
-        dateText={dateText}
-        progress={progress}
-        budget={mockBudget}
-        toggleDrawer={toggleDrawer}
-      />,
+      <Router location={history.location} navigator={history}>
+        <BudgetDetailsDrawer
+          toggleDeleteModal={toggleDeleteModal}
+          dateText={dateText}
+          progress={progress}
+          budget={mockBudget}
+          toggleDrawer={toggleDrawer}
+        />
+      </Router>,
     );
 
     expect(screen.getByText('periodic')).toBeInTheDocument();

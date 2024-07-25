@@ -19,11 +19,12 @@ import { BudgetPeriodView } from './BudgetPeriodView';
 import {
   ErrorResultFormAnimated, LoadingFormAnimated, ResultFormAnimated, SuccessResultFormAnimated,
 } from '../../../../templates';
+import { BudgetUI } from '../../../../../globalInterface';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-const initialValues: CreateBudgetValues = {
+const defaultInitialValues: CreateBudgetValues = {
   name: '',
   typeBudget: 'one-time',
   description: '',
@@ -37,12 +38,12 @@ const initialValues: CreateBudgetValues = {
   previousPeriods: [],
 };
 
-const BudgetForm = () => {
+const BudgetForm = ({ budget }: { budget?: BudgetUI }) => {
   const {
     direction, counterView, goPreviousView, goNextView, getFinalResult, resetCounterView,
   } = useAnimateBox();
   const { isLoadingCreateBudget, isErrorCreateBudget, createBudget } = useBudgets();
-  const formData = useRef<CreateBudgetValues>(initialValues);
+  const formData = useRef<CreateBudgetValues>(defaultInitialValues);
   const [isPeriodic, setIsPeriodic] = useState(false);
   const togglePeriodic = () => setIsPeriodic((prevState) => !prevState);
 

@@ -8,7 +8,7 @@ import { CreateBudgeTitle, GoBackIconButton, Main } from './BudgetEditorPage.sty
 const BudgetEditorPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.state);
+  const budgetToModify = location.state?.budget;
   const handleGoBack = () => navigate(BUDGETS_ROUTE);
 
   return (
@@ -17,7 +17,7 @@ const BudgetEditorPage = () => {
         <AppIcon icon="Close" />
       </GoBackIconButton>
       <CreateBudgeTitle align="center" variant="h1">Create budget: </CreateBudgeTitle>
-      <BudgetForm />
+      <BudgetForm budget={budgetToModify} />
     </Main>
   );
 };

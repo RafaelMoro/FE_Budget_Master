@@ -69,4 +69,27 @@ describe('Budget form', () => {
 
     expect(await screen.findByText(/budget name must be at most 20 characters/i)).toBeInTheDocument();
   });
+
+  test('Given a user entering the first form correctly, then clicking next, should show the second form', async () => {
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <BudgetForm />
+      </Router>,
+    );
+    const nextButton = screen.getByRole('button', { name: /next/i });
+    const budgetNameInput = screen.getByRole('textbox', { name: /name/i });
+    const budgetLimitInput = screen.getByRole('textbox', { name: /budget limit/i });
+    const amountSpentInput = screen.getByRole('textbox', { name: /amount spent/i });
+
+    userEvent.type(budgetNameInput, 'Budget name');
+    userEvent.type(budgetLimitInput, '1000');
+    userEvent.type(amountSpentInput, '500');
+    userEvent.click(nextButton);
+
+    expect(await screen.findByRole('textbox', { name: /description \(optional\)/i })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /start date/i })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /end date/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /return/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /create budget/i })).toBeInTheDocument();
+  });
 });

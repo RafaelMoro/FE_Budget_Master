@@ -1,9 +1,10 @@
 import { Dialog } from '@mui/material';
 import { Container, Title, WarnText } from './DeleteBudgetModal.styled';
 import { BudgetUI } from '../../../../../globalInterface';
-import { CancelButton, SecondaryButton } from '../../../../../styles';
+import { AppColors, CancelButton, SecondaryButton } from '../../../../../styles';
 import { LoadingSpinner } from '../../../LoadingSpinner';
 import { useBudgets } from '../../../../../hooks/useBudgets/useBudgets';
+import { AppIcon } from '../../../Icons';
 
 interface DeleteBudgetModalProps {
   open: boolean;
@@ -13,7 +14,7 @@ interface DeleteBudgetModalProps {
 
 const DeleteBudgetModal = ({ open, onClose, budget }: DeleteBudgetModalProps) => {
   const { name } = budget;
-  const { deleteBudget, isLoadingDeleteBudget: isLoading } = useBudgets();
+  const { deleteBudget, isLoadingDeleteBudget: isLoading, isSuccessDeleteBudget: isSuccess } = useBudgets();
 
   const handleDelete = () => {
     deleteBudget({ values: { budgetId: budget._id } });
@@ -33,7 +34,9 @@ const DeleteBudgetModal = ({ open, onClose, budget }: DeleteBudgetModalProps) =>
         <WarnText>You cannot reverse this action.</WarnText>
         <SecondaryButton onClick={onClose}>Cancel</SecondaryButton>
         <CancelButton onClick={handleDelete}>
-          { (isLoading) ? (<LoadingSpinner />) : 'Delete' }
+          { (!isLoading && !isSuccess) && 'Delete' }
+          { (isLoading && !isSuccess) && <LoadingSpinner /> }
+          { (!isLoading && isSuccess) && (<AppIcon icon="TickMark" fillColor={AppColors.white} />) }
         </CancelButton>
       </Container>
     </Dialog>

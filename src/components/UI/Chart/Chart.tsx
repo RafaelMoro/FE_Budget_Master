@@ -35,6 +35,7 @@ const Chart = () => {
         data: data.map((item) => item.amount),
         backgroundColor: [
           AppColors.primary,
+          AppColors.secondary,
         ],
         borderWidth: 1,
       },

@@ -4,8 +4,8 @@ import { Actions, GeneralError } from '../../globalInterface';
 import { BUDGETS_ROUTE } from '../../pages/RoutesConstants';
 import { useNotification } from '../useNotification';
 import { ShowErrorNotificationBudgetProps } from './useBudgets.interface';
-import { useCreateBudgetMutation, useDeleteBudgetMutation } from '../../redux/slices/Budgets/budgets.api';
-import { CreateBudgetValuesApiRequest, DeleteBudgetValues } from '../../components/UI/Budget/Budget.interface';
+import { useCreateBudgetMutation, useDeleteBudgetMutation, useEditBudgetMutation } from '../../redux/slices/Budgets/budgets.api';
+import { CreateBudgetValuesApiRequest, DeleteBudgetValues, EditBudgetValuesApiRequest } from '../../components/UI/Budget/Budget.interface';
 import { useAppSelector } from '../../redux/hooks';
 
 const useBudgets = () => {
@@ -16,6 +16,7 @@ const useBudgets = () => {
     createBudgetMutation,
     { isLoading: isLoadingCreateBudget, isError: isErrorCreateBudget },
   ] = useCreateBudgetMutation();
+  const [editBudgetMutation] = useEditBudgetMutation();
   const [deleteBudgetMutation, { isLoading: isLoadingDeleteBudget }] = useDeleteBudgetMutation();
 
   const userReduxState = useAppSelector((state) => state.user);
@@ -56,6 +57,19 @@ const useBudgets = () => {
     }
   };
 
+  const editBudget = async ({ values }: { values: EditBudgetValuesApiRequest }) => {
+    try {
+      await editBudgetMutation({ values, bearerToken });
+    } catch (err) {
+      const errorCatched = err as GeneralError;
+      showErrorNotification({
+        errorMessage: errorCatched?.data?.message ?? '',
+        action: 'Edit',
+        goToBudgets: true,
+      });
+    }
+  };
+
   const deleteBudget = async ({ values }: { values: DeleteBudgetValues }) => {
     try {
       await deleteBudgetMutation({ values, bearerToken });
@@ -69,6 +83,7 @@ const useBudgets = () => {
   return {
     createBudget,
     deleteBudget,
+    editBudget,
     isLoadingCreateBudget,
     isLoadingDeleteBudget,
     isErrorCreateBudget,

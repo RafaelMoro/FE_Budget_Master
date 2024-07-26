@@ -24,6 +24,7 @@ export function getTop4DaysTotalAmount(records: AnyRecord[]) {
     date: item[0],
     amount: item[1],
   }));
+  const sortedData = result.toSorted((a, b) => b.amount - a.amount);
 
-  return result;
+  return sortedData;
 }

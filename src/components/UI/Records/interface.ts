@@ -40,6 +40,11 @@ export interface CategoriesResponse extends Omit<GeneralResponse, 'data'> {
   };
 }
 
+export interface ExpenseBudget {
+  budgetId: string;
+  budgetName: string;
+}
+
 export interface SelectCategoryProps extends SelectFormikProps {
   setNewCategory: (value: string) => void;
 }

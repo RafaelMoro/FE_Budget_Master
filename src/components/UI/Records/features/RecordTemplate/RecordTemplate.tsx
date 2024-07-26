@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 
 /** Constants, atoms, interfaces, hooks */
 import { RecordTemplateProps } from './interface';
-import { CreateRecordValues } from '../../interface';
+import { CreateRecordValues, ExpenseBudget } from '../../interface';
 import { ExpensePaid, IndebtedPeople } from '../../../../../globalInterface';
 import { DASHBOARD_ROUTE } from '../../../../../pages/RoutesConstants';
 import { useRecords } from '../../../../../hooks/useRecords/useRecords';
@@ -41,6 +41,7 @@ import { scrollToTop } from '../../../../../utils/ScrollToTop';
 import { useGuestUser } from '../../../../../hooks/useGuestUser/useGuestUser';
 import { EditExpenseProps, EditIncomeProps } from '../../../../../hooks/useRecords/interface';
 import { useLazyFetchBudgetsQuery } from '../../../../../redux/slices/Budgets/budgets.api';
+import { SelectBudget } from '../SelectBudget';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -91,7 +92,10 @@ const RecordTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
   const action: string = edit ? 'Edit' : 'Create';
   const categoryToBeEdited = recordToBeEdited?.category ?? null;
   const isCredit = selectedAccount?.accountType === 'Credit';
-  const budgetsAvailable = useMemo(() => (budgets ?? []).map((budget) => ({ budgetId: budget._id, budgetName: budget.name })), [budgets]);
+  const budgetsAvailable: ExpenseBudget[] = useMemo(
+    () => (budgets ?? []).map((budget) => ({ budgetId: budget._id, budgetName: budget.name })),
+    [budgets],
+  );
   const [showExpenses, setShowExpenses] = useState<boolean>(false);
   const [expensesSelected, setExpensesSelected] = useState<ExpensePaid[]>([]);
   const [initialValues, setInitialValues] = useState<CreateRecordValues>({
@@ -347,7 +351,7 @@ const RecordTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
               </>
               ) }
               { (typeOfRecord === 'expense') && (
-                <p>select budget</p>
+                <SelectBudget budgets={budgetsAvailable} />
               )}
               <ActionButtonPanel
                 routeCancelButton={DASHBOARD_ROUTE}

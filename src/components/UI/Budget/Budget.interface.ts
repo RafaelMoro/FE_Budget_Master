@@ -43,6 +43,8 @@ CreateBudgetValues,
   currentAmount: number;
 }
 
+export type EditBudgetValuesApiRequest = Partial<CreateBudgetValuesApiRequest> & { budgetId: string };
+
 export interface DeleteBudgetValues {
   budgetId: string;
 }

@@ -1,6 +1,6 @@
 import { BudgetsResponse } from '../../../components/UI/Budget/Budget.interface';
 import { transformBudgetUI } from '../../../components/UI/Budget/Budget.util';
-import { DELETE_METHOD, POST_METHOD } from '../../../constants';
+import { DELETE_METHOD, POST_METHOD, PUT_METHOD } from '../../../constants';
 import { Budget, RequestBearerTokenProps } from '../../../globalInterface';
 import { budgetMasterApi } from '../../budgetMaster.api';
 import { BUDGETS_NOT_FOUND_MESSAGE, BUDGETS_TAG, BUDGETS_ROUTE_BE } from '../../constants';
@@ -37,6 +37,18 @@ export const budgetsApiSlice = budgetMasterApi.injectEndpoints({
       invalidatesTags: [BUDGETS_TAG],
     }),
 
+    editBudget: builder.mutation({
+      query: ({ values, bearerToken }: CreateBudgetMutationProps) => ({
+        url: BUDGETS_ROUTE_BE,
+        method: PUT_METHOD,
+        body: values,
+        headers: {
+          Authorization: bearerToken,
+        },
+      }),
+      invalidatesTags: [BUDGETS_TAG],
+    }),
+
     deleteBudget: builder.mutation({
       query: ({ values, bearerToken }: DeleteBudgetMutationProps) => ({
         url: BUDGETS_ROUTE_BE,
@@ -51,4 +63,6 @@ export const budgetsApiSlice = budgetMasterApi.injectEndpoints({
   }),
 });
 
-export const { useFetchBudgetsQuery, useCreateBudgetMutation, useDeleteBudgetMutation } = budgetsApiSlice;
+export const {
+  useFetchBudgetsQuery, useCreateBudgetMutation, useDeleteBudgetMutation, useEditBudgetMutation,
+} = budgetsApiSlice;

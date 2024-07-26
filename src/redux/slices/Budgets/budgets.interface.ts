@@ -1,8 +1,12 @@
-import { CreateBudgetValuesApiRequest, DeleteBudgetValues } from '../../../components/UI/Budget/Budget.interface';
+import { CreateBudgetValuesApiRequest, DeleteBudgetValues, EditBudgetValuesApiRequest } from '../../../components/UI/Budget/Budget.interface';
 
 export interface CreateBudgetMutationProps {
   values: CreateBudgetValuesApiRequest;
   bearerToken: string;
+}
+
+export interface EditBudgetMutationProps extends Omit<CreateBudgetMutationProps, 'values'> {
+  values: EditBudgetValuesApiRequest;
 }
 
 export interface DeleteBudgetMutationProps {

@@ -350,7 +350,7 @@ const RecordTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
                 </FlexContainer>
               </>
               ) }
-              { (typeOfRecord === 'expense') && (
+              { (typeOfRecord === 'expense' && budgetsAvailable.length > 0) && (
                 <SelectBudget budgets={budgetsAvailable} />
               )}
               <ActionButtonPanel

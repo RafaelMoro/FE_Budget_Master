@@ -90,4 +90,5 @@ export interface BudgetPeriodViewProps {
   // This function persists the data of BudgetPeriodView is the user decides to return to BudgetDetailsView
   goBack: ({ data }: GoBackBudgetPeriodViewProps) => void
   isPeriodic: boolean;
+  isEditBudget: boolean;
 }

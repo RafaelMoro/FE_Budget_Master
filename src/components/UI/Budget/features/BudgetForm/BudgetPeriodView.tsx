@@ -18,7 +18,7 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 const BudgetPeriodView = ({
-  data, direction, counterView, isPeriodic, goBack, goNext,
+  data, direction, counterView, isPeriodic, isEditBudget, goBack, goNext,
 }: BudgetPeriodViewProps) => {
   const {
     description, startDate, endDate, period, nextResetDate, isActive, previousPeriods,
@@ -32,6 +32,7 @@ const BudgetPeriodView = ({
     isActive,
     previousPeriods,
   };
+  const textButton = isEditBudget ? 'Edit Budget' : 'Create Budget';
 
   // The validate function receives automatically the value of the field
   const validateEndDate = (endDateRceived: Dayjs) => {
@@ -92,7 +93,7 @@ const BudgetPeriodView = ({
             ) }
             <FlexContainer justifyContent="space-between">
               <CancelButton variant="contained" onClick={() => goBack({ data: values })} size="medium">Return</CancelButton>
-              <PrimaryButton variant="contained" onClick={submitForm} size="medium">Create Budget</PrimaryButton>
+              <PrimaryButton variant="contained" onClick={submitForm} size="medium">{textButton}</PrimaryButton>
             </FlexContainer>
           </FormContainer>
         </AnimateBox>

@@ -9,6 +9,9 @@ const BudgetEditorPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const budgetToModify = location.state?.budget;
+  const isModify = !!budgetToModify;
+  const pageTitle = isModify ? 'Edit budget' : 'Create budget';
+
   const handleGoBack = () => navigate(BUDGETS_ROUTE);
 
   return (
@@ -16,7 +19,7 @@ const BudgetEditorPage = () => {
       <GoBackIconButton aria-label="go-back-button" onClick={handleGoBack}>
         <AppIcon icon="Close" />
       </GoBackIconButton>
-      <CreateBudgeTitle align="center" variant="h1">Create budget: </CreateBudgeTitle>
+      <CreateBudgeTitle align="center" variant="h1">{pageTitle}</CreateBudgeTitle>
       <BudgetForm budget={budgetToModify} />
     </Main>
   );

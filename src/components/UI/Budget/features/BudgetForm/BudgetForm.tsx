@@ -109,6 +109,7 @@ const BudgetForm = ({ budget }: { budget?: BudgetUI }) => {
       <BudgetPeriodView
         data={formData.current}
         isPeriodic={isPeriodic}
+        isEditBudget={isEditBudget}
         counterView={counterView}
         direction={direction}
         goBack={goBackBudgetPeriodView}

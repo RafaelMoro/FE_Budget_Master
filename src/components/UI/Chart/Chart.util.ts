@@ -1,6 +1,6 @@
 import { AnyRecord } from '../../../globalInterface';
 
-export function getTop4DaysTotalAmount(records: AnyRecord[]) {
+export function getTopDaysExpensePerDay(records: AnyRecord[]) {
   const dayAmountMap = records.reduce<Record<string, number>>((acc, record) => {
     const { fullDate, amount } = record;
     if (!acc[fullDate]) {

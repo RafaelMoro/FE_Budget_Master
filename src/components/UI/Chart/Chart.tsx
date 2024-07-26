@@ -5,7 +5,7 @@ import 'chart.js/auto';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../../redux/hooks';
 import { AppColors } from '../../../styles';
-import { getTop4DaysTotalAmount } from './Chart.util';
+import { getTopDaysExpensePerDay } from './Chart.util';
 
 interface Result {
   date: string;
@@ -19,7 +19,7 @@ const Chart = () => {
 
   useEffect(() => {
     if (recordsData) {
-      const newData = getTop4DaysTotalAmount(recordsData);
+      const newData = getTopDaysExpensePerDay(recordsData);
       setData(newData);
     }
   }, [recordsData]);

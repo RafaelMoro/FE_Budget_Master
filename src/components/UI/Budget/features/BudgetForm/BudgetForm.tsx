@@ -65,6 +65,11 @@ const BudgetForm = ({ budget }: { budget?: BudgetUI }) => {
   const [isPeriodic, setIsPeriodic] = useState(false);
   const togglePeriodic = () => setIsPeriodic((prevState) => !prevState);
 
+  // Texts
+  const loadingText = isEditBudget ? 'Updating your budget. Please wait...' : 'Your budget is being created. Please wait...';
+  const action = isEditBudget ? 'updating' : 'creating';
+  const actionOnSuccess = isEditBudget ? 'updated' : 'created';
+
   const handleSubmitOnCreate = async (values: CreateBudgetValues) => {
     // Format values to be sent to the API
     const newValues: CreateBudgetValuesApiRequest = {
@@ -141,7 +146,7 @@ const BudgetForm = ({ budget }: { budget?: BudgetUI }) => {
         goBack={goBackBudgetPeriodView}
         goNext={goNext}
       />
-      <LoadingFormAnimated text="Your budget is being created. Please wait..." order={2} counterView={counterView} direction={direction} />
+      <LoadingFormAnimated text={loadingText} order={2} counterView={counterView} direction={direction} />
       { (!isLoadingCreateBudget) && (
       <ResultFormAnimated
         counterView={counterView}
@@ -154,14 +159,14 @@ const BudgetForm = ({ budget }: { budget?: BudgetUI }) => {
                   redirectRoute={BUDGETS_ROUTE}
                   secondaryButtonText="Go to Budgets"
                   primaryButtonText="Try Again"
-                  error="Oops! An error ocurred while creating your budget. Please try again later."
+                  error={`An error occurred while ${action} your budget. Please try again.`}
                   resetCounterView={resetCounterView}
                 />
               )
             }
         onSuccess={() => (
           <SuccessResultFormAnimated
-            title="Your budget has being created."
+            title={`Budget ${actionOnSuccess}`}
             buttonText="Go to Budgets"
             redirectRoute={BUDGETS_ROUTE}
           />

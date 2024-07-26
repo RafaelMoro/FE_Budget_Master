@@ -11,7 +11,7 @@ import {
 } from '../../Budget.interface';
 import { useBudgets } from '../../../../../hooks/useBudgets/useBudgets';
 import { BUDGETS_ROUTE } from '../../../../../pages/RoutesConstants';
-import { formatCurrencyToNumber } from '../../../../../utils';
+import { formatCurrencyToNumber, formatValueToCurrency } from '../../../../../utils';
 import { useAnimateBox } from '../../../../../hooks';
 
 import { BudgetDetailsView } from './BudgetDetailsView';
@@ -43,7 +43,22 @@ const BudgetForm = ({ budget }: { budget?: BudgetUI }) => {
     direction, counterView, goPreviousView, goNextView, getFinalResult, resetCounterView,
   } = useAnimateBox();
   const { isLoadingCreateBudget, isErrorCreateBudget, createBudget } = useBudgets();
-  const formData = useRef<CreateBudgetValues>(defaultInitialValues);
+  const isEditBudget = !!budget?._id;
+  const initialValues = isEditBudget
+    ? {
+      name: budget.name,
+      typeBudget: budget.typeBudget,
+      description: budget.description,
+      startDate: dayjs(budget.startDate).tz('America/Mexico_City'),
+      endDate: dayjs(budget.endDate).tz('America/Mexico_City'),
+      limit: formatValueToCurrency({ amount: budget.limit }),
+      currentAmount: formatValueToCurrency({ amount: budget.currentAmount }),
+      period: budget.period,
+      nextResetDate: dayjs(budget.nextResetDate).tz('America/Mexico_City'),
+      isActive: budget.isActive,
+      previousPeriods: budget.previousPeriods,
+    } : defaultInitialValues;
+  const formData = useRef<CreateBudgetValues>(initialValues);
   const [isPeriodic, setIsPeriodic] = useState(false);
   const togglePeriodic = () => setIsPeriodic((prevState) => !prevState);
 

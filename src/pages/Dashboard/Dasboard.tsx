@@ -12,6 +12,7 @@ import {
 } from './Dashboard.styled';
 import { useResizeWindow } from '../../hooks/useResizeWindow';
 import { useLogin } from '../../hooks/useLogin';
+import { Chart } from '../../components/UI/Chart';
 
 const Dashboard = () => {
   const windowSize = useAppSelector((state) => state.userInterface.windowSize);
@@ -50,6 +51,7 @@ const Dashboard = () => {
         )}
         <ViewAccounts hide={noAccountsCreated} accountsActions={accountActions} />
         <RecordsBox id="record-box" onScroll={toggleVisibleDesktop} noAccountsCreated={noAccountsCreated}>
+          <Chart />
           <RecordList handleOpenCreateAccount={handleOpenCreateAccount} />
         </RecordsBox>
         <SpeedDial

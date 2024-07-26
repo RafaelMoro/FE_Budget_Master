@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Drawer } from '@mui/material';
 import { Formik, Field } from 'formik';
 import { Switch } from 'formik-mui';
@@ -91,6 +91,7 @@ const RecordTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
   const action: string = edit ? 'Edit' : 'Create';
   const categoryToBeEdited = recordToBeEdited?.category ?? null;
   const isCredit = selectedAccount?.accountType === 'Credit';
+  const budgetsAvailable = useMemo(() => (budgets ?? []).map((budget) => ({ budgetId: budget._id, budgetName: budget.name })), [budgets]);
   const [showExpenses, setShowExpenses] = useState<boolean>(false);
   const [expensesSelected, setExpensesSelected] = useState<ExpensePaid[]>([]);
   const [initialValues, setInitialValues] = useState<CreateRecordValues>({
@@ -345,6 +346,9 @@ const RecordTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
                 </FlexContainer>
               </>
               ) }
+              { (typeOfRecord === 'expense') && (
+                <p>select budget</p>
+              )}
               <ActionButtonPanel
                 routeCancelButton={DASHBOARD_ROUTE}
                 minWidthNumber="18"

@@ -4,7 +4,9 @@ import { formatValueToCurrency, transformDateToMonthDay } from '../../../utils';
 export function calculateProgress({ limit, currentAmount }: { limit: number, currentAmount: number }) {
   if (currentAmount === 0) return 0;
 
-  return (currentAmount * 100) / limit;
+  const result = ((currentAmount * 100) / limit);
+  const resultWithTwoDecimals = result.toFixed(2);
+  return Number(resultWithTwoDecimals);
 }
 
 export const transformBudgetUI = ({ budgets }: { budgets: Budget[] }): BudgetUI[] => budgets.map((budget) => ({

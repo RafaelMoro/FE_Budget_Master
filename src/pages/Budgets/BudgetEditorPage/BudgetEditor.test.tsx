@@ -22,7 +22,7 @@ describe('Create budget page', () => {
       </Router>,
     );
 
-    expect(screen.getByText('Create budget:')).toBeInTheDocument();
+    expect(screen.getByText('Create budget')).toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: /name/i })).toBeInTheDocument();
     expect(screen.getByRole('combobox')).toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: /budget limit/i })).toBeInTheDocument();

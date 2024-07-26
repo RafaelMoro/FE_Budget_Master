@@ -64,5 +64,5 @@ export const budgetsApiSlice = budgetMasterApi.injectEndpoints({
 });
 
 export const {
-  useFetchBudgetsQuery, useCreateBudgetMutation, useDeleteBudgetMutation, useEditBudgetMutation,
+  useFetchBudgetsQuery, useLazyFetchBudgetsQuery, useCreateBudgetMutation, useDeleteBudgetMutation, useEditBudgetMutation,
 } = budgetsApiSlice;

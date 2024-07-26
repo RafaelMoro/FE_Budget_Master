@@ -40,6 +40,7 @@ import { resetLocalStorageWithUserOnly } from '../../../../../utils/LocalStorage
 import { scrollToTop } from '../../../../../utils/ScrollToTop';
 import { useGuestUser } from '../../../../../hooks/useGuestUser/useGuestUser';
 import { EditExpenseProps, EditIncomeProps } from '../../../../../hooks/useRecords/interface';
+import { useLazyFetchBudgetsQuery } from '../../../../../redux/slices/Budgets/budgets.api';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -82,6 +83,10 @@ const RecordTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
 
   const recordToBeEdited = useAppSelector((state) => state.records.recordToBeModified);
   const selectedAccount = useAppSelector((state) => state.accounts.accountSelected);
+  const budgets = useAppSelector((state) => state.budgets.budgets);
+  const user = useAppSelector((state) => state.user);
+  const bearerToken = user.userInfo?.bearerToken as string;
+  const [fetchBudgetsMutation] = useLazyFetchBudgetsQuery();
 
   const action: string = edit ? 'Edit' : 'Create';
   const categoryToBeEdited = recordToBeEdited?.category ?? null;
@@ -151,6 +156,13 @@ const RecordTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recordToBeEdited?.category.categoryName, edit, isCredit]);
+
+  // Fetch budgets if they are not fetched yet
+  useEffect(() => {
+    if (!budgets && bearerToken) {
+      fetchBudgetsMutation({ bearerToken });
+    }
+  }, [bearerToken, budgets, fetchBudgetsMutation]);
 
   const openAddPersonModal = (values: any) => {
     // save initial values

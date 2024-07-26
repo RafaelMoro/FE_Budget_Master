@@ -1,6 +1,7 @@
 import { List, Typography, IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
+import { useEffect, useState } from 'react';
 import { AppIcon } from '../../../Icons';
 import { BudgetUI } from '../../../../../globalInterface';
 import { getRemainingDays } from '../../../../../utils';
@@ -25,6 +26,18 @@ const BudgetDetailsDrawer = ({
 }: BudgetDetailsDrawerProps) => {
   const navigate = useNavigate();
   const restingDays = getRemainingDays(budget.endDate);
+  const [restingDaysText, setRestingDaysText] = useState<string>(`${restingDays} days left`);
+
+  useEffect(() => {
+    if (restingDays === 0) {
+      setRestingDaysText('Ending today');
+    } else if (restingDays === 1) {
+      setRestingDaysText('Ending tomorrow');
+    } else {
+      setRestingDaysText(`${restingDays} days left`);
+    }
+  }, [restingDays]);
+
   const handleEditBudget = () => {
     navigate(BUDGET_EDITOR_PAGE_ROUTE, { state: { budget } });
   };
@@ -50,16 +63,13 @@ const BudgetDetailsDrawer = ({
         {budget.limitFormatted}
       </Typography>
       <DaysLeftText>
-        {restingDays}
-        {' '}
-        days left
+        {restingDaysText}
       </DaysLeftText>
       <ProgressBudget currentAmountFormatted={budget.currentAmountFormatted} progress={progress} />
       <TextTwoColumns>{budget.description}</TextTwoColumns>
       <BudgetChip label={budget.typeBudget} />
       <BudgetChip label={budget.period} />
-      { /** @TODO: Make every list item as collapsable to see records in budget history */ }
-      { (budget.typeBudget === 'periodic' && budget.previousPeriods.length > 0) && (
+      { (budget.typeBudget === 'periodic' && budget.previousPeriods?.length > 0) && (
         <>
           <TextTwoColumns align="center">Previous periods: </TextTwoColumns>
           <List>

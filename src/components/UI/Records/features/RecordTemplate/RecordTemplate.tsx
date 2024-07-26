@@ -19,7 +19,7 @@ import { useCurrencyField } from '../../../../Other/CurrencyField/useCurrencyFie
 
 /** Components */
 import { TransactionFormFields } from '../TransactionFormFields';
-import { ActionButtonPanel } from '../../../../templates';
+import { ActionButtonPanel, NoBudgetsCreatedForRecords } from '../../../../templates';
 import { ShowExpenses } from '../ShowExpenses';
 import { SelectExpenses } from '../SelectExpenses';
 import { AddIndebtedPerson } from '../AddIndebtedPerson/AddIndebtedPerson';
@@ -350,6 +350,9 @@ const RecordTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
                 </FlexContainer>
               </>
               ) }
+              { (typeOfRecord === 'expense' && budgetsAvailable.length === 0) && (
+                <NoBudgetsCreatedForRecords />
+              )}
               { (typeOfRecord === 'expense' && budgetsAvailable.length > 0) && (
                 <SelectBudget budgets={budgetsAvailable} />
               )}

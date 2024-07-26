@@ -16,7 +16,10 @@ const useBudgets = () => {
     createBudgetMutation,
     { isLoading: isLoadingCreateBudget, isError: isErrorCreateBudget },
   ] = useCreateBudgetMutation();
-  const [editBudgetMutation] = useEditBudgetMutation();
+  const [
+    editBudgetMutation,
+    { isLoading: isLoadingEditBudget, isError: isErrorEditBudget },
+  ] = useEditBudgetMutation();
   const [deleteBudgetMutation, { isLoading: isLoadingDeleteBudget }] = useDeleteBudgetMutation();
 
   const userReduxState = useAppSelector((state) => state.user);
@@ -85,8 +88,10 @@ const useBudgets = () => {
     deleteBudget,
     editBudget,
     isLoadingCreateBudget,
+    isLoadingEditBudget,
     isLoadingDeleteBudget,
     isErrorCreateBudget,
+    isErrorEditBudget,
   };
 };
 

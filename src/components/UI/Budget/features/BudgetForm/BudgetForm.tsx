@@ -44,7 +44,7 @@ const BudgetForm = ({ budget }: { budget?: BudgetUI }) => {
     direction, counterView, goPreviousView, goNextView, getFinalResult, resetCounterView,
   } = useAnimateBox();
   const {
-    isLoadingCreateBudget, isErrorCreateBudget, createBudget, editBudget,
+    isLoadingCreateBudget, isLoadingEditBudget, isErrorEditBudget, isErrorCreateBudget, createBudget, editBudget,
   } = useBudgets();
   const isEditBudget = !!budget?._id;
   const initialValues = isEditBudget
@@ -147,12 +147,12 @@ const BudgetForm = ({ budget }: { budget?: BudgetUI }) => {
         goNext={goNext}
       />
       <LoadingFormAnimated text={loadingText} order={2} counterView={counterView} direction={direction} />
-      { (!isLoadingCreateBudget) && (
+      { (!isLoadingCreateBudget || !isLoadingEditBudget) && (
       <ResultFormAnimated
         counterView={counterView}
         direction={direction}
         order={3}
-        isError={isErrorCreateBudget}
+        isError={(isErrorCreateBudget || isErrorEditBudget)}
         onError={
               () => (
                 <ErrorResultFormAnimated

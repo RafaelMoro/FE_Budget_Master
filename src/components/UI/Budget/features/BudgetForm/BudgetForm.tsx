@@ -8,6 +8,7 @@ import {
   CreateBudgetValues, BudgetDetailsViewValues, GoNextProps, BudgetPeriodViewValues,
   GoBackBudgetPeriodViewProps,
   CreateBudgetValuesApiRequest,
+  EditBudgetValuesApiRequest,
 } from '../../Budget.interface';
 import { useBudgets } from '../../../../../hooks/useBudgets/useBudgets';
 import { BUDGETS_ROUTE } from '../../../../../pages/RoutesConstants';
@@ -42,7 +43,9 @@ const BudgetForm = ({ budget }: { budget?: BudgetUI }) => {
   const {
     direction, counterView, goPreviousView, goNextView, getFinalResult, resetCounterView,
   } = useAnimateBox();
-  const { isLoadingCreateBudget, isErrorCreateBudget, createBudget } = useBudgets();
+  const {
+    isLoadingCreateBudget, isErrorCreateBudget, createBudget, editBudget,
+  } = useBudgets();
   const isEditBudget = !!budget?._id;
   const initialValues = isEditBudget
     ? {
@@ -62,7 +65,7 @@ const BudgetForm = ({ budget }: { budget?: BudgetUI }) => {
   const [isPeriodic, setIsPeriodic] = useState(false);
   const togglePeriodic = () => setIsPeriodic((prevState) => !prevState);
 
-  const handleSubmit = async (values: CreateBudgetValues) => {
+  const handleSubmitOnCreate = async (values: CreateBudgetValues) => {
     // Format values to be sent to the API
     const newValues: CreateBudgetValuesApiRequest = {
       ...values,
@@ -79,6 +82,29 @@ const BudgetForm = ({ budget }: { budget?: BudgetUI }) => {
       getFinalResult();
     }, 3000);
   };
+
+  const handleSubmitOnEdit = async (values: CreateBudgetValues) => {
+    if (budget) {
+      // Format values to be sent to the API
+      const newValues: EditBudgetValuesApiRequest = {
+        ...values,
+        budgetId: budget._id,
+        startDate: values.startDate.toDate(),
+        endDate: values.endDate.toDate(),
+        currentAmount: formatCurrencyToNumber(values.currentAmount),
+        limit: formatCurrencyToNumber(values.limit),
+        nextResetDate: values.endDate.toDate(),
+      };
+
+      await editBudget({ values: newValues });
+
+      setTimeout(() => {
+        getFinalResult();
+      }, 3000);
+    }
+  };
+
+  const handleSubmit = isEditBudget ? handleSubmitOnEdit : handleSubmitOnCreate;
 
   const updateData = (newInfo: BudgetDetailsViewValues | BudgetPeriodViewValues) => {
     const { current } = formData;

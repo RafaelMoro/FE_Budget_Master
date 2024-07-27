@@ -150,7 +150,8 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
       indebtedPeople,
       account: (selectedAccount?._id ?? ''),
       typeOfRecord: 'expense',
-      linkedBudgets: [values.linkedBudgets],
+      // If linked budgets has a value, then send the value in the array, if not, send it empty
+      linkedBudgets: values.linkedBudgets ? [values.linkedBudgets] : [],
     };
 
     if (isGuestUser) {

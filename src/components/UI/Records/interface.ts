@@ -64,6 +64,7 @@ export interface CreateRecordValues {
 
 export interface CreateExpenseValues extends CreateRecordValues {
   isPaid?: boolean;
+  linkedBudgets: string[];
 }
 
 export interface CreateTransferValues extends CreateRecordValues {

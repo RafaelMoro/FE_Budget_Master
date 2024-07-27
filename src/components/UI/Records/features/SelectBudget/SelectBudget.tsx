@@ -12,7 +12,7 @@ interface SelectBudgetProps {
 const SelectBudget = ({ budgets }: SelectBudgetProps) => (
   <FormControl variant="standard">
     <InputLabel id="select-record-budget">Budgets</InputLabel>
-    <Field dataTestId="select-record-budget" name="linkedBudget" component={SelectFormik}>
+    <Field dataTestId="select-record-budget" name="linkedBudgets" component={SelectFormik}>
       {
         budgets.map((budget) => (
           <MenuItem key={budget.budgetId} value={budget.budgetId}>{budget.budgetName}</MenuItem>

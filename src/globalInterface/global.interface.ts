@@ -198,6 +198,7 @@ export interface ExpensePaidRedux extends Omit<ExpensePaid, 'date'> {
 
 export interface AnyRecord extends AccountRecord {
   isPaid?: boolean;
+  linkedBudgets?: string[];
   expensesPaid?: ExpensePaid[];
 }
 

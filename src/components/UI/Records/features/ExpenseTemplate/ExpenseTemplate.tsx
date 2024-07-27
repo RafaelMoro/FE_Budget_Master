@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import { Switch } from 'formik-mui';
 
 import { DASHBOARD_ROUTE } from '../../../../../pages/RoutesConstants';
-import { CreateExpenseValues, CreateRecordValues, ExpenseBudget } from '../../interface';
+import { CreateExpenseValues, ExpenseBudget } from '../../interface';
 import { IndebtedPeople } from '../../../../../globalInterface';
 import { useAppSelector } from '../../../../../redux/hooks';
 import { useCurrencyField } from '../../../../Other/CurrencyField/useCurrencyField';
@@ -24,6 +24,7 @@ import { AddIndebtedPerson } from '../AddIndebtedPerson/AddIndebtedPerson';
 import { TransactionFormFields } from '../TransactionFormFields';
 import { FormContainer, SecondaryButtonForm, ShowIndebtedPeopleContainer } from '../RecordTemplate/RecordTemplate.styled';
 import { FlexContainer, FormControlLabel } from '../../../../../styles';
+import { useLazyFetchBudgetsQuery } from '../../../../../redux/slices/Budgets/budgets.api';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -60,6 +61,10 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
   const selectedAccount = useAppSelector((state) => state.accounts.accountSelected);
   const recordToBeEdited = useAppSelector((state) => state.records.recordToBeModified);
   const budgets = useAppSelector((state) => state.budgets.budgets);
+  const user = useAppSelector((state) => state.user);
+  const [fetchBudgetsMutation] = useLazyFetchBudgetsQuery();
+
+  const bearerToken = user.userInfo?.bearerToken as string;
   const categoryToBeEdited = recordToBeEdited?.category ?? null;
   const isCredit = selectedAccount?.accountType === 'Credit';
   const action: string = edit ? 'Edit' : 'Create';
@@ -76,6 +81,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
     date: dayjs().tz('America/Mexico_City'),
     tag: [],
     budgets: [],
+    linkedBudgets: [],
   });
   const budgetsAvailable: ExpenseBudget[] = useMemo(
     () => (budgets ?? []).map((budget) => ({ budgetId: budget._id, budgetName: budget.name })),
@@ -95,6 +101,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
         date: dayjs(recordToBeEdited.date),
         tag: recordToBeEdited.tag,
         budgets: recordToBeEdited.budgets,
+        linkedBudgets: recordToBeEdited.linkedBudgets ?? [],
       };
       initialAmount.current = String(recordToBeEdited.amount);
 
@@ -115,6 +122,13 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recordToBeEdited?.category.categoryName, edit, isCredit]);
 
+  // Fetch budgets if they are not fetched yet
+  useEffect(() => {
+    if (!budgets && bearerToken) {
+      fetchBudgetsMutation({ bearerToken });
+    }
+  }, [bearerToken, budgets, fetchBudgetsMutation]);
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const openAddPersonModal = (values: any) => {
     // save initial values
@@ -123,15 +137,15 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
   };
 
   // This data is not included in initial values because are not part of the main form, hence, the data will be empty.
-  const updateTags = ({ values, newChips }: { values: CreateRecordValues, newChips: string[] }) => {
+  const updateTags = ({ values, newChips }: { values: CreateExpenseValues, newChips: string[] }) => {
     setInitialValues({ ...values, tag: newChips });
   };
 
-  const updateBudgets = ({ values, newBudgets }: { values: CreateRecordValues, newBudgets: string[] }) => {
+  const updateBudgets = ({ values, newBudgets }: { values: CreateExpenseValues, newBudgets: string[] }) => {
     setInitialValues({ ...values, budgets: newBudgets });
   };
 
-  const handleSubmitOnCreate = (values: CreateRecordValues) => {
+  const handleSubmitOnCreate = (values: CreateExpenseValues) => {
     const newAmount = verifyAmountEndsPeriod(initialAmount.current);
     const amountToNumber = Number(newAmount);
     const newValues = {
@@ -151,7 +165,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
     createExpense(newValues);
   };
 
-  const handleSubmitOnEdit = (values: CreateRecordValues) => {
+  const handleSubmitOnEdit = (values: CreateExpenseValues) => {
     // Flag to know if amount has a different value from the initial value. If so, the query to update account amount will be executed.
     let amountTouched = false;
     if (recordToBeEdited?.amount !== Number(initialAmount.current)) {
@@ -208,7 +222,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
           const hasErrors = Object.keys(errors).length > 0;
           return (
             <FormContainer>
-              <TransactionFormFields<CreateRecordValues>
+              <TransactionFormFields<CreateExpenseValues>
                 values={values}
                 amount={values.amount}
                 updateAmount={updateAmount}

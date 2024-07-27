@@ -11,7 +11,7 @@ import { DASHBOARD_ROUTE } from '../../pages/RoutesConstants';
 
 import { SystemStateEnum } from '../../enums';
 import {
-  CreateExpenseValues, CreateIncomeValues,
+  CreateExpenseValuesApiRequest, CreateIncomeValues,
 } from '../../components/UI/Records/interface';
 import {
   Actions,
@@ -361,7 +361,7 @@ const useRecords = ({
 
   const formatCreateLocalRecord = ({
     values, category,
-  }: { values: CreateExpenseValues | CreateIncomeValues, category: Category, }) => {
+  }: { values: CreateExpenseValuesApiRequest | CreateIncomeValues, category: Category, }) => {
     const { date, subCategory } = values;
     const expensesPaid = (values as CreateIncomeValues)?.expensesPaid;
     const { formattedTime, fullDate } = formatDateToString(date.toDate());
@@ -371,7 +371,7 @@ const useRecords = ({
     const amountFormatted = formatValueToCurrency({ amount: values.amount });
     if (isCreateExpense(values)) {
       const newExpense: RecordRedux = {
-        ...(values as CreateExpenseValues),
+        ...(values as CreateExpenseValuesApiRequest),
         date: dateFormatted,
         _id: newId,
         amountFormatted,
@@ -422,7 +422,7 @@ const useRecords = ({
 
   const formatCreateTransfer = ({
     income, expense, category,
-  }: { income: CreateIncomeValues, expense: CreateExpenseValues, category: Category }) => {
+  }: { income: CreateIncomeValues, expense: CreateExpenseValuesApiRequest, category: Category }) => {
     const { date, subCategory } = expense;
     const expensesPaid = (income as CreateIncomeValues)?.expensesPaid;
     const { formattedTime, fullDate } = formatDateToString(date.toDate());
@@ -433,7 +433,7 @@ const useRecords = ({
     const amountFormatted = formatValueToCurrency({ amount: expense.amount });
 
     const newExpense: RecordRedux = {
-      ...(expense as CreateExpenseValues),
+      ...(expense as CreateExpenseValuesApiRequest),
       transferRecord: {
         transferId: incomeId,
         account: income.account,
@@ -692,7 +692,7 @@ const useRecords = ({
     };
   };
 
-  const createExpenseIncomeLocalStorage = (values: CreateExpenseValues | CreateIncomeValues) => {
+  const createExpenseIncomeLocalStorage = (values: CreateExpenseValuesApiRequest | CreateIncomeValues) => {
     // this could be part of a hook formatting the expense
     const { category, date } = values;
     const categoryFound = categoriesLocalStorage.find((cat) => cat.categoryName === category);
@@ -968,7 +968,7 @@ const useRecords = ({
     navigate(DASHBOARD_ROUTE);
   };
 
-  const createExpense = async (values: CreateExpenseValues) => {
+  const createExpense = async (values: CreateExpenseValuesApiRequest) => {
     try {
       const { amount, date: dateValue, account } = values;
       const date = dateValue.toDate();
@@ -1001,7 +1001,10 @@ const useRecords = ({
     }
   };
 
-  const createTransferLocal = ({ valuesExpense, valuesIncome }: { valuesExpense: CreateExpenseValues; valuesIncome: CreateIncomeValues }) => {
+  const createTransferLocal = (
+    { valuesExpense, valuesIncome }
+    : { valuesExpense: CreateExpenseValuesApiRequest; valuesIncome: CreateIncomeValues },
+  ) => {
     const { category } = valuesExpense;
     const categoryFound = categoriesLocalStorage.find((cat) => cat.categoryName === category);
     if (!categoryFound) {

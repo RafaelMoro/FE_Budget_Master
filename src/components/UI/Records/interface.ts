@@ -69,7 +69,7 @@ export interface CreateTransferValues extends CreateRecordValues {
   tag: string[];
 }
 
-export interface CreateExpenseValues extends Omit<CreateRecordValues, 'amount'> {
+export interface CreateExpenseValuesApiRequest extends Omit<CreateRecordValues, 'amount'> {
   amount: number;
   tag: string[];
   budgets: string[];
@@ -77,7 +77,7 @@ export interface CreateExpenseValues extends Omit<CreateRecordValues, 'amount'> 
   account: string;
 }
 
-export interface CreateIncomeValues extends CreateExpenseValues {
+export interface CreateIncomeValues extends CreateExpenseValuesApiRequest {
   expensesPaid: ExpensePaid[];
 }
 

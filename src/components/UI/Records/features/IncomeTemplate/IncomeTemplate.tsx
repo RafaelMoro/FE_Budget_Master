@@ -172,6 +172,28 @@ const IncomeTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
     createIncome(newValues);
   };
 
+  const handleSubmitOnCreate = (values: CreateRecordValues) => {
+    const newAmount = verifyAmountEndsPeriod(initialAmount.current);
+    const amountToNumber = Number(newAmount);
+    const {
+      isPaid, amount, ...restValues
+    } = values;
+    const newValues = {
+      ...restValues,
+      amount: amountToNumber,
+      indebtedPeople: [],
+      expensesPaid: expensesSelected,
+      account: (selectedAccount?._id ?? ''),
+      typeOfRecord: 'income',
+    };
+
+    if (isGuestUser) {
+      createExpenseIncomeLocalStorage(newValues);
+      return;
+    }
+    createIncome(newValues);
+  };
+
   return (
     <>
       <Formik

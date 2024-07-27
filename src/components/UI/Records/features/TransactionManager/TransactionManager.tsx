@@ -5,13 +5,13 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
 import { TypeOfRecord } from '../../../../../globalInterface';
 import { DASHBOARD_ROUTE } from '../../../../../pages/RoutesConstants';
-import { RecordTemplate } from '../RecordTemplate/RecordTemplate';
 import { Transfer } from '../Transfer';
 import { AppIcon } from '../../../Icons';
 import { ToggleButton } from '../../../../../styles';
 import { GoBackIconButton, RecordTemplateMain, ToggleButtonGroup } from '../RecordTemplate/RecordTemplate.styled';
 import { isCategoryNotSelected } from '../../../../../redux/slices/Categories/categories.slice';
 import { ExpenseTemplate } from '../ExpenseTemplate';
+import { IncomeTemplate } from '../IncomeTemplate';
 
 const TransactionManager = ({ edit = false }: { edit?: boolean }) => {
   const location = useLocation();
@@ -56,7 +56,7 @@ const TransactionManager = ({ edit = false }: { edit?: boolean }) => {
         {' '}
         { typeOfRecord }
       </Typography>
-      { (typeOfRecord === 'income') && (<RecordTemplate typeOfRecord={typeOfRecord} edit={edit} />) }
+      { (typeOfRecord === 'income') && (<IncomeTemplate typeOfRecord={typeOfRecord} edit={edit} />) }
       { (typeOfRecord === 'expense') && (<ExpenseTemplate typeOfRecord={typeOfRecord} edit={edit} />)}
       {(typeOfRecord === 'transfer' && !hasOnlyOneAccount) && (
       <Transfer edit={edit} typeOfRecord={typeOfRecord} action={action} />

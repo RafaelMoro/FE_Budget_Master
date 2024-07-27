@@ -98,10 +98,6 @@ const Transfer = ({ action, typeOfRecord, edit = false }: TransferProps) => {
     setInitialValues({ ...values, tag: newChips });
   };
 
-  const updateBudgets = ({ values, newBudgets }: { values: CreateTransferValues, newBudgets: string[] }) => {
-    setInitialValues({ ...values, budgets: newBudgets });
-  };
-
   useEffect(() => {
     if (edit && recordToBeEdited) {
       const destinationAccount = isIncome ? recordToBeEdited.account : recordToBeEdited.transferRecord?.account ?? '';
@@ -240,10 +236,8 @@ const Transfer = ({ action, typeOfRecord, edit = false }: TransferProps) => {
                 errors={errors}
                 touched={touched}
                 categoryToBeEdited={categoryToBeEdited}
-                updateBudgets={updateBudgets}
                 updateTags={updateTags}
                 tags={initialValues.tag}
-                budgets={initialValues.budgets}
               />
               { (isCreditDestinationAcc) && (
               <>

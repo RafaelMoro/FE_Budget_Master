@@ -32,12 +32,6 @@ export const SecondaryButtonForm = styled(SecondaryButton)`
   min-width: 18rem;
 `;
 
-export const AddChipContainer = styled.div`
-  display: grid;
-  grid-template-rows: repeat(2, 1fr);
-  gap: 1.5rem;
-`;
-
 export const ShowIndebtedPeopleContainer = styled.div`
   padding: 3rem 0;
   display: flex;

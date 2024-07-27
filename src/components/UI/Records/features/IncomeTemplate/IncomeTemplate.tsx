@@ -66,10 +66,6 @@ const IncomeTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
     setInitialValues({ ...values, tag: newChips });
   };
 
-  const updateBudgets = ({ values, newBudgets }: { values: CreateRecordValues, newBudgets: string[] }) => {
-    setInitialValues({ ...values, budgets: newBudgets });
-  };
-
   const showExpenseText = expensesSelected.length === 0 ? 'Add Expense' : 'Add or Remove Expense';
   const buttonText = `${action} record`;
 
@@ -212,10 +208,8 @@ const IncomeTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
                 errors={errors}
                 touched={touched}
                 categoryToBeEdited={categoryToBeEdited}
-                updateBudgets={updateBudgets}
                 updateTags={updateTags}
                 tags={initialValues.tag}
-                budgets={initialValues.budgets}
               />
               { (typeOfRecord === 'income' && isCredit) && (
               <>

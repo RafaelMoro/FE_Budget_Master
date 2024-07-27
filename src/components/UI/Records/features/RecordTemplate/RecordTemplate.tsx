@@ -115,9 +115,9 @@ const RecordTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
     setInitialValues({ ...values, tag: newChips });
   };
 
-  const updateBudgets = ({ values, newBudgets }: { values: CreateRecordValues, newBudgets: string[] }) => {
-    setInitialValues({ ...values, budgets: newBudgets });
-  };
+  // const updateBudgets = ({ values, newBudgets }: { values: CreateRecordValues, newBudgets: string[] }) => {
+  //   setInitialValues({ ...values, budgets: newBudgets });
+  // };
 
   const isExpense = typeOfRecord === 'expense';
   const showExpenseText = expensesSelected.length === 0 ? 'Add Expense' : 'Add or Remove Expense';
@@ -309,10 +309,10 @@ const RecordTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
                 errors={errors}
                 touched={touched}
                 categoryToBeEdited={categoryToBeEdited}
-                updateBudgets={updateBudgets}
+                // updateBudgets={updateBudgets}
                 updateTags={updateTags}
                 tags={initialValues.tag}
-                budgets={initialValues.budgets}
+                // budgets={initialValues.budgets}
               />
               { (isCredit && typeOfRecord === 'expense') && (
               <FormControlLabel

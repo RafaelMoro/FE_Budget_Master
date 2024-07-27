@@ -141,10 +141,6 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
     setInitialValues({ ...values, tag: newChips });
   };
 
-  const updateBudgets = ({ values, newBudgets }: { values: CreateExpenseValues, newBudgets: string[] }) => {
-    setInitialValues({ ...values, budgets: newBudgets });
-  };
-
   const handleSubmitOnCreate = (values: CreateExpenseValues) => {
     const newAmount = verifyAmountEndsPeriod(initialAmount.current);
     const amountToNumber = Number(newAmount);
@@ -231,10 +227,8 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
                 errors={errors}
                 touched={touched}
                 categoryToBeEdited={categoryToBeEdited}
-                updateBudgets={updateBudgets}
                 updateTags={updateTags}
                 tags={initialValues.tag}
-                budgets={initialValues.budgets}
               />
               { (isCredit && typeOfRecord === 'expense') && (
               <FormControlLabel

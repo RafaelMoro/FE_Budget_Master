@@ -57,8 +57,6 @@ const IncomeTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
     description: '',
     category: '',
     subCategory: '',
-    // If is credit, the prop is false, otherwise it's true because only credit is paid later.
-    isPaid: !isCredit,
     date: dayjs().tz('America/Mexico_City'),
     tag: [],
     budgets: [],
@@ -84,7 +82,6 @@ const IncomeTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
         description: recordToBeEdited.description,
         category: recordToBeEdited.category.categoryName,
         subCategory: recordToBeEdited.subCategory,
-        isPaid: recordToBeEdited.isPaid ?? !isCredit,
         date: dayjs(recordToBeEdited.date),
         tag: recordToBeEdited.tag,
         budgets: recordToBeEdited.budgets,
@@ -114,7 +111,7 @@ const IncomeTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
     const newAmount = verifyAmountEndsPeriod(initialAmount.current);
     const amountToNumber = Number(newAmount);
     const {
-      isPaid, amount, ...restValues
+      amount, ...restValues
     } = values;
     const newValues = {
       ...restValues,
@@ -142,7 +139,7 @@ const IncomeTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
     const newAmount = verifyAmountEndsPeriod(initialAmount.current);
 
     const {
-      isPaid, amount, ...restValues
+      amount, ...restValues
     } = values;
     const amountToNumber = Number(newAmount);
     const newValues = {

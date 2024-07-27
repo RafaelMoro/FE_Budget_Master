@@ -1,5 +1,5 @@
 import { RecordAgeCategory } from '../../aliasType';
-import { CreateExpenseValuesApiRequest, CreateIncomeValues } from '../../components/UI/Records/interface';
+import { CreateExpenseValuesApiRequest, CreateIncomeValuesApiRequest } from '../../components/UI/Records/interface';
 import {
   AnyRecord, ExpensePaid, ExpensePaidRedux, RecordRedux,
 } from '../../globalInterface';
@@ -34,7 +34,7 @@ export interface ShowErrorNotificationProps {
 
 export interface CreateTransferProps {
   valuesExpense: CreateExpenseValuesApiRequest;
-  valuesIncome: CreateIncomeValues;
+  valuesIncome: CreateIncomeValuesApiRequest;
 }
 
 export interface UpdateRecordsOnEditProps {
@@ -52,7 +52,7 @@ export interface EditExpenseProps {
 }
 
 export interface EditIncomeProps {
-  values: CreateIncomeValues;
+  values: CreateIncomeValuesApiRequest;
   recordId: string;
   userId: string;
   amountTouched: boolean;

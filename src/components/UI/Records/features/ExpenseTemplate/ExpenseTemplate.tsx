@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import { Switch } from 'formik-mui';
 
 import { DASHBOARD_ROUTE } from '../../../../../pages/RoutesConstants';
-import { CreateRecordValues, ExpenseBudget } from '../../interface';
+import { CreateExpenseValues, CreateRecordValues, ExpenseBudget } from '../../interface';
 import { IndebtedPeople } from '../../../../../globalInterface';
 import { useAppSelector } from '../../../../../redux/hooks';
 import { useCurrencyField } from '../../../../Other/CurrencyField/useCurrencyField';
@@ -65,7 +65,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
   const action: string = edit ? 'Edit' : 'Create';
   const buttonText = `${action} record`;
 
-  const [initialValues, setInitialValues] = useState<CreateRecordValues>({
+  const [initialValues, setInitialValues] = useState<CreateExpenseValues>({
     amount: '',
     shortName: '',
     description: '',
@@ -85,7 +85,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
   // Update edit data to the initial values
   useEffect(() => {
     if (edit && recordToBeEdited) {
-      const newInitialValues: CreateRecordValues = {
+      const newInitialValues: CreateExpenseValues = {
         amount: String(recordToBeEdited.amount),
         shortName: recordToBeEdited.shortName,
         description: recordToBeEdited.description,

@@ -105,7 +105,7 @@ const RecordTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
     category: '',
     subCategory: '',
     // If is credit, the prop is false, otherwise it's true because only credit is paid later.
-    isPaid: !isCredit,
+    // isPaid: !isCredit,
     date: dayjs().tz('America/Mexico_City'),
     tag: [],
     budgets: [],
@@ -132,7 +132,7 @@ const RecordTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
         description: recordToBeEdited.description,
         category: recordToBeEdited.category.categoryName,
         subCategory: recordToBeEdited.subCategory,
-        isPaid: recordToBeEdited.isPaid ?? !isCredit,
+        // isPaid: recordToBeEdited.isPaid ?? !isCredit,
         date: dayjs(recordToBeEdited.date),
         tag: recordToBeEdited.tag,
         budgets: recordToBeEdited.budgets,
@@ -319,7 +319,7 @@ const RecordTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
                 control={(
                   <Field
                     type="checkbox"
-                    checked={values.isPaid}
+                    checked
                     label="Transaction paid (Optional)"
                     name="isPaid"
                     component={Switch}

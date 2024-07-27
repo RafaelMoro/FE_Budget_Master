@@ -1,5 +1,5 @@
 import {
-  RecordOperationResponse, CreateExpenseValuesApiRequest, CreateIncomeValues, DeleteRecordResponse,
+  RecordOperationResponse, CreateExpenseValuesApiRequest, CreateIncomeValuesApiRequest, DeleteRecordResponse,
 } from '../../../components/UI/Records/interface';
 import {
   AnyRecord, Expense, GeneralResponse, RecordsTotal,
@@ -60,7 +60,7 @@ export interface RecordOperationThunkResponse {
 }
 
 export interface CreateIncomeThunkProps extends Omit<CreateExpenseMutationProps, 'values'> {
-  values: CreateIncomeValues;
+  values: CreateIncomeValuesApiRequest;
 }
 
 export interface DeleteRecordProps {
@@ -75,7 +75,7 @@ export interface DeleteRecordMutationProps {
 
 export interface CreateTransferValues {
   expense: CreateExpenseValuesApiRequest;
-  income: CreateIncomeValues;
+  income: CreateIncomeValuesApiRequest;
 }
 
 export interface CreateTransferMutationProps {
@@ -93,7 +93,7 @@ export interface EditExpenseValues extends CreateExpenseValuesApiRequest {
   userId: string;
 }
 
-export interface EditIncomeValues extends CreateIncomeValues {
+export interface EditIncomeValues extends CreateIncomeValuesApiRequest {
   recordId: string;
   userId: string;
 }

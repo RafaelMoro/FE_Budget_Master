@@ -11,7 +11,7 @@ import { DASHBOARD_ROUTE } from '../../pages/RoutesConstants';
 
 import { SystemStateEnum } from '../../enums';
 import {
-  CreateExpenseValuesApiRequest, CreateIncomeValues,
+  CreateExpenseValuesApiRequest, CreateIncomeValuesApiRequest,
 } from '../../components/UI/Records/interface';
 import {
   Actions,
@@ -361,9 +361,9 @@ const useRecords = ({
 
   const formatCreateLocalRecord = ({
     values, category,
-  }: { values: CreateExpenseValuesApiRequest | CreateIncomeValues, category: Category, }) => {
+  }: { values: CreateExpenseValuesApiRequest | CreateIncomeValuesApiRequest, category: Category, }) => {
     const { date, subCategory } = values;
-    const expensesPaid = (values as CreateIncomeValues)?.expensesPaid;
+    const expensesPaid = (values as CreateIncomeValuesApiRequest)?.expensesPaid;
     const { formattedTime, fullDate } = formatDateToString(date.toDate());
     const dateFormatted = date.toISOString();
     const newId = window.crypto.randomUUID();
@@ -389,7 +389,7 @@ const useRecords = ({
     if (expensesPaid.length > 0) {
       const newExpensesRelated: ExpensePaidRedux[] = expensesPaid.map((rec) => ({ ...rec, date: rec.date.toISOString() }));
       const newIncome: RecordRedux = {
-        ...(values as CreateIncomeValues),
+        ...(values as CreateIncomeValuesApiRequest),
         date: dateFormatted,
         _id: newId,
         amountFormatted,
@@ -405,7 +405,7 @@ const useRecords = ({
     }
 
     const newIncome: RecordRedux = {
-      ...(values as CreateIncomeValues),
+      ...(values as CreateIncomeValuesApiRequest),
       date: dateFormatted,
       _id: newId,
       amountFormatted,
@@ -422,9 +422,9 @@ const useRecords = ({
 
   const formatCreateTransfer = ({
     income, expense, category,
-  }: { income: CreateIncomeValues, expense: CreateExpenseValuesApiRequest, category: Category }) => {
+  }: { income: CreateIncomeValuesApiRequest, expense: CreateExpenseValuesApiRequest, category: Category }) => {
     const { date, subCategory } = expense;
-    const expensesPaid = (income as CreateIncomeValues)?.expensesPaid;
+    const expensesPaid = (income as CreateIncomeValuesApiRequest)?.expensesPaid;
     const { formattedTime, fullDate } = formatDateToString(date.toDate());
     const dateFormatted = date.toISOString();
     const expenseId = window.crypto.randomUUID();
@@ -453,7 +453,7 @@ const useRecords = ({
     if (expensesPaid.length > 0) {
       const newExpensesRelated: ExpensePaidRedux[] = expensesPaid.map((rec) => ({ ...rec, date: rec.date.toISOString() }));
       const incomeWithExpenses: RecordRedux = {
-        ...(income as CreateIncomeValues),
+        ...(income as CreateIncomeValuesApiRequest),
         transferRecord: {
           transferId: expenseId,
           account: expense.account,
@@ -473,7 +473,7 @@ const useRecords = ({
     }
 
     const newIncome: RecordRedux = {
-      ...(income as CreateIncomeValues),
+      ...(income as CreateIncomeValuesApiRequest),
       transferRecord: {
         transferId: expenseId,
         account: expense.account,
@@ -496,7 +496,7 @@ const useRecords = ({
   const formatEditLocalRecord = (payload: EditExpenseProps, category: Category) => {
     const { values, recordId, userId } = payload;
     const { date } = values;
-    const expensesPaid = (values as CreateIncomeValues)?.expensesPaid;
+    const expensesPaid = (values as CreateIncomeValuesApiRequest)?.expensesPaid;
     const { formattedTime, fullDate } = formatDateToString(date.toDate());
     const amountFormatted = formatValueToCurrency({ amount: values.amount });
 
@@ -517,7 +517,7 @@ const useRecords = ({
     }
 
     const newIncome: RecordRedux = {
-      ...(values as CreateIncomeValues),
+      ...(values as CreateIncomeValuesApiRequest),
       _id: recordId,
       category,
       userId,
@@ -692,7 +692,7 @@ const useRecords = ({
     };
   };
 
-  const createExpenseIncomeLocalStorage = (values: CreateExpenseValuesApiRequest | CreateIncomeValues) => {
+  const createExpenseIncomeLocalStorage = (values: CreateExpenseValuesApiRequest | CreateIncomeValuesApiRequest) => {
     // this could be part of a hook formatting the expense
     const { category, date } = values;
     const categoryFound = categoriesLocalStorage.find((cat) => cat.categoryName === category);
@@ -1003,7 +1003,7 @@ const useRecords = ({
 
   const createTransferLocal = (
     { valuesExpense, valuesIncome }
-    : { valuesExpense: CreateExpenseValuesApiRequest; valuesIncome: CreateIncomeValues },
+    : { valuesExpense: CreateExpenseValuesApiRequest; valuesIncome: CreateIncomeValuesApiRequest },
   ) => {
     const { category } = valuesExpense;
     const categoryFound = categoriesLocalStorage.find((cat) => cat.categoryName === category);
@@ -1111,7 +1111,7 @@ const useRecords = ({
     }
   };
 
-  const createIncome = async (values: CreateIncomeValues) => {
+  const createIncome = async (values: CreateIncomeValuesApiRequest) => {
     try {
       const { amount, date: dateValue, account } = values;
       const date = dateValue.toDate();

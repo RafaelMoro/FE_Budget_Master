@@ -49,17 +49,21 @@ export interface SelectCategoryProps extends SelectFormikProps {
   setNewCategory: (value: string) => void;
 }
 
-// Check the IndebtedPeople array and fields that may be different.
+// There is no CreateIncomeValues because the only prop would differentiate is expensesPaid,
+// which is added in the CreateIncomeValuesApiRequest separately.
 export interface CreateRecordValues {
   amount: string;
   shortName: string;
   description: string;
   category: string;
   subCategory: string;
-  isPaid?: boolean;
   date: Dayjs;
   tag: string[];
   budgets: string[];
+}
+
+export interface CreateExpenseValues extends CreateRecordValues {
+  isPaid?: boolean;
 }
 
 export interface CreateTransferValues extends CreateRecordValues {
@@ -67,6 +71,7 @@ export interface CreateTransferValues extends CreateRecordValues {
   destinationAccount: string;
   budgets: string[];
   tag: string[];
+  isPaid?: boolean;
 }
 
 export interface CreateExpenseValuesApiRequest extends Omit<CreateRecordValues, 'amount'> {
@@ -75,9 +80,15 @@ export interface CreateExpenseValuesApiRequest extends Omit<CreateRecordValues, 
   budgets: string[];
   indebtedPeople: IndebtedPeople[];
   account: string;
+  isPaid?: boolean;
 }
 
-export interface CreateIncomeValues extends CreateExpenseValuesApiRequest {
+export interface CreateIncomeValuesApiRequest extends Omit<CreateRecordValues, 'amount'> {
+  amount: number;
+  tag: string[];
+  budgets: string[];
+  indebtedPeople: IndebtedPeople[];
+  account: string;
   expensesPaid: ExpensePaid[];
 }
 

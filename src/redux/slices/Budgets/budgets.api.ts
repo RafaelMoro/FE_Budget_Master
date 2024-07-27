@@ -3,7 +3,9 @@ import { transformBudgetUI } from '../../../components/UI/Budget/Budget.util';
 import { DELETE_METHOD, POST_METHOD, PUT_METHOD } from '../../../constants';
 import { Budget, RequestBearerTokenProps } from '../../../globalInterface';
 import { budgetMasterApi } from '../../budgetMaster.api';
-import { BUDGETS_NOT_FOUND_MESSAGE, BUDGETS_TAG, BUDGETS_ROUTE_BE } from '../../constants';
+import {
+  BUDGETS_NOT_FOUND_MESSAGE, BUDGETS_TAG, BUDGETS_ROUTE_BE, EXPENSE_TAG,
+} from '../../constants';
 import { CreateBudgetMutationProps, DeleteBudgetMutationProps } from './budgets.interface';
 
 export const budgetsApiSlice = budgetMasterApi.injectEndpoints({
@@ -15,7 +17,7 @@ export const budgetsApiSlice = budgetMasterApi.injectEndpoints({
           Authorization: bearerToken,
         },
       }),
-      providesTags: [BUDGETS_TAG],
+      providesTags: [BUDGETS_TAG, EXPENSE_TAG],
       transformResponse: (response: BudgetsResponse) => {
         if (!response.data && response.message === BUDGETS_NOT_FOUND_MESSAGE) return [];
 

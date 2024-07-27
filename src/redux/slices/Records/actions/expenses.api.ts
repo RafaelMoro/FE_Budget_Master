@@ -1,6 +1,8 @@
 import { POST_METHOD, PUT_METHOD } from '../../../../constants';
 import { budgetMasterApi } from '../../../budgetMaster.api';
-import { RECORD_TAG, EXPENSE_ROUTE, UPDATE_MULTIPLE_EXPENSES } from '../../../constants';
+import {
+  RECORD_TAG, EXPENSE_ROUTE, UPDATE_MULTIPLE_EXPENSES, EXPENSE_TAG,
+} from '../../../constants';
 import { CreateExpenseMutationProps, GetExpensesResponse } from '../interface';
 
 export const expensesApiSlice = budgetMasterApi.injectEndpoints({
@@ -30,7 +32,7 @@ export const expensesApiSlice = budgetMasterApi.injectEndpoints({
           Authorization: bearerToken,
         },
       }),
-      invalidatesTags: [RECORD_TAG],
+      invalidatesTags: [RECORD_TAG, EXPENSE_TAG],
     }),
 
     editExpense: builder.mutation({
@@ -42,7 +44,7 @@ export const expensesApiSlice = budgetMasterApi.injectEndpoints({
           Authorization: bearerToken,
         },
       }),
-      invalidatesTags: [RECORD_TAG],
+      invalidatesTags: [RECORD_TAG, EXPENSE_TAG],
     }),
 
     updatePaidMultipleExpenses: builder.mutation({

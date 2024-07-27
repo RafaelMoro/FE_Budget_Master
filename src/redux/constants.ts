@@ -1,5 +1,6 @@
 export const ACCOUNT_TAG = 'Accounts';
 export const RECORD_TAG = 'Records';
+export const EXPENSE_TAG = 'Expenses';
 export const CATEGORIES_TAG = 'Categories';
 export const BUDGETS_TAG = 'Budgets';
 

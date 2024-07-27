@@ -144,56 +144,68 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
     setInitialValues({ ...values, budgets: newBudgets });
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleSubmit = (values: any) => {
-    // Flag to know if amount has a different value from the initial value. If so, the query to update account amount will be executed.
-    let amountTouched = false;
-    if (recordToBeEdited?.amount !== Number(initialAmount.current)) {
-      amountTouched = true;
-    }
+  const handleSubmitOnCreate = (values: CreateRecordValues) => {
     const newAmount = verifyAmountEndsPeriod(initialAmount.current);
-
-    const {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-      isPaid, amount, ...restValues
-    } = values;
     const amountToNumber = Number(newAmount);
     const newValues = {
       ...values,
       amount: amountToNumber,
       indebtedPeople,
-      account: selectedAccount?._id,
+      account: (selectedAccount?._id ?? ''),
       typeOfRecord: 'expense',
+      // @TODO: Cambiar esto
       linkedBudgets: [],
     };
 
-    if (edit) {
-      const recordId = recordToBeEdited?._id ?? '';
-      const previousAmount = recordToBeEdited?.amount ?? 0;
-      const userIdRecord = recordToBeEdited?.userId ?? '';
-      const payload: EditExpenseProps = {
-        values: newValues,
-        recordId,
-        amountTouched,
-        previousAmount,
-        userId: userIdRecord,
-        accountId: (selectedAccount?._id ?? ''),
-      };
-
-      if (isGuestUser) {
-        editExpenseLocalStorage(payload);
-        return;
-      }
-      resetLocalStorageWithUserOnly();
-      editExpense(payload);
-      return;
-    }
     if (isGuestUser) {
       createExpenseIncomeLocalStorage(newValues);
       return;
     }
     createExpense(newValues);
   };
+
+  const handleSubmitOnEdit = (values: CreateRecordValues) => {
+    // Flag to know if amount has a different value from the initial value. If so, the query to update account amount will be executed.
+    let amountTouched = false;
+    if (recordToBeEdited?.amount !== Number(initialAmount.current)) {
+      amountTouched = true;
+    }
+
+    const newAmount = verifyAmountEndsPeriod(initialAmount.current);
+    const amountToNumber = Number(newAmount);
+
+    const newValues = {
+      ...values,
+      amount: amountToNumber,
+      indebtedPeople,
+      account: selectedAccount?._id ?? '',
+      typeOfRecord: 'expense',
+      // @TODO: Cambiar esto
+      linkedBudgets: [],
+    };
+
+    const recordId = recordToBeEdited?._id ?? '';
+    const previousAmount = recordToBeEdited?.amount ?? 0;
+    const userIdRecord = recordToBeEdited?.userId ?? '';
+    const payload: EditExpenseProps = {
+      values: newValues,
+      recordId,
+      amountTouched,
+      previousAmount,
+      userId: userIdRecord,
+      accountId: (selectedAccount?._id ?? ''),
+    };
+
+    if (isGuestUser) {
+      editExpenseLocalStorage(payload);
+      return;
+    }
+    resetLocalStorageWithUserOnly();
+    editExpense(payload);
+  };
+
+  const handleSubmit = edit ? handleSubmitOnEdit : handleSubmitOnCreate;
+
   return (
     <>
       <Formik

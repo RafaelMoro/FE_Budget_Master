@@ -43,7 +43,7 @@ export interface UpdateRecordsOnEditProps {
 }
 
 export interface EditExpenseProps {
-  values: CreateExpenseValues | CreateIncomeValues;
+  values: CreateExpenseValues;
   recordId: string;
   amountTouched: boolean;
   previousAmount: number;

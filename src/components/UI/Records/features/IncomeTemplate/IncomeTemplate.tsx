@@ -110,68 +110,6 @@ const IncomeTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
   const closeShowExpenses = () => setShowExpenses(false);
   const addExpenseToIncome = (expenses: ExpensePaid[]) => setExpensesSelected(expenses);
 
-  const handleSubmit = (values: CreateRecordValues) => {
-    // Flag to know if amount has a different value from the initial value. If so, the query to update account amount will be executed.
-    let amountTouched = false;
-    if (recordToBeEdited?.amount !== Number(initialAmount.current)) {
-      amountTouched = true;
-    }
-    const newAmount = verifyAmountEndsPeriod(initialAmount.current);
-
-    const {
-      isPaid, amount, ...restValues
-    } = values;
-    const amountToNumber = Number(newAmount);
-    const newValues = {
-      ...restValues,
-      amount: amountToNumber,
-      indebtedPeople: [],
-      expensesPaid: expensesSelected,
-      account: (selectedAccount?._id ?? ''),
-      typeOfRecord: 'income',
-    };
-
-    if (edit) {
-      const expensesPaid = newValues?.expensesPaid;
-      // Format expenses as the new expenses selected are type ExpensePaid but the old ones are type ExpensePaidRedux
-      const expensesPaidFormatted = expensesPaid.map((expense) => {
-        if (typeof expense.date === 'string') {
-          return { ...expense, date: new Date(expense.date) };
-        }
-        return expense;
-      });
-      const formattedValues = { ...newValues, expensesPaid: expensesPaidFormatted };
-      const recordId = recordToBeEdited?._id ?? '';
-      const previousAmount = recordToBeEdited?.amount ?? 0;
-      const previousExpensesRelated = recordToBeEdited?.expensesPaid ?? [];
-      const userIdRecord = recordToBeEdited?.userId ?? '';
-
-      // Do symmetric difference to know what expenses should be edited as unpaid and what new records should be edited as paid.
-      const { oldRecords } = symmetricDifferenceExpensesRelated(previousExpensesRelated, expensesSelected);
-      const payload: EditIncomeProps = {
-        values: formattedValues,
-        recordId,
-        amountTouched,
-        previousAmount,
-        previousExpensesRelated: oldRecords,
-        userId: userIdRecord,
-        accountId: (selectedAccount?._id ?? ''),
-      };
-      if (isGuestUser) {
-        editIncomeLocalStorage(payload);
-        return;
-      }
-      resetLocalStorageWithUserOnly();
-      editIncome(payload);
-      return;
-    }
-    if (isGuestUser) {
-      createExpenseIncomeLocalStorage(newValues);
-      return;
-    }
-    createIncome(newValues);
-  };
-
   const handleSubmitOnCreate = (values: CreateRecordValues) => {
     const newAmount = verifyAmountEndsPeriod(initialAmount.current);
     const amountToNumber = Number(newAmount);
@@ -193,6 +131,65 @@ const IncomeTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
     }
     createIncome(newValues);
   };
+
+  const handleSubmitOnEdit = (values: CreateRecordValues) => {
+    // Flag to know if amount has a different value from the initial value. If so, the query to update account amount will be executed.
+    let amountTouched = false;
+    if (recordToBeEdited?.amount !== Number(initialAmount.current)) {
+      amountTouched = true;
+    }
+
+    const newAmount = verifyAmountEndsPeriod(initialAmount.current);
+
+    const {
+      isPaid, amount, ...restValues
+    } = values;
+    const amountToNumber = Number(newAmount);
+    const newValues = {
+      ...restValues,
+      amount: amountToNumber,
+      indebtedPeople: [],
+      expensesPaid: expensesSelected,
+      account: (selectedAccount?._id ?? ''),
+      typeOfRecord: 'income',
+    };
+
+    const expensesPaid = newValues?.expensesPaid;
+    // Format expenses as the new expenses selected are type ExpensePaid but the old ones are type ExpensePaidRedux
+    const expensesPaidFormatted = expensesPaid.map((expense) => {
+      if (typeof expense.date === 'string') {
+        return { ...expense, date: new Date(expense.date) };
+      }
+      return expense;
+    });
+    const formattedValues = { ...newValues, expensesPaid: expensesPaidFormatted };
+    const recordId = recordToBeEdited?._id ?? '';
+    const previousAmount = recordToBeEdited?.amount ?? 0;
+    const previousExpensesRelated = recordToBeEdited?.expensesPaid ?? [];
+    const userIdRecord = recordToBeEdited?.userId ?? '';
+
+    // Do symmetric difference to know what expenses should be edited as unpaid and what new records should be edited as paid.
+    const { oldRecords } = symmetricDifferenceExpensesRelated(previousExpensesRelated, expensesSelected);
+    const payload: EditIncomeProps = {
+      values: formattedValues,
+      recordId,
+      amountTouched,
+      previousAmount,
+      previousExpensesRelated: oldRecords,
+      userId: userIdRecord,
+      accountId: (selectedAccount?._id ?? ''),
+    };
+
+    if (isGuestUser) {
+      editIncomeLocalStorage(payload);
+      return;
+    }
+
+    resetLocalStorageWithUserOnly();
+    editIncome(payload);
+  };
+
+  const handleSubmit = edit ? handleSubmitOnEdit : handleSubmitOnCreate;
 
   return (
     <>

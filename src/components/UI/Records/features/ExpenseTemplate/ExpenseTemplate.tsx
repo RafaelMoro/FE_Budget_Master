@@ -81,7 +81,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
     date: dayjs().tz('America/Mexico_City'),
     tag: [],
     budgets: [],
-    linkedBudgets: [],
+    linkedBudgets: '',
   });
   const budgetsAvailable: ExpenseBudget[] = useMemo(
     () => (budgets ?? []).map((budget) => ({ budgetId: budget._id, budgetName: budget.name })),
@@ -101,7 +101,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
         date: dayjs(recordToBeEdited.date),
         tag: recordToBeEdited.tag,
         budgets: recordToBeEdited.budgets,
-        linkedBudgets: recordToBeEdited.linkedBudgets ?? [],
+        linkedBudgets: recordToBeEdited?.linkedBudgets?.[0] ?? '',
       };
       initialAmount.current = String(recordToBeEdited.amount);
 

@@ -64,7 +64,8 @@ export interface CreateRecordValues {
 
 export interface CreateExpenseValues extends CreateRecordValues {
   isPaid?: boolean;
-  linkedBudgets: string[];
+  // Setting it as string instead of string[] because we want to link a single budget
+  linkedBudgets: string;
 }
 
 export interface CreateTransferValues extends CreateRecordValues {

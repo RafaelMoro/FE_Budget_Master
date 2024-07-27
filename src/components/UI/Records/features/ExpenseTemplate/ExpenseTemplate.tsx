@@ -3,28 +3,27 @@ import { useEffect, useMemo, useState } from 'react';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import dayjs from 'dayjs';
-
 import { Switch } from 'formik-mui';
-import { Drawer } from '@mui/material';
+
+import { DASHBOARD_ROUTE } from '../../../../../pages/RoutesConstants';
 import { CreateRecordValues, ExpenseBudget } from '../../interface';
+import { IndebtedPeople } from '../../../../../globalInterface';
 import { useAppSelector } from '../../../../../redux/hooks';
 import { useCurrencyField } from '../../../../Other/CurrencyField/useCurrencyField';
 import { useGuestUser, useIndebtedPeople, useRecords } from '../../../../../hooks';
 import { RecordTemplateProps } from '../RecordTemplate/interface';
 import { EditExpenseProps } from '../../../../../hooks/useRecords/interface';
 import { resetLocalStorageWithUserOnly } from '../../../../../utils';
+import { scrollToTop } from '../../../../../utils/ScrollToTop';
 import { CreateRecordSchema } from '../../../../../validationsSchemas/records.schema';
-import { FormContainer, SecondaryButtonForm, ShowIndebtedPeopleContainer } from '../RecordTemplate/RecordTemplate.styled';
-import { TransactionFormFields } from '../TransactionFormFields';
-import { FlexContainer, FormControlLabel } from '../../../../../styles';
+
 import { ShowIndebtedPeople } from '../ShowIndebtedPeople';
 import { ActionButtonPanel, NoBudgetsCreatedForRecords } from '../../../../templates';
 import { SelectBudget } from '../SelectBudget';
-import { DASHBOARD_ROUTE } from '../../../../../pages/RoutesConstants';
-import { scrollToTop } from '../../../../../utils/ScrollToTop';
 import { AddIndebtedPerson } from '../AddIndebtedPerson/AddIndebtedPerson';
-import { SelectExpenses } from '../SelectExpenses';
-import { ExpensePaid, IndebtedPeople } from '../../../../../globalInterface';
+import { TransactionFormFields } from '../TransactionFormFields';
+import { FormContainer, SecondaryButtonForm, ShowIndebtedPeopleContainer } from '../RecordTemplate/RecordTemplate.styled';
+import { FlexContainer, FormControlLabel } from '../../../../../styles';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -66,8 +65,6 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
   const action: string = edit ? 'Edit' : 'Create';
   const buttonText = `${action} record`;
 
-  const [showExpenses, setShowExpenses] = useState<boolean>(false);
-  const [expensesSelected, setExpensesSelected] = useState<ExpensePaid[]>([]);
   const [initialValues, setInitialValues] = useState<CreateRecordValues>({
     amount: '',
     shortName: '',
@@ -113,20 +110,10 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
         addIndebtedPeopleForEdit(indebtedPeopleWithoutId);
       }
 
-      // If the income has expenses paid, update it.
-      const expensesPaid = (recordToBeEdited?.expensesPaid ?? []) as ExpensePaid[];
-      if (expensesPaid.length > 0) {
-        setExpensesSelected(expensesPaid);
-      }
-
       setInitialValues(newInitialValues);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recordToBeEdited?.category.categoryName, edit, isCredit]);
-
-  const addExpenseToIncome = (expenses: ExpensePaid[]) => setExpensesSelected(expenses);
-
-  const closeShowExpenses = () => setShowExpenses(false);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const openAddPersonModal = (values: any) => {
@@ -295,9 +282,6 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
         updatePerson={updateIndebtedPerson}
         modifyAction={indebtedPersonModalAction === 'Modify'}
       />
-      <Drawer anchor="right" open={showExpenses} onClose={closeShowExpenses}>
-        <SelectExpenses modifySelectedExpenses={addExpenseToIncome} selectedExpenses={expensesSelected} closeDrawer={closeShowExpenses} />
-      </Drawer>
     </>
   );
 };

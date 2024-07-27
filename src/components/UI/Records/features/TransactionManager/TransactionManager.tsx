@@ -11,6 +11,7 @@ import { AppIcon } from '../../../Icons';
 import { ToggleButton } from '../../../../../styles';
 import { GoBackIconButton, RecordTemplateMain, ToggleButtonGroup } from '../RecordTemplate/RecordTemplate.styled';
 import { isCategoryNotSelected } from '../../../../../redux/slices/Categories/categories.slice';
+import { ExpenseTemplate } from '../ExpenseTemplate';
 
 const TransactionManager = ({ edit = false }: { edit?: boolean }) => {
   const location = useLocation();
@@ -55,7 +56,8 @@ const TransactionManager = ({ edit = false }: { edit?: boolean }) => {
         {' '}
         { typeOfRecord }
       </Typography>
-      { (typeOfRecord !== 'transfer') && (<RecordTemplate typeOfRecord={typeOfRecord} edit={edit} />) }
+      { (typeOfRecord === 'income') && (<RecordTemplate typeOfRecord={typeOfRecord} edit={edit} />) }
+      { (typeOfRecord === 'expense') && (<ExpenseTemplate typeOfRecord={typeOfRecord} edit={edit} />)}
       {(typeOfRecord === 'transfer' && !hasOnlyOneAccount) && (
       <Transfer edit={edit} typeOfRecord={typeOfRecord} action={action} />
       )}

@@ -53,6 +53,7 @@ import {
   useCreateTransferMutation,
   saveRecordsLocalStorage,
   saveRecordsLocalStorageSelectedAccount,
+  useDeleteExpenseMutation,
 } from '../../redux/slices/Records';
 
 const useRecords = ({
@@ -63,6 +64,7 @@ const useRecords = ({
   const { updateGlobalNotification } = useNotification({});
   const [updateAmountAccountMutation] = useModifyAmountAccountMutation();
   const [deleteRecordMutation, { isLoading: loadingDeleteRecord }] = useDeleteRecordMutation();
+  const [deleteExpenseMutation] = useDeleteExpenseMutation();
   const [createExpenseMutation, { isLoading: isLoadingCreateExpense, isSuccess: isSucessCreateExpense }] = useCreateExpenseMutation();
   const [createIncomeMutation, { isLoading: isLoadingCreateIncome, isSuccess: isSucessCreateIncome }] = useCreateIncomeMutation();
   const [createTransferMutation, { isLoading: isLoadingCreateTransfer, isSuccess: isSuccessCreateTransfer }] = useCreateTransferMutation();
@@ -1303,6 +1305,61 @@ const useRecords = ({
     }
   };
 
+  const deleteExpense = async ({ isGuestUser }: { isGuestUser: boolean; }) => {
+    try {
+      const amountOfRecord = recordToBeDeleted?.amount as number;
+      const recordId = recordToBeDeleted?._id as string;
+      const accountRecord = recordToBeDeleted?.account as string;
+      const date = recordToBeDeleted?.date as Date;
+      const valuesDeleteRecord: DeleteRecordProps = { recordId };
+
+      if (isGuestUser) {
+        const response = deleteLocalRecord({
+          recordId, account: accountRecord, date, expensesPaid: [],
+        });
+        if (!response) {
+          return;
+        }
+        const { newRecordLocalStorage, allRecordsLocalStorage } = response;
+        dispatch(saveRecordsLocalStorage(allRecordsLocalStorage));
+        dispatch(saveRecordsLocalStorageSelectedAccount(newRecordLocalStorage));
+        addToLocalStorage({ newInfo: allRecordsLocalStorage, prop: 'records' });
+      } else {
+        await deleteExpenseMutation({ values: valuesDeleteRecord, bearerToken });
+      }
+
+      // Update Amount of the account.
+      const updateAmount = await updateAmountAccount({
+        amount: amountOfRecord, isExpense: true, deleteRecord: true, accountId: accountRecord, isGuestUser,
+      });
+      // If there's an error while updating the account, return
+      if (updateAmount !== UPDATE_AMOUNT_ACCOUNT_SUCCESS_RESPONSE) {
+        closeDeleteRecordModalCb();
+        closeDrawer();
+        return;
+      }
+
+      // Show success notification
+      updateGlobalNotification({
+        newTitle: 'Record Deleted Succesfully',
+        newDescription: '',
+        newStatus: SystemStateEnum.Success,
+      });
+      closeDeleteRecordModalCb();
+      closeDrawer();
+    } catch (err) {
+      const errorCatched = err as GeneralError;
+      closeDeleteRecordModalCb();
+      closeDrawer();
+      // Show notification error
+      showErrorNotification({
+        errorMessage: errorCatched?.data.message ?? '',
+        action: 'Delete',
+        goToDashboard: true,
+      });
+    }
+  };
+
   return {
     createExpense,
     editExpense,
@@ -1310,6 +1367,7 @@ const useRecords = ({
     editIncome,
     createTransfer,
     deleteRecord,
+    deleteExpense,
     createExpenseIncomeLocalStorage,
     createTransferLocal,
     editTransferLocal,

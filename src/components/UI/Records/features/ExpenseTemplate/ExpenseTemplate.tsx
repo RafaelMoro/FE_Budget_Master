@@ -150,8 +150,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
       indebtedPeople,
       account: (selectedAccount?._id ?? ''),
       typeOfRecord: 'expense',
-      // @TODO: Cambiar esto
-      linkedBudgets: [],
+      linkedBudgets: [values.linkedBudgets],
     };
 
     if (isGuestUser) {

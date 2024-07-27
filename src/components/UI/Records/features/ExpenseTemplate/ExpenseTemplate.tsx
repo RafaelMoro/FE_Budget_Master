@@ -230,7 +230,13 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
                 updateTags={updateTags}
                 tags={initialValues.tag}
               />
-              { (isCredit && typeOfRecord === 'expense') && (
+              { (budgetsAvailable.length === 0) && (
+                <NoBudgetsCreatedForRecords />
+              )}
+              { (budgetsAvailable.length > 0) && (
+                <SelectBudget budgets={budgetsAvailable} />
+              )}
+              { (isCredit) && (
               <FormControlLabel
                 control={(
                   <Field
@@ -254,12 +260,6 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
                   <SecondaryButtonForm variant="contained" onClick={() => openAddPersonModal(values)} size="medium">Add Person</SecondaryButtonForm>
                 </FlexContainer>
               </ShowIndebtedPeopleContainer>
-              { (budgetsAvailable.length === 0) && (
-                <NoBudgetsCreatedForRecords />
-              )}
-              { (budgetsAvailable.length > 0) && (
-                <SelectBudget budgets={budgetsAvailable} />
-              )}
               <ActionButtonPanel
                 routeCancelButton={DASHBOARD_ROUTE}
                 minWidthNumber="18"

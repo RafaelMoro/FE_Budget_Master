@@ -1,9 +1,9 @@
-import { POST_METHOD, PUT_METHOD } from '../../../../constants';
+import { DELETE_METHOD, POST_METHOD, PUT_METHOD } from '../../../../constants';
 import { budgetMasterApi } from '../../../budgetMaster.api';
 import {
   RECORD_TAG, EXPENSE_ROUTE, UPDATE_MULTIPLE_EXPENSES, EXPENSE_TAG,
 } from '../../../constants';
-import { CreateExpenseMutationProps, GetExpensesResponse } from '../interface';
+import { CreateExpenseMutationProps, DeleteExpenseMutationProps, GetExpensesResponse } from '../interface';
 
 export const expensesApiSlice = budgetMasterApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -57,6 +57,18 @@ export const expensesApiSlice = budgetMasterApi.injectEndpoints({
         },
       }),
     }),
+
+    deleteExpense: builder.mutation({
+      query: ({ values, bearerToken }: DeleteExpenseMutationProps) => ({
+        url: EXPENSE_ROUTE,
+        method: DELETE_METHOD,
+        body: values,
+        headers: {
+          Authorization: bearerToken,
+        },
+      }),
+      invalidatesTags: [RECORD_TAG, EXPENSE_TAG],
+    }),
   }),
 });
 
@@ -66,4 +78,5 @@ export const {
   useCreateExpenseMutation,
   useEditExpenseMutation,
   useUpdatePaidMultipleExpensesMutation,
+  useDeleteExpenseMutation,
 } = expensesApiSlice;

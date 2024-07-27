@@ -73,6 +73,11 @@ export interface DeleteRecordMutationProps {
   bearerToken: string;
 }
 
+export interface DeleteExpenseMutationProps {
+  values: DeleteRecordProps;
+  bearerToken: string;
+}
+
 export interface CreateTransferValues {
   expense: CreateExpenseValuesApiRequest;
   income: CreateIncomeValuesApiRequest;

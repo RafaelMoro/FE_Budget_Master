@@ -99,7 +99,7 @@ const useRecords = ({
     }
   };
 
-  async function updateAmountAccount({
+  function updateAmountAccount({
     amount, isExpense, accountId, isGuestUser = false, deleteRecord = false,
   }: UpdateAmountAccountProps) {
     try {
@@ -134,7 +134,7 @@ const useRecords = ({
     }
   }
 
-  const updateAmountAccountOnEditRecord = async ({
+  const updateAmountAccountOnEditRecord = ({
     amount, isExpense, previousAmount, accountId, isGuestUser = false,
   }: UpdateAmountAccountOnEditProps) => {
     try {
@@ -1065,7 +1065,7 @@ const useRecords = ({
       await editExpenseMutation({ values: newValues, bearerToken }).unwrap();
       if (amountTouched) {
         // Update the redux state
-        await updateAmountAccountOnEditRecord({
+        updateAmountAccountOnEditRecord({
           amount, isExpense: true, previousAmount, accountId,
         });
       }
@@ -1088,24 +1088,11 @@ const useRecords = ({
 
   const createIncome = async (values: CreateIncomeValuesApiRequest) => {
     try {
-      const { amount, date: dateValue, account } = values;
+      const { amount, date: dateValue } = values;
       const date = dateValue.toDate();
 
       await createIncomeMutation({ values, bearerToken }).unwrap();
-
-      // Update the amount of the account.
-      const updateAmount = await updateAmountAccount({ amount, isExpense: false, accountId: account });
-      // If there's an error while updating the account, return
-      if (updateAmount !== UPDATE_AMOUNT_ACCOUNT_SUCCESS_RESPONSE) return;
-
       updateTotalsIncome({ date, amount });
-
-      // Show success notification
-      updateGlobalNotification({
-        newTitle: 'Record created',
-        newDescription: '',
-        newStatus: SystemStateEnum.Success,
-      });
 
       // Navigate to dashboard
       navigate(DASHBOARD_ROUTE);

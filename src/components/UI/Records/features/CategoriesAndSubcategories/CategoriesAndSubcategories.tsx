@@ -98,7 +98,7 @@ const CategoriesAndSubcategories = ({
 
   const setNewCategory = (value: string) => {
     const allCategories = isGuestUser ? categoriesLocalStorage : (currentData ?? []);
-    const selectedCategory = allCategories.find((item) => item.categoryName === value);
+    const selectedCategory = allCategories.find((item) => item._id === value);
     if (selectedCategory && categoriesState.currentCategory !== selectedCategory) {
       dispatch(updateCurrentCategory(selectedCategory));
       if (categoriesState.categoryNotSelected === true) dispatch(isCategorySelected());

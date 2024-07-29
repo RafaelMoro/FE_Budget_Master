@@ -95,7 +95,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
         amount: String(recordToBeEdited.amount),
         shortName: recordToBeEdited.shortName,
         description: recordToBeEdited.description,
-        category: recordToBeEdited.category.categoryName,
+        category: recordToBeEdited.category._id,
         subCategory: recordToBeEdited.subCategory,
         isPaid: recordToBeEdited.isPaid ?? !isCredit,
         date: dayjs(recordToBeEdited.date),

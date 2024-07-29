@@ -79,7 +79,7 @@ const CategoriesAndSubcategories = ({
   useEffect(() => {
     if (categoryToBeEdited && (isSuccess || isGuestUser)) {
       const categories = isGuestUser ? categoriesLocalStorage : (currentData ?? []);
-      const newCategory = categories.find((item) => item.categoryName === categoryToBeEdited.categoryName);
+      const newCategory = categories.find((item) => item._id === categoryToBeEdited._id);
       dispatch(updateCurrentCategory(newCategory));
       dispatch(isCategorySelected());
     }

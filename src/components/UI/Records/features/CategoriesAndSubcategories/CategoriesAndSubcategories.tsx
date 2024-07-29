@@ -46,8 +46,14 @@ const CategoriesAndSubcategories = ({
     currentData, isError, isFetching, isSuccess,
   } = useFetchCategoriesQuery({ bearerToken }, { skip: !bearerToken && isGuestUser });
 
-  const onlyCategoriesFetched = useMemo(() => (currentData ?? []).map((item) => item.categoryName), [currentData]);
-  const onlyCategoriesLocalStorage = categoriesLocalStorage.map((category) => category.categoryName);
+  const onlyCategoriesFetched = useMemo(() => (currentData ?? []).map((item) => ({
+    name: item.categoryName,
+    categoryId: item._id,
+  })), [currentData]);
+  const onlyCategoriesLocalStorage = categoriesLocalStorage.map((category) => ({
+    name: category.categoryName,
+    categoryId: category._id,
+  }));
   const onlyCategories = isGuestUser ? onlyCategoriesLocalStorage : onlyCategoriesFetched;
 
   const handleCreateLocalCatergories = async () => {
@@ -139,7 +145,7 @@ const CategoriesAndSubcategories = ({
         <Field dataTestId="select-record-category" name={categoriesFieldName} setNewCategory={setNewCategory} component={SelectCategory}>
           {
             onlyCategories.map((option) => (
-              <MenuItem key={`${categoriesFieldName}-${option}`} value={option}>{option}</MenuItem>
+              <MenuItem key={option.categoryId} value={option.categoryId}>{option.name}</MenuItem>
             ))
           }
         </Field>

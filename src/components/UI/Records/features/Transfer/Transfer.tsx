@@ -158,7 +158,6 @@ const Transfer = ({ action, typeOfRecord, edit = false }: TransferProps) => {
       recordId: recordIdExpense,
       amountTouched,
       previousAmount,
-      userId: userIdRecord,
       accountId: expenseAccount,
     };
 

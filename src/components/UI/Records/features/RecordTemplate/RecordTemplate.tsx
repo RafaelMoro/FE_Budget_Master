@@ -218,13 +218,12 @@ const RecordTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => 
       if (edit) {
         const recordId = recordToBeEdited?._id ?? '';
         const previousAmount = recordToBeEdited?.amount ?? 0;
-        const userIdRecord = recordToBeEdited?.userId ?? '';
         const payload: EditExpenseProps = {
           values: newValues,
           recordId,
           amountTouched,
           previousAmount,
-          userId: userIdRecord,
+          // userId: userIdRecord,
           accountId: (selectedAccount?._id ?? ''),
         };
 

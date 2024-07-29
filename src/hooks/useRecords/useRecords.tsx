@@ -28,11 +28,9 @@ import {
   TransferRecordInfo,
   UpdateExpensesPaidLocalProps,
 } from './interface';
-import { UpdateAmountPayload } from '../../redux/slices/Accounts/interface';
 import {
   DeleteRecordProps, EditExpenseValues, EditIncomeValues, UpdateRelatedExpensesValues, UpdateTotalExpenseIncomePayload,
 } from '../../redux/slices/Records/interface';
-import { useModifyAmountAccountMutation } from '../../redux/slices/Accounts/actions';
 import { updateAmountSelectedAccount, updateAmountSelectedAccountLocalStorage } from '../../redux/slices/Accounts/accounts.slice';
 import { GUEST_USER_ID } from '../useGuestUser/constants';
 import { RecordsLocalStorage } from '../../utils/LocalStorage/interface';
@@ -62,7 +60,6 @@ const useRecords = ({
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { updateGlobalNotification } = useNotification({});
-  const [updateAmountAccountMutation] = useModifyAmountAccountMutation();
   const [deleteRecordMutation, { isLoading: loadingDeleteRecord }] = useDeleteRecordMutation();
   const [deleteExpenseMutation] = useDeleteExpenseMutation();
   const [createExpenseMutation, { isLoading: isLoadingCreateExpense, isSuccess: isSucessCreateExpense }] = useCreateExpenseMutation();
@@ -115,7 +112,7 @@ const useRecords = ({
         ? { accountId, amount: amountToUpdate - amount }
         : { accountId, amount: amountToUpdate + amount };
 
-      const payload: UpdateAmountPayload = deleteRecord ? payloadDeleteRecord : payloadCreateRecord;
+      const payload = deleteRecord ? payloadDeleteRecord : payloadCreateRecord;
       if (isGuestUser) {
         // Will update redux and local storage
         dispatch(updateAmountSelectedAccountLocalStorage({ amount: payload.amount, accountId }));
@@ -145,7 +142,7 @@ const useRecords = ({
       const newAccountId = accountId ?? selectedAccount?._id as string;
       const amountResultIncome = amountToUpdate - previousAmount + amount;
       const amountResultExpense = amountToUpdate + previousAmount - amount;
-      const payload: UpdateAmountPayload = isExpense
+      const payload = isExpense
         ? { accountId: newAccountId, amount: amountResultExpense }
         : { accountId: newAccountId, amount: amountResultIncome };
 
@@ -155,10 +152,8 @@ const useRecords = ({
         return UPDATE_AMOUNT_ACCOUNT_LOCAL_SUCCESS_RESPONSE;
       }
 
-      const { data: { account: { amount: amountFetched } } } = await updateAmountAccountMutation({ payload, bearerToken }).unwrap();
-
       // dispatch update amount account
-      dispatch(updateAmountSelectedAccount({ amount: amountFetched, accountId: newAccountId }));
+      dispatch(updateAmountSelectedAccount({ amount: payload.amount, accountId: newAccountId }));
 
       return UPDATE_AMOUNT_ACCOUNT_SUCCESS_RESPONSE;
     } catch (err) {
@@ -495,7 +490,7 @@ const useRecords = ({
   };
 
   const formatEditLocalRecord = (payload: EditExpenseProps, category: Category) => {
-    const { values, recordId, userId } = payload;
+    const { values, recordId } = payload;
     const { date } = values;
     const expensesPaid = (values as CreateIncomeValuesApiRequest)?.expensesPaid;
     const { formattedTime, fullDate } = formatDateToString(date.toDate());
@@ -506,7 +501,7 @@ const useRecords = ({
         ...values,
         _id: recordId,
         category,
-        userId,
+        userId: GUEST_USER_ID,
         date: date.toISOString(),
         formattedTime,
         fullDate,
@@ -521,7 +516,7 @@ const useRecords = ({
       ...(values as CreateIncomeValuesApiRequest),
       _id: recordId,
       category,
-      userId,
+      userId: GUEST_USER_ID,
       date: date.toISOString(),
       formattedTime,
       fullDate,
@@ -1060,31 +1055,23 @@ const useRecords = ({
   };
 
   const editExpense = async ({
-    values, recordId, amountTouched, previousAmount, userId, accountId,
+    values, recordId, amountTouched, previousAmount, accountId,
   }: EditExpenseProps) => {
     try {
       const { amount, date: dateValue } = values;
       const date = dateValue.toDate();
-      const newValues: EditExpenseValues = { ...values, recordId, userId };
+      const newValues: EditExpenseValues = { ...values, recordId };
 
       await editExpenseMutation({ values: newValues, bearerToken }).unwrap();
       if (amountTouched) {
-        const updateAmount = await updateAmountAccountOnEditRecord({
+        // Update the redux state
+        await updateAmountAccountOnEditRecord({
           amount, isExpense: true, previousAmount, accountId,
         });
-        // If there's an error while updating the account, return
-        if (updateAmount !== UPDATE_AMOUNT_ACCOUNT_SUCCESS_RESPONSE) return;
       }
 
       updateTotalsExpense({
         date, amount, edit: true, previousAmount,
-      });
-
-      // Show success notification
-      updateGlobalNotification({
-        newTitle: 'Record updated',
-        newDescription: '',
-        newStatus: SystemStateEnum.Success,
       });
 
       // Navigate to dashboard

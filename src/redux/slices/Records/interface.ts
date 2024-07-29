@@ -95,7 +95,6 @@ export interface DeleteExpenseThunkResponse extends Omit<RecordOperationThunkRes
 
 export interface EditExpenseValues extends CreateExpenseValuesApiRequest {
   recordId: string;
-  userId: string;
 }
 
 export interface EditIncomeValues extends CreateIncomeValuesApiRequest {

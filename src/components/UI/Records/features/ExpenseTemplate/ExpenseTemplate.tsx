@@ -177,19 +177,16 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
       indebtedPeople,
       account: selectedAccount?._id ?? '',
       typeOfRecord: 'expense',
-      // @TODO: Cambiar esto
-      linkedBudgets: [],
+      linkedBudgets: values.linkedBudgets ? [values.linkedBudgets] : [],
     };
 
     const recordId = recordToBeEdited?._id ?? '';
     const previousAmount = recordToBeEdited?.amount ?? 0;
-    const userIdRecord = recordToBeEdited?.userId ?? '';
     const payload: EditExpenseProps = {
       values: newValues,
       recordId,
       amountTouched,
       previousAmount,
-      userId: userIdRecord,
       accountId: (selectedAccount?._id ?? ''),
     };
 

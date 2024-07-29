@@ -48,7 +48,6 @@ export interface EditExpenseProps {
   amountTouched: boolean;
   previousAmount: number;
   accountId: string;
-  userId: string;
 }
 
 export interface EditIncomeProps {

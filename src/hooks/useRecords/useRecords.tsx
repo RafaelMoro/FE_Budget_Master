@@ -29,7 +29,7 @@ import {
   UpdateExpensesPaidLocalProps,
 } from './interface';
 import {
-  DeleteRecordProps, EditExpenseValues, EditIncomeValues, UpdateRelatedExpensesValues, UpdateTotalExpenseIncomePayload,
+  DeleteRecordProps, EditExpenseValues, EditIncomeValues, UpdateTotalExpenseIncomePayload,
 } from '../../redux/slices/Records/interface';
 import { updateAmountSelectedAccount, updateAmountSelectedAccountLocalStorage } from '../../redux/slices/Accounts/accounts.slice';
 import { GUEST_USER_ID } from '../useGuestUser/constants';
@@ -45,7 +45,6 @@ import {
   useDeleteRecordMutation,
   useCreateExpenseMutation,
   useEditExpenseMutation,
-  useUpdatePaidMultipleExpensesMutation,
   useCreateIncomeMutation,
   useEditIncomeMutation,
   useCreateTransferMutation,
@@ -67,7 +66,6 @@ const useRecords = ({
   const [createTransferMutation, { isLoading: isLoadingCreateTransfer, isSuccess: isSuccessCreateTransfer }] = useCreateTransferMutation();
   const [editExpenseMutation, { isLoading: isLoadingEditExpense, isSuccess: isSucessEditExpense }] = useEditExpenseMutation();
   const [editIncomeMutation, { isLoading: isLoadingEditIncome, isSuccess: isSucessEditIncome }] = useEditIncomeMutation();
-  const [updatePaidMultipleExpensesMutation] = useUpdatePaidMultipleExpensesMutation();
 
   const selectedAccount = useAppSelector((state) => state.accounts.accountSelected);
   const categoriesLocalStorage = useAppSelector((state) => state.categories.categoriesLocalStorage);
@@ -1107,42 +1105,16 @@ const useRecords = ({
   };
 
   const editIncome = async ({
-    values, recordId, amountTouched, previousAmount, previousExpensesRelated, userId, accountId,
+    values, recordId, previousAmount,
   }: EditIncomeProps) => {
     try {
       const { amount, date: dateValue } = values;
       const date = dateValue.toDate();
-      const newValues: EditIncomeValues = { ...values, recordId, userId };
+      const newValues: EditIncomeValues = { ...values, recordId };
 
       await editIncomeMutation({ values: newValues, bearerToken }).unwrap();
-
-      if (amountTouched) {
-        const updateAmount = await updateAmountAccountOnEditRecord({
-          amount, isExpense: false, previousAmount, accountId,
-        });
-        // If there's an error while updating the account, return
-        if (updateAmount !== UPDATE_AMOUNT_ACCOUNT_SUCCESS_RESPONSE) return;
-      }
-
       updateTotalsIncome({
         date, amount, edit: true, previousAmount,
-      });
-
-      // Set expenses as not paid to those that are removed from expenses related
-      if (previousExpensesRelated.length > 0) {
-        const payload: UpdateRelatedExpensesValues[] = previousExpensesRelated.map((expense) => ({
-          recordId: expense._id,
-          isPaid: false,
-        }));
-
-        await updatePaidMultipleExpensesMutation({ values: payload, bearerToken });
-      }
-
-      // Show success notification
-      updateGlobalNotification({
-        newTitle: 'Record Updated',
-        newDescription: '',
-        newStatus: SystemStateEnum.Success,
       });
 
       // Navigate to dashboard

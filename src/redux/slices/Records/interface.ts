@@ -99,7 +99,6 @@ export interface EditExpenseValues extends CreateExpenseValuesApiRequest {
 
 export interface EditIncomeValues extends CreateIncomeValuesApiRequest {
   recordId: string;
-  userId: string;
 }
 
 export interface EditExpenseThunkProps extends Omit<CreateExpenseMutationProps, 'values'> {

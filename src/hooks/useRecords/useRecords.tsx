@@ -122,7 +122,6 @@ const useRecords = ({
         return UPDATE_AMOUNT_ACCOUNT_LOCAL_SUCCESS_RESPONSE;
       }
 
-      await updateAmountAccountMutation({ payload, bearerToken }).unwrap();
       // dispatch update amount account
       dispatch(updateAmountSelectedAccount({ amount: payload.amount, accountId }));
 
@@ -972,24 +971,11 @@ const useRecords = ({
 
   const createExpense = async (values: CreateExpenseValuesApiRequest) => {
     try {
-      const { amount, date: dateValue, account } = values;
+      const { amount, date: dateValue } = values;
       const date = dateValue.toDate();
 
       await createExpenseMutation({ values, bearerToken }).unwrap();
-
-      // Update the amount of the account.
-      const updateAmountAccountResponse = await updateAmountAccount({ amount, isExpense: true, accountId: account });
-      // If there's an error while updating the account, return
-      if (updateAmountAccountResponse !== UPDATE_AMOUNT_ACCOUNT_SUCCESS_RESPONSE) return;
-
       updateTotalsExpense({ date, amount });
-
-      // Show success notification
-      updateGlobalNotification({
-        newTitle: 'Record created',
-        newDescription: '',
-        newStatus: SystemStateEnum.Success,
-      });
 
       // Navigate to dashboard
       navigate(DASHBOARD_ROUTE);

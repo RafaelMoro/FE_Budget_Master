@@ -7,11 +7,11 @@ import { Switch } from 'formik-mui';
 
 import { DASHBOARD_ROUTE } from '../../../../../pages/RoutesConstants';
 import { CreateExpenseValues, ExpenseBudget } from '../../interface';
-import { IndebtedPeople } from '../../../../../globalInterface';
+import { IndebtedPeople, TypeOfRecord } from '../../../../../globalInterface';
 import { useAppSelector } from '../../../../../redux/hooks';
+import { useLazyFetchBudgetsQuery } from '../../../../../redux/slices/Budgets/budgets.api';
 import { useCurrencyField } from '../../../../Other/CurrencyField/useCurrencyField';
 import { useGuestUser, useIndebtedPeople, useRecords } from '../../../../../hooks';
-import { RecordTemplateProps } from '../RecordTemplate/interface';
 import { EditExpenseProps } from '../../../../../hooks/useRecords/interface';
 import { resetLocalStorageWithUserOnly } from '../../../../../utils';
 import { scrollToTop } from '../../../../../utils/ScrollToTop';
@@ -22,14 +22,18 @@ import { ActionButtonPanel, NoBudgetsCreatedForRecords } from '../../../../templ
 import { SelectBudget } from '../SelectBudget';
 import { AddIndebtedPerson } from '../AddIndebtedPerson/AddIndebtedPerson';
 import { TransactionFormFields } from '../TransactionFormFields';
-import { FormContainer, SecondaryButtonForm, ShowIndebtedPeopleContainer } from '../RecordTemplate/RecordTemplate.styled';
+import { FormContainer, SecondaryButtonForm, ShowIndebtedPeopleContainer } from '../Features.styled';
 import { FlexContainer, FormControlLabel } from '../../../../../styles';
-import { useLazyFetchBudgetsQuery } from '../../../../../redux/slices/Budgets/budgets.api';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => {
+interface ExpenseTemplateProps {
+  edit?: boolean;
+  typeOfRecord: TypeOfRecord;
+}
+
+const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) => {
   const {
     modal: indebtedPersonModal,
     openModal,

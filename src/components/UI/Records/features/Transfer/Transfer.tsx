@@ -19,8 +19,7 @@ import { formatCurrencyToString, resetLocalStorageWithUserOnly, symmetricDiffere
 import { TransferAccountSelector } from '../TransferAccountSelector';
 import { TransactionFormFields } from '../TransactionFormFields';
 import { ActionButtonPanel } from '../../../../templates';
-import { FormContainer, SecondaryButtonForm } from '../RecordTemplate/RecordTemplate.styled';
-// Reuse imports on RecordTemplate
+import { FormContainer, SecondaryButtonForm } from '../Features.styled';
 import { ShowExpenses } from '../ShowExpenses';
 import { FlexContainer } from '../../../../../styles';
 import { SelectExpenses } from '../SelectExpenses';

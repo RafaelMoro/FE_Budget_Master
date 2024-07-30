@@ -8,7 +8,7 @@ import { DASHBOARD_ROUTE } from '../../../../../pages/RoutesConstants';
 import { Transfer } from '../Transfer';
 import { AppIcon } from '../../../Icons';
 import { ToggleButton } from '../../../../../styles';
-import { GoBackIconButton, RecordTemplateMain, ToggleButtonGroup } from '../RecordTemplate/RecordTemplate.styled';
+import { GoBackIconButton, TransactionManagerMain, ToggleButtonGroup } from '../Features.styled';
 import { isCategoryNotSelected } from '../../../../../redux/slices/Categories/categories.slice';
 import { ExpenseTemplate } from '../ExpenseTemplate';
 import { IncomeTemplate } from '../IncomeTemplate';
@@ -33,7 +33,7 @@ const TransactionManager = ({ edit = false }: { edit?: boolean }) => {
   };
 
   return (
-    <RecordTemplateMain>
+    <TransactionManagerMain>
       <GoBackIconButton aria-label="sign-out-button" onClick={handleGoBack}>
         <AppIcon icon="Close" />
       </GoBackIconButton>
@@ -61,7 +61,7 @@ const TransactionManager = ({ edit = false }: { edit?: boolean }) => {
       {(typeOfRecord === 'transfer' && !hasOnlyOneAccount) && (
       <Transfer edit={edit} typeOfRecord={typeOfRecord} action={action} />
       )}
-    </RecordTemplateMain>
+    </TransactionManagerMain>
   );
 };
 

@@ -8,11 +8,10 @@ import dayjs from 'dayjs';
 import { useGuestUser, useRecords } from '../../../../../hooks';
 import { useAppSelector } from '../../../../../redux/hooks';
 import { useCurrencyField } from '../../../../Other/CurrencyField/useCurrencyField';
-import { RecordTemplateProps } from '../RecordTemplate/interface';
-import { ExpensePaid } from '../../../../../globalInterface';
+import { ExpensePaid, TypeOfRecord } from '../../../../../globalInterface';
 import { CreateRecordValues } from '../../interface';
 import { CreateRecordSchema } from '../../../../../validationsSchemas/records.schema';
-import { FormContainer, SecondaryButtonForm } from '../RecordTemplate/RecordTemplate.styled';
+import { FormContainer, SecondaryButtonForm } from '../Features.styled';
 import { TransactionFormFields } from '../TransactionFormFields';
 import { ShowExpenses } from '../ShowExpenses';
 import { FlexContainer } from '../../../../../styles';
@@ -27,7 +26,12 @@ import { EditIncomeProps } from '../../../../../hooks/useRecords/interface';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-const IncomeTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) => {
+interface IncomeTemplateProps {
+  edit?: boolean;
+  typeOfRecord: TypeOfRecord;
+}
+
+const IncomeTemplate = ({ edit = false, typeOfRecord }: IncomeTemplateProps) => {
   const {
     createIncome,
     editIncome,

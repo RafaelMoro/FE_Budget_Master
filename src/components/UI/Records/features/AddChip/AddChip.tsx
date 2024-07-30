@@ -3,7 +3,7 @@ import { Field, Formik } from 'formik';
 import { TagOrBudgetSchema } from '../../../../../validationsSchemas/records.schema';
 import {
   ChipsContainer, ChipForm, AddChipButtonContainer, SecondaryButtonForm,
-} from '../RecordTemplate/RecordTemplate.styled';
+} from '../Features.styled';
 import {
   InputForm, Chip, FlexContainer,
 } from '../../../../../styles';

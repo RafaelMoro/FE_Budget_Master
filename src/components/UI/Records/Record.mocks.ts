@@ -78,6 +78,27 @@ export const getMockExpense = ({
   };
 };
 
+export const creditAccountMock: AccountUI = {
+  _id: '2',
+  __v: 0,
+  title: 'Bank account 2',
+  amount: 30000,
+  amountFormatted: '$30,000.00',
+  accountType: 'Credit',
+  backgroundColor: 'blue',
+  color: 'white',
+  backgroundColorUI: { name: 'blue', color: 'blue' },
+  colorUI: { name: 'white', color: 'white' },
+  selected: false,
+};
+
+export const accountsIniitalState: AccountsInitialState = {
+  accounts: [creditAccountMock],
+  accountSelected: creditAccountMock,
+  accountsLocalStorage: null,
+  accountsFetchStatus: 'success',
+};
+
 export const mockIncome: AnyRecord = {
   _id: '456-789',
   userId: '987-654',

@@ -4,6 +4,7 @@ import { screen } from '@testing-library/react';
 
 import { renderWithProviders } from '../../../../../tests/CustomWrapperRedux';
 import { ExpenseTemplate } from './ExpenseTemplate';
+import { accountsInitialState } from '../../Record.mocks';
 
 describe('<ExpenseTemplate />', () => {
   beforeEach(() => {
@@ -33,5 +34,16 @@ describe('<ExpenseTemplate />', () => {
     expect(screen.getByRole('button', { name: /add person/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /cancel/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /create record/i })).toBeInTheDocument();
+  });
+
+  test('Given an credit account, show the transaction paid input', () => {
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <ExpenseTemplate edit={false} typeOfRecord="expense" />
+      </Router>,
+      { preloadedState: { accounts: accountsInitialState } },
+    );
+
+    expect(screen.getByRole('checkbox', { name: /transaction paid/i })).toBeInTheDocument();
   });
 });

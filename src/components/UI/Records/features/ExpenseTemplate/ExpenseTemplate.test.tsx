@@ -12,6 +12,8 @@ describe('<ExpenseTemplate />', () => {
     jest.spyOn(console, 'error').mockImplementation(() => {});
   });
   const history = createMemoryHistory();
+
+  let createRecordButton: HTMLElement | null = null;
   test('Show Expense Template with title, description, amount, tags and button', () => {
     renderWithProviders(
       <Router location={history.location} navigator={history}>
@@ -54,12 +56,26 @@ describe('<ExpenseTemplate />', () => {
         <ExpenseTemplate edit={false} typeOfRecord="expense" />
       </Router>,
     );
-    const createRecordButton = screen.getByRole('button', { name: /create record/i });
+    createRecordButton = screen.getByRole('button', { name: /create record/i });
     userEvent.click(createRecordButton);
 
     expect(await screen.findByText(/amount is required/i)).toBeInTheDocument();
     expect(screen.getByText(/short description is required/i)).toBeInTheDocument();
     expect(screen.getByText(/^category is required/i)).toBeInTheDocument();
     expect(screen.getByText(/subcategory is required/i)).toBeInTheDocument();
+  });
+
+  test('Given a user filling short description with 2 characters, then show validation error', async () => {
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <ExpenseTemplate edit={false} typeOfRecord="expense" />
+      </Router>,
+    );
+    createRecordButton = screen.getByRole('button', { name: /create record/i });
+    const shortDescriptionInput = screen.getByRole('textbox', { name: /short description/i });
+    userEvent.type(shortDescriptionInput, 'ab');
+    userEvent.click(createRecordButton);
+
+    expect(await screen.findByText(/short description is too short/i)).toBeInTheDocument();
   });
 });

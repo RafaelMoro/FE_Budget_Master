@@ -1016,29 +1016,13 @@ const useRecords = ({
 
   const createTransfer = async ({ valuesExpense, valuesIncome }: CreateTransferProps) => {
     try {
-      const { amount: amountExpense, date: dateExpense, account: accountExpense } = valuesExpense;
-      const { amount: amountIncome, account: accountIncome, date: dateIncome } = valuesIncome;
+      const { amount: amountExpense, date: dateExpense } = valuesExpense;
+      const { amount: amountIncome, date: dateIncome } = valuesIncome;
 
       await createTransferMutation({ values: { expense: valuesExpense, income: valuesIncome }, bearerToken }).unwrap();
 
-      // Update the amount of the account.
-      const updateAmountOriginAccountResponse = await updateAmountAccount({ amount: amountExpense, isExpense: true, accountId: accountExpense });
-      // If there's an error while updating the account, return
-      if (updateAmountOriginAccountResponse !== UPDATE_AMOUNT_ACCOUNT_SUCCESS_RESPONSE) return;
-      const updateAmountDestinationAccountResponse = await updateAmountAccount({
-        amount: amountIncome, isExpense: false, accountId: accountIncome,
-      });
-      if (updateAmountDestinationAccountResponse !== UPDATE_AMOUNT_ACCOUNT_SUCCESS_RESPONSE) return;
-
       updateTotalsExpense({ date: dateExpense.toDate(), amount: amountExpense });
       updateTotalsIncome({ date: dateIncome.toDate(), amount: amountIncome });
-
-      // Show success notification
-      updateGlobalNotification({
-        newTitle: 'Transfer created',
-        newDescription: '',
-        newStatus: SystemStateEnum.Success,
-      });
 
       // Navigate to dashboard
       navigate(DASHBOARD_ROUTE);

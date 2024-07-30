@@ -2,6 +2,7 @@ import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { screen } from '@testing-library/react';
 
+import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from '../../../../../tests/CustomWrapperRedux';
 import { ExpenseTemplate } from './ExpenseTemplate';
 import { accountsInitialState } from '../../Record.mocks';
@@ -45,5 +46,20 @@ describe('<ExpenseTemplate />', () => {
     );
 
     expect(screen.getByRole('checkbox', { name: /transaction paid/i })).toBeInTheDocument();
+  });
+
+  test('Given a user clickin on create record, show validation error,', async () => {
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <ExpenseTemplate edit={false} typeOfRecord="expense" />
+      </Router>,
+    );
+    const createRecordButton = screen.getByRole('button', { name: /create record/i });
+    userEvent.click(createRecordButton);
+
+    expect(await screen.findByText(/amount is required/i)).toBeInTheDocument();
+    expect(screen.getByText(/short description is required/i)).toBeInTheDocument();
+    expect(screen.getByText(/^category is required/i)).toBeInTheDocument();
+    expect(screen.getByText(/subcategory is required/i)).toBeInTheDocument();
   });
 });

@@ -12,6 +12,7 @@ import {
   DaysLeftText, DrawerCloseIconButton, DrawerContainer, IconsContainer, Title,
 } from './BudgetDetailsDrawer.styled';
 import { BUDGET_EDITOR_PAGE_ROUTE } from '../../../../../pages/RoutesConstants';
+import { getExpirationMessage } from '../../Budget.util';
 
 interface BudgetDetailsDrawerProps {
   budget: BudgetUI;
@@ -29,14 +30,9 @@ const BudgetDetailsDrawer = ({
   const [restingDaysText, setRestingDaysText] = useState<string>(`${restingDays} days left`);
 
   useEffect(() => {
-    if (restingDays === 0) {
-      setRestingDaysText('Ending today');
-    } else if (restingDays === 1) {
-      setRestingDaysText('Ending tomorrow');
-    } else {
-      setRestingDaysText(`${restingDays} days left`);
-    }
-  }, [restingDays]);
+    const message = getExpirationMessage({ days: restingDays, month: dateText });
+    setRestingDaysText(message);
+  }, [dateText, restingDays]);
 
   const handleEditBudget = () => {
     navigate(BUDGET_EDITOR_PAGE_ROUTE, { state: { budget } });

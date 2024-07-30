@@ -1,8 +1,7 @@
-import { TRANSFER_ROUTE } from '../../../../components/UI/Records/constants';
 import { IncomeAndExpensesResponse } from '../../../../components/UI/Records/interface';
 import { DELETE_METHOD, POST_METHOD } from '../../../../constants';
 import { budgetMasterApi } from '../../../budgetMaster.api';
-import { RECORD_TAG } from '../../../constants';
+import { RECORD_TAG, TRANSFER_ROUTE } from '../../../constants';
 import { CreateTransferMutationProps, DeleteRecordMutationProps, GetRecordByMonthAndYearProps } from '../interface';
 
 export const recordsApiSlice = budgetMasterApi.injectEndpoints({

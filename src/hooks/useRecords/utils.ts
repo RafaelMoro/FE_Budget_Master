@@ -1,9 +1,9 @@
-import { CreateExpenseValues, CreateIncomeValues } from '../../components/UI/Records/interface';
+import { CreateExpenseValuesApiRequest, CreateIncomeValuesApiRequest } from '../../components/UI/Records/interface';
 import { AbbreviatedMonthsType, RecordRedux } from '../../globalInterface';
 import { RecordAgeStatusKey } from '../../utils/LocalStorage/interface';
 
-export function isCreateExpense(values: CreateExpenseValues | CreateIncomeValues): values is CreateExpenseValues {
-  return (values as CreateExpenseValues).isPaid !== undefined;
+export function isCreateExpense(values: CreateExpenseValuesApiRequest | CreateIncomeValuesApiRequest): values is CreateExpenseValuesApiRequest {
+  return (values as CreateExpenseValuesApiRequest).isPaid !== undefined;
 }
 
 export const getAgeLocalRecord = (

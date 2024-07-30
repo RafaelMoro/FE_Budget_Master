@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { GET_EXPENSES } from '../../components/UI/Records/constants';
+import { GET_EXPENSES } from '../../redux/constants';
 import { UseAllExpensesProps } from './interface';
 import { useAppSelector } from '../../redux/hooks';
 import { useLazyGetExpensesQuery } from '../../redux/slices/Records/actions/expenses.api';

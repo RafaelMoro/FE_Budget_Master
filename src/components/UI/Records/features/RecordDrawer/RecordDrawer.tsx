@@ -35,7 +35,7 @@ const RecordDrawer = ({
 }: RecordDrawerProps) => {
   const {
     shortName, description, fullDate, formattedTime,
-    category, subCategory, tag, indebtedPeople, budgets, isPaid, typeOfRecord,
+    category, subCategory, tag, indebtedPeople, linkedBudgets, isPaid, typeOfRecord,
   } = record;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -111,11 +111,11 @@ const RecordDrawer = ({
         {subCategory}
       </Typography>
       <RecordDrawerDescription>{description}</RecordDrawerDescription>
-      { (budgets.length > 0 && (
+      { (linkedBudgets && linkedBudgets?.length > 0 && (
         <DrawerChipContainer>
           <ParagraphBold>Budgets:</ParagraphBold>
-          { (budgets.map((budget, index) => (
-            <Chip key={`${index + 1}-${budget}`} label={budget} variant="outlined" chipColor={chipColor} />
+          { (linkedBudgets.map((budget) => (
+            <Chip key={budget._id} label={budget.name} variant="outlined" chipColor={chipColor} />
           ))) }
         </DrawerChipContainer>
       )) }

@@ -7,7 +7,6 @@ import { DateTimePickerValue } from '../../../DateTimePickerValue';
 import { CategoriesAndSubcategories } from '../CategoriesAndSubcategories';
 import { AddChip } from '../AddChip';
 import { InputForm } from '../../../../../styles';
-import { AddChipContainer } from '../RecordTemplate/RecordTemplate.styled';
 import { CurrencyField } from '../../../../Other';
 
 interface TransactionFormFieldsProps<CreateAnyRecord> {
@@ -20,15 +19,13 @@ interface TransactionFormFieldsProps<CreateAnyRecord> {
   touched: FormikTouched<CreateRecordValues | CreateTransferValues>;
   categoryToBeEdited: Category | null;
   updateTags: ({ values, newChips }: { values: CreateAnyRecord, newChips: string[] }) => void;
-  updateBudgets: ({ values, newBudgets }: { values: CreateAnyRecord, newBudgets: string[] }) => void;
   tags: string[];
-  budgets: string[];
 }
 
 // eslint-disable-next-line @typescript-eslint/comma-dangle
 const TransactionFormFields = <CreateAnyRecord,>({
   typeOfRecord, setFieldValue, errors, touched, categoryToBeEdited,
-  updateTags, updateBudgets, tags, budgets, values, amount, updateAmount,
+  updateTags, tags, values, amount, updateAmount,
 }: TransactionFormFieldsProps<CreateAnyRecord>) => (
   <>
     <CurrencyField
@@ -66,16 +63,7 @@ const TransactionFormFields = <CreateAnyRecord,>({
       touchedSubCategory={touched.subCategory}
       categoryToBeEdited={categoryToBeEdited}
     />
-    <AddChipContainer>
-      <AddChip name="tag" label="Tag (Optional)" action="tag" updateData={(newChips) => updateTags({ values, newChips })} chipsData={tags} />
-      <AddChip
-        name="budget"
-        label="Budget (Optional)"
-        action="budget"
-        updateData={(newBudgets) => updateBudgets({ values, newBudgets })}
-        chipsData={budgets}
-      />
-    </AddChipContainer>
+    <AddChip name="tag" label="Tag (Optional)" action="tag" updateData={(newChips) => updateTags({ values, newChips })} chipsData={tags} />
   </>
   );
 

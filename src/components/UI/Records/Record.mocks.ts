@@ -3,6 +3,7 @@ import { AccountsInitialState, AccountsState } from '../../../redux/slices/Accou
 import { CategoriesInitialState } from '../../../redux/slices/Categories/interface';
 import { UserInitialState } from '../../../redux/slices/User/interface';
 import { AccountUI } from '../Account/Account.interface';
+import { getMockBudget } from '../Budget/Budget.mocks';
 import { GetMockExpenseProps } from './interface';
 
 export const mockRecords: AnyRecord[] = [];
@@ -54,16 +55,49 @@ export const mockExpense: AnyRecord = {
 };
 
 export const getMockExpense = ({
-  paidStatus = false, budgets = [], tag = [], shortName = '',
+  paidStatus = false, budgets = [], tag = [], shortName = '', hasLinkedBudgets = false,
 }
-: GetMockExpenseProps): AnyRecord => ({
-  ...mockExpense,
-  shortName,
-  budgets,
-  tag,
-  isPaid: paidStatus,
+: GetMockExpenseProps): AnyRecord => {
+  if (hasLinkedBudgets) {
+    const budget = getMockBudget();
+    return {
+      ...mockExpense,
+      shortName,
+      budgets,
+      tag,
+      isPaid: paidStatus,
+      linkedBudgets: [budget],
+    };
+  }
+  return {
+    ...mockExpense,
+    shortName,
+    budgets,
+    tag,
+    isPaid: paidStatus,
+  };
+};
 
-});
+export const creditAccountMock: AccountUI = {
+  _id: '2',
+  __v: 0,
+  title: 'Bank account 2',
+  amount: 30000,
+  amountFormatted: '$30,000.00',
+  accountType: 'Credit',
+  backgroundColor: 'blue',
+  color: 'white',
+  backgroundColorUI: { name: 'blue', color: 'blue' },
+  colorUI: { name: 'white', color: 'white' },
+  selected: false,
+};
+
+export const accountsIniitalState: AccountsInitialState = {
+  accounts: [creditAccountMock],
+  accountSelected: creditAccountMock,
+  accountsLocalStorage: null,
+  accountsFetchStatus: 'success',
+};
 
 export const mockIncome: AnyRecord = {
   _id: '456-789',

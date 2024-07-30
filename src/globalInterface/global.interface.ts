@@ -10,6 +10,11 @@ export interface UserInfo {
   sub: string;
 }
 
+export interface Actions {
+  create: string;
+  edit: string;
+}
+
 export interface User {
   user: UserInfo;
   bearerToken: string;
@@ -94,6 +99,42 @@ export interface Category {
   icon: string;
 }
 
+export type TypeBudget = 'one-time' | 'periodic';
+export type PeriodBudget = 'weekly' | 'bi-weekly' | 'montly' | 'daily' | 'yearly';
+
+export interface Budget {
+  _id: string
+  __v: number;
+  name: string;
+  typeBudget: TypeBudget;
+  description: string;
+  // start date and end date are saved as strings because of the non serialized error in redux but these are Date type
+  startDate: string;
+  endDate: string;
+  limit: number;
+  currentAmount: number;
+  period: PeriodBudget;
+  // nextResetDate is saved as strings because of the non serialized error in redux but these are Date type
+  nextResetDate: string;
+  isActive: boolean;
+  previousPeriods: string[];
+}
+
+export interface BudgetUI extends Budget {
+  limitFormatted: string;
+  currentAmountFormatted: string;
+  startDateFormatted: string;
+  endDateFormatted: string;
+}
+
+export interface BudgetHistory {
+  _id: string;
+  __v: number;
+  budget: string;
+  sub: string;
+  records: string[];
+}
+
 export type TypeOfRecord = 'expense' | 'income' | 'transfer';
 
 export interface TransferRecord {
@@ -157,6 +198,7 @@ export interface ExpensePaidRedux extends Omit<ExpensePaid, 'date'> {
 
 export interface AnyRecord extends AccountRecord {
   isPaid?: boolean;
+  linkedBudgets?: Budget[];
   expensesPaid?: ExpensePaid[];
 }
 
@@ -199,6 +241,7 @@ export interface SelectFormikProps {
   form: SelectFormikFormProps;
   dataTestId: string;
   disabled?: boolean;
+  onClickCb?: () => void;
 }
 
 export interface LazyFetchRecords {

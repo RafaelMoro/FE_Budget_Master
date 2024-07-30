@@ -17,7 +17,7 @@ interface CreateCategoryValues {
 
 const WrapperCategoriesAndSubcategories = ({ categoryToBeEdited = null }: { categoryToBeEdited?: Category | null }) => {
   const initialValues: CreateCategoryValues = {
-    category: categoryToBeEdited ? categoryToBeEdited.categoryName : '',
+    category: categoryToBeEdited ? categoryToBeEdited._id : '',
     subCategory: categoryToBeEdited ? categoryToBeEdited.subCategories[0] : '',
   };
   const handleSubmit = jest.fn();

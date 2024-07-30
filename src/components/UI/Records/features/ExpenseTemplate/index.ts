@@ -1,0 +1,1 @@
+export { ExpenseTemplate } from './ExpenseTemplate';

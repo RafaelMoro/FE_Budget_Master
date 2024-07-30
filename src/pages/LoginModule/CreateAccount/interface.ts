@@ -1,5 +1,3 @@
-import { ReactNode } from 'react';
-
 export interface CreateUserValues {
   email: string;
   password: string;
@@ -47,17 +45,4 @@ export interface UserAndPasswordProps {
 export interface LoadingCreateAccountProps {
   counterView: number;
   direction: number;
-}
-
-export interface ErrorCreateAccountProps {
-  error: string;
-  resetCounterView: () => void;
-}
-
-export interface CreateAccountResultProps {
-  direction: number;
-  counterView: number;
-  isError: boolean;
-  onError: () => ReactNode;
-  onSuccess: () => ReactNode;
 }

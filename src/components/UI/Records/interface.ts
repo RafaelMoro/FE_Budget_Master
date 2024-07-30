@@ -40,21 +40,32 @@ export interface CategoriesResponse extends Omit<GeneralResponse, 'data'> {
   };
 }
 
+export interface ExpenseBudget {
+  budgetId: string;
+  budgetName: string;
+}
+
 export interface SelectCategoryProps extends SelectFormikProps {
   setNewCategory: (value: string) => void;
 }
 
-// Check the IndebtedPeople array and fields that may be different.
+// There is no CreateIncomeValues because the only prop would differentiate is expensesPaid,
+// which is added in the CreateIncomeValuesApiRequest separately.
 export interface CreateRecordValues {
   amount: string;
   shortName: string;
   description: string;
   category: string;
   subCategory: string;
-  isPaid?: boolean;
   date: Dayjs;
   tag: string[];
   budgets: string[];
+}
+
+export interface CreateExpenseValues extends CreateRecordValues {
+  isPaid?: boolean;
+  // Setting it as string instead of string[] because we want to link a single budget
+  linkedBudgets: string;
 }
 
 export interface CreateTransferValues extends CreateRecordValues {
@@ -62,17 +73,24 @@ export interface CreateTransferValues extends CreateRecordValues {
   destinationAccount: string;
   budgets: string[];
   tag: string[];
+  isPaid?: boolean;
 }
 
-export interface CreateExpenseValues extends Omit<CreateRecordValues, 'amount'> {
+export interface CreateExpenseValuesApiRequest extends Omit<CreateRecordValues, 'amount'> {
   amount: number;
   tag: string[];
   budgets: string[];
   indebtedPeople: IndebtedPeople[];
   account: string;
+  isPaid?: boolean;
 }
 
-export interface CreateIncomeValues extends CreateExpenseValues {
+export interface CreateIncomeValuesApiRequest extends Omit<CreateRecordValues, 'amount'> {
+  amount: number;
+  tag: string[];
+  budgets: string[];
+  indebtedPeople: IndebtedPeople[];
+  account: string;
   expensesPaid: ExpensePaid[];
 }
 
@@ -106,6 +124,7 @@ export interface GetMockExpenseProps {
   budgets?: string[];
   tag?: string[];
   shortName?: string;
+  hasLinkedBudgets?: boolean;
 }
 
 export interface SelectMonthYearBoxProps {

@@ -1,0 +1,1 @@
+export { IncomeTemplate } from './IncomeTemplate';

@@ -11,9 +11,6 @@ import { GeneralError } from '../../../globalInterface';
 import { useCreateLocalCategoriesMutation, useCreateUserMutation } from '../../../redux/slices/User/actions/createUser';
 import { useAnimateBox } from '../../../hooks/useAnimateBox';
 
-import {
-  CreateAccountResult, SuccessCreateAccount, ErrorCreateAccount, LoadingCreateAccount,
-} from './CreateAccountResult';
 import { PersonalInformation } from './PersonalInformation';
 import { UserAndPassword } from './UserAndPassword';
 import {
@@ -21,6 +18,10 @@ import {
 } from '../../../styles/LoginModule.styled';
 import { saveInfoToLocalStorage } from '../../../utils';
 import { useLogin } from '../../../hooks';
+import {
+  LoadingFormAnimated, ResultFormAnimated, ErrorResultFormAnimated, SuccessResultFormAnimated,
+} from '../../../components/templates';
+import { LOGIN_ROUTE } from '../../RoutesConstants';
 
 const initialValuesCreateAccountForm = {
   email: '',
@@ -98,14 +99,31 @@ const CreateAccount = ():ReactElement => {
           counterView={counterView}
           direction={direction}
         />
-        <LoadingCreateAccount counterView={counterView} direction={direction} />
+        <LoadingFormAnimated text="Your account is being created. Please wait..." order={2} counterView={counterView} direction={direction} />
         { (!isLoadingUser || isLoadingCategories) && (
-          <CreateAccountResult
+          <ResultFormAnimated
             counterView={counterView}
             direction={direction}
+            order={3}
             isError={isErrorCategories || isErrorUser}
-            onError={() => <ErrorCreateAccount error={errorText} resetCounterView={resetCounterView} />}
-            onSuccess={() => <SuccessCreateAccount />}
+            onError={
+              () => (
+                <ErrorResultFormAnimated
+                  redirectRoute={LOGIN_ROUTE}
+                  secondaryButtonText="Go to Login"
+                  primaryButtonText="Try Again"
+                  error={errorText}
+                  resetCounterView={resetCounterView}
+                />
+              )
+            }
+            onSuccess={() => (
+              <SuccessResultFormAnimated
+                title="Your account has being created."
+                buttonText="Go to Login"
+                redirectRoute={LOGIN_ROUTE}
+              />
+            )}
           />
         )}
       </MainContainer>

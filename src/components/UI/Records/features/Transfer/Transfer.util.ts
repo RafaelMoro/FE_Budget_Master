@@ -15,6 +15,7 @@ export const getValuesIncomeAndExpense = ({ values, expensesSelected }: { values
     account: values.originAccount,
     typeOfRecord: typeOfRecordValue,
     isPaid: true,
+    linkedBudgets: [],
   };
   const newValuesIncome = {
     ...restValues,

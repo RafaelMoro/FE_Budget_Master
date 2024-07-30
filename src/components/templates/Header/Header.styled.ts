@@ -1,11 +1,16 @@
 import styled from '@emotion/styled';
 import { IconButton, Typography } from '@mui/material';
-import { GuestUserButtonProps, HeaderShadowProps } from './Header.interface';
-import { Anchor, AppColors, SecondaryButton } from '../../../styles';
+import {
+  DrawerMenuLinkProps, GuestUserButtonProps, HeaderNavAnchorProps, HeaderShadowProps,
+} from './Header.interface';
+import {
+  Anchor, AppColors, globalConfiguration, responsiveBreakpoints, SecondaryButton,
+} from '../../../styles';
 
 export const HeaderShadow = styled.header`
   padding: 2rem;
   max-height: 11.3rem;
+  background-color: ${({ isLandingPage }: HeaderShadowProps) => (isLandingPage ? 'transparent' : AppColors.white)};
   ${(props: HeaderShadowProps) => (!props.isLandingPage && 'box-shadow: 0 .2rem .4rem rgba(0, 0, 0, 0.2); margin-bottom: 2rem;')}
 `;
 
@@ -14,6 +19,35 @@ export const HeaderContainer = styled.div`
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+`;
+
+export const HeaderNav = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+`;
+
+export const HeaderNavAnchor = styled(Anchor, { shouldForwardProp: (props) => props !== 'active' })`
+  color: ${AppColors.black};
+  text-decoration: none;
+  padding-bottom: 0.5rem;
+  font-size: ${globalConfiguration.mobile.fontSizes.H5};
+  font-weight: bold;
+  ${({ active }: HeaderNavAnchorProps) => active && `border-bottom: 1px solid ${AppColors.primary};`}
+  transition: color 0.3s;
+
+  :hover {
+    color: ${AppColors.primary};
+  }
+
+  @media ${responsiveBreakpoints.tablet} {
+    font-size: ${globalConfiguration.tablet.fontSizes.H5};
+  }
+
+  @media ${responsiveBreakpoints.desktop} {
+    font-size: ${globalConfiguration.desktop.fontSizes.H5};
+  }
 `;
 
 export const LogoImageContainer = styled.picture`
@@ -58,6 +92,14 @@ export const CloseIconButton = styled(IconButton)`
 export const DrawerMenuLink = styled(Anchor)`
   text-decoration: none;
   color: ${AppColors.black};
+  cursor: pointer;
+`;
+
+export const ActiveDrawerMenuLink = styled(Anchor, { shouldForwardProp: (props) => props !== 'active' })`
+  text-decoration: none;
+  color: ${({ active }: DrawerMenuLinkProps) => (active ? AppColors.primary : AppColors.black)};
+  border-bottom: 1px solid black;
+  border-color: ${({ active }: DrawerMenuLinkProps) => (active ? AppColors.primary : AppColors.black)};
   cursor: pointer;
 `;
 

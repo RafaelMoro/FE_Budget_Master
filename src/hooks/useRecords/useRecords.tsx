@@ -6,14 +6,15 @@ import {
   sortByDate,
 } from '../../utils';
 import { UPDATE_AMOUNT_ACCOUNT_LOCAL_SUCCESS_RESPONSE, UPDATE_AMOUNT_ACCOUNT_SUCCESS_RESPONSE } from './constants';
-import { EXPENSE_ROUTE, INCOME_ROUTE } from '../../components/UI/Records/constants';
+import { EXPENSE_ROUTE, INCOME_ROUTE } from '../../redux/constants';
 import { DASHBOARD_ROUTE } from '../../pages/RoutesConstants';
 
 import { SystemStateEnum } from '../../enums';
 import {
-  CreateExpenseValues, CreateIncomeValues,
+  CreateExpenseValuesApiRequest, CreateIncomeValuesApiRequest,
 } from '../../components/UI/Records/interface';
 import {
+  Actions,
   Category, ExpensePaid, ExpensePaidRedux, GeneralError, RecordRedux,
   TypeOfRecord,
 } from '../../globalInterface';
@@ -21,18 +22,15 @@ import {
   UseRecordsProps, UpdateAmountAccountProps, ShowErrorNotificationProps,
   UpdateAmountAccountOnEditProps, EditIncomeProps, EditExpenseProps,
   UpdateTotalCurrencyProps,
-  Actions,
   CreateTransferProps,
   GetNewRecordsClassifiedByAgeProps,
   GetRecordAgeStatusResponse,
   TransferRecordInfo,
   UpdateExpensesPaidLocalProps,
 } from './interface';
-import { UpdateAmountPayload } from '../../redux/slices/Accounts/interface';
 import {
-  DeleteRecordProps, EditExpenseValues, EditIncomeValues, UpdateRelatedExpensesValues, UpdateTotalExpenseIncomePayload,
+  DeleteRecordProps, EditExpenseValues, EditIncomeValues, UpdateTotalExpenseIncomePayload,
 } from '../../redux/slices/Records/interface';
-import { useModifyAmountAccountMutation } from '../../redux/slices/Accounts/actions';
 import { updateAmountSelectedAccount, updateAmountSelectedAccountLocalStorage } from '../../redux/slices/Accounts/accounts.slice';
 import { GUEST_USER_ID } from '../useGuestUser/constants';
 import { RecordsLocalStorage } from '../../utils/LocalStorage/interface';
@@ -47,12 +45,12 @@ import {
   useDeleteRecordMutation,
   useCreateExpenseMutation,
   useEditExpenseMutation,
-  useUpdatePaidMultipleExpensesMutation,
   useCreateIncomeMutation,
   useEditIncomeMutation,
   useCreateTransferMutation,
   saveRecordsLocalStorage,
   saveRecordsLocalStorageSelectedAccount,
+  useDeleteExpenseMutation,
 } from '../../redux/slices/Records';
 
 const useRecords = ({
@@ -61,14 +59,13 @@ const useRecords = ({
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { updateGlobalNotification } = useNotification({});
-  const [updateAmountAccountMutation] = useModifyAmountAccountMutation();
   const [deleteRecordMutation, { isLoading: loadingDeleteRecord }] = useDeleteRecordMutation();
+  const [deleteExpenseMutation] = useDeleteExpenseMutation();
   const [createExpenseMutation, { isLoading: isLoadingCreateExpense, isSuccess: isSucessCreateExpense }] = useCreateExpenseMutation();
   const [createIncomeMutation, { isLoading: isLoadingCreateIncome, isSuccess: isSucessCreateIncome }] = useCreateIncomeMutation();
   const [createTransferMutation, { isLoading: isLoadingCreateTransfer, isSuccess: isSuccessCreateTransfer }] = useCreateTransferMutation();
   const [editExpenseMutation, { isLoading: isLoadingEditExpense, isSuccess: isSucessEditExpense }] = useEditExpenseMutation();
   const [editIncomeMutation, { isLoading: isLoadingEditIncome, isSuccess: isSucessEditIncome }] = useEditIncomeMutation();
-  const [updatePaidMultipleExpensesMutation] = useUpdatePaidMultipleExpensesMutation();
 
   const selectedAccount = useAppSelector((state) => state.accounts.accountSelected);
   const categoriesLocalStorage = useAppSelector((state) => state.categories.categoriesLocalStorage);
@@ -100,7 +97,7 @@ const useRecords = ({
     }
   };
 
-  async function updateAmountAccount({
+  function updateAmountAccount({
     amount, isExpense, accountId, isGuestUser = false, deleteRecord = false,
   }: UpdateAmountAccountProps) {
     try {
@@ -113,14 +110,13 @@ const useRecords = ({
         ? { accountId, amount: amountToUpdate - amount }
         : { accountId, amount: amountToUpdate + amount };
 
-      const payload: UpdateAmountPayload = deleteRecord ? payloadDeleteRecord : payloadCreateRecord;
+      const payload = deleteRecord ? payloadDeleteRecord : payloadCreateRecord;
       if (isGuestUser) {
         // Will update redux and local storage
         dispatch(updateAmountSelectedAccountLocalStorage({ amount: payload.amount, accountId }));
         return UPDATE_AMOUNT_ACCOUNT_LOCAL_SUCCESS_RESPONSE;
       }
 
-      await updateAmountAccountMutation({ payload, bearerToken }).unwrap();
       // dispatch update amount account
       dispatch(updateAmountSelectedAccount({ amount: payload.amount, accountId }));
 
@@ -136,7 +132,7 @@ const useRecords = ({
     }
   }
 
-  const updateAmountAccountOnEditRecord = async ({
+  const updateAmountAccountOnEditRecord = ({
     amount, isExpense, previousAmount, accountId, isGuestUser = false,
   }: UpdateAmountAccountOnEditProps) => {
     try {
@@ -144,7 +140,7 @@ const useRecords = ({
       const newAccountId = accountId ?? selectedAccount?._id as string;
       const amountResultIncome = amountToUpdate - previousAmount + amount;
       const amountResultExpense = amountToUpdate + previousAmount - amount;
-      const payload: UpdateAmountPayload = isExpense
+      const payload = isExpense
         ? { accountId: newAccountId, amount: amountResultExpense }
         : { accountId: newAccountId, amount: amountResultIncome };
 
@@ -154,10 +150,8 @@ const useRecords = ({
         return UPDATE_AMOUNT_ACCOUNT_LOCAL_SUCCESS_RESPONSE;
       }
 
-      const { data: { account: { amount: amountFetched } } } = await updateAmountAccountMutation({ payload, bearerToken }).unwrap();
-
       // dispatch update amount account
-      dispatch(updateAmountSelectedAccount({ amount: amountFetched, accountId: newAccountId }));
+      dispatch(updateAmountSelectedAccount({ amount: payload.amount, accountId: newAccountId }));
 
       return UPDATE_AMOUNT_ACCOUNT_SUCCESS_RESPONSE;
     } catch (err) {
@@ -361,9 +355,9 @@ const useRecords = ({
 
   const formatCreateLocalRecord = ({
     values, category,
-  }: { values: CreateExpenseValues | CreateIncomeValues, category: Category, }) => {
+  }: { values: CreateExpenseValuesApiRequest | CreateIncomeValuesApiRequest, category: Category, }) => {
     const { date, subCategory } = values;
-    const expensesPaid = (values as CreateIncomeValues)?.expensesPaid;
+    const expensesPaid = (values as CreateIncomeValuesApiRequest)?.expensesPaid;
     const { formattedTime, fullDate } = formatDateToString(date.toDate());
     const dateFormatted = date.toISOString();
     const newId = window.crypto.randomUUID();
@@ -371,7 +365,7 @@ const useRecords = ({
     const amountFormatted = formatValueToCurrency({ amount: values.amount });
     if (isCreateExpense(values)) {
       const newExpense: RecordRedux = {
-        ...(values as CreateExpenseValues),
+        ...(values as CreateExpenseValuesApiRequest),
         date: dateFormatted,
         _id: newId,
         amountFormatted,
@@ -389,7 +383,7 @@ const useRecords = ({
     if (expensesPaid.length > 0) {
       const newExpensesRelated: ExpensePaidRedux[] = expensesPaid.map((rec) => ({ ...rec, date: rec.date.toISOString() }));
       const newIncome: RecordRedux = {
-        ...(values as CreateIncomeValues),
+        ...(values as CreateIncomeValuesApiRequest),
         date: dateFormatted,
         _id: newId,
         amountFormatted,
@@ -405,7 +399,7 @@ const useRecords = ({
     }
 
     const newIncome: RecordRedux = {
-      ...(values as CreateIncomeValues),
+      ...(values as CreateIncomeValuesApiRequest),
       date: dateFormatted,
       _id: newId,
       amountFormatted,
@@ -422,9 +416,9 @@ const useRecords = ({
 
   const formatCreateTransfer = ({
     income, expense, category,
-  }: { income: CreateIncomeValues, expense: CreateExpenseValues, category: Category }) => {
+  }: { income: CreateIncomeValuesApiRequest, expense: CreateExpenseValuesApiRequest, category: Category }) => {
     const { date, subCategory } = expense;
-    const expensesPaid = (income as CreateIncomeValues)?.expensesPaid;
+    const expensesPaid = (income as CreateIncomeValuesApiRequest)?.expensesPaid;
     const { formattedTime, fullDate } = formatDateToString(date.toDate());
     const dateFormatted = date.toISOString();
     const expenseId = window.crypto.randomUUID();
@@ -433,7 +427,7 @@ const useRecords = ({
     const amountFormatted = formatValueToCurrency({ amount: expense.amount });
 
     const newExpense: RecordRedux = {
-      ...(expense as CreateExpenseValues),
+      ...(expense as CreateExpenseValuesApiRequest),
       transferRecord: {
         transferId: incomeId,
         account: income.account,
@@ -453,7 +447,7 @@ const useRecords = ({
     if (expensesPaid.length > 0) {
       const newExpensesRelated: ExpensePaidRedux[] = expensesPaid.map((rec) => ({ ...rec, date: rec.date.toISOString() }));
       const incomeWithExpenses: RecordRedux = {
-        ...(income as CreateIncomeValues),
+        ...(income as CreateIncomeValuesApiRequest),
         transferRecord: {
           transferId: expenseId,
           account: expense.account,
@@ -473,7 +467,7 @@ const useRecords = ({
     }
 
     const newIncome: RecordRedux = {
-      ...(income as CreateIncomeValues),
+      ...(income as CreateIncomeValuesApiRequest),
       transferRecord: {
         transferId: expenseId,
         account: expense.account,
@@ -494,9 +488,9 @@ const useRecords = ({
   };
 
   const formatEditLocalRecord = (payload: EditExpenseProps, category: Category) => {
-    const { values, recordId, userId } = payload;
+    const { values, recordId } = payload;
     const { date } = values;
-    const expensesPaid = (values as CreateIncomeValues)?.expensesPaid;
+    const expensesPaid = (values as CreateIncomeValuesApiRequest)?.expensesPaid;
     const { formattedTime, fullDate } = formatDateToString(date.toDate());
     const amountFormatted = formatValueToCurrency({ amount: values.amount });
 
@@ -505,7 +499,7 @@ const useRecords = ({
         ...values,
         _id: recordId,
         category,
-        userId,
+        userId: GUEST_USER_ID,
         date: date.toISOString(),
         formattedTime,
         fullDate,
@@ -517,10 +511,10 @@ const useRecords = ({
     }
 
     const newIncome: RecordRedux = {
-      ...(values as CreateIncomeValues),
+      ...(values as CreateIncomeValuesApiRequest),
       _id: recordId,
       category,
-      userId,
+      userId: GUEST_USER_ID,
       date: date.toISOString(),
       formattedTime,
       fullDate,
@@ -692,7 +686,7 @@ const useRecords = ({
     };
   };
 
-  const createExpenseIncomeLocalStorage = (values: CreateExpenseValues | CreateIncomeValues) => {
+  const createExpenseIncomeLocalStorage = (values: CreateExpenseValuesApiRequest | CreateIncomeValuesApiRequest) => {
     // this could be part of a hook formatting the expense
     const { category, date } = values;
     const categoryFound = categoriesLocalStorage.find((cat) => cat.categoryName === category);
@@ -968,26 +962,13 @@ const useRecords = ({
     navigate(DASHBOARD_ROUTE);
   };
 
-  const createExpense = async (values: CreateExpenseValues) => {
+  const createExpense = async (values: CreateExpenseValuesApiRequest) => {
     try {
-      const { amount, date: dateValue, account } = values;
+      const { amount, date: dateValue } = values;
       const date = dateValue.toDate();
 
       await createExpenseMutation({ values, bearerToken }).unwrap();
-
-      // Update the amount of the account.
-      const updateAmountAccountResponse = await updateAmountAccount({ amount, isExpense: true, accountId: account });
-      // If there's an error while updating the account, return
-      if (updateAmountAccountResponse !== UPDATE_AMOUNT_ACCOUNT_SUCCESS_RESPONSE) return;
-
       updateTotalsExpense({ date, amount });
-
-      // Show success notification
-      updateGlobalNotification({
-        newTitle: 'Record created',
-        newDescription: '',
-        newStatus: SystemStateEnum.Success,
-      });
 
       // Navigate to dashboard
       navigate(DASHBOARD_ROUTE);
@@ -1001,7 +982,10 @@ const useRecords = ({
     }
   };
 
-  const createTransferLocal = ({ valuesExpense, valuesIncome }: { valuesExpense: CreateExpenseValues; valuesIncome: CreateIncomeValues }) => {
+  const createTransferLocal = (
+    { valuesExpense, valuesIncome }
+    : { valuesExpense: CreateExpenseValuesApiRequest; valuesIncome: CreateIncomeValuesApiRequest },
+  ) => {
     const { category } = valuesExpense;
     const categoryFound = categoriesLocalStorage.find((cat) => cat.categoryName === category);
     if (!categoryFound) {
@@ -1032,29 +1016,13 @@ const useRecords = ({
 
   const createTransfer = async ({ valuesExpense, valuesIncome }: CreateTransferProps) => {
     try {
-      const { amount: amountExpense, date: dateExpense, account: accountExpense } = valuesExpense;
-      const { amount: amountIncome, account: accountIncome, date: dateIncome } = valuesIncome;
+      const { amount: amountExpense, date: dateExpense } = valuesExpense;
+      const { amount: amountIncome, date: dateIncome } = valuesIncome;
 
       await createTransferMutation({ values: { expense: valuesExpense, income: valuesIncome }, bearerToken }).unwrap();
 
-      // Update the amount of the account.
-      const updateAmountOriginAccountResponse = await updateAmountAccount({ amount: amountExpense, isExpense: true, accountId: accountExpense });
-      // If there's an error while updating the account, return
-      if (updateAmountOriginAccountResponse !== UPDATE_AMOUNT_ACCOUNT_SUCCESS_RESPONSE) return;
-      const updateAmountDestinationAccountResponse = await updateAmountAccount({
-        amount: amountIncome, isExpense: false, accountId: accountIncome,
-      });
-      if (updateAmountDestinationAccountResponse !== UPDATE_AMOUNT_ACCOUNT_SUCCESS_RESPONSE) return;
-
       updateTotalsExpense({ date: dateExpense.toDate(), amount: amountExpense });
       updateTotalsIncome({ date: dateIncome.toDate(), amount: amountIncome });
-
-      // Show success notification
-      updateGlobalNotification({
-        newTitle: 'Transfer created',
-        newDescription: '',
-        newStatus: SystemStateEnum.Success,
-      });
 
       // Navigate to dashboard
       navigate(DASHBOARD_ROUTE);
@@ -1069,31 +1037,23 @@ const useRecords = ({
   };
 
   const editExpense = async ({
-    values, recordId, amountTouched, previousAmount, userId, accountId,
+    values, recordId, amountTouched, previousAmount, accountId,
   }: EditExpenseProps) => {
     try {
       const { amount, date: dateValue } = values;
       const date = dateValue.toDate();
-      const newValues: EditExpenseValues = { ...values, recordId, userId };
+      const newValues: EditExpenseValues = { ...values, recordId };
 
       await editExpenseMutation({ values: newValues, bearerToken }).unwrap();
       if (amountTouched) {
-        const updateAmount = await updateAmountAccountOnEditRecord({
+        // Update the redux state
+        updateAmountAccountOnEditRecord({
           amount, isExpense: true, previousAmount, accountId,
         });
-        // If there's an error while updating the account, return
-        if (updateAmount !== UPDATE_AMOUNT_ACCOUNT_SUCCESS_RESPONSE) return;
       }
 
       updateTotalsExpense({
         date, amount, edit: true, previousAmount,
-      });
-
-      // Show success notification
-      updateGlobalNotification({
-        newTitle: 'Record updated',
-        newDescription: '',
-        newStatus: SystemStateEnum.Success,
       });
 
       // Navigate to dashboard
@@ -1108,26 +1068,13 @@ const useRecords = ({
     }
   };
 
-  const createIncome = async (values: CreateIncomeValues) => {
+  const createIncome = async (values: CreateIncomeValuesApiRequest) => {
     try {
-      const { amount, date: dateValue, account } = values;
+      const { amount, date: dateValue } = values;
       const date = dateValue.toDate();
 
       await createIncomeMutation({ values, bearerToken }).unwrap();
-
-      // Update the amount of the account.
-      const updateAmount = await updateAmountAccount({ amount, isExpense: false, accountId: account });
-      // If there's an error while updating the account, return
-      if (updateAmount !== UPDATE_AMOUNT_ACCOUNT_SUCCESS_RESPONSE) return;
-
       updateTotalsIncome({ date, amount });
-
-      // Show success notification
-      updateGlobalNotification({
-        newTitle: 'Record created',
-        newDescription: '',
-        newStatus: SystemStateEnum.Success,
-      });
 
       // Navigate to dashboard
       navigate(DASHBOARD_ROUTE);
@@ -1142,42 +1089,16 @@ const useRecords = ({
   };
 
   const editIncome = async ({
-    values, recordId, amountTouched, previousAmount, previousExpensesRelated, userId, accountId,
+    values, recordId, previousAmount,
   }: EditIncomeProps) => {
     try {
       const { amount, date: dateValue } = values;
       const date = dateValue.toDate();
-      const newValues: EditIncomeValues = { ...values, recordId, userId };
+      const newValues: EditIncomeValues = { ...values, recordId };
 
       await editIncomeMutation({ values: newValues, bearerToken }).unwrap();
-
-      if (amountTouched) {
-        const updateAmount = await updateAmountAccountOnEditRecord({
-          amount, isExpense: false, previousAmount, accountId,
-        });
-        // If there's an error while updating the account, return
-        if (updateAmount !== UPDATE_AMOUNT_ACCOUNT_SUCCESS_RESPONSE) return;
-      }
-
       updateTotalsIncome({
         date, amount, edit: true, previousAmount,
-      });
-
-      // Set expenses as not paid to those that are removed from expenses related
-      if (previousExpensesRelated.length > 0) {
-        const payload: UpdateRelatedExpensesValues[] = previousExpensesRelated.map((expense) => ({
-          recordId: expense._id,
-          isPaid: false,
-        }));
-
-        await updatePaidMultipleExpensesMutation({ values: payload, bearerToken });
-      }
-
-      // Show success notification
-      updateGlobalNotification({
-        newTitle: 'Record Updated',
-        newDescription: '',
-        newStatus: SystemStateEnum.Success,
       });
 
       // Navigate to dashboard
@@ -1300,6 +1221,61 @@ const useRecords = ({
     }
   };
 
+  const deleteExpense = async ({ isGuestUser }: { isGuestUser: boolean; }) => {
+    try {
+      const amountOfRecord = recordToBeDeleted?.amount as number;
+      const recordId = recordToBeDeleted?._id as string;
+      const accountRecord = recordToBeDeleted?.account as string;
+      const date = recordToBeDeleted?.date as Date;
+      const valuesDeleteRecord: DeleteRecordProps = { recordId };
+
+      if (isGuestUser) {
+        const response = deleteLocalRecord({
+          recordId, account: accountRecord, date, expensesPaid: [],
+        });
+        if (!response) {
+          return;
+        }
+        const { newRecordLocalStorage, allRecordsLocalStorage } = response;
+        dispatch(saveRecordsLocalStorage(allRecordsLocalStorage));
+        dispatch(saveRecordsLocalStorageSelectedAccount(newRecordLocalStorage));
+        addToLocalStorage({ newInfo: allRecordsLocalStorage, prop: 'records' });
+      } else {
+        await deleteExpenseMutation({ values: valuesDeleteRecord, bearerToken });
+      }
+
+      // Update Amount of the account.
+      const updateAmount = await updateAmountAccount({
+        amount: amountOfRecord, isExpense: true, deleteRecord: true, accountId: accountRecord, isGuestUser,
+      });
+      // If there's an error while updating the account, return
+      if (updateAmount !== UPDATE_AMOUNT_ACCOUNT_SUCCESS_RESPONSE) {
+        closeDeleteRecordModalCb();
+        closeDrawer();
+        return;
+      }
+
+      // Show success notification
+      updateGlobalNotification({
+        newTitle: 'Record Deleted Succesfully',
+        newDescription: '',
+        newStatus: SystemStateEnum.Success,
+      });
+      closeDeleteRecordModalCb();
+      closeDrawer();
+    } catch (err) {
+      const errorCatched = err as GeneralError;
+      closeDeleteRecordModalCb();
+      closeDrawer();
+      // Show notification error
+      showErrorNotification({
+        errorMessage: errorCatched?.data.message ?? '',
+        action: 'Delete',
+        goToDashboard: true,
+      });
+    }
+  };
+
   return {
     createExpense,
     editExpense,
@@ -1307,6 +1283,7 @@ const useRecords = ({
     editIncome,
     createTransfer,
     deleteRecord,
+    deleteExpense,
     createExpenseIncomeLocalStorage,
     createTransferLocal,
     editTransferLocal,

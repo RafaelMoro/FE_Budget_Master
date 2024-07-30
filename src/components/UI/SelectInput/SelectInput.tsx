@@ -14,7 +14,7 @@ import { ColorCircle, PersonalizedMenuItem } from './SelectInput.styled';
 ** the value and name of the select input
 */
 const SelectInput = ({
-  labelId, labelName, fieldName, stringOptions, colorOptions, dataTestId,
+  labelId, labelName, fieldName, stringOptions, colorOptions, dataTestId, onClickCb,
   selectInputColors = false, disabled = false,
 }: SelectInputProps) => (
   <FormControl variant="standard">
@@ -24,6 +24,7 @@ const SelectInput = ({
       name={fieldName}
       dataTestId={dataTestId}
       component={SelectFormik}
+      onClickCb={onClickCb}
     >
       { (colorOptions && colorOptions.length > 0 && selectInputColors) && colorOptions.map((option) => (
         <PersonalizedMenuItem

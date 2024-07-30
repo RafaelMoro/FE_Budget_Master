@@ -46,8 +46,14 @@ const CategoriesAndSubcategories = ({
     currentData, isError, isFetching, isSuccess,
   } = useFetchCategoriesQuery({ bearerToken }, { skip: !bearerToken && isGuestUser });
 
-  const onlyCategoriesFetched = useMemo(() => (currentData ?? []).map((item) => item.categoryName), [currentData]);
-  const onlyCategoriesLocalStorage = categoriesLocalStorage.map((category) => category.categoryName);
+  const onlyCategoriesFetched = useMemo(() => (currentData ?? []).map((item) => ({
+    name: item.categoryName,
+    categoryId: item._id,
+  })), [currentData]);
+  const onlyCategoriesLocalStorage = categoriesLocalStorage.map((category) => ({
+    name: category.categoryName,
+    categoryId: category._id,
+  }));
   const onlyCategories = isGuestUser ? onlyCategoriesLocalStorage : onlyCategoriesFetched;
 
   const handleCreateLocalCatergories = async () => {
@@ -73,7 +79,7 @@ const CategoriesAndSubcategories = ({
   useEffect(() => {
     if (categoryToBeEdited && (isSuccess || isGuestUser)) {
       const categories = isGuestUser ? categoriesLocalStorage : (currentData ?? []);
-      const newCategory = categories.find((item) => item.categoryName === categoryToBeEdited.categoryName);
+      const newCategory = categories.find((item) => item._id === categoryToBeEdited._id);
       dispatch(updateCurrentCategory(newCategory));
       dispatch(isCategorySelected());
     }
@@ -92,7 +98,7 @@ const CategoriesAndSubcategories = ({
 
   const setNewCategory = (value: string) => {
     const allCategories = isGuestUser ? categoriesLocalStorage : (currentData ?? []);
-    const selectedCategory = allCategories.find((item) => item.categoryName === value);
+    const selectedCategory = allCategories.find((item) => item._id === value);
     if (selectedCategory && categoriesState.currentCategory !== selectedCategory) {
       dispatch(updateCurrentCategory(selectedCategory));
       if (categoriesState.categoryNotSelected === true) dispatch(isCategorySelected());
@@ -139,7 +145,7 @@ const CategoriesAndSubcategories = ({
         <Field dataTestId="select-record-category" name={categoriesFieldName} setNewCategory={setNewCategory} component={SelectCategory}>
           {
             onlyCategories.map((option) => (
-              <MenuItem key={`${categoriesFieldName}-${option}`} value={option}>{option}</MenuItem>
+              <MenuItem key={option.categoryId} value={option.categoryId}>{option.name}</MenuItem>
             ))
           }
         </Field>

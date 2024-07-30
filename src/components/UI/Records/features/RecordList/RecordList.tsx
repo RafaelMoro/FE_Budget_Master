@@ -1,5 +1,5 @@
 import { LoadingStatus } from '../LoadingStatus';
-import { NoAccountsFound } from '../../../Account/features/NoAccountsFound';
+import { NotElementFound } from '../../../../templates/NotFoundElement';
 
 import { useAppSelector } from '../../../../../redux/hooks';
 import { useGuestUser } from '../../../../../hooks/useGuestUser/useGuestUser';
@@ -37,7 +37,11 @@ const RecordList = ({ handleOpenCreateAccount }: RecordListProps) => {
 
   if (accounts && accounts.length === 0) {
     return (
-      <NoAccountsFound handleOpenCreateAccount={handleOpenCreateAccount} />
+      <NotElementFound
+        description="You have not created accounts yet. Start now!"
+        buttonText="Create account"
+        onClickCb={handleOpenCreateAccount}
+      />
     );
   }
 

@@ -19,8 +19,7 @@ import { formatCurrencyToString, resetLocalStorageWithUserOnly, symmetricDiffere
 import { TransferAccountSelector } from '../TransferAccountSelector';
 import { TransactionFormFields } from '../TransactionFormFields';
 import { ActionButtonPanel } from '../../../../templates';
-import { FormContainer, SecondaryButtonForm } from '../RecordTemplate/RecordTemplate.styled';
-// Reuse imports on RecordTemplate
+import { FormContainer, SecondaryButtonForm } from '../Features.styled';
 import { ShowExpenses } from '../ShowExpenses';
 import { FlexContainer } from '../../../../../styles';
 import { SelectExpenses } from '../SelectExpenses';
@@ -98,10 +97,6 @@ const Transfer = ({ action, typeOfRecord, edit = false }: TransferProps) => {
     setInitialValues({ ...values, tag: newChips });
   };
 
-  const updateBudgets = ({ values, newBudgets }: { values: CreateTransferValues, newBudgets: string[] }) => {
-    setInitialValues({ ...values, budgets: newBudgets });
-  };
-
   useEffect(() => {
     if (edit && recordToBeEdited) {
       const destinationAccount = isIncome ? recordToBeEdited.account : recordToBeEdited.transferRecord?.account ?? '';
@@ -113,7 +108,7 @@ const Transfer = ({ action, typeOfRecord, edit = false }: TransferProps) => {
         amount: String(recordToBeEdited.amount),
         shortName: recordToBeEdited.shortName,
         description: recordToBeEdited.description,
-        category: recordToBeEdited.category.categoryName,
+        category: recordToBeEdited.category._id,
         subCategory: recordToBeEdited.subCategory,
         date: dayjs(recordToBeEdited.date),
         tag: recordToBeEdited.tag,
@@ -162,7 +157,6 @@ const Transfer = ({ action, typeOfRecord, edit = false }: TransferProps) => {
       recordId: recordIdExpense,
       amountTouched,
       previousAmount,
-      userId: userIdRecord,
       accountId: expenseAccount,
     };
 
@@ -240,10 +234,8 @@ const Transfer = ({ action, typeOfRecord, edit = false }: TransferProps) => {
                 errors={errors}
                 touched={touched}
                 categoryToBeEdited={categoryToBeEdited}
-                updateBudgets={updateBudgets}
                 updateTags={updateTags}
                 tags={initialValues.tag}
-                budgets={initialValues.budgets}
               />
               { (isCreditDestinationAcc) && (
               <>

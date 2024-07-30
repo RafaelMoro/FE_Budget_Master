@@ -1,8 +1,11 @@
 import styled from '@emotion/styled';
-import { Toolbar, Typography } from '@mui/material';
-
 import {
-  AppColors, TableCell, responsiveBreakpoints,
+  IconButton, Toolbar, Typography, ToggleButtonGroup as ToggleButtonGroupMUI,
+} from '@mui/material';
+
+import { Form } from 'formik';
+import {
+  AppColors, SecondaryButton, TableCell, responsiveBreakpoints,
 } from '../../../../styles';
 import { appTheme } from '../../../../styles/theme';
 import { SelectExpensesCellProps, SelectMonthYearBoxProps } from '../interface';
@@ -140,4 +143,59 @@ export const NoRecordsFoundContainer = styled.div`
   align-items: center;
   gap: 4rem;
   padding-top: 4rem;
+`;
+
+/** Expense and Income Template */
+export const ShowIndebtedPeopleContainer = styled.div`
+  padding: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
+
+export const SecondaryButtonForm = styled(SecondaryButton)`
+  min-width: 18rem;
+`;
+
+export const FormContainer = styled(Form)`
+  display: grid;
+  padding: 0 1rem 0 1rem;
+  gap: 2rem;
+`;
+
+/** Chips */
+export const ChipForm = styled.div`
+  display: grid;
+  gap: 3rem;
+  margin: 2rem 0;
+`;
+
+export const ChipsContainer = styled.div`
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(min-content, 20%));
+  justify-content: center;
+  gap: 1rem;
+`;
+
+export const AddChipButtonContainer = styled.div`
+  margin: 0 auto;
+`;
+
+/** Transaction manager */
+export const GoBackIconButton = styled(IconButton)`
+  color: ${AppColors.grey};
+  justify-self: end;
+`;
+
+export const TransactionManagerMain = styled.main`
+  display: grid;
+  padding: 1rem;
+  gap: 1rem;
+  max-width: 90rem;
+  margin: 0 auto;
+`;
+
+export const ToggleButtonGroup = styled(ToggleButtonGroupMUI)`
+  justify-self: center;
 `;

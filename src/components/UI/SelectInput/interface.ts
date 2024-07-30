@@ -15,6 +15,7 @@ export interface SelectInputProps {
   colorOptions?: TextColors[] | BackgroundColors[];
   selectInputColors?: boolean;
   disabled?: boolean;
+  onClickCb?: () => void;
 }
 
 export interface SelectInputDynamicProps {

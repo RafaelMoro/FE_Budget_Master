@@ -4,6 +4,7 @@ import accountsReducer from './slices/Accounts/accounts.slice';
 import userInterfaceReducer from './slices/userInterface.slice';
 import recordsReducer from './slices/Records/records.slice';
 import categoriesReducer from './slices/Categories/categories.slice';
+import budgetsReducer from './slices/Budgets/budgets.slice';
 import { budgetMasterApi } from './budgetMaster.api';
 
 export const store = configureStore({
@@ -12,6 +13,7 @@ export const store = configureStore({
     user: userReducer,
     accounts: accountsReducer,
     records: recordsReducer,
+    budgets: budgetsReducer,
     categories: categoriesReducer,
     userInterface: userInterfaceReducer,
   },
@@ -24,6 +26,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   accounts: accountsReducer,
   records: recordsReducer,
+  budgets: budgetsReducer,
   categories: categoriesReducer,
   userInterface: userInterfaceReducer,
 });

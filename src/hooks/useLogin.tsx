@@ -17,6 +17,7 @@ import { LOGIN_FIXED_CACHED_KEY } from '../redux/constants';
 import { GeneralError } from '../globalInterface';
 import { toggleSignedOn } from '../redux/slices/userInterface.slice';
 import { resetCategoriesLocalStorage } from '../redux/slices/Categories/categories.slice';
+import { resetBudgets } from '../redux/slices/Budgets/budgets.slice';
 
 const NOTIFICATION_TITLE = 'Error';
 const NOTIFICATION_DESCRIPTION = '';
@@ -61,6 +62,7 @@ const useLogin = () => {
     // Reset redux state and local storage after sign out.
     dispatch(signOff());
     dispatch(resetAccounts());
+    dispatch(resetBudgets());
     dispatch(resetSelectedAccount());
     dispatch(resetTotalBalanceRecords());
     if (hasSignedOn) dispatch(toggleSignedOn());

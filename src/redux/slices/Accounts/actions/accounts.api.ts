@@ -4,7 +4,7 @@ import { formatAccounts } from '../../../../utils';
 import { budgetMasterApi } from '../../../budgetMaster.api';
 import { ACCOUNT_TAG } from '../../../constants';
 import {
-  CreateAccountMutationProps, DeleteAccountMutationProps, FetchAccountsResponse, ModifyAccountMutationProps, UpdateAmountAccountMutationProps,
+  CreateAccountMutationProps, DeleteAccountMutationProps, FetchAccountsResponse, ModifyAccountMutationProps,
 } from '../interface';
 
 export const accountsApiSlice = budgetMasterApi.injectEndpoints({
@@ -48,17 +48,6 @@ export const accountsApiSlice = budgetMasterApi.injectEndpoints({
       invalidatesTags: [ACCOUNT_TAG],
     }),
 
-    modifyAmountAccount: builder.mutation({
-      query: ({ payload, bearerToken }: UpdateAmountAccountMutationProps) => ({
-        url: POST_PUT_ACCOUNT_ROUTE,
-        method: PUT_METHOD,
-        body: payload,
-        headers: {
-          Authorization: bearerToken,
-        },
-      }),
-    }),
-
     deleteAccount: builder.mutation({
       query: ({ values, bearerToken }: DeleteAccountMutationProps) => ({
         url: DELETE_ACCOUNT_ROUTE,
@@ -75,5 +64,4 @@ export const accountsApiSlice = budgetMasterApi.injectEndpoints({
 
 export const {
   useFetchAccountsQuery, useCreateAccountMutation, useDeleteAccountMutation, useModifyAccountMutation,
-  useModifyAmountAccountMutation,
 } = accountsApiSlice;

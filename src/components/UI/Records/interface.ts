@@ -124,6 +124,7 @@ export interface GetMockExpenseProps {
   budgets?: string[];
   tag?: string[];
   shortName?: string;
+  hasLinkedBudgets?: boolean;
 }
 
 export interface SelectMonthYearBoxProps {

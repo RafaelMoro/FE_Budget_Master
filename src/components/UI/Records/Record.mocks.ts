@@ -3,6 +3,7 @@ import { AccountsInitialState, AccountsState } from '../../../redux/slices/Accou
 import { CategoriesInitialState } from '../../../redux/slices/Categories/interface';
 import { UserInitialState } from '../../../redux/slices/User/interface';
 import { AccountUI } from '../Account/Account.interface';
+import { getMockBudget } from '../Budget/Budget.mocks';
 import { GetMockExpenseProps } from './interface';
 
 export const mockRecords: AnyRecord[] = [];
@@ -54,16 +55,28 @@ export const mockExpense: AnyRecord = {
 };
 
 export const getMockExpense = ({
-  paidStatus = false, budgets = [], tag = [], shortName = '',
+  paidStatus = false, budgets = [], tag = [], shortName = '', hasLinkedBudgets = false,
 }
-: GetMockExpenseProps): AnyRecord => ({
-  ...mockExpense,
-  shortName,
-  budgets,
-  tag,
-  isPaid: paidStatus,
-
-});
+: GetMockExpenseProps): AnyRecord => {
+  if (hasLinkedBudgets) {
+    const budget = getMockBudget();
+    return {
+      ...mockExpense,
+      shortName,
+      budgets,
+      tag,
+      isPaid: paidStatus,
+      linkedBudgets: [budget],
+    };
+  }
+  return {
+    ...mockExpense,
+    shortName,
+    budgets,
+    tag,
+    isPaid: paidStatus,
+  };
+};
 
 export const mockIncome: AnyRecord = {
   _id: '456-789',

@@ -84,7 +84,11 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
     linkedBudgets: '',
   });
   const budgetsAvailable: ExpenseBudget[] = useMemo(
-    () => (budgets ?? []).map((budget) => ({ budgetId: budget._id, budgetName: budget.name })),
+    () => {
+      const budgetsFetched = (budgets ?? []).map((budget) => ({ budgetId: budget._id, budgetName: budget.name }));
+      budgetsFetched.unshift({ budgetId: 'None', budgetName: 'None' });
+      return budgetsFetched;
+    },
     [budgets],
   );
 
@@ -101,7 +105,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
         date: dayjs(recordToBeEdited.date),
         tag: recordToBeEdited.tag,
         budgets: recordToBeEdited.budgets,
-        linkedBudgets: recordToBeEdited?.linkedBudgets?.[0]._id ?? '',
+        linkedBudgets: recordToBeEdited?.linkedBudgets?.[0]?._id ?? '',
       };
       initialAmount.current = String(recordToBeEdited.amount);
 
@@ -144,6 +148,13 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
   const handleSubmitOnCreate = (values: CreateExpenseValues) => {
     const newAmount = verifyAmountEndsPeriod(initialAmount.current);
     const amountToNumber = Number(newAmount);
+    let newLinkedBudgets: string[] = [];
+    if (values.linkedBudgets) {
+      newLinkedBudgets = [values.linkedBudgets];
+      if (values.linkedBudgets === 'None') {
+        newLinkedBudgets = [];
+      }
+    }
     const newValues = {
       ...values,
       amount: amountToNumber,
@@ -151,7 +162,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
       account: (selectedAccount?._id ?? ''),
       typeOfRecord: 'expense',
       // If linked budgets has a value, then send the value in the array, if not, send it empty
-      linkedBudgets: values.linkedBudgets ? [values.linkedBudgets] : [],
+      linkedBudgets: newLinkedBudgets,
     };
 
     if (isGuestUser) {
@@ -167,6 +178,13 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
     if (recordToBeEdited?.amount !== Number(initialAmount.current)) {
       amountTouched = true;
     }
+    let newLinkedBudgets: string[] = [];
+    if (values.linkedBudgets) {
+      newLinkedBudgets = [values.linkedBudgets];
+      if (values.linkedBudgets === 'None') {
+        newLinkedBudgets = [];
+      }
+    }
 
     const newAmount = verifyAmountEndsPeriod(initialAmount.current);
     const amountToNumber = Number(newAmount);
@@ -177,7 +195,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
       indebtedPeople,
       account: selectedAccount?._id ?? '',
       typeOfRecord: 'expense',
-      linkedBudgets: values.linkedBudgets ? [values.linkedBudgets] : [],
+      linkedBudgets: newLinkedBudgets,
     };
 
     const recordId = recordToBeEdited?._id ?? '';

@@ -109,7 +109,7 @@ const Transfer = ({ action, typeOfRecord, edit = false }: TransferProps) => {
         amount: String(recordToBeEdited.amount),
         shortName: recordToBeEdited.shortName,
         description: recordToBeEdited.description,
-        category: recordToBeEdited.category.categoryName,
+        category: recordToBeEdited.category._id,
         subCategory: recordToBeEdited.subCategory,
         date: dayjs(recordToBeEdited.date),
         tag: recordToBeEdited.tag,

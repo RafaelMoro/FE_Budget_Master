@@ -54,6 +54,7 @@ const Record = ({ record, backgroundColor }: RecordProps) => {
     return `${person.name} - `;
   });
 
+  // effect to slice long descriptions
   useEffect(() => {
     if (descriptionIsLong) {
       const descriptionSliced = description.slice(0, MAX_LENGTH_DESCRIPTION);
@@ -62,6 +63,7 @@ const Record = ({ record, backgroundColor }: RecordProps) => {
     }
   }, [description, descriptionIsLong]);
 
+  // effect to slice long names
   useEffect(() => {
     if (nameIsLong) {
       const nameSliced = shortName.slice(0, MAX_LENGTH_TITLE);

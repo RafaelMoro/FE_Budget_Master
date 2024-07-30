@@ -30,9 +30,9 @@ const BudgetDetailsDrawer = ({
   const [restingDaysText, setRestingDaysText] = useState<string>(`${restingDays} days left`);
 
   useEffect(() => {
-    const message = getExpirationMessage({ days: restingDays, month: dateText });
+    const message = getExpirationMessage({ days: restingDays, month: dateText, endDateParam: budget.endDate });
     setRestingDaysText(message);
-  }, [dateText, restingDays]);
+  }, [budget.endDate, dateText, restingDays]);
 
   const handleEditBudget = () => {
     navigate(BUDGET_EDITOR_PAGE_ROUTE, { state: { budget } });

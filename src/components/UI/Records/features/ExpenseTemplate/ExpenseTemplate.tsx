@@ -101,7 +101,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: RecordTemplateProps) =>
         date: dayjs(recordToBeEdited.date),
         tag: recordToBeEdited.tag,
         budgets: recordToBeEdited.budgets,
-        linkedBudgets: recordToBeEdited?.linkedBudgets?.[0] ?? '',
+        linkedBudgets: recordToBeEdited?.linkedBudgets?.[0]._id ?? '',
       };
       initialAmount.current = String(recordToBeEdited.amount);
 

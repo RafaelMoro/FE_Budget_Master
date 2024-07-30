@@ -26,7 +26,7 @@ const Record = ({ record, backgroundColor }: RecordProps) => {
   const {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     _id, shortName, description, tag = [], category: { icon: categoryIcon },
-    indebtedPeople = [], budgets = [], typeOfRecord,
+    indebtedPeople = [], linkedBudgets = [], typeOfRecord,
     formattedTime, fullDate, isPaid, amountFormatted, expensesPaid = [],
   } = record;
   const windowSize = useAppSelector((state) => state.userInterface.windowSize);
@@ -35,7 +35,7 @@ const Record = ({ record, backgroundColor }: RecordProps) => {
   const [openLongView, setOpenLongView] = useState(false);
   const [shortedName, setShortedName] = useState('');
   const [shortedDescription, setShortedDescription] = useState('');
-  const firstTwoBudgets = budgets.slice(0, 2);
+  const firstTwoBudgets = linkedBudgets.slice(0, 2);
   const firstTwoTags = tag.slice(0, 2);
 
   const [openDeleteRecordModal, setOpenDeleteRecordModal] = useState(false);
@@ -132,9 +132,9 @@ const Record = ({ record, backgroundColor }: RecordProps) => {
           </RecordsPaidText>
           )}
           <BudgetChipContainer>
-            { budgets.length === 0 && (<RecordSubtitleText variant="body2">No budgets</RecordSubtitleText>) }
-            { budgets.length > 0 && budgets.map((budget) => (
-              <Chip key={`${_id}-${budget}`} label={budget} variant="outlined" chipColor={backgroundColor} />
+            { linkedBudgets.length === 0 && (<RecordSubtitleText variant="body2">No budgets</RecordSubtitleText>) }
+            { linkedBudgets.length > 0 && linkedBudgets.map((budget) => (
+              <Chip key={budget._id} label={budget.name} variant="outlined" chipColor={backgroundColor} />
             ))}
           </BudgetChipContainer>
           <TagsChipContainer>
@@ -217,12 +217,12 @@ const Record = ({ record, backgroundColor }: RecordProps) => {
           </RecordsPaidText>
         )}
         <BudgetChipContainer>
-          { budgets.length === 0 && (<RecordSubtitleText variant="body2">No budgets</RecordSubtitleText>) }
-          { budgets.length > 0 && firstTwoBudgets.map((budget) => (
-            <Chip key={`${_id}-${budget}`} label={budget} variant="outlined" chipColor={backgroundColor} />
+          { linkedBudgets.length === 0 && (<RecordSubtitleText variant="body2">No budgets</RecordSubtitleText>) }
+          { linkedBudgets.length > 0 && firstTwoBudgets.map((budget) => (
+            <Chip key={budget._id} label={budget.name} variant="outlined" chipColor={backgroundColor} />
           ))}
-          { budgets.length > 2 && (
-          <Chip label={`Remaining budgets: ${budgets.length - 2}`} variant="outlined" chipColor={backgroundColor} />
+          { linkedBudgets.length > 2 && (
+          <Chip label={`Remaining budgets: ${linkedBudgets.length - 2}`} variant="outlined" chipColor={backgroundColor} />
           ) }
         </BudgetChipContainer>
         <TagsChipContainer>

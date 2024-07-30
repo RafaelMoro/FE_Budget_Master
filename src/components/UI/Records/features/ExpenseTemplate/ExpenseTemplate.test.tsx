@@ -78,4 +78,20 @@ describe('<ExpenseTemplate />', () => {
 
     expect(await screen.findByText(/short description is too short/i)).toBeInTheDocument();
   });
+
+  test('Given a user filling short description with a long text, show error validation', async () => {
+    const text = 'this is a very long test on the short description where it will show validation error';
+    renderWithProviders(
+      <Router location={history.location} navigator={history}>
+        <ExpenseTemplate edit={false} typeOfRecord="expense" />
+      </Router>,
+    );
+
+    createRecordButton = screen.getByRole('button', { name: /create record/i });
+    const shortDescriptionInput = screen.getByRole('textbox', { name: /short description/i });
+    userEvent.type(shortDescriptionInput, text);
+    userEvent.click(createRecordButton);
+
+    expect(await screen.findByText(/short description is too long\. use description field instead\./i)).toBeInTheDocument();
+  });
 });

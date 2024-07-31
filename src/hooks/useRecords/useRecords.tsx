@@ -964,10 +964,12 @@ const useRecords = ({
 
   const createExpense = async (values: CreateExpenseValuesApiRequest) => {
     try {
-      const { amount, date: dateValue } = values;
+      const { amount, date: dateValue, account: accountId } = values;
       const date = dateValue.toDate();
 
       await createExpenseMutation({ values, bearerToken }).unwrap();
+      // Update account in redux state, not in the backend
+      updateAmountAccount({ amount, isExpense: true, accountId });
       updateTotalsExpense({ date, amount });
 
       // Navigate to dashboard
@@ -1020,7 +1022,9 @@ const useRecords = ({
       const { amount: amountIncome, date: dateIncome } = valuesIncome;
 
       await createTransferMutation({ values: { expense: valuesExpense, income: valuesIncome }, bearerToken }).unwrap();
-
+      // Update account in redux state, not in the backend
+      updateAmountAccount({ amount: amountExpense, isExpense: true, accountId: valuesExpense.account });
+      updateAmountAccount({ amount: amountIncome, isExpense: false, accountId: valuesIncome.account });
       updateTotalsExpense({ date: dateExpense.toDate(), amount: amountExpense });
       updateTotalsIncome({ date: dateIncome.toDate(), amount: amountIncome });
 
@@ -1070,10 +1074,12 @@ const useRecords = ({
 
   const createIncome = async (values: CreateIncomeValuesApiRequest) => {
     try {
-      const { amount, date: dateValue } = values;
+      const { amount, date: dateValue, account: accountId } = values;
       const date = dateValue.toDate();
 
       await createIncomeMutation({ values, bearerToken }).unwrap();
+      // Update account in redux state, not in the backend
+      updateAmountAccount({ amount, isExpense: false, accountId });
       updateTotalsIncome({ date, amount });
 
       // Navigate to dashboard
@@ -1089,14 +1095,21 @@ const useRecords = ({
   };
 
   const editIncome = async ({
-    values, recordId, previousAmount,
+    values, recordId, previousAmount, amountTouched,
   }: EditIncomeProps) => {
     try {
-      const { amount, date: dateValue } = values;
+      const { amount, date: dateValue, account: accountId } = values;
       const date = dateValue.toDate();
       const newValues: EditIncomeValues = { ...values, recordId };
 
       await editIncomeMutation({ values: newValues, bearerToken }).unwrap();
+
+      if (amountTouched) {
+        // Update only the redux state
+        updateAmountAccountOnEditRecord({
+          amount, isExpense: false, previousAmount, accountId,
+        });
+      }
       updateTotalsIncome({
         date, amount, edit: true, previousAmount,
       });
@@ -1171,7 +1184,7 @@ const useRecords = ({
       }
 
       // Update Amount of the account.
-      const updateAmount = await updateAmountAccount({
+      const updateAmount = updateAmountAccount({
         amount: amountOfRecord, isExpense: deleteRecordExpense ?? false, deleteRecord: true, accountId: accountRecord, isGuestUser,
       });
       // If there's an error while updating the account, return

@@ -8,7 +8,6 @@ import { LANDING_ROUTE } from '../../../pages/RoutesConstants';
 
 const BrandLogoName = ({ isLandingPage = false, isLoginPage = false }: BrandLogoNameProps) => {
   const navigate = useNavigate();
-  const titleVariant = isLoginPage ? 'h1' : 'h2';
   const navigateHome = () => navigate(LANDING_ROUTE);
 
   return (
@@ -17,7 +16,7 @@ const BrandLogoName = ({ isLandingPage = false, isLoginPage = false }: BrandLogo
         <source srcSet={logoWebp} type="image/webp" />
         <img src={logoPng} alt="Budget Master logo" />
       </LogoImageContainer>
-      <LogoTitleLogin isLandingPage={isLandingPage} variant={titleVariant}>Budget Master</LogoTitleLogin>
+      <LogoTitleLogin isLandingPage={isLandingPage}>Budget Master</LogoTitleLogin>
     </BrandLogoButton>
   );
 };

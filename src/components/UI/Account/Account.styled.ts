@@ -10,7 +10,7 @@ import { FormContainer } from '../../../styles/LoginModule.styled';
 const accountDynamicStyles = ({
   color, selected,
 }: AccountDynamicStylesProps) => css`
-  border: .1rem solid ${color ?? AppColors.black};
+  background-color: ${color ?? AppColors.black};
   ${selected && 'opacity: 1;'}
 `;
 

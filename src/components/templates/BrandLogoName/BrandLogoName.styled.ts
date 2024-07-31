@@ -24,7 +24,6 @@ export const LogoImageContainer = styled.picture`
     ${(props: LogoImageContainerProps) => (props.isLandingPage && 'border-radius: 50%;')}
   }
 `;
-console.log('appTheme.typography.h2.fontSize', globalConfiguration.desktop.fontSizes.H2);
 
 export const LogoTitleLogin = styled(Typography, { shouldForwardProp: (props) => props !== 'isLandingPage' })`
   font-family: 'Russo One', sans-serif;

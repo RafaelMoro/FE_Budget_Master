@@ -1020,7 +1020,8 @@ const useRecords = ({
       const { amount: amountIncome, date: dateIncome } = valuesIncome;
 
       await createTransferMutation({ values: { expense: valuesExpense, income: valuesIncome }, bearerToken }).unwrap();
-
+      updateAmountAccount({ amount: amountExpense, isExpense: true, accountId: valuesExpense.account });
+      updateAmountAccount({ amount: amountIncome, isExpense: false, accountId: valuesIncome.account });
       updateTotalsExpense({ date: dateExpense.toDate(), amount: amountExpense });
       updateTotalsIncome({ date: dateIncome.toDate(), amount: amountIncome });
 

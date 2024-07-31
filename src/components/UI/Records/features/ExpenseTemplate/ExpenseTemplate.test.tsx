@@ -1,6 +1,8 @@
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { fireEvent, screen, within } from '@testing-library/react';
+import {
+  fireEvent, screen, waitFor, within,
+} from '@testing-library/react';
 import fetchMock from 'jest-fetch-mock';
 
 import userEvent from '@testing-library/user-event';
@@ -98,7 +100,7 @@ describe('<ExpenseTemplate />', () => {
     expect(await screen.findByText(/short description is too long\. use description field instead\./i)).toBeInTheDocument();
   });
 
-  test.only('Given a user creating an expense, the expense is created', async () => {
+  test('Given a user creating an expense, the expense is created', async () => {
     fetchMock
       .once(JSON.stringify(successfulResponseFetchCategories))
       .once(JSON.stringify(successfulCreateExpenseResponse));
@@ -142,13 +144,13 @@ describe('<ExpenseTemplate />', () => {
       'listbox',
     );
     const optionsSubcategory = within(listBoxSubcategory).getAllByRole('option');
-    // screen.debug(undefined, 10000000);
     fireEvent.click(optionsSubcategory[0]);
     expect(await screen.findByText(/restaurants/i)).toBeInTheDocument();
-    // userEvent.click(createRecordButton);
 
-    // await waitFor(() => {
-    //   expect(fetchMock).toHaveBeenCalledTimes(3);
-    // });
+    userEvent.click(createRecordButton);
+
+    await waitFor(() => {
+      expect(fetchMock).toHaveBeenCalledTimes(2);
+    });
   });
 });

@@ -964,10 +964,12 @@ const useRecords = ({
 
   const createExpense = async (values: CreateExpenseValuesApiRequest) => {
     try {
-      const { amount, date: dateValue } = values;
+      const { amount, date: dateValue, account: accountId } = values;
       const date = dateValue.toDate();
 
       await createExpenseMutation({ values, bearerToken }).unwrap();
+      // Update account in redux state, not in the backend
+      updateAmountAccount({ amount, isExpense: true, accountId });
       updateTotalsExpense({ date, amount });
 
       // Navigate to dashboard
@@ -1020,6 +1022,7 @@ const useRecords = ({
       const { amount: amountIncome, date: dateIncome } = valuesIncome;
 
       await createTransferMutation({ values: { expense: valuesExpense, income: valuesIncome }, bearerToken }).unwrap();
+      // Update account in redux state, not in the backend
       updateAmountAccount({ amount: amountExpense, isExpense: true, accountId: valuesExpense.account });
       updateAmountAccount({ amount: amountIncome, isExpense: false, accountId: valuesIncome.account });
       updateTotalsExpense({ date: dateExpense.toDate(), amount: amountExpense });

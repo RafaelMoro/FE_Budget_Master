@@ -227,7 +227,7 @@ export const ToggleButton = styled(ToggleButtonMui)`
   ${createResponsiveProps({ fontSize: 'P' })}
   &.Mui-selected {
     color: ${AppColors.primary};
-    background-color: ${AppColors.bgColorLight};
+    background-color: ${AppColors.bgColorWhite};
   }
 `;
 

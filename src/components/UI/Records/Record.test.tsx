@@ -19,7 +19,7 @@ describe('<Records />', () => {
   test('Show record with tags and budgets', () => {
     const backgroundColor = 'green';
     const history = createMemoryHistory();
-    const expense = getMockExpense({ tag: ['first tag'], budgets: ['first budget'] });
+    const expense = getMockExpense({ tag: ['first tag'], budgets: ['first budget'], hasLinkedBudgets: true });
     renderWithProviders(
       <Router location={history.location} navigator={history}>
         <Record
@@ -30,7 +30,7 @@ describe('<Records />', () => {
     );
 
     expect(screen.getByText(/first tag/i)).toBeInTheDocument();
-    expect(screen.getByText(/first budget/i)).toBeInTheDocument();
+    expect(screen.getByText(/Fast food and beverages/i)).toBeInTheDocument();
   });
   // No need to test it with different type of records and in different Views (mobile, desktop, tablet)
   test('Show record with short name with ellipsis ', () => {
@@ -453,7 +453,7 @@ describe('<Records />', () => {
     test('Show record with tags and budgets for Desktop', () => {
       const backgroundColor = 'green';
       const history = createMemoryHistory();
-      const expense = getMockExpense({ tag: ['first tag'], budgets: ['first budget'] });
+      const expense = getMockExpense({ tag: ['first tag'], budgets: ['first budget'], hasLinkedBudgets: true });
       renderWithProviders(
         <Router location={history.location} navigator={history}>
           <Record
@@ -465,7 +465,7 @@ describe('<Records />', () => {
       );
 
       expect(screen.getByText(/first tag/i)).toBeInTheDocument();
-      expect(screen.getByText(/first budget/i)).toBeInTheDocument();
+      expect(screen.getByText(/Fast food and beverages/i)).toBeInTheDocument();
     });
   });
 

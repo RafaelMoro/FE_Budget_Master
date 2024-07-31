@@ -19,10 +19,20 @@ const DeleteRecordModal = ({
 }: DeleteRecordModalProps) => {
   const { shortName: recordName, typeOfRecord } = record;
   const isTransfer = typeOfRecord === 'transfer';
+  const isTypeExpense = typeOfRecord === 'expense';
   const { isGuestUser } = useGuestUser();
-  const { deleteRecord, loadingDeleteRecord } = useRecords({
+  const { deleteRecord, deleteExpense, loadingDeleteRecord } = useRecords({
     recordToBeDeleted: record, deleteRecordExpense: isExpense, closeDeleteRecordModalCb: onClose, closeDrawer,
   });
+
+  const handleDeleteRecord = () => {
+    // If it's type expense and not transfer, call delete expense function.
+    if (isTypeExpense) {
+      deleteExpense({ isGuestUser });
+      return;
+    }
+    deleteRecord({ deleteTransfer: isTransfer, isGuestUser });
+  };
 
   return (
     <Dialog open={open} onClose={onClose}>
@@ -39,7 +49,7 @@ const DeleteRecordModal = ({
         <SecondaryButton onClick={onClose}>Cancel</SecondaryButton>
         <CancelButton
           disabled={loadingDeleteRecord}
-          onClick={() => deleteRecord({ deleteTransfer: isTransfer, isGuestUser })}
+          onClick={handleDeleteRecord}
         >
           { (loadingDeleteRecord) ? (<LoadingSpinner />) : 'Delete' }
         </CancelButton>

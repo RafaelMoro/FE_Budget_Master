@@ -1,8 +1,7 @@
-import { GET_CATEGORIES } from '../../../components/UI/Records/constants';
 import { CategoriesResponse } from '../../../components/UI/Records/interface';
 import { RequestBearerTokenProps } from '../../../globalInterface';
 import { budgetMasterApi } from '../../budgetMaster.api';
-import { CATEGORIES_TAG } from '../../constants';
+import { CATEGORIES_TAG, GET_CATEGORIES } from '../../constants';
 
 export const categoriesApiSlice = budgetMasterApi.injectEndpoints({
   endpoints: (builder) => ({

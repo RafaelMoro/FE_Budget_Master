@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { motion } from 'framer-motion';
 import { Theme, styled as styledMui } from '@mui/material/styles';
 import {
   Box,
@@ -38,6 +39,8 @@ export const ListItemRecord = styledMui(ListItem)(({ theme }: { theme: Theme }) 
     column-gap: ${theme.spacing(2)};
   }
 `);
+
+export const RecordMapWrapper = styled(motion.div)``;
 
 export const RecordTitle = styled(Typography)`
   grid-column: 1 / 3;

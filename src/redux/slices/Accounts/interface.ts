@@ -47,16 +47,6 @@ export interface ModifyAccountMutationProps {
   bearerToken: string;
 }
 
-export interface UpdateAmountPayload {
-  accountId: string;
-  amount: number;
-}
-
-export interface UpdateAmountAccountMutationProps {
-  payload: UpdateAmountPayload
-  bearerToken: string;
-}
-
 export interface FetchAccountsResponse extends Omit<GeneralResponse, 'data'> {
   data: {
     accounts: Account[]

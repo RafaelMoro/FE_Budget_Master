@@ -5,7 +5,7 @@ import { Switch } from 'formik-mui';
 
 import { useRef } from 'react';
 import { IndebtedPeopleFormSchema } from '../../../../../validationsSchemas/records.schema';
-import { FormContainer } from '../RecordTemplate/RecordTemplate.styled';
+import { FormContainer } from '../Features.styled';
 import {
   PrimaryButton, InputForm,
   FormControlLabel, TransparentButton, FlexContainer,

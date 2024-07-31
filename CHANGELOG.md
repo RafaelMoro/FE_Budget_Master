@@ -1,3 +1,9 @@
+## v1.6.0 (2024-07-31)
+
+### Pull Requests
+[#42](https://github.com/RafaelMoro/FE_Budget_Master/pull/42) | Fix design with too much colors
+
+
 ## v1.5.0 (2024-07-30)
 
 ### Pull Requests

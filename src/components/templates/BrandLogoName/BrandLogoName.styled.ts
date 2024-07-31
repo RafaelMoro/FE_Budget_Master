@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { Typography } from '@mui/material';
 import { BrandLogoButtonProps, LogoImageContainerProps, LogoTitleLoginProps } from './interface';
-import { AppColors } from '../../../styles';
+import { AppColors, globalConfiguration, responsiveBreakpoints } from '../../../styles';
 import { appTheme } from '../../../styles/theme';
 
 export const BrandLogoButton = styled('button', { shouldForwardProp: (props) => props !== 'isLoginPage' })`
@@ -28,5 +28,13 @@ export const LogoImageContainer = styled.picture`
 export const LogoTitleLogin = styled(Typography, { shouldForwardProp: (props) => props !== 'isLandingPage' })`
   font-family: 'Russo One', sans-serif;
   color: ${AppColors.primary};
+  font-size: ${globalConfiguration.mobile.fontSizes.H2};
   ${(props: LogoTitleLoginProps) => (props.isLandingPage && `color: ${AppColors.white}; font-weight: 400;`)}
+
+  @media ${responsiveBreakpoints.tablet} {
+    font-size: ${globalConfiguration.tablet.fontSizes.H2};
+  }
+  @media ${responsiveBreakpoints.desktop} {
+    font-size: ${globalConfiguration.desktop.fontSizes.H2};
+  }
 `;

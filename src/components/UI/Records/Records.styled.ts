@@ -274,13 +274,13 @@ export const ListExpandableContainer = styled(ListItemButton, { shouldForwardPro
   display: flex;
   justify-content: space-between;
   padding: 1.5rem 1rem;
-  border: .1rem solid  ${({ color }: ListExpandableContainerProps) => color};
+  background-color:  ${({ color }: ListExpandableContainerProps) => color};
   border-radius: 1rem;
-  color: ${({ color }: ListExpandableContainerProps) => color};
+  color: ${AppColors.white};
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.04);
-    color: ${AppColors.black};
+    background-color: ${AppColors.primary};
+    color: ${AppColors.white};
   }
 `;
 

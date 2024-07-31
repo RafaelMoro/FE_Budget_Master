@@ -5,6 +5,7 @@ import { AccountComponentProps } from './Account.interface';
 import {
   AccountContainerColoroued, AccountTitle, AccountIconsContainer, SelectedTextBox,
 } from './Account.styled';
+import { AppColors } from '../../../styles';
 
 const Account = ({
   account,
@@ -18,7 +19,7 @@ const Account = ({
 
   return (
     <AccountContainerColoroued
-      color={backgroundColorUI.color}
+      color={AppColors.bgColorDark}
       selected={selected}
       onClick={selectAccountOnClick}
     >
@@ -26,15 +27,15 @@ const Account = ({
       <Typography>{ amountFormatted }</Typography>
       <AccountIconsContainer>
         <IconButton aria-label={`edit-button-account-${title}`} onClick={() => openModifyAccountModal(accountId)}>
-          <AppIcon icon="Edit" fillColor={backgroundColorUI.color} />
+          <AppIcon icon="Edit" fillColor={AppColors.white} />
         </IconButton>
         <IconButton aria-label={`delete-button-account-${title}`} onClick={() => openDeleteAccountModal(accountId, title)}>
-          <AppIcon icon="Delete" fillColor={backgroundColorUI.color} />
+          <AppIcon icon="Delete" fillColor={AppColors.white} />
         </IconButton>
       </AccountIconsContainer>
       <Typography>{ accountType }</Typography>
       { (selected) && (
-        <SelectedTextBox backgroundColor={backgroundColorUI.color}>
+        <SelectedTextBox backgroundColor={AppColors.white}>
           <Typography>Selected</Typography>
         </SelectedTextBox>
       ) }

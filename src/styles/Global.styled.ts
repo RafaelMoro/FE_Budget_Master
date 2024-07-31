@@ -239,8 +239,8 @@ export const MenuItem = styled(MenuItemMUI)`
 
 export const Chip = styled(ChipMUI, { shouldForwardProp: (props) => props !== 'chipColor' })`
   max-width: 15rem;
-  color: ${({ chipColor }: ChipProps) => (chipColor ?? AppColors.primary)};
-  border-color: ${({ chipColor }: ChipProps) => (chipColor ?? AppColors.primary)};
+  color: ${AppColors.white};
+  background-color: ${({ chipColor }: ChipProps) => (chipColor ?? AppColors.primary)};
 
   & .MuiChip-label {
     ${createResponsiveProps({ fontSize: 'Sub' })}

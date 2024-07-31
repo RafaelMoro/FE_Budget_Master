@@ -33,7 +33,6 @@ export const HeaderNavAnchor = styled(Anchor, { shouldForwardProp: (props) => pr
   text-decoration: none;
   padding-bottom: 0.5rem;
   font-size: ${globalConfiguration.mobile.fontSizes.H5};
-  font-weight: bold;
   ${({ active }: HeaderNavAnchorProps) => active && `border-bottom: 1px solid ${AppColors.primary};`}
   transition: color 0.3s;
 

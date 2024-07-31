@@ -8,6 +8,7 @@ import { useAppSelector } from '../../../redux/hooks';
 import { RecordDrawer } from './features/RecordDrawer';
 import { DeleteRecordModal } from './features/DeleteRecordModal';
 import {
+  AppColors,
   Chip,
 } from '../../../styles';
 import {
@@ -134,13 +135,13 @@ const Record = ({ record, backgroundColor }: RecordProps) => {
           <BudgetChipContainer>
             { linkedBudgets.length === 0 && (<RecordSubtitleText variant="body2">No budgets</RecordSubtitleText>) }
             { linkedBudgets.length > 0 && linkedBudgets.map((budget) => (
-              <Chip key={budget._id} label={budget.name} variant="outlined" chipColor={backgroundColor} />
+              <Chip key={budget._id} label={budget.name} variant="outlined" chipColor={AppColors.bgColorDark} />
             ))}
           </BudgetChipContainer>
           <TagsChipContainer>
             { tag.length === 0 && (<RecordSubtitleText variant="body2">No tags</RecordSubtitleText>) }
             { tag.length > 0 && tag.map((item) => (
-              <Chip key={`${_id}-${item}`} label={item} variant="outlined" chipColor={backgroundColor} />
+              <Chip key={`${_id}-${item}`} label={item} variant="outlined" chipColor={AppColors.bgColorDark} />
             ))}
           </TagsChipContainer>
           { (indebtedPeople.length > 0 && !openLongView) && (

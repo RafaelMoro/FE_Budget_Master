@@ -1074,10 +1074,12 @@ const useRecords = ({
 
   const createIncome = async (values: CreateIncomeValuesApiRequest) => {
     try {
-      const { amount, date: dateValue } = values;
+      const { amount, date: dateValue, account: accountId } = values;
       const date = dateValue.toDate();
 
       await createIncomeMutation({ values, bearerToken }).unwrap();
+      // Update account in redux state, not in the backend
+      updateAmountAccount({ amount, isExpense: false, accountId });
       updateTotalsIncome({ date, amount });
 
       // Navigate to dashboard
@@ -1175,7 +1177,7 @@ const useRecords = ({
       }
 
       // Update Amount of the account.
-      const updateAmount = await updateAmountAccount({
+      const updateAmount = updateAmountAccount({
         amount: amountOfRecord, isExpense: deleteRecordExpense ?? false, deleteRecord: true, accountId: accountRecord, isGuestUser,
       });
       // If there's an error while updating the account, return

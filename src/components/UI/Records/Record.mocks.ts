@@ -92,7 +92,7 @@ export const creditAccountMock: AccountUI = {
   selected: false,
 };
 
-export const accountsIniitalState: AccountsInitialState = {
+export const accountsInitalState: AccountsInitialState = {
   accounts: [creditAccountMock],
   accountSelected: creditAccountMock,
   accountsLocalStorage: null,
@@ -291,6 +291,16 @@ export const categoriesInitialState: CategoriesInitialState = {
 
 export const modifyCategoryState: CategoriesInitialState = {
   ...categoriesInitialState, currentCategory: mockCategories[1], categoryNotSelected: false,
+};
+
+export const successfulCreateExpenseResponse = {
+  data: {
+    expense: mockExpense,
+  },
+  error: null,
+  message: ['Expense created', 'Account updated'],
+  success: true,
+  version: '2.0.0',
 };
 
 export const successfulResponseFetchCategories = {

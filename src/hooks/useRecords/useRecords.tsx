@@ -1095,14 +1095,21 @@ const useRecords = ({
   };
 
   const editIncome = async ({
-    values, recordId, previousAmount,
+    values, recordId, previousAmount, amountTouched,
   }: EditIncomeProps) => {
     try {
-      const { amount, date: dateValue } = values;
+      const { amount, date: dateValue, account: accountId } = values;
       const date = dateValue.toDate();
       const newValues: EditIncomeValues = { ...values, recordId };
 
       await editIncomeMutation({ values: newValues, bearerToken }).unwrap();
+
+      if (amountTouched) {
+        // Update only the redux state
+        updateAmountAccountOnEditRecord({
+          amount, isExpense: false, previousAmount, accountId,
+        });
+      }
       updateTotalsIncome({
         date, amount, edit: true, previousAmount,
       });

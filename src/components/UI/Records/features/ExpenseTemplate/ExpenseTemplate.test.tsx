@@ -122,7 +122,6 @@ describe('<ExpenseTemplate />', () => {
     userEvent.type(dateInput, '2024-07-20T12:08:00.000Z');
     userEvent.type(shortDescriptionInput, 'Cash');
     userEvent.type(descriptionInput, 'Cash');
-    // screen.debug(undefined, 10000000);
 
     // Select category
     const selectCategoryTestId = screen.getByTestId('select-record-category');
@@ -135,6 +134,17 @@ describe('<ExpenseTemplate />', () => {
     fireEvent.click(optionsCategory[0]);
     expect(await screen.findByText(/food and drink/i)).toBeInTheDocument();
 
+    // Select subcategory
+    const selectSubCategoryTestId = screen.getByTestId('select-record-subcategory');
+    const selectSubcategoryButton = within(selectSubCategoryTestId).getByRole('combobox');
+    fireEvent.mouseDown(selectSubcategoryButton);
+    const listBoxSubcategory = within(screen.getByRole('presentation')).getByRole(
+      'listbox',
+    );
+    const optionsSubcategory = within(listBoxSubcategory).getAllByRole('option');
+    // screen.debug(undefined, 10000000);
+    fireEvent.click(optionsSubcategory[0]);
+    expect(await screen.findByText(/restaurants/i)).toBeInTheDocument();
     // userEvent.click(createRecordButton);
 
     // await waitFor(() => {

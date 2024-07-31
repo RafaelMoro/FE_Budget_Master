@@ -14,12 +14,12 @@ const Account = ({
   openDeleteAccountModal,
 }: AccountComponentProps) => {
   const {
-    _id: accountId, title, backgroundColorUI, accountType, selected, amountFormatted,
+    _id: accountId, title, accountType, selected, amountFormatted,
   } = account;
 
   return (
     <AccountContainerColoroued
-      color={AppColors.bgColorDark}
+      color={AppColors.white}
       selected={selected}
       onClick={selectAccountOnClick}
     >
@@ -27,15 +27,15 @@ const Account = ({
       <Typography>{ amountFormatted }</Typography>
       <AccountIconsContainer>
         <IconButton aria-label={`edit-button-account-${title}`} onClick={() => openModifyAccountModal(accountId)}>
-          <AppIcon icon="Edit" fillColor={AppColors.white} />
+          <AppIcon icon="Edit" fillColor={AppColors.bgColorDark} />
         </IconButton>
         <IconButton aria-label={`delete-button-account-${title}`} onClick={() => openDeleteAccountModal(accountId, title)}>
-          <AppIcon icon="Delete" fillColor={AppColors.white} />
+          <AppIcon icon="Delete" fillColor={AppColors.bgColorDark} />
         </IconButton>
       </AccountIconsContainer>
       <Typography>{ accountType }</Typography>
       { (selected) && (
-        <SelectedTextBox backgroundColor={AppColors.white}>
+        <SelectedTextBox backgroundColor={AppColors.black}>
           <Typography>Selected</Typography>
         </SelectedTextBox>
       ) }

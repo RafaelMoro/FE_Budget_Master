@@ -42,7 +42,6 @@ const AccountContainerBasicStyles = styled.article`
 
 export const AccountContainerColoroued = styled(AccountContainerBasicStyles)`
   ${accountDynamicStyles}
-  color: ${AppColors.white};
 `;
 
 export const AccountContainerLoading = styled(AccountContainerBasicStyles)`

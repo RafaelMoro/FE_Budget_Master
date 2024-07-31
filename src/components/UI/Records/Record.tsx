@@ -135,13 +135,13 @@ const Record = ({ record, backgroundColor }: RecordProps) => {
           <BudgetChipContainer>
             { linkedBudgets.length === 0 && (<RecordSubtitleText variant="body2">No budgets</RecordSubtitleText>) }
             { linkedBudgets.length > 0 && linkedBudgets.map((budget) => (
-              <Chip key={budget._id} label={budget.name} variant="outlined" chipColor={AppColors.bgColorDark} />
+              <Chip key={budget._id} label={budget.name} variant="outlined" chipColor={AppColors.primary} />
             ))}
           </BudgetChipContainer>
           <TagsChipContainer>
             { tag.length === 0 && (<RecordSubtitleText variant="body2">No tags</RecordSubtitleText>) }
             { tag.length > 0 && tag.map((item) => (
-              <Chip key={`${_id}-${item}`} label={item} variant="outlined" chipColor={AppColors.bgColorDark} />
+              <Chip key={`${_id}-${item}`} label={item} variant="outlined" chipColor={AppColors.primary} />
             ))}
           </TagsChipContainer>
           { (indebtedPeople.length > 0 && !openLongView) && (

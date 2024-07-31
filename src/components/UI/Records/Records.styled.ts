@@ -44,6 +44,8 @@ export const RecordMapWrapper = styled(motion.div)``;
 
 export const RecordTitle = styled(Typography)`
   grid-column: 1 / 3;
+  color: ${AppColors.bgColorDark};
+  text-transform: capitalize;
   text-wrap: balance;
 
   @media ${responsiveBreakpoints.tablet} {
@@ -274,14 +276,8 @@ export const ListExpandableContainer = styled(ListItemButton, { shouldForwardPro
   display: flex;
   justify-content: space-between;
   padding: 1.5rem 1rem;
-  background-color:  ${({ color }: ListExpandableContainerProps) => color};
   border-radius: 1rem;
-  color: ${AppColors.white};
-
-  &:hover {
-    background-color: ${AppColors.primary};
-    color: ${AppColors.white};
-  }
+  border: 1px solid ${AppColors.grey};
 `;
 
 // Show Expenses

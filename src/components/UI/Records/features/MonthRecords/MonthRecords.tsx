@@ -4,7 +4,7 @@ import { AnyRecord } from '../../../../../globalInterface';
 import { MonthAccordeon } from '../MonthAccordeon';
 import { ShowRecords } from '../ShowRecords';
 import { Record } from '../../Record';
-import { FlexContainer } from '../../../../../styles';
+import { AppColors, FlexContainer } from '../../../../../styles';
 import { RecordExpense, RecordIncome } from '../../Records.styled';
 import { ShowTotalContianer } from '../Features.styled';
 
@@ -35,7 +35,7 @@ const MonthRecords = ({
   onClickCb = () => {}, children,
 }: MonthRecordsProps) => (
   <MonthAccordeon
-    color={color}
+    color={AppColors.bgColorDark}
     opened={openedAccordeon}
     title={titleMonthAccordeon}
     accountId={accountId}

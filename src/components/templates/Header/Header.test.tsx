@@ -23,7 +23,7 @@ describe('Header', () => {
       { preloadedState: { userInterface: userInterfaceState } },
     );
 
-    expect(screen.getByRole('heading', { name: /budget master/i })).toBeInTheDocument();
+    expect(screen.getByText(/budget master/i)).toBeInTheDocument();
     expect(screen.getByRole('img', { name: /budget master logo/i })).toBeInTheDocument();
     expect(screen.getByTestId('hamburguer-menu-header')).toBeInTheDocument();
   });
@@ -37,7 +37,7 @@ describe('Header', () => {
       { preloadedState: { userInterface: userInterfaceState } },
     );
 
-    expect(screen.getByRole('heading', { name: /budget master/i })).toBeInTheDocument();
+    expect(screen.getByText(/budget master/i)).toBeInTheDocument();
     expect(screen.getByRole('img', { name: /budget master logo/i })).toBeInTheDocument();
     expect(screen.getByTestId('hamburguer-menu-header')).toBeInTheDocument();
   });

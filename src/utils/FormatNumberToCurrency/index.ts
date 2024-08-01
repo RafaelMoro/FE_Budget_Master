@@ -7,12 +7,6 @@ const usDollar = Intl.NumberFormat('en-US', {
   minimumFractionDigits: 2,
 });
 
-const usDollarWithoutDecimals = Intl.NumberFormat('en-US', {
-  style: CURRENCY,
-  currency: USD_CURRENCY,
-  minimumFractionDigits: 0,
-});
-
 /*
 * This function formats a number to usd or mexican currency.
 * The props are:
@@ -33,11 +27,12 @@ export const formatValueToCurrency = ({
   const transformedAmount = typeof amount === 'number' ? amount : Number(amount);
   const amountCurrency = usDollar.format(transformedAmount);
   if (hasNoDecimals) {
-    const currencyWithoutDecimals = usDollarWithoutDecimals.format(transformedAmount);
+    // Returns the value and the decimals = [value, decimals]
+    const [currentValue] = amountCurrency.split('.');
     if (hasNoCurrencySign) {
-      return currencyWithoutDecimals.replace('$', '');
+      return currentValue.replace('$', '');
     }
-    return currencyWithoutDecimals;
+    return currentValue;
   }
   if (hasNoCurrencySign) {
     return amountCurrency.replace('$', '');

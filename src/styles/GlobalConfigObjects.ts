@@ -14,11 +14,11 @@ export const AppColors = {
   secondaryDark: '#3E1910',
   white: '#fbfbfb',
   black: '#1D1305',
-  positive: '#2e8625',
-  positiveDark: '#205D19',
+  positive: '#37ba29',
+  positiveDark: '#269b18',
   positiveLight: '#579E50',
-  negative: '#bd4a0e',
-  negativeDark: '#843309',
+  negative: '#f03939',
+  negativeDark: '#bb4b11',
   negativeLight: '#CA6E3E',
   info: '#0288d1',
   infoDark: '#01579b',
@@ -36,8 +36,8 @@ export const AppColors = {
 
 export const RecordStatusTypeColors = {
   Transfer: AppColors.info,
-  Paid: AppColors.positive,
-  Unpaid: AppColors.negative,
+  Paid: AppColors.positiveDark,
+  Unpaid: AppColors.negativeDark,
 };
 
 export const AllTextColors: TextColors[] = [

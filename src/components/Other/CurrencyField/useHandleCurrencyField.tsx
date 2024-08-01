@@ -16,7 +16,7 @@ const useHandleCurrencyField = ({
   const currentFieldName = fieldName ?? CURRENCY_FIELD_NAME;
 
   const validateCurrencyField = (value: string) => {
-    const hasNumericPeriodCommaRegex = /[0-9.,]+/;
+    const hasNumericPeriodCommaRegex = /^[0-9.,]+$/;
     const startsWithPeriodRegex = /^\./;
     const deletedNumberRegex = /,\d{2}$/;
     const EndsWithPeriodRegex = /[0-9]+[.]$/;
@@ -47,18 +47,22 @@ const useHandleCurrencyField = ({
     const newValue = event.target.value;
     const {
       valueHasForbiddenCharacters,
-      valueBeginsWithPeriod,
       emptyValue,
-      valueEndsWithPeriod,
       hasDeleted,
-      isValueThousandWithNoComma,
+      valueBeginsWithPeriod,
       isValueThousandWithComma,
+      valueEndsWithPeriod,
     } = validateCurrencyField(newValue);
+    const [integers, decimals] = newValue.split('.');
+    const hasDecimals = !!decimals;
+    const hasMoreThanThreeDecimals = hasDecimals && decimals.length > 2;
+
     if (emptyValue) {
       updateAmount('0');
       setFieldValue(currentFieldName, '');
       return;
     }
+
     if (valueHasForbiddenCharacters) return;
     if (valueBeginsWithPeriod) return;
 
@@ -70,14 +74,10 @@ const useHandleCurrencyField = ({
       return;
     }
 
-    if (isValueThousandWithNoComma) {
-      if (valueEndsWithPeriod) {
-        setFieldValue(currentFieldName, newValue);
-        return;
-      }
-      updateAmount(newValue);
-      const newAmount = formatValueToCurrency({ amount: newValue, hasNoDecimals: true, hasNoCurrencySign: true });
-      setFieldValue(currentFieldName, newAmount);
+    if (hasMoreThanThreeDecimals) {
+      const newDecimals = decimals.slice(0, 2);
+      const newValueFormatted = `${integers}.${newDecimals}`;
+      setFieldValue(currentFieldName, newValueFormatted);
       return;
     }
 
@@ -87,13 +87,21 @@ const useHandleCurrencyField = ({
         return;
       }
       const newAmountNotFormatted = formatCurrencyToString(newValue);
+      const valueFormatted = formatValueToCurrency({ amount: newAmountNotFormatted, hasNoDecimals: true, hasNoCurrencySign: true });
+      const completeValueFormatted = hasDecimals ? `${valueFormatted}.${decimals}` : valueFormatted;
       updateAmount(newAmountNotFormatted);
-      const newAmount = formatValueToCurrency({ amount: newAmountNotFormatted, hasNoDecimals: true, hasNoCurrencySign: true });
-      setFieldValue(currentFieldName, newAmount);
+      setFieldValue(currentFieldName, completeValueFormatted);
+      return;
+    }
+
+    if (valueEndsWithPeriod) {
+      setFieldValue(currentFieldName, newValue);
       return;
     }
     updateAmount(newValue);
-    setFieldValue(currentFieldName, newValue);
+    const valueFormatted = formatValueToCurrency({ amount: integers, hasNoDecimals: true, hasNoCurrencySign: true });
+    const completeValueFormatted = hasDecimals ? `${valueFormatted}.${decimals}` : valueFormatted;
+    setFieldValue(currentFieldName, completeValueFormatted);
   };
 
   return {

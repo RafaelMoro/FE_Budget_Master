@@ -55,6 +55,7 @@ const useHandleCurrencyField = ({
     } = validateCurrencyField(newValue);
     const [integers, decimals] = newValue.split('.');
     const hasDecimals = !!decimals;
+    const hasMoreThanThreeDecimals = hasDecimals && decimals.length > 2;
 
     if (emptyValue) {
       updateAmount('0');
@@ -70,6 +71,13 @@ const useHandleCurrencyField = ({
       updateAmount(newAmountNotFormatted);
       const newAmount = formatValueToCurrency({ amount: newAmountNotFormatted, hasNoDecimals: true, hasNoCurrencySign: true });
       setFieldValue(currentFieldName, newAmount);
+      return;
+    }
+
+    if (hasMoreThanThreeDecimals) {
+      const newDecimals = decimals.slice(0, 2);
+      const newValueFormatted = `${integers}.${newDecimals}`;
+      setFieldValue(currentFieldName, newValueFormatted);
       return;
     }
 

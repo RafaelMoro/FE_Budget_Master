@@ -25,6 +25,7 @@ const CurrencyField = ({
       component={InputForm}
       name={fieldName ?? 'amount'}
       type="text"
+      inputMode="numeric"
       variant="standard"
       label={labelName ?? 'Amount'}
       onChange={handleChange}

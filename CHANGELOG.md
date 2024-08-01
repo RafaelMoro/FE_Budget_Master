@@ -1,3 +1,15 @@
+## v1.6.2 (2024-08-01)
+
+### Pull Requests
+[#45](https://github.com/RafaelMoro/FE_Budget_Master/pull/45) | Fixes on currency input for decimals starting with 0 and strange characters
+
+
+## v1.6.1 (2024-07-31)
+
+### Pull Requests
+[#43](https://github.com/RafaelMoro/FE_Budget_Master/pull/43) | Multiple fixes
+
+
 ## v1.6.0 (2024-07-31)
 
 ### Pull Requests

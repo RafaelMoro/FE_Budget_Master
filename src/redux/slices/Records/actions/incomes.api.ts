@@ -1,6 +1,6 @@
 import { POST_METHOD, PUT_METHOD } from '../../../../constants';
 import { budgetMasterApi } from '../../../budgetMaster.api';
-import { RECORD_TAG, INCOME_ROUTE, ACCOUNT_TAG } from '../../../constants';
+import { RECORD_TAG, INCOME_ROUTE } from '../../../constants';
 
 export const incomesApiSlice = budgetMasterApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -13,7 +13,7 @@ export const incomesApiSlice = budgetMasterApi.injectEndpoints({
           Authorization: bearerToken,
         },
       }),
-      invalidatesTags: [RECORD_TAG, ACCOUNT_TAG],
+      invalidatesTags: [RECORD_TAG],
     }),
 
     editIncome: builder.mutation({
@@ -25,7 +25,7 @@ export const incomesApiSlice = budgetMasterApi.injectEndpoints({
           Authorization: bearerToken,
         },
       }),
-      invalidatesTags: [RECORD_TAG, ACCOUNT_TAG],
+      invalidatesTags: [RECORD_TAG],
     }),
   }),
 });

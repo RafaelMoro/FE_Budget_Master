@@ -966,6 +966,7 @@ const useRecords = ({
     try {
       const { amount, date: dateValue, account: accountId } = values;
       const date = dateValue.toDate();
+      console.log('date from create expense hook', date);
 
       await createExpenseMutation({ values, bearerToken }).unwrap();
       // Update account in redux state, not in the backend

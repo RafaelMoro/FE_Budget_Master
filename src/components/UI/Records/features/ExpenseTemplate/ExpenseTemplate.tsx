@@ -151,6 +151,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
 
   const handleSubmitOnCreate = (values: CreateExpenseValues) => {
     const newAmount = verifyAmountEndsPeriod(initialAmount.current);
+    console.log('values on create expense', values);
     const amountToNumber = Number(newAmount);
     let newLinkedBudgets: string[] = [];
     if (values.linkedBudgets) {

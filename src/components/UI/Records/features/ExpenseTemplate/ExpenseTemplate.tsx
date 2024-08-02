@@ -99,7 +99,6 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
   // Update edit data to the initial values
   useEffect(() => {
     if (edit && recordToBeEdited) {
-      console.log('record to be edited', recordToBeEdited);
       const newInitialValues: CreateExpenseValues = {
         amount: String(recordToBeEdited.amount),
         shortName: recordToBeEdited.shortName,
@@ -182,7 +181,6 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
     const { date } = values;
     // Pass value to utc first to avoid timezone issues
     const newDate = date.utc();
-    console.log('date to be edited utc', newDate);
     // Flag to know if amount has a different value from the initial value. If so, the query to update account amount will be executed.
     let amountTouched = false;
     if (recordToBeEdited?.amount !== Number(initialAmount.current)) {
@@ -209,7 +207,6 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
       typeOfRecord: 'expense',
       linkedBudgets: newLinkedBudgets,
     };
-    console.log('new values on edit expense', newValues);
 
     const recordId = recordToBeEdited?._id ?? '';
     const previousAmount = recordToBeEdited?.amount ?? 0;

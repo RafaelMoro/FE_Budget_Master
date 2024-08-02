@@ -1044,7 +1044,6 @@ const useRecords = ({
   }: EditExpenseProps) => {
     try {
       const { amount, date } = values;
-      console.log('date from edit expense hook', values);
       const newValues: EditExpenseValues = { ...values, recordId };
 
       await editExpenseMutation({ values: newValues, bearerToken }).unwrap();

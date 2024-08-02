@@ -151,7 +151,6 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
 
   const handleSubmitOnCreate = (values: CreateExpenseValues) => {
     const newAmount = verifyAmountEndsPeriod(initialAmount.current);
-    console.log('values on create expense', values);
     const amountToNumber = Number(newAmount);
     let newLinkedBudgets: string[] = [];
     if (values.linkedBudgets) {
@@ -162,6 +161,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
     }
     const newValues = {
       ...values,
+      date: values.date.toDate(),
       amount: amountToNumber,
       indebtedPeople,
       account: (selectedAccount?._id ?? ''),
@@ -169,6 +169,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
       // If linked budgets has a value, then send the value in the array, if not, send it empty
       linkedBudgets: newLinkedBudgets,
     };
+    console.log('new values on create expense', newValues);
 
     if (isGuestUser) {
       createExpenseIncomeLocalStorage(newValues);
@@ -196,6 +197,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
 
     const newValues = {
       ...values,
+      date: values.date.toDate(),
       amount: amountToNumber,
       indebtedPeople,
       account: selectedAccount?._id ?? '',

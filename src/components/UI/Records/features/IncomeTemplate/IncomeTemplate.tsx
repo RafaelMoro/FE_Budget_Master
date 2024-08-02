@@ -115,6 +115,7 @@ const IncomeTemplate = ({ edit = false, typeOfRecord }: IncomeTemplateProps) => 
     } = values;
     const newValues = {
       ...restValues,
+      date: values.date.toDate(),
       amount: amountToNumber,
       indebtedPeople: [],
       expensesPaid: expensesSelected,
@@ -144,6 +145,7 @@ const IncomeTemplate = ({ edit = false, typeOfRecord }: IncomeTemplateProps) => 
     const amountToNumber = Number(newAmount);
     const newValues = {
       ...restValues,
+      date: values.date.toDate(),
       amount: amountToNumber,
       indebtedPeople: [],
       expensesPaid: expensesSelected,

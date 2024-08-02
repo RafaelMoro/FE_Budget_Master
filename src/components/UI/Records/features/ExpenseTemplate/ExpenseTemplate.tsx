@@ -178,6 +178,10 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
   };
 
   const handleSubmitOnEdit = (values: CreateExpenseValues) => {
+    const { date } = values;
+    // Pass value to utc first to avoid timezone issues
+    const newDate = date.utc();
+    console.log('date to be edited utc', newDate);
     // Flag to know if amount has a different value from the initial value. If so, the query to update account amount will be executed.
     let amountTouched = false;
     if (recordToBeEdited?.amount !== Number(initialAmount.current)) {
@@ -196,7 +200,8 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
 
     const newValues = {
       ...values,
-      date: values.date.toDate(),
+      // Pass value to type Date
+      date: newDate.toDate(),
       amount: amountToNumber,
       indebtedPeople,
       account: selectedAccount?._id ?? '',

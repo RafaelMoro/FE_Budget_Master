@@ -99,6 +99,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
   // Update edit data to the initial values
   useEffect(() => {
     if (edit && recordToBeEdited) {
+      console.log('record to be edited', recordToBeEdited);
       const newInitialValues: CreateExpenseValues = {
         amount: String(recordToBeEdited.amount),
         shortName: recordToBeEdited.shortName,

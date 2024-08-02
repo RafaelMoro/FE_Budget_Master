@@ -358,7 +358,7 @@ const useRecords = ({
   }: { values: CreateExpenseValuesApiRequest | CreateIncomeValuesApiRequest, category: Category, }) => {
     const { date, subCategory } = values;
     const expensesPaid = (values as CreateIncomeValuesApiRequest)?.expensesPaid;
-    const { formattedTime, fullDate } = formatDateToString(date.toDate());
+    const { formattedTime, fullDate } = formatDateToString(date);
     const dateFormatted = date.toISOString();
     const newId = window.crypto.randomUUID();
 
@@ -419,7 +419,7 @@ const useRecords = ({
   }: { income: CreateIncomeValuesApiRequest, expense: CreateExpenseValuesApiRequest, category: Category }) => {
     const { date, subCategory } = expense;
     const expensesPaid = (income as CreateIncomeValuesApiRequest)?.expensesPaid;
-    const { formattedTime, fullDate } = formatDateToString(date.toDate());
+    const { formattedTime, fullDate } = formatDateToString(date);
     const dateFormatted = date.toISOString();
     const expenseId = window.crypto.randomUUID();
     const incomeId = window.crypto.randomUUID();
@@ -491,7 +491,7 @@ const useRecords = ({
     const { values, recordId } = payload;
     const { date } = values;
     const expensesPaid = (values as CreateIncomeValuesApiRequest)?.expensesPaid;
-    const { formattedTime, fullDate } = formatDateToString(date.toDate());
+    const { formattedTime, fullDate } = formatDateToString(date);
     const amountFormatted = formatValueToCurrency({ amount: values.amount });
 
     if (isCreateExpense(values)) {
@@ -700,7 +700,7 @@ const useRecords = ({
     const recordLocalStorage = (recordsLocalStorage ?? []).find((record) => record.account === newRecord.account);
     let recordLocalStorageModified: RecordsLocalStorage | null = null;
     if (recordLocalStorage) {
-      const { recordAgeStatusKey, missingStatus } = getRecordAgeStatus(date.toDate());
+      const { recordAgeStatusKey, missingStatus } = getRecordAgeStatus(date);
       const { expensesPaid = [] } = newRecord;
       // Add new expense and sort records by date.
       let newRecords: RecordRedux[] = [...recordLocalStorage.records[recordAgeStatusKey], newRecord].sort(sortByDate);
@@ -754,7 +754,7 @@ const useRecords = ({
     const editedExpense = formatEditLocalRecord(payload, category);
 
     const response = getLocalRecordsOrderedOnEdit({
-      account: values.account, date: date.toDate(), recordId, editedRecord: editedExpense, transferInfo,
+      account: values.account, date, recordId, editedRecord: editedExpense, transferInfo,
     });
     if (!response) {
       console.error(`Records of local storage not found by the account: ${values.account}`);
@@ -778,7 +778,7 @@ const useRecords = ({
     const editedIncome = formatEditLocalRecord(payload, category);
     const { expensesPaid = [] } = editedIncome;
     const response = getLocalRecordsOrderedOnEdit({
-      account: values.account, date: date.toDate(), recordId, editedRecord: editedIncome, transferInfo,
+      account: values.account, date, recordId, editedRecord: editedIncome, transferInfo,
     });
     if (!response) {
       console.error(`Records of local storage not found by the account: ${values.account}`);
@@ -828,7 +828,7 @@ const useRecords = ({
     const editedExpense = formatEditLocalRecord(payload, categoryFound);
 
     const response = getLocalRecordsOrderedOnEdit({
-      account: values.account, date: date.toDate(), recordId, editedRecord: editedExpense,
+      account: values.account, date, recordId, editedRecord: editedExpense,
     });
     if (!response) {
       console.error(`Records of local storage not found by the account: ${values.account}`);
@@ -964,8 +964,7 @@ const useRecords = ({
 
   const createExpense = async (values: CreateExpenseValuesApiRequest) => {
     try {
-      const { amount, date: dateValue, account: accountId } = values;
-      const date = dateValue.toDate();
+      const { amount, date, account: accountId } = values;
 
       await createExpenseMutation({ values, bearerToken }).unwrap();
       // Update account in redux state, not in the backend
@@ -996,7 +995,7 @@ const useRecords = ({
     }
     const { expense, income } = formatCreateTransfer({ income: valuesIncome, expense: valuesExpense, category: categoryFound });
 
-    updateStoreStorageOnCreateLocalTransfer({ expense, income, date: valuesExpense.date.toDate() });
+    updateStoreStorageOnCreateLocalTransfer({ expense, income, date: valuesExpense.date });
 
     updateAmountAccount({
       amount: expense.amount, isExpense: true, accountId: expense.account, isGuestUser: true,
@@ -1025,8 +1024,8 @@ const useRecords = ({
       // Update account in redux state, not in the backend
       updateAmountAccount({ amount: amountExpense, isExpense: true, accountId: valuesExpense.account });
       updateAmountAccount({ amount: amountIncome, isExpense: false, accountId: valuesIncome.account });
-      updateTotalsExpense({ date: dateExpense.toDate(), amount: amountExpense });
-      updateTotalsIncome({ date: dateIncome.toDate(), amount: amountIncome });
+      updateTotalsExpense({ date: dateExpense, amount: amountExpense });
+      updateTotalsIncome({ date: dateIncome, amount: amountIncome });
 
       // Navigate to dashboard
       navigate(DASHBOARD_ROUTE);
@@ -1044,8 +1043,7 @@ const useRecords = ({
     values, recordId, amountTouched, previousAmount, accountId,
   }: EditExpenseProps) => {
     try {
-      const { amount, date: dateValue } = values;
-      const date = dateValue.toDate();
+      const { amount, date } = values;
       const newValues: EditExpenseValues = { ...values, recordId };
 
       await editExpenseMutation({ values: newValues, bearerToken }).unwrap();
@@ -1075,7 +1073,7 @@ const useRecords = ({
   const createIncome = async (values: CreateIncomeValuesApiRequest) => {
     try {
       const { amount, date: dateValue, account: accountId } = values;
-      const date = dateValue.toDate();
+      const date = dateValue;
 
       await createIncomeMutation({ values, bearerToken }).unwrap();
       // Update account in redux state, not in the backend
@@ -1098,8 +1096,7 @@ const useRecords = ({
     values, recordId, previousAmount, amountTouched,
   }: EditIncomeProps) => {
     try {
-      const { amount, date: dateValue, account: accountId } = values;
-      const date = dateValue.toDate();
+      const { amount, date, account: accountId } = values;
       const newValues: EditIncomeValues = { ...values, recordId };
 
       await editIncomeMutation({ values: newValues, bearerToken }).unwrap();

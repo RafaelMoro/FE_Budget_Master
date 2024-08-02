@@ -76,8 +76,9 @@ export interface CreateTransferValues extends CreateRecordValues {
   isPaid?: boolean;
 }
 
-export interface CreateExpenseValuesApiRequest extends Omit<CreateRecordValues, 'amount'> {
+export interface CreateExpenseValuesApiRequest extends Omit<CreateRecordValues, 'amount' | 'date'> {
   amount: number;
+  date: Date;
   tag: string[];
   budgets: string[];
   indebtedPeople: IndebtedPeople[];
@@ -85,8 +86,9 @@ export interface CreateExpenseValuesApiRequest extends Omit<CreateRecordValues, 
   isPaid?: boolean;
 }
 
-export interface CreateIncomeValuesApiRequest extends Omit<CreateRecordValues, 'amount'> {
+export interface CreateIncomeValuesApiRequest extends Omit<CreateRecordValues, 'amount' | 'date'> {
   amount: number;
+  date: Date;
   tag: string[];
   budgets: string[];
   indebtedPeople: IndebtedPeople[];

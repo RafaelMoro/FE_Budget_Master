@@ -5,11 +5,12 @@ import { CreateTransferValues } from '../../interface';
 export const getValuesIncomeAndExpense = ({ values, expensesSelected }: { values: CreateTransferValues, expensesSelected: ExpensePaid[] }) => {
   const typeOfRecordValue = 'transfer';
   const {
-    isPaid, amount, destinationAccount, originAccount, ...restValues
+    isPaid, amount, destinationAccount, date, originAccount, ...restValues
   } = values;
   const amountToNumber = Number(amount);
   const newValuesExpense = {
     ...restValues,
+    date: values.date.toDate(),
     amount: amountToNumber,
     indebtedPeople: [],
     account: values.originAccount,
@@ -19,6 +20,7 @@ export const getValuesIncomeAndExpense = ({ values, expensesSelected }: { values
   };
   const newValuesIncome = {
     ...restValues,
+    date: values.date.toDate(),
     amount: amountToNumber,
     indebtedPeople: [],
     expensesPaid: expensesSelected,

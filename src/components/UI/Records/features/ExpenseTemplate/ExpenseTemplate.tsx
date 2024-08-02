@@ -106,7 +106,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
         category: recordToBeEdited.category._id,
         subCategory: recordToBeEdited.subCategory,
         isPaid: recordToBeEdited.isPaid ?? !isCredit,
-        date: dayjs(recordToBeEdited.date),
+        date: dayjs(recordToBeEdited.date).utc(),
         tag: recordToBeEdited.tag,
         budgets: recordToBeEdited.budgets,
         linkedBudgets: recordToBeEdited?.linkedBudgets?.[0]?._id ?? '',
@@ -161,6 +161,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
     }
     const newValues = {
       ...values,
+      date: values.date.toDate(),
       amount: amountToNumber,
       indebtedPeople,
       account: (selectedAccount?._id ?? ''),
@@ -177,6 +178,9 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
   };
 
   const handleSubmitOnEdit = (values: CreateExpenseValues) => {
+    const { date } = values;
+    // Pass value to utc first to avoid timezone issues
+    const newDate = date.utc();
     // Flag to know if amount has a different value from the initial value. If so, the query to update account amount will be executed.
     let amountTouched = false;
     if (recordToBeEdited?.amount !== Number(initialAmount.current)) {
@@ -195,6 +199,8 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
 
     const newValues = {
       ...values,
+      // Pass value to type Date
+      date: newDate.toDate(),
       amount: amountToNumber,
       indebtedPeople,
       account: selectedAccount?._id ?? '',

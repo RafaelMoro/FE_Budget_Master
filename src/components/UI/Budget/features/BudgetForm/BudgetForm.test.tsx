@@ -137,10 +137,12 @@ describe('Budget form', () => {
     // We can have the edge case where the current date is the first day of the month and two days before corresponds to the previous month.
     const twoDaysBeforeMonthText = screen.queryByText(`${twoDaysBeforeMonth} ${twoDaysBeforeYear}`);
     if (!twoDaysBeforeMonthText) {
+      console.log('here setting value directly');
       // Assigning value directly as clicking on the last month button does not work completelty well.
       const endDateInput = screen.getByRole('textbox', { name: /end date/i });
       userEvent.type(endDateInput, twoDaysDateFormatted);
     } else {
+      console.log('clicking button');
       userEvent.click(twoDaysBeforeDayButton);
     }
 
@@ -148,6 +150,7 @@ describe('Budget form', () => {
       // expect the value to be changed with two days before
       expect(screen.getByRole('textbox', { name: /end date/i })).toHaveValue(twoDaysDateFormatted);
     });
+    screen.debug(undefined, 1000000);
     const createBudgetButton = screen.getByRole('button', { name: /create budget/i });
     userEvent.click(createBudgetButton);
 

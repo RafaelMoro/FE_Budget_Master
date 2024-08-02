@@ -110,7 +110,7 @@ const Transfer = ({ action, typeOfRecord, edit = false }: TransferProps) => {
         description: recordToBeEdited.description,
         category: recordToBeEdited.category._id,
         subCategory: recordToBeEdited.subCategory,
-        date: dayjs(recordToBeEdited.date),
+        date: dayjs(recordToBeEdited.date).utc(),
         tag: recordToBeEdited.tag,
         budgets: recordToBeEdited.budgets,
       };
@@ -145,8 +145,10 @@ const Transfer = ({ action, typeOfRecord, edit = false }: TransferProps) => {
     }
     const amountFormatted = formatCurrencyToString(values.amount);
     const newAmount = verifyAmountEndsPeriod(initialAmount.current || amountFormatted);
-    const { amount, ...restValues } = values;
-    const newValues = { ...restValues, amount: newAmount };
+    const { amount, date, ...restValues } = values;
+    // Pass value to utc first to avoid timezone issues
+    const newDate = date.utc();
+    const newValues = { ...restValues, amount: newAmount, date: newDate };
     const { newValuesIncome, newValuesExpense } = getValuesIncomeAndExpense({ values: newValues, expensesSelected });
 
     const previousAmount = recordToBeEdited?.amount ?? 0;

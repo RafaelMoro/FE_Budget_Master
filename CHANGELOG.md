@@ -1,3 +1,9 @@
+## v1.6.3 (2024-08-02)
+
+### Pull Requests
+[#48](https://github.com/RafaelMoro/FE_Budget_Master/pull/48) | Fix date issues due timezone
+
+
 ## v1.6.2 (2024-08-01)
 
 ### Pull Requests

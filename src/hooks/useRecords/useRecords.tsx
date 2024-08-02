@@ -965,7 +965,6 @@ const useRecords = ({
   const createExpense = async (values: CreateExpenseValuesApiRequest) => {
     try {
       const { amount, date, account: accountId } = values;
-      console.log('date from create expense hook', date);
 
       await createExpenseMutation({ values, bearerToken }).unwrap();
       // Update account in redux state, not in the backend
@@ -1044,8 +1043,8 @@ const useRecords = ({
     values, recordId, amountTouched, previousAmount, accountId,
   }: EditExpenseProps) => {
     try {
-      const { amount, date: dateValue } = values;
-      const date = dateValue;
+      const { amount, date } = values;
+      console.log('date from edit expense hook', values);
       const newValues: EditExpenseValues = { ...values, recordId };
 
       await editExpenseMutation({ values: newValues, bearerToken }).unwrap();

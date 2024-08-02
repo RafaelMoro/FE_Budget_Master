@@ -106,7 +106,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
         category: recordToBeEdited.category._id,
         subCategory: recordToBeEdited.subCategory,
         isPaid: recordToBeEdited.isPaid ?? !isCredit,
-        date: dayjs(recordToBeEdited.date),
+        date: dayjs(recordToBeEdited.date).utc(),
         tag: recordToBeEdited.tag,
         budgets: recordToBeEdited.budgets,
         linkedBudgets: recordToBeEdited?.linkedBudgets?.[0]?._id ?? '',
@@ -169,7 +169,6 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
       // If linked budgets has a value, then send the value in the array, if not, send it empty
       linkedBudgets: newLinkedBudgets,
     };
-    console.log('new values on create expense', newValues);
 
     if (isGuestUser) {
       createExpenseIncomeLocalStorage(newValues);
@@ -204,6 +203,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
       typeOfRecord: 'expense',
       linkedBudgets: newLinkedBudgets,
     };
+    console.log('new values on edit expense', newValues);
 
     const recordId = recordToBeEdited?._id ?? '';
     const previousAmount = recordToBeEdited?.amount ?? 0;

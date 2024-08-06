@@ -2,6 +2,7 @@ import { Typography } from '@mui/material';
 import { GraphicsCardContainer, NoRecordsGraphicsCardContainer } from './GraphicsCard.styled';
 import { ChartExpensiveDays } from '../../UI/Graphics';
 import { AnyRecord } from '../../../globalInterface';
+import { ChartCategories } from '../../UI/Graphics/ChartCategories';
 
 interface GraphicsCardProps {
   records: AnyRecord[];
@@ -21,6 +22,7 @@ const GraphicsCard = ({ records }: GraphicsCardProps) => {
     <GraphicsCardContainer>
       <Typography variant="h5">Useful statistics of your finances</Typography>
       <ChartExpensiveDays records={records} />
+      <ChartCategories records={records} />
     </GraphicsCardContainer>
   );
 };

@@ -12,7 +12,6 @@ import {
 } from './Dashboard.styled';
 import { useResizeWindow } from '../../hooks/useResizeWindow';
 import { useLogin } from '../../hooks/useLogin';
-import { Chart } from '../../components/UI/Graphics';
 
 const Dashboard = () => {
   const windowSize = useAppSelector((state) => state.userInterface.windowSize);

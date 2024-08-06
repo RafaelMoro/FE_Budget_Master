@@ -8,7 +8,7 @@ import { AppColors } from '../../../styles';
 import { getTopDaysExpensePerDay } from './Chart.util';
 import { ChartExpensiveDaysData, ChartExpensiveDaysProps } from './Chart.interface';
 
-const Chart = ({ records }: ChartExpensiveDaysProps) => {
+const ChartExpensiveDays = ({ records }: ChartExpensiveDaysProps) => {
   const windowSize = useAppSelector((state) => state.userInterface.windowSize);
   const isMobile = windowSize === 'Mobile';
   const [data, setData] = useState<ChartExpensiveDaysData[]>([]);
@@ -45,4 +45,4 @@ const Chart = ({ records }: ChartExpensiveDaysProps) => {
   );
 };
 
-export { Chart };
+export { ChartExpensiveDays };

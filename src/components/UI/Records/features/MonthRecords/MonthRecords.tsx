@@ -7,6 +7,7 @@ import { Record } from '../../Record';
 import { AppColors, FlexContainer } from '../../../../../styles';
 import { RecordExpense, RecordIncome } from '../../Records.styled';
 import { ShowTotalContianer } from '../Features.styled';
+import { Chart } from '../../../Chart';
 
 interface MonthRecordsProps {
   color: string;
@@ -55,6 +56,7 @@ const MonthRecords = ({
       </ShowTotalContianer>
     ) }
     { (isGuestUser && isOlderRecords && children) && children }
+    <Chart records={records} />
     <ShowRecords
       records={records}
       loading={loading}

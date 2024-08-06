@@ -14,3 +14,7 @@ export const GraphicsCardContainer = styled.article`
   place-items: center;
   gap: 2rem;
 `;
+
+export const NoRecordsGraphicsCardContainer = styled(GraphicsCardContainer)`
+  padding: 4rem 2rem;
+`;

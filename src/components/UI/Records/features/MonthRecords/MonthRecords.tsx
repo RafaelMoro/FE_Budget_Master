@@ -7,7 +7,7 @@ import { Record } from '../../Record';
 import { AppColors, FlexContainer } from '../../../../../styles';
 import { RecordExpense, RecordIncome } from '../../Records.styled';
 import { ShowTotalContianer } from '../Features.styled';
-import { Chart } from '../../../Chart';
+import { Chart } from '../../../Graphics';
 
 interface MonthRecordsProps {
   color: string;

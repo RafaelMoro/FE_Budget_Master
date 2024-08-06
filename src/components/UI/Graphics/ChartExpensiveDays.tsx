@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { Bar, Pie } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { useEffect, useState } from 'react';
 
@@ -36,7 +36,7 @@ const ChartExpensiveDays = ({ records }: ChartExpensiveDaysProps) => {
 
   if (isMobile) {
     return (
-      <Pie data={chartData} />
+      <Line data={chartData} />
     );
   }
 

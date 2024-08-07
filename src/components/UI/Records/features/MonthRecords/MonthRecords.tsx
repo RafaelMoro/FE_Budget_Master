@@ -56,7 +56,7 @@ const MonthRecords = ({
       </ShowTotalContianer>
     ) }
     { (isGuestUser && isOlderRecords && children) && children }
-    <GraphicsCard records={records} />
+    {/* <GraphicsCard records={records} /> */}
     <ShowRecords
       records={records}
       loading={loading}

@@ -12,6 +12,7 @@ export interface RecordsInitialState {
   recordToBeModified: AnyRecord | null;
   recordsLocalStorageSelectedAccount: RecordsLocalStorage | null;
   recordsLocalStorage: RecordsLocalStorage[] | null;
+  currentMonthRecordsData: AnyRecord[] | null;
 }
 
 export interface GetRecordByMonthAndYearProps {

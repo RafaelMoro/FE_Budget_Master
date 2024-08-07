@@ -1,0 +1,1 @@
+export { GraphicsCard } from './GraphicsCard';

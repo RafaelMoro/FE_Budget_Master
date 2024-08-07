@@ -25,9 +25,9 @@ export function getTopDaysExpensePerDay(records: AnyRecord[]) {
     date: item[0],
     amount: item[1],
   }));
-  const sortedData = result.toSorted((a, b) => b.amount - a.amount);
+  result.sort((a, b) => b.amount - a.amount);
 
-  return sortedData;
+  return result;
 }
 
 export function getCategoriesTotalExpense(records: AnyRecord[]) {
@@ -53,6 +53,6 @@ export function getCategoriesTotalExpense(records: AnyRecord[]) {
     category: item[0],
     amount: item[1],
   }));
-  const sortedCategoryData = result.toSorted((a, b) => b.amount - a.amount);
-  return sortedCategoryData;
+  result.sort((a, b) => b.amount - a.amount);
+  return result;
 }

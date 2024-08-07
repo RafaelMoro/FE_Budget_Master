@@ -7,7 +7,7 @@ export function getTopDaysExpensePerDay(records: AnyRecord[]) {
       acc[fullDate] = 0;
     }
     // Verify if the record is an expense
-    if (record?.isPaid) {
+    if (record?.isPaid !== undefined) {
       acc[fullDate] += amount;
     }
     return acc;
@@ -37,7 +37,7 @@ export function getCategoriesTotalExpense(records: AnyRecord[]) {
       acc[categoryName] = 0;
     }
     // Verify if the record is an expense
-    if (record?.isPaid) {
+    if (record?.isPaid !== undefined) {
       acc[categoryName] += amount;
     }
     return acc;

@@ -7,6 +7,7 @@ import { Record } from '../../Record';
 import { AppColors, FlexContainer } from '../../../../../styles';
 import { RecordExpense, RecordIncome } from '../../Records.styled';
 import { ShowTotalContianer } from '../Features.styled';
+import { GraphicsCard } from '../../../../templates/GraphicsCard';
 
 interface MonthRecordsProps {
   color: string;
@@ -14,24 +15,25 @@ interface MonthRecordsProps {
   titleMonthAccordeon: string;
   totalExpense: string;
   totalIncome: string;
-  children?: ReactNode;
-  onClickCb?: () => Promise<void> | void;
-  isOlderRecords?: boolean;
   accountId: string;
   records: AnyRecord[];
   loading: boolean;
   error: boolean;
   isGuestUser: boolean;
-  showMessage?: boolean;
-  onShowMessage?: () => ReactElement;
   onEmptyCb: () => ReactElement;
   onErrorCb: () => ReactElement;
   onLoadingCb: () => ReactElement;
+  children?: ReactNode;
+  isOlderRecords?: boolean;
+  showMessage?: boolean;
+  hideCharts?: boolean;
+  onClickCb?: () => Promise<void> | void;
+  onShowMessage?: () => ReactElement;
 }
 
 const MonthRecords = ({
   color, openedAccordeon, titleMonthAccordeon, accountId, isGuestUser, isOlderRecords, showMessage,
-  records, loading, error, onEmptyCb, onLoadingCb, onErrorCb, totalExpense, totalIncome, onShowMessage,
+  records, loading, error, onEmptyCb, onLoadingCb, onErrorCb, totalExpense, totalIncome, onShowMessage, hideCharts,
   onClickCb = () => {}, children,
 }: MonthRecordsProps) => (
   <MonthAccordeon
@@ -55,6 +57,7 @@ const MonthRecords = ({
       </ShowTotalContianer>
     ) }
     { (isGuestUser && isOlderRecords && children) && children }
+    { (!hideCharts) && (<GraphicsCard records={records} />) }
     <ShowRecords
       records={records}
       loading={loading}

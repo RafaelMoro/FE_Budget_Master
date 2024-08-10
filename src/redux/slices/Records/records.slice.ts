@@ -1,12 +1,14 @@
 /* eslint-disable no-param-reassign */
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { ZERO_CURRENCY } from '../../../constants';
 import { RecordsInitialState, UpdateTotalExpenseAndIncomeProps, UpdateTotalExpenseIncomeAction } from './interface';
+import { recordsApiSlice } from './actions/records.api';
 
 const recordsInitialState: RecordsInitialState = {
   recordToBeModified: null,
   recordsLocalStorageSelectedAccount: null,
   recordsLocalStorage: null,
+  currentMonthRecordsData: null,
   totalRecords: {
     currentMonth: {
       expenseTotal: ZERO_CURRENCY,
@@ -87,6 +89,11 @@ export const recordsSlice = createSlice({
       }
       state.totalRecords.lastMonth.incomeTotal = newAmount;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(isAnyOf(recordsApiSlice.endpoints.fetchRecordsByMonthYear.matchFulfilled), (state, action) => {
+      state.currentMonthRecordsData = action.payload.records;
+    });
   },
 });
 

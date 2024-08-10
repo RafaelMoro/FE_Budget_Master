@@ -1,4 +1,3 @@
-import { Pie } from 'react-chartjs-2';
 import { AnyRecord } from '../../../globalInterface';
 import { useStatistics } from '../../../hooks/useStatistics';
 
@@ -9,7 +8,7 @@ interface ChartCategoriesProps {
 const ChartCategories = ({ records }: ChartCategoriesProps) => {
   const { categoriesChartData } = useStatistics({ records });
   return (
-    <Pie data={categoriesChartData} />
+    <h1>Categories chart</h1>
   );
 };
 

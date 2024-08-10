@@ -1,7 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { Bar, Line } from 'react-chartjs-2';
-import 'chart.js/auto';
-
 import { useAppSelector } from '../../../redux/hooks';
 import { ChartExpensiveDaysProps } from './Chart.interface';
 import { useStatistics } from '../../../hooks/useStatistics';
@@ -13,12 +9,12 @@ const ChartExpensiveDays = ({ records }: ChartExpensiveDaysProps) => {
 
   if (isMobile) {
     return (
-      <Line data={expensiveDaysChartData} />
+      <h1>Hi</h1>
     );
   }
 
   return (
-    <Bar data={expensiveDaysChartData} />
+    <h1>Bye</h1>
   );
 };
 

@@ -26,7 +26,6 @@ describe('<MonthRecords />', () => {
           onEmptyCb={() => <div>No records found</div>}
           onErrorCb={() => <div>Error</div>}
           onLoadingCb={() => <div>Loading...</div>}
-          hideCharts
         />
       </Router>,
     );

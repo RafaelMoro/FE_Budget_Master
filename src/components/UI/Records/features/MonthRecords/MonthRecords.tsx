@@ -7,7 +7,6 @@ import { Record } from '../../Record';
 import { AppColors, FlexContainer } from '../../../../../styles';
 import { RecordExpense, RecordIncome } from '../../Records.styled';
 import { ShowTotalContianer } from '../Features.styled';
-import { GraphicsCard } from '../../../../templates/GraphicsCard';
 
 interface MonthRecordsProps {
   color: string;
@@ -26,14 +25,13 @@ interface MonthRecordsProps {
   children?: ReactNode;
   isOlderRecords?: boolean;
   showMessage?: boolean;
-  hideCharts?: boolean;
   onClickCb?: () => Promise<void> | void;
   onShowMessage?: () => ReactElement;
 }
 
 const MonthRecords = ({
   color, openedAccordeon, titleMonthAccordeon, accountId, isGuestUser, isOlderRecords, showMessage,
-  records, loading, error, onEmptyCb, onLoadingCb, onErrorCb, totalExpense, totalIncome, onShowMessage, hideCharts,
+  records, loading, error, onEmptyCb, onLoadingCb, onErrorCb, totalExpense, totalIncome, onShowMessage,
   onClickCb = () => {}, children,
 }: MonthRecordsProps) => (
   <MonthAccordeon
@@ -57,7 +55,6 @@ const MonthRecords = ({
       </ShowTotalContianer>
     ) }
     { (isGuestUser && isOlderRecords && children) && children }
-    { (!hideCharts) && (<GraphicsCard records={records} />) }
     <ShowRecords
       records={records}
       loading={loading}

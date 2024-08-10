@@ -20,12 +20,10 @@ interface OlderRecordsProps {
   color: string;
   accountId: string;
   isGuestUser: boolean;
-  // Prop to hide charts on unit tests due owner document error when interacting with the dom.
-  hideCharts?: boolean;
 }
 
 const OlderRecords = ({
-  color, accountId, isGuestUser, hideCharts,
+  color, accountId, isGuestUser,
 }: OlderRecordsProps) => {
   const dispatch = useAppDispatch();
   const {
@@ -141,7 +139,6 @@ const OlderRecords = ({
         <ShowMultipleRecordLoader numberOfSkeletons={3} keyMap="older-records" />
       )}
       isOlderRecords
-      hideCharts={hideCharts}
     >
       <SelectMonthYear
         completeMonth={completeMonth}

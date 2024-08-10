@@ -64,7 +64,7 @@ describe('Current month records', () => {
     fetchMock.once(JSON.stringify(olderRecordsResponse));
     renderWithProviders(
       <Router location={history.location} navigator={history}>
-        <CurrentMonthRecords color="blue" accountId="some-account-id" isGuestUser={false} hideCharts />
+        <CurrentMonthRecords color="blue" accountId="some-account-id" isGuestUser={false} />
       </Router>,
       { preloadedState: { user: userInitialState } },
     );

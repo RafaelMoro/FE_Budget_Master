@@ -139,7 +139,7 @@ describe('Older Records', () => {
     fetchMock.once(JSON.stringify(olderRecordsResponse));
     renderWithProviders(
       <Router location={history.location} navigator={history}>
-        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} hideCharts />
+        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} />
       </Router>,
       { preloadedState: { user: userInitialState } },
     );
@@ -177,7 +177,7 @@ describe('Older Records', () => {
     fetchMock.once(JSON.stringify(olderRecordsResponse));
     renderWithProviders(
       <Router location={history.location} navigator={history}>
-        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} hideCharts />
+        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} />
       </Router>,
       { preloadedState: { user: userInitialState } },
     );
@@ -215,7 +215,7 @@ describe('Older Records', () => {
     fetchMock.once(JSON.stringify(olderRecordsResponse));
     renderWithProviders(
       <Router location={history.location} navigator={history}>
-        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} hideCharts />
+        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} />
       </Router>,
       { preloadedState: { user: userInitialState } },
     );
@@ -256,7 +256,7 @@ describe('Older Records', () => {
       .once(JSON.stringify(olderRecordsResponseEmptyRecords));
     renderWithProviders(
       <Router location={history.location} navigator={history}>
-        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} hideCharts />
+        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} />
       </Router>,
       { preloadedState: { user: userInitialState } },
     );

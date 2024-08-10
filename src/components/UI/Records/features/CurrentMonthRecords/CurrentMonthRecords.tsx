@@ -15,10 +15,11 @@ interface CurrentMonthRecordsProps {
   color: string;
   accountId: string;
   isGuestUser: boolean;
+  hideCharts?: boolean;
 }
 
 const CurrentMonthRecords = ({
-  color, accountId, isGuestUser,
+  color, accountId, isGuestUser, hideCharts,
 }: CurrentMonthRecordsProps) => {
   const dispatch = useAppDispatch();
   const {
@@ -55,6 +56,7 @@ const CurrentMonthRecords = ({
     <MonthRecords
       color={color}
       openedAccordeon
+      hideCharts={hideCharts}
       titleMonthAccordeon={`Current month: ${completeCurrentMonth}`}
       totalExpense={totalRecords.currentMonth.expenseTotal}
       totalIncome={totalRecords.currentMonth.incomeTotal}

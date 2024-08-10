@@ -139,7 +139,7 @@ describe('Older Records', () => {
     fetchMock.once(JSON.stringify(olderRecordsResponse));
     renderWithProviders(
       <Router location={history.location} navigator={history}>
-        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} />
+        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} hideCharts />
       </Router>,
       { preloadedState: { user: userInitialState } },
     );
@@ -151,6 +151,7 @@ describe('Older Records', () => {
     userEvent.click(accordion);
     await screen.findByText(/Casa a solesta gym/i);
 
+    // screen.debug(undefined, 1000000);
     // Change month on combobox
     const selectMonthTestId = screen.getByTestId('select-month');
     const selectMonthButton = within(selectMonthTestId).getByRole('combobox');
@@ -176,7 +177,7 @@ describe('Older Records', () => {
     fetchMock.once(JSON.stringify(olderRecordsResponse));
     renderWithProviders(
       <Router location={history.location} navigator={history}>
-        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} />
+        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} hideCharts />
       </Router>,
       { preloadedState: { user: userInitialState } },
     );
@@ -207,13 +208,14 @@ describe('Older Records', () => {
     await screen.findByText(errorMessage);
   });
 
+  // Hiding charts on unit tests due owner document error when interacting with the dom.
   test('Show older records, then click the last month option, then click on search expenses and should show error', async () => {
     const { lastMonth, lastMonthName } = getLastMonthDate();
 
     fetchMock.once(JSON.stringify(olderRecordsResponse));
     renderWithProviders(
       <Router location={history.location} navigator={history}>
-        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} />
+        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} hideCharts />
       </Router>,
       { preloadedState: { user: userInitialState } },
     );
@@ -244,6 +246,7 @@ describe('Older Records', () => {
     await screen.findByText(errorMessage);
   });
 
+  // Hiding charts on unit tests due owner document error when interacting with the dom.
   test(`Show older records, then click the option of the month before of the before last month,
     then click on search expenses and should reset the total income and expense`, async () => {
     const { passedMonth, passedMonthName } = getTwoMonthBeforeLastMonth();
@@ -253,7 +256,7 @@ describe('Older Records', () => {
       .once(JSON.stringify(olderRecordsResponseEmptyRecords));
     renderWithProviders(
       <Router location={history.location} navigator={history}>
-        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} />
+        <OlderRecords color="blue" accountId="some-account-id" isGuestUser={false} hideCharts />
       </Router>,
       { preloadedState: { user: userInitialState } },
     );

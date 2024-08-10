@@ -14,14 +14,16 @@ const data = [
 ];
 
 const TestChart = () => (
-  <BarChart width={500} height={300} data={data}>
-    <CartesianGrid strokeDasharray="3 3" />
-    <XAxis dataKey="name" />
-    <YAxis />
-    <Tooltip />
-    <Legend />
-    <Bar dataKey="amount" fill="#8884d8" />
-  </BarChart>
+  <div data-testid="test-chart-something">
+    <BarChart width={500} height={300} data={data}>
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="name" />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      <Bar dataKey="amount" fill="#8884d8" />
+    </BarChart>
+  </div>
 );
 
 export { TestChart };

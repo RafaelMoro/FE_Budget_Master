@@ -57,7 +57,7 @@ const MonthRecords = ({
     ) }
     { (isGuestUser && isOlderRecords && children) && children }
     <TestChart />
-    <ShowRecordsw
+    <ShowRecords
       records={records}
       loading={loading}
       error={error}

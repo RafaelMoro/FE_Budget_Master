@@ -11,20 +11,6 @@ interface UseStatisticsProps {
 const useStatistics = ({ records }: UseStatisticsProps) => {
   const [expensiveDaysData, setExpensiveDaysData] = useState<ChartExpensiveDaysData[]>([]);
   const [categoriesData, setCategoriesData] = useState<ChartCategoriesData[]>([]);
-  const expensiveDaysChartData = {
-    labels: expensiveDaysData.map((item) => item.date),
-    datasets: [
-      {
-        label: 'Daily amount spending',
-        data: expensiveDaysData.map((item) => item.amount),
-        backgroundColor: [
-          AppColors.primary,
-          AppColors.secondary,
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
   const categoriesChartData = {
     labels: categoriesData.map((item) => item.category),
     datasets: [
@@ -51,7 +37,7 @@ const useStatistics = ({ records }: UseStatisticsProps) => {
   }, [records]);
 
   return {
-    expensiveDaysChartData,
+    expensiveDaysData,
     categoriesChartData,
   };
 };

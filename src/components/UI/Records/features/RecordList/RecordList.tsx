@@ -8,7 +8,6 @@ import { List } from '../../Records.styled';
 import { OlderRecords } from '../OlderRecords';
 import { LastMonthRecords } from '../LastMonthRecords';
 import { CurrentMonthRecords } from '../CurrentMonthRecords';
-import { TestChart } from '../../../Graphics/TestChart';
 
 interface RecordListProps {
   handleOpenCreateAccount: () => void;
@@ -48,7 +47,6 @@ const RecordList = ({ handleOpenCreateAccount }: RecordListProps) => {
 
   return (
     <List>
-      <TestChart />
       <CurrentMonthRecords
         color={color}
         accountId={accountId}

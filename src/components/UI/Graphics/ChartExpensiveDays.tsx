@@ -1,5 +1,5 @@
 import {
-  BarChart, Bar, CartesianGrid, Tooltip, Legend, XAxis, YAxis,
+  BarChart, Bar, CartesianGrid, Tooltip, Legend, XAxis, YAxis, PieChart, Pie,
 } from 'recharts';
 import { Typography } from '@mui/material';
 
@@ -15,7 +15,18 @@ const ChartExpensiveDays = ({ records }: ChartExpensiveDaysProps) => {
 
   if (isMobile) {
     return (
-      <h1>Hi</h1>
+      <div data-testid="chart-bar-expensive-days">
+        {expensiveDaysData.length === 0 && (
+        <Typography variant="body2">No data to display</Typography>
+        )}
+        { expensiveDaysData.length > 0 && (
+        <PieChart width={320} height={300}>
+          <Pie data={expensiveDaysData} dataKey="amount" nameKey="date" cx="50%" cy="50%" fill="#8884d8" />
+          <Legend />
+          <Tooltip />
+        </PieChart>
+        )}
+      </div>
     );
   }
 

@@ -1,14 +1,39 @@
+import { Typography } from '@mui/material';
+import {
+  CartesianGrid, Legend, LineChart, XAxis, YAxis, Tooltip, Line,
+} from 'recharts';
+
 import { AnyRecord } from '../../../globalInterface';
 import { useStatistics } from '../../../hooks/useStatistics';
+import { AppColors } from '../../../styles';
+import { useAppSelector } from '../../../redux/hooks';
 
 interface ChartCategoriesProps {
   records: AnyRecord[];
 }
 
 const ChartCategories = ({ records }: ChartCategoriesProps) => {
-  const { categoriesChartData } = useStatistics({ records });
+  const { categoriesData } = useStatistics({ records });
+  const windowSize = useAppSelector((state) => state.userInterface.windowSize);
+  const isMobile = windowSize === 'Mobile';
+  const lineWidth = isMobile ? 320 : 480;
+
   return (
-    <h1>Categories chart</h1>
+    <div data-testid="categories-chart">
+      {categoriesData.length === 0 && (
+        <Typography variant="body2">No data to display</Typography>
+      )}
+      { categoriesData.length > 0 && (
+        <LineChart width={lineWidth} height={300} data={categoriesData}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="category" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="amount" stroke={AppColors.primary} />
+        </LineChart>
+      )}
+    </div>
   );
 };
 

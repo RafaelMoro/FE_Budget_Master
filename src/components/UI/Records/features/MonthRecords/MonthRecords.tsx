@@ -8,6 +8,7 @@ import { AppColors, FlexContainer } from '../../../../../styles';
 import { RecordExpense, RecordIncome } from '../../Records.styled';
 import { ShowTotalContianer } from '../Features.styled';
 import { GraphicsCard } from '../../../../templates/GraphicsCard';
+import { RecordsOverviewCard } from '../../../../templates/RecordsOverviewCard';
 
 interface MonthRecordsProps {
   color: string;
@@ -57,6 +58,7 @@ const MonthRecords = ({
     ) }
     { (isGuestUser && isOlderRecords && children) && children }
     <GraphicsCard records={records} />
+    <RecordsOverviewCard />
     <ShowRecords
       records={records}
       loading={loading}

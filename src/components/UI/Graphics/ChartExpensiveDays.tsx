@@ -15,7 +15,7 @@ const ChartExpensiveDays = ({ records }: ChartExpensiveDaysProps) => {
 
   if (isMobile) {
     return (
-      <div data-testid="chart-bar-expensive-days">
+      <div data-testid="chart-bar-expensive-days-mobile">
         {expensiveDaysData.length === 0 && (
         <Typography variant="body2">No data to display</Typography>
         )}
@@ -31,7 +31,7 @@ const ChartExpensiveDays = ({ records }: ChartExpensiveDaysProps) => {
   }
 
   return (
-    <div data-testid="chart-bar-expensive-days">
+    <div data-testid="chart-bar-expensive-days-desktop">
       {expensiveDaysData.length === 0 && (
         <Typography variant="body2">No data to display</Typography>
       )}

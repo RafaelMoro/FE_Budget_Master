@@ -18,14 +18,18 @@ const RecordsOverviewCard = ({ records, color }: { records: AnyRecord[], color: 
       { records.length === 0 && (
       <Typography variant="body2">No records created yet. Start creating records this month to start showing statistics.</Typography>
       )}
-      { last10Records.length > 0 && last10Records.map((record) => (
-        <Record
-          key={record._id}
-          backgroundColor={color}
-          record={record}
-        />
-      ))}
-      <PrimaryButton>View all records</PrimaryButton>
+      { last10Records.length > 0 && (
+        <>
+          { last10Records.map((record) => (
+            <Record
+              key={record._id}
+              backgroundColor={color}
+              record={record}
+            />
+          ))}
+          <PrimaryButton>View all records</PrimaryButton>
+        </>
+      )}
     </Container>
   );
 };

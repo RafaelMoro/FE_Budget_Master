@@ -21,7 +21,7 @@ const ChartExpensiveDays = ({ records }: ChartExpensiveDaysProps) => {
         )}
         { expensiveDaysData.length > 0 && (
         <PieChart width={320} height={300}>
-          <Pie data={expensiveDaysData} dataKey="amount" nameKey="date" cx="50%" cy="50%" fill="#8884d8" />
+          <Pie data={expensiveDaysData} dataKey="amount" nameKey="date" cx="50%" cy="50%" fill={AppColors.primaryDark} />
           <Legend />
           <Tooltip />
         </PieChart>

@@ -1,5 +1,5 @@
-import { Typography } from '@mui/material';
-import { Container } from './RecordsOverviewCard.styled';
+import { Divider, Typography } from '@mui/material';
+import { Container, RecordContainer, ViewAllFirstButton } from './RecordsOverviewCard.styled';
 import { AnyRecord } from '../../../globalInterface';
 import { Record } from '../../UI/Records/Record';
 import { PrimaryButton } from '../../../styles';
@@ -16,23 +16,24 @@ interface RecordsOverviewCardProps {
 */
 const RecordsOverviewCard = ({ records, color, viewAllRecords }: RecordsOverviewCardProps) => {
   const last10Records = records.slice(0, 10);
-  const title = records.length > 0 ? 'Last 10 records' : 'Records overview';
 
   return (
     <Container>
-      <Typography variant="h5">{title}</Typography>
+      <Typography variant="h5">Records overview</Typography>
       { records.length === 0 && (
       <Typography variant="body2">No records created yet. Start creating records this month to start showing statistics.</Typography>
       )}
       { last10Records.length > 0 && (
         <>
-          <PrimaryButton onClick={viewAllRecords}>View all records</PrimaryButton>
+          <ViewAllFirstButton onClick={viewAllRecords}>View all records</ViewAllFirstButton>
           { last10Records.map((record) => (
-            <Record
-              key={record._id}
-              backgroundColor={color}
-              record={record}
-            />
+            <RecordContainer key={record._id}>
+              <Record
+                backgroundColor={color}
+                record={record}
+              />
+              <Divider />
+            </RecordContainer>
           ))}
           <PrimaryButton onClick={viewAllRecords}>View all records</PrimaryButton>
         </>

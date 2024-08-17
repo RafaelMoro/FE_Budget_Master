@@ -29,7 +29,7 @@ const ShowRecords = ({
     { (!loading && !error && !showMessage && records?.length > 0) && (
       <MonthRecordBox>
         <IconButton onClick={hideAllRecords}>
-          <AppIcon icon="Close" />
+          <AppIcon icon="GoBack" />
         </IconButton>
         { records?.map(renderRecords) }
       </MonthRecordBox>

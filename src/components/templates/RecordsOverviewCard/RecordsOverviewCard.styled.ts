@@ -10,7 +10,7 @@ export const Container = styled.article`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 3rem;
 `;
 
 export const RecordsContainer = styled.div``;

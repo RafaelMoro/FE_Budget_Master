@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from 'react';
+import { ReactElement, ReactNode, useState } from 'react';
 import { Divider, Typography } from '@mui/material';
 import { AnyRecord } from '../../../../../globalInterface';
 import { MonthAccordeon } from '../MonthAccordeon';
@@ -35,15 +35,19 @@ const MonthRecords = ({
   color, openedAccordeon, titleMonthAccordeon, accountId, isGuestUser, isOlderRecords, showMessage,
   records, loading, error, onEmptyCb, onLoadingCb, onErrorCb, totalExpense, totalIncome, onShowMessage,
   onClickCb = () => {}, children,
-}: MonthRecordsProps) => (
-  <MonthAccordeon
-    color={AppColors.bgColorDark}
-    opened={openedAccordeon}
-    title={titleMonthAccordeon}
-    accountId={accountId}
-    onClickCallback={onClickCb}
-  >
-    { (!isGuestUser) && (
+}: MonthRecordsProps) => {
+  const [showAllRecords, setShowAllRecords] = useState(false);
+  const toggleShowAllRecords = () => setShowAllRecords((prevState) => !prevState);
+
+  return (
+    <MonthAccordeon
+      color={AppColors.bgColorDark}
+      opened={openedAccordeon}
+      title={titleMonthAccordeon}
+      accountId={accountId}
+      onClickCallback={onClickCb}
+    >
+      { (!isGuestUser) && (
       <ShowTotalContianer>
         <FlexContainer gap={2}>
           <Typography>Total Expense: </Typography>
@@ -55,20 +59,29 @@ const MonthRecords = ({
           <RecordIncome data-testid="total-income-number">{totalIncome}</RecordIncome>
         </FlexContainer>
       </ShowTotalContianer>
-    ) }
-    { (isGuestUser && isOlderRecords && children) && children }
-    <GraphicsCard records={records} />
-    <RecordsOverviewCard color={color} records={records} />
-    <ShowRecords
-      records={records}
-      loading={loading}
-      error={error}
-      showMessage={showMessage}
-      onShowMessage={onShowMessage}
-      onEmptyRecords={onEmptyCb}
-      onErrorRecords={onErrorCb}
-      onLoadingRecords={onLoadingCb}
-      renderRecords={
+      ) }
+      { (isGuestUser && isOlderRecords && children) && children }
+      {
+        !showAllRecords && (
+          <>
+            <GraphicsCard records={records} />
+            <RecordsOverviewCard color={color} records={records} viewAllRecords={toggleShowAllRecords} />
+          </>
+        )
+      }
+      {
+        showAllRecords && (
+          <ShowRecords
+            records={records}
+            loading={loading}
+            error={error}
+            hideAllRecords={toggleShowAllRecords}
+            showMessage={showMessage}
+            onShowMessage={onShowMessage}
+            onEmptyRecords={onEmptyCb}
+            onErrorRecords={onErrorCb}
+            onLoadingRecords={onLoadingCb}
+            renderRecords={
           (record: AnyRecord, index: number) => (
             <div key={record._id}>
               { (index === 0) && (<Divider />) }
@@ -80,8 +93,11 @@ const MonthRecords = ({
             </div>
           )
         }
-    />
-  </MonthAccordeon>
-);
+          />
+        )
+      }
+    </MonthAccordeon>
+  );
+};
 
 export { MonthRecords };

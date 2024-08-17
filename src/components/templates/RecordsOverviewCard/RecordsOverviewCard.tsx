@@ -4,11 +4,17 @@ import { AnyRecord } from '../../../globalInterface';
 import { Record } from '../../UI/Records/Record';
 import { PrimaryButton } from '../../../styles';
 
+interface RecordsOverviewCardProps {
+  records: AnyRecord[];
+  color: string;
+  viewAllRecords: () => void;
+}
+
 /*
 * This component shows the last 10 records of the month.
 * Since it receives all the records, it will slice the last 10 records.
 */
-const RecordsOverviewCard = ({ records, color }: { records: AnyRecord[], color: string }) => {
+const RecordsOverviewCard = ({ records, color, viewAllRecords }: RecordsOverviewCardProps) => {
   const last10Records = records.slice(0, 10);
   const title = records.length > 0 ? 'Last 10 records' : 'Records overview';
 
@@ -20,6 +26,7 @@ const RecordsOverviewCard = ({ records, color }: { records: AnyRecord[], color: 
       )}
       { last10Records.length > 0 && (
         <>
+          <PrimaryButton onClick={viewAllRecords}>View all records</PrimaryButton>
           { last10Records.map((record) => (
             <Record
               key={record._id}
@@ -27,7 +34,7 @@ const RecordsOverviewCard = ({ records, color }: { records: AnyRecord[], color: 
               record={record}
             />
           ))}
-          <PrimaryButton>View all records</PrimaryButton>
+          <PrimaryButton onClick={viewAllRecords}>View all records</PrimaryButton>
         </>
       )}
     </Container>

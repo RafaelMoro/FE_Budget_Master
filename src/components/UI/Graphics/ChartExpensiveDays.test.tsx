@@ -28,4 +28,13 @@ describe('ChartExpensiveDays chart component', () => {
 
     expect(screen.getByTestId('chart-bar-expensive-days-desktop')).toBeInTheDocument();
   });
+
+  test('Given no data, show message "No data to display" on desktop', () => {
+    const userInterfaceState = getInitialUserInterfaceState({ newWindowSize: 'Desktop' });
+    renderWithProviders(
+      <ChartExpensiveDays records={[]} />,
+      { preloadedState: { userInterface: userInterfaceState } },
+    );
+    expect(screen.getByText('No data to display')).toBeInTheDocument();
+  });
 });

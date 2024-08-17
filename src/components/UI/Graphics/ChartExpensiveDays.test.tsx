@@ -12,6 +12,13 @@ describe('ChartExpensiveDays chart component', () => {
     expect(screen.getByTestId('chart-bar-expensive-days-mobile')).toBeInTheDocument();
   });
 
+  test('Given no data, show message "No data to display" on mobile', () => {
+    renderWithProviders(
+      <ChartExpensiveDays records={[]} />,
+    );
+    expect(screen.getByText('No data to display')).toBeInTheDocument();
+  });
+
   test('Show ChartExpensiveDays chart on desktop', () => {
     const userInterfaceState = getInitialUserInterfaceState({ newWindowSize: 'Desktop' });
     renderWithProviders(

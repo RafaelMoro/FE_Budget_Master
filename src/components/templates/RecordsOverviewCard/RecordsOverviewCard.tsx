@@ -26,13 +26,13 @@ const RecordsOverviewCard = ({ records, color, viewAllRecords }: RecordsOverview
       { last10Records.length > 0 && (
         <>
           <ViewAllFirstButton onClick={viewAllRecords}>View all records</ViewAllFirstButton>
-          { last10Records.map((record) => (
+          { last10Records.map((record, index) => (
             <RecordContainer key={record._id}>
               <Record
                 backgroundColor={color}
                 record={record}
               />
-              <Divider />
+              { (index !== last10Records.length - 1) && (<Divider />) }
             </RecordContainer>
           ))}
           <PrimaryButton onClick={viewAllRecords}>View all records</PrimaryButton>

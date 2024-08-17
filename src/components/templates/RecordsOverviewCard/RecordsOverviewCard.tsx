@@ -2,6 +2,7 @@ import { Typography } from '@mui/material';
 import { Container } from './RecordsOverviewCard.styled';
 import { AnyRecord } from '../../../globalInterface';
 import { Record } from '../../UI/Records/Record';
+import { PrimaryButton } from '../../../styles';
 
 /*
 * This component shows the last 10 records of the month.
@@ -24,6 +25,7 @@ const RecordsOverviewCard = ({ records, color }: { records: AnyRecord[], color: 
           record={record}
         />
       ))}
+      <PrimaryButton>View all records</PrimaryButton>
     </Container>
   );
 };

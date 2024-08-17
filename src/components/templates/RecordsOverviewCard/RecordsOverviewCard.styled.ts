@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { AppColors, PrimaryButton, responsiveBreakpoints } from '../../../styles';
+import { PrimaryButton, responsiveBreakpoints } from '../../../styles';
 
 export const Container = styled.article`
   padding: 2rem 0;

@@ -30,7 +30,7 @@ const ChartCategories = ({ records }: ChartCategoriesProps) => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="amount" stroke={AppColors.primary} />
+          <Line type="monotone" dataKey="amount" stroke={AppColors.primaryDark} />
         </LineChart>
       )}
     </div>

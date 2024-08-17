@@ -42,7 +42,7 @@ const ChartExpensiveDays = ({ records }: ChartExpensiveDaysProps) => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="amount" fill={AppColors.primary} />
+          <Bar dataKey="amount" fill={AppColors.primaryDark} />
         </BarChart>
       )}
     </div>

@@ -11,4 +11,12 @@ describe('ChartCategories chart component', () => {
 
     expect(screen.getByTestId('categories-chart')).toBeInTheDocument();
   });
+
+  test('Given no data, show message "No data to display"', () => {
+    renderWithProviders(
+      <ChartCategories records={[]} />,
+    );
+
+    expect(screen.getByText('No data to display')).toBeInTheDocument();
+  });
 });

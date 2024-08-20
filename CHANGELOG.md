@@ -1,3 +1,9 @@
+## v1.6.4 (2024-08-20)
+
+### Pull Requests
+[#50](https://github.com/RafaelMoro/FE_Budget_Master/pull/50) | Add GA4 into index html
+
+
 ## v1.6.3 (2024-08-02)
 
 ### Pull Requests

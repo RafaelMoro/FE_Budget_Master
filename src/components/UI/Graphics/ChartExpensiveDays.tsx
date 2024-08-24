@@ -17,7 +17,10 @@ const ChartExpensiveDays = ({ records }: ChartExpensiveDaysProps) => {
   return (
     <div data-testid="chart-bar-expensive-days">
       {expensiveDaysData.length === 0 && (
-        <Typography variant="body2">No data to display</Typography>
+        <>
+          <Typography variant="body2">Oops! It looks like there are no expenses to display right now.</Typography>
+          <Typography variant="body2">Add some expenses to start tracking your spending and see the data visualized here.</Typography>
+        </>
       )}
       { expensiveDaysData.length > 0 && (
         <BarChart width={barWidth} height={300} data={expensiveDaysData}>

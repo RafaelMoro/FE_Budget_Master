@@ -61,27 +61,25 @@ const MonthRecords = ({
       </ShowTotalContianer>
       ) }
       { (isGuestUser && isOlderRecords && children) && children }
-      {
-        !showAllRecords && (
+      <ShowRecords
+        records={records}
+        loading={loading}
+        error={error}
+        showAllRecords={showAllRecords}
+        hideAllRecords={toggleShowAllRecords}
+        showMessage={showMessage}
+        onShowMessage={onShowMessage}
+        onEmptyRecords={onEmptyCb}
+        onErrorRecords={onErrorCb}
+        onLoadingRecords={onLoadingCb}
+        // eslint-disable-next-line react/no-unstable-nested-components
+        onShowAllRecords={() => (
           <>
             <GraphicsCard records={records} />
             <RecordsOverviewCard color={color} records={records} viewAllRecords={toggleShowAllRecords} />
           </>
-        )
-      }
-      {
-        showAllRecords && (
-          <ShowRecords
-            records={records}
-            loading={loading}
-            error={error}
-            hideAllRecords={toggleShowAllRecords}
-            showMessage={showMessage}
-            onShowMessage={onShowMessage}
-            onEmptyRecords={onEmptyCb}
-            onErrorRecords={onErrorCb}
-            onLoadingRecords={onLoadingCb}
-            renderRecords={
+        )}
+        renderRecords={
           (record: AnyRecord, index: number) => (
             <div key={record._id}>
               { (index === 0) && (<Divider />) }
@@ -93,9 +91,7 @@ const MonthRecords = ({
             </div>
           )
         }
-          />
-        )
-      }
+      />
     </MonthAccordeon>
   );
 };

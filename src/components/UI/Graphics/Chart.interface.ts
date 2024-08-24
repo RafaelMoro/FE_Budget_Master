@@ -12,4 +12,5 @@ export interface ChartCategoriesData {
 
 export interface ChartExpensiveDaysProps {
   records: AnyRecord[];
+  showNoDisplayData?: boolean;
 }

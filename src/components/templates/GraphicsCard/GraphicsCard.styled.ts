@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Typography } from '@mui/material';
 import { TextWithMarginBottomProps } from './GraphicsCard.interface';
+import { appTheme } from '../../../styles/theme';
 
 export const GraphicsCardContainer = styled.article`
   width: 100%;
@@ -14,6 +15,7 @@ export const GraphicsCardContainer = styled.article`
 
 export const NoRecordsGraphicsCardContainer = styled(GraphicsCardContainer)`
   padding: 4rem 2rem;
+  margin-bottom: ${appTheme.spacing(4)};
 `;
 
 export const TextWithMarginBottom = styled(Typography, { shouldForwardProp: (props) => props !== 'margin' })`

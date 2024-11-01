@@ -90,6 +90,7 @@ export const recordsSlice = createSlice({
       state.totalRecords.lastMonth.incomeTotal = newAmount;
     },
   },
+  // TODO: Check if this is correct
   extraReducers: (builder) => {
     builder.addMatcher(isAnyOf(recordsApiSlice.endpoints.fetchRecordsByMonthYear.matchFulfilled), (state, action) => {
       state.currentMonthRecordsData = action.payload.records;

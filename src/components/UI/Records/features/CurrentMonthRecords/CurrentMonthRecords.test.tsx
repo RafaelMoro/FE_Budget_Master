@@ -59,6 +59,7 @@ describe('Current month records', () => {
     expect(createRecordButton).toBeInTheDocument();
   });
 
+  // Hiding charts on unit tests due owner document error when interacting with the dom.
   test('Show current month records with records', async () => {
     fetchMock.once(JSON.stringify(olderRecordsResponse));
     renderWithProviders(

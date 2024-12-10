@@ -36,10 +36,15 @@ export const validateMonthOlderRecords = ({ month, year }: ValidateMonthOlderRec
 export const getFutureDate = () => {
   const now = new Date();
   const currentMonth = now.getMonth();
-  const futureMonth = currentMonth + 1;
+  const currentYear = now.getFullYear();
+  const nextYear = currentYear + 1;
+  const isDecember = currentMonth === 11;
+  const futureMonth = isDecember ? 0 : currentMonth + 1;
   const futureMonthName = MONTHS[futureMonth];
 
-  return { futureMonth, futureMonthName };
+  return {
+    futureMonth, futureMonthName, currentYear, nextYear,
+  };
 };
 
 export const getCurrentDate = () => {

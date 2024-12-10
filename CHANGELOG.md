@@ -1,3 +1,9 @@
+## v1.7.0 (2024-12-10)
+
+### Pull Requests
+[#52](https://github.com/RafaelMoro/FE_Budget_Master/pull/52) | Add charts from recharts
+
+
 ## v1.6.4 (2024-08-20)
 
 ### Pull Requests

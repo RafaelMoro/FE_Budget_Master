@@ -8,7 +8,7 @@ import { ChartExpensiveDaysProps } from './Chart.interface';
 import { useStatistics } from '../../../hooks/useStatistics';
 import { AppColors } from '../../../styles';
 
-const ChartExpensiveDays = ({ records, showNoDisplayData }: ChartExpensiveDaysProps) => {
+const ChartExpensiveDays = ({ records }: ChartExpensiveDaysProps) => {
   const windowSize = useAppSelector((state) => state.userInterface.windowSize);
   const isMobile = windowSize === 'Mobile';
   const barWidth = isMobile ? 320 : 480;
@@ -16,7 +16,7 @@ const ChartExpensiveDays = ({ records, showNoDisplayData }: ChartExpensiveDaysPr
 
   return (
     <div data-testid="chart-bar-expensive-days">
-      { (expensiveDaysData.length === 0 && showNoDisplayData) && (
+      { (expensiveDaysData.length === 0) && (
         <>
           <Typography variant="body2">Oops! It looks like there are no expenses to display right now.</Typography>
           <Typography variant="body2">Add some expenses to start tracking your spending and see the data visualized here.</Typography>

@@ -11,10 +11,11 @@ describe('ChartExpensiveDays chart component', () => {
     expect(screen.getByTestId('chart-bar-expensive-days')).toBeInTheDocument();
   });
 
-  test('Given no data, show message "No data to display"', () => {
+  test('Given no data, show message "Oops! It looks like there are no expenses to display right now."', () => {
     renderWithProviders(
       <ChartExpensiveDays records={[]} />,
     );
-    expect(screen.getByText('No data to display')).toBeInTheDocument();
+    expect(screen.getByText('Oops! It looks like there are no expenses to display right now.')).toBeInTheDocument();
+    expect(screen.getByText('Add some expenses to start tracking your spending and see the data visualized here.')).toBeInTheDocument();
   });
 });

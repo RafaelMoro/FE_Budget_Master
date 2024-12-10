@@ -22,7 +22,9 @@ interface OlderRecordsProps {
   isGuestUser: boolean;
 }
 
-const OlderRecords = ({ color, accountId, isGuestUser }: OlderRecordsProps) => {
+const OlderRecords = ({
+  color, accountId, isGuestUser,
+}: OlderRecordsProps) => {
   const dispatch = useAppDispatch();
   const {
     completeMonth, month, year, years,

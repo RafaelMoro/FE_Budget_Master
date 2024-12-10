@@ -7,6 +7,9 @@ import { GlobalConfiguration, BackgroundColors, TextColors } from './interface';
 
 export const AppColors = {
   primary: '#B16841',
+  complementary: '#418ab1',
+  firstAnalogous: '#b14152',
+  secondAnalogous: '#b1a041',
   primaryDark: '#C08667',
   primaryLight: '#7B482D',
   secondary: '#592418',

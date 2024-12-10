@@ -17,6 +17,7 @@ export interface AppIcons {
   Edit: AppIcon;
   LogOut: AppIcon;
   Close: AppIcon;
+  GoBack: AppIcon;
   GoToTop: AppIcon;
   TickMark: AppIcon;
   Visibility: AppIcon;

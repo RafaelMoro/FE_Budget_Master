@@ -1,7 +1,7 @@
 import {
   DeleteOutlined, ErrorOutlineOutlined, EditOutlined, LogoutOutlined, Close,
   DoneOutlined, Visibility, VisibilityOff, KeyboardArrowUpOutlined,
-  Celebration, MonetizationOn,
+  Celebration, MonetizationOn, ArrowBackOutlined,
   Fastfood, House, Engineering, Language, DirectionsCar,
   AccountBalance, MedicalInformation, FamilyRestroom, ShoppingCart,
   Menu,
@@ -13,6 +13,10 @@ export const APP_ICONS: AppIcons = {
   Delete: {
     icon: DeleteOutlined,
     defaultColor: AppColors.negative,
+  },
+  GoBack: {
+    icon: ArrowBackOutlined,
+    defaultColor: AppColors.subtitleColor,
   },
   Error: {
     icon: ErrorOutlineOutlined,

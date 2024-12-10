@@ -1,9 +1,10 @@
 import {
-  fireEvent, screen, within,
+  fireEvent, screen, waitFor, within,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import fetchMock from 'jest-fetch-mock';
 
 import { renderWithProviders } from '../../../../../tests/CustomWrapperRedux';
@@ -151,7 +152,6 @@ describe('Older Records', () => {
     userEvent.click(accordion);
     await screen.findByText(/Casa a solesta gym/i);
 
-    // screen.debug(undefined, 1000000);
     // Change month on combobox
     const selectMonthTestId = screen.getByTestId('select-month');
     const selectMonthButton = within(selectMonthTestId).getByRole('combobox');
@@ -167,7 +167,13 @@ describe('Older Records', () => {
     const searchExpensesButton = screen.getByRole('button', { name: /search records/i });
     userEvent.click(searchExpensesButton);
 
-    const errorMessage = new RegExp(`You are selecting a date in the future: ${futureMonthName} 2024`);
+    let errorMessage: RegExp | string = new RegExp(`You are selecting a date in the future: ${futureMonthName} 2024`);
+
+    if (futureMonth === 0) {
+      // The error changes because the next year option is not shown. Hence, the error message won't appear with 2025.
+      // that's why if the future month is january, the error message will be selected as january of current year
+      errorMessage = 'You have not created records for this month.';
+    }
     await screen.findByText(errorMessage);
   });
 

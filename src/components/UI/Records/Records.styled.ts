@@ -6,9 +6,6 @@ import {
   ListItem, ListItemButton, List as ListMUI, Typography,
 } from '@mui/material';
 
-import {
-  ListExpandableContainerProps,
-} from './interface';
 import { blinkAnimation } from '../../../styles/animations/blink';
 import {
   AppColors, Chip, RecordStatusTypeColors, globalConfiguration, responsiveBreakpoints,

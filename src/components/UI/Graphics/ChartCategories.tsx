@@ -10,10 +10,9 @@ import { useAppSelector } from '../../../redux/hooks';
 
 interface ChartCategoriesProps {
   records: AnyRecord[];
-  showNoDisplayData?: boolean;
 }
 
-const ChartCategories = ({ records, showNoDisplayData }: ChartCategoriesProps) => {
+const ChartCategories = ({ records }: ChartCategoriesProps) => {
   const { categoriesData } = useStatistics({ records });
   const windowSize = useAppSelector((state) => state.userInterface.windowSize);
   const isMobile = windowSize === 'Mobile';
@@ -21,7 +20,7 @@ const ChartCategories = ({ records, showNoDisplayData }: ChartCategoriesProps) =
 
   return (
     <div data-testid="categories-chart">
-      { (categoriesData.length === 0 && showNoDisplayData) && (
+      { (categoriesData.length === 0) && (
         <Typography variant="body2">No data to display</Typography>
       )}
       { categoriesData.length > 0 && (

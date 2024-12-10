@@ -34,7 +34,7 @@ export const SUCCESS_PASSWORD_RESET_DESC = 'You may login with your new password
 export const SUCCESS_FORGOT_PASSWORD_TITLE = 'Email Sent.';
 export const SUCCESS_FORGOT_PASSWORD_DESC = 'Kindly check your email inbox and follow the instructions. Redirecting to sign in page';
 
-export const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'December'];
+export const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 export const ZERO_CURRENCY = '$0.00';
 
 const FOOD_AND_DRINK_CATEGORY: Category = {

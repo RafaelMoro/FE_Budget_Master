@@ -31,7 +31,7 @@ const ChartCategories = ({ records, showNoDisplayData }: ChartCategoriesProps) =
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="amount" stroke={AppColors.primaryDark} />
+          <Line type="monotone" dataKey="amount" stroke={AppColors.complementary} />
         </LineChart>
       )}
     </div>

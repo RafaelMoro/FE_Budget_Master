@@ -1,5 +1,7 @@
 import { Category } from './globalInterface';
 
+export const BUDGET_MASTER_LANDING = 'https://budget-master.space';
+
 export const BACKEND_ENV_URI = process.env.REACT_APP_BACKEND_URI;
 export const BACKEND_LOCAL_URI = 'http://localhost:6006/';
 export const POST_METHOD = 'POST';

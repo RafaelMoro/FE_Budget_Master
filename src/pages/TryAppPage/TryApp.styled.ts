@@ -33,13 +33,16 @@ export const Description = styled(Typography)`
 `;
 
 export const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 2rem;
-  align-items: center;
+
+  img {
+    width: 20rem;
+    height: 100%;
+    mask-image: linear-gradient(black 95%, transparent 100%);
+  }
 
   @media (max-width: 768px) {
-    flex-direction: row;
-    justify-content: space-between;
   }
 `;

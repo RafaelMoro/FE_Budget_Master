@@ -1,18 +1,22 @@
 import styled from '@emotion/styled';
 import { Typography } from '@mui/material';
 import {
-  AppColors, globalConfiguration, responsiveBreakpoints, TransparentButton,
+  AppColors, globalConfiguration, OutsideAnchor, responsiveBreakpoints, TransparentButton,
 } from '../../styles';
 
 export const Main = styled.main`
-  margin-top: 5rem;
-  padding: 0 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
   min-height: 100vh;
   width: 100%;
-  align-items: center;
+  margin-top: 5rem;
+  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  justify-items: center;
+`;
+
+export const GoBackAnchor = styled(OutsideAnchor)`
+  justify-self: start;
 `;
 
 export const LogoTitleLogin = styled(Typography)`

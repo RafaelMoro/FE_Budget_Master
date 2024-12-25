@@ -19,6 +19,7 @@ const useSyncLoginInfo = () => {
   const dispatch = useAppDispatch();
   const { loadGuestUser } = useGuestUser();
   const userReduxState = useAppSelector((state) => state.user);
+  const accountsReduxState = useAppSelector((state) => state.accounts.accounts);
   const [recordToBeEdited, setRecordtoBeEdited] = useState<null | AnyRecord>(null);
   const [isEmptyLocalStorage, setIsEmptyLocalStorage] = useState<boolean>(false);
 
@@ -56,6 +57,11 @@ const useSyncLoginInfo = () => {
     const records = localStorageInfo?.records ?? [];
 
     if (user?.user?.firstName === 'Guest') {
+      // This means that the user has already logged on as guest user
+      if (accountsReduxState && accountsReduxState.length > 1) {
+        console.log('there are accounts');
+        return;
+      }
       loadGuestUser({ accountsLocalStorage: accounts, recordsLocalStorage: records });
     }
   };

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { Typography } from '@mui/material';
 import {
-  AppColors, globalConfiguration, OutsideAnchor, responsiveBreakpoints, TransparentButton,
+  AppColors, OutsideAnchor, TransparentButton,
 } from '../../styles';
 
 export const Main = styled.main`

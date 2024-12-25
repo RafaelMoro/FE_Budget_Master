@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Typography } from '@mui/material';
 
@@ -14,6 +14,8 @@ const LoginChecker = () => {
   console.log('isGuestUser', isGuestUser);
   console.log('userLoggedOn', userLoggedOn);
   const { verifyGuestUser } = useSyncLoginInfo();
+
+  const [showInitialMessage, setShowInitialMessage] = useState(true);
   const checkLogin = () => {};
 
   const handleStartNow = () => {
@@ -30,6 +32,12 @@ const LoginChecker = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setShowInitialMessage(false);
+    }, 1000);
+  }, []);
+
   return (
     <Main>
       <Typography variant="h1">
@@ -40,9 +48,11 @@ const LoginChecker = () => {
         </BrandTitle>
       </Typography>
       <HorizontalLoader />
-      <Typography>Revisando si ya ha iniciado sesión...</Typography>
       {
-        (userLoggedOn) && (<Typography>Ya has iniciado sesión. Redirigiendote hacia tu panel de cuentas.</Typography>)
+        (showInitialMessage) && (<Typography>Revisando si ya ha iniciado sesión...</Typography>)
+      }
+      {
+        (userLoggedOn && !showInitialMessage) && (<Typography>Ya has iniciado sesión. Redirigiendote hacia tu panel de cuentas.</Typography>)
       }
     </Main>
   );

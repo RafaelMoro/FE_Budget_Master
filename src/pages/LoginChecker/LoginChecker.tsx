@@ -11,21 +11,9 @@ import { HorizontalLoader } from '../../components/UI/HorizontalLoader';
 const LoginChecker = () => {
   const navigate = useNavigate();
   const { addGuestUser, isGuestUser, userLoggedOn } = useGuestUser();
-  console.log('isGuestUser', isGuestUser);
-  console.log('userLoggedOn', userLoggedOn);
   const { verifyGuestUser } = useSyncLoginInfo();
 
   const [showInitialMessage, setShowInitialMessage] = useState(true);
-  const checkLogin = () => {};
-
-  const handleStartNow = () => {
-    if (isGuestUser || userLoggedOn) {
-      navigate(DASHBOARD_ROUTE);
-      return;
-    }
-    addGuestUser();
-    navigate(DASHBOARD_ROUTE);
-  };
 
   useEffect(() => {
     verifyGuestUser();
@@ -49,6 +37,12 @@ const LoginChecker = () => {
         navigate(LOGIN_ROUTE);
       }, 3000);
     }
+
+    if (isGuestUser && !showInitialMessage) {
+      setTimeout(() => {
+        navigate(DASHBOARD_ROUTE);
+      }, 2000);
+    }
   }, [navigate, userLoggedOn, isGuestUser, showInitialMessage]);
 
   return (
@@ -65,11 +59,19 @@ const LoginChecker = () => {
         (showInitialMessage) && (<Typography>Revisando si ya ha iniciado sesión...</Typography>)
       }
       {
-        (userLoggedOn && !showInitialMessage) && (<Typography>Ya has iniciado sesión. Redirigiendote hacia tu panel de cuentas.</Typography>)
+        (userLoggedOn && !showInitialMessage) && (<Typography>Ya has iniciado sesión. Redirigiendote hacia tu panel de administración.</Typography>)
       }
       {
         (!isGuestUser && !userLoggedOn && !showInitialMessage) && (
         <Typography>No has iniciado sesión. Redirigiendote hacia el inicio de sesión.</Typography>
+        )
+      }
+      {
+        (isGuestUser && !showInitialMessage) && (
+          <>
+            <Typography>Estás accediendo a la versión gratuita de nuestra plataforma. </Typography>
+            <Typography>En unos momentos, serás redirigido al panel de administración para continuar con tu experiencia financiera.</Typography>
+          </>
         )
       }
     </Main>

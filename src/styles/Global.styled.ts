@@ -20,7 +20,7 @@ import { TextField } from 'formik-mui';
 import { Link } from 'react-router-dom';
 
 import { FlexContainerProps, ChipProps } from './interface';
-import { AppColors } from './GlobalConfigObjects';
+import { AppColors, globalConfiguration, responsiveBreakpoints } from './GlobalConfigObjects';
 import { createResponsiveProps } from './createResponsiveProps';
 import { dynamicPadding } from './DynamicStyles.styled';
 import { appTheme } from './theme';
@@ -159,6 +159,21 @@ export const OutsideAnchor = styled.a`
   ${createResponsiveProps({ fontSize: 'P' })}
   color: ${AppColors.black};
   text-decoration: none;
+`;
+
+export const BrandTitle = styled(Typography)`
+  font-family: 'Russo One', sans-serif;
+  color: ${AppColors.primary};
+  display: inline;
+  font-size: ${globalConfiguration.mobile.fontSizes.H1} !important;
+  font-weight: 400;
+
+  @media ${responsiveBreakpoints.tablet} {
+    font-size: ${globalConfiguration.tablet.fontSizes.H1};
+  }
+  @media ${responsiveBreakpoints.desktop} {
+    font-size: ${globalConfiguration.desktop.fontSizes.H1} !important;
+  }
 `;
 
 export const AnchorButton = styled(Link)`

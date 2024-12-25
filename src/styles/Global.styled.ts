@@ -155,6 +155,12 @@ export const Anchor = styled(Link)`
   ${createResponsiveProps({ fontSize: 'P' })}
 `;
 
+export const OutsideAnchor = styled.a`
+  ${createResponsiveProps({ fontSize: 'P' })}
+  color: ${AppColors.black};
+  text-decoration: none;
+`;
+
 export const AnchorButton = styled(Link)`
   text-decoration: none;
   ${createResponsiveProps({ fontSize: 'P' })}

@@ -19,14 +19,14 @@ export const LogoTitleLogin = styled(Typography)`
   font-family: 'Russo One', sans-serif;
   color: ${AppColors.primary};
   display: inline;
-  font-size: ${globalConfiguration.mobile.fontSizes.H1};
+  font-size: ${globalConfiguration.mobile.fontSizes.H1} !important;
   font-weight: 400;
 
   @media ${responsiveBreakpoints.tablet} {
     font-size: ${globalConfiguration.tablet.fontSizes.H1};
   }
   @media ${responsiveBreakpoints.desktop} {
-    font-size: ${globalConfiguration.desktop.fontSizes.H1};
+    font-size: ${globalConfiguration.desktop.fontSizes.H1} !important;
   }
 `;
 
@@ -51,12 +51,18 @@ export const ActionsContainer = styled.div`
   }
 
   @media (min-width: 768px) {
-    align-items: center;
+    place-items: center;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-areas: "image-with-data image-with-no-data"
+    grid-template-areas: "image-with-no-data image-with-data"
                           "primary-button secondary-button";
     img {
       width: 30rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    img {
+      width: 40rem;
     }
   }
 `;

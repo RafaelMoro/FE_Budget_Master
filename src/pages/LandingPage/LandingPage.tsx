@@ -31,7 +31,7 @@ import { getHeroButtonText } from './utils';
 const LandingPage = () => {
   const navigate = useNavigate();
   useResizeWindow();
-  const { addGuestUser, isGuestUser, userLoggedOn } = useGuestUser();
+  const { addGuestUserWithData, isGuestUser, userLoggedOn } = useGuestUser();
   const { verifyGuestUser } = useSyncLoginInfo();
 
   const heroButtonText = getHeroButtonText(isGuestUser, userLoggedOn);
@@ -46,7 +46,7 @@ const LandingPage = () => {
       navigate(DASHBOARD_ROUTE);
       return;
     }
-    addGuestUser();
+    addGuestUserWithData();
     navigate(DASHBOARD_ROUTE);
   };
 

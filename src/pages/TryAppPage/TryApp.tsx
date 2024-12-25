@@ -4,7 +4,7 @@ import { Typography } from '@mui/material';
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 
 import { DASHBOARD_ROUTE } from '../RoutesConstants';
-import { useSyncLoginInfo } from '../../hooks';
+import { useGuestUser, useSyncLoginInfo } from '../../hooks';
 import { BrandTitle, PrimaryButton, SecondaryButton } from '../../styles';
 import {
   ActionsContainer, Description, GoBackAnchor, ImageWithData, ImageWithNoData, Main,
@@ -19,9 +19,15 @@ import { BUDGET_MASTER_LANDING } from '../../constants';
 const TryApp = () => {
   const navigate = useNavigate();
   const { verifyGuestUser } = useSyncLoginInfo();
-  const handleClickSampleData = () => navigate(DASHBOARD_ROUTE);
+  const { addGuestUserWithData, addGuesUserWithoutData } = useGuestUser();
 
   const handleOwnData = () => {
+    addGuesUserWithoutData();
+    navigate(DASHBOARD_ROUTE);
+  };
+
+  const handleSampleData = () => {
+    addGuestUserWithData();
     navigate(DASHBOARD_ROUTE);
   };
 
@@ -51,7 +57,7 @@ const TryApp = () => {
         </PrimaryButtonContainer>
         <ImageWithNoData src={tryAppEmptyAccountImage} alt="Budget Master App with no data screenshot" />
         <SecondaryButtonContainer>
-          <SecondaryButton type="button" onClick={handleClickSampleData}>Usar datos de muestra</SecondaryButton>
+          <SecondaryButton type="button" onClick={handleSampleData}>Usar datos de muestra</SecondaryButton>
         </SecondaryButtonContainer>
       </ActionsContainer>
       <SkipStepButton variant="text" onClick={handleOwnData}>Omitir este paso</SkipStepButton>

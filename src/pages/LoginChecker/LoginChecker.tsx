@@ -10,7 +10,7 @@ import { HorizontalLoader } from '../../components/UI/HorizontalLoader';
 
 const LoginChecker = () => {
   const navigate = useNavigate();
-  const { addGuestUser, isGuestUser, userLoggedOn } = useGuestUser();
+  const { isGuestUser, userLoggedOn } = useGuestUser();
   const { verifyGuestUser } = useSyncLoginInfo();
 
   const [showInitialMessage, setShowInitialMessage] = useState(true);

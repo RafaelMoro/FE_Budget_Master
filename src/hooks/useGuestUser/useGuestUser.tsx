@@ -34,11 +34,13 @@ const useGuestUser = () => {
     dispatch(saveRecordsLocalStorageSelectedAccount(recordsOfSelectedAccount));
   };
 
-  const addGuestUser = () => {
+  const addGuesUserWithoutData = () => {
     // Add user
     dispatch(signOn(guestUser));
     addToLocalStorage({ newInfo: { user: guestUser } });
+  };
 
+  const addGuestUserAccountsRecords = () => {
     // Add accounts
     dispatch(updateAccountsLocalStorage(accounts));
     const accountsUI = formatAccounts({ accounts, selectedAccountId: accounts[1]._id });
@@ -70,6 +72,11 @@ const useGuestUser = () => {
     loadRecords(accountsUI[1], records);
   };
 
+  const addGuestUserWithData = () => {
+    addGuesUserWithoutData();
+    addGuestUserAccountsRecords();
+  };
+
   const loadGuestUser = ({ accountsLocalStorage, recordsLocalStorage }:
   { accountsLocalStorage: Account[], recordsLocalStorage: RecordsLocalStorage[] }) => {
     dispatch(signOn(guestUser));
@@ -96,7 +103,8 @@ const useGuestUser = () => {
     userLoggedOn,
     recordsCurrentMonthLocalStorage,
     recordsLastMonthLocalStorage,
-    addGuestUser,
+    addGuestUserWithData,
+    addGuesUserWithoutData,
     loadGuestUser,
     loadRecords,
   };

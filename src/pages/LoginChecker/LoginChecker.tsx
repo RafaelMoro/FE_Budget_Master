@@ -1,11 +1,21 @@
+import { Typography } from '@mui/material';
+import { Main } from './LoginChecker.styled';
+import { BrandTitle } from '../../styles';
+
 const LoginChecker = () => {
   const checkLogin = () => {};
 
   return (
-    <main>
-      <h1>Bienvenido a Budget Master</h1>
-      <p>Revisando si ya ha iniciado sesión...</p>
-    </main>
+    <Main>
+      <Typography variant="h1">
+        Bienvenido a
+        {' '}
+        <BrandTitle>
+          Budget Master
+        </BrandTitle>
+      </Typography>
+      <Typography>Revisando si ya ha iniciado sesión...</Typography>
+    </Main>
   );
 };
 

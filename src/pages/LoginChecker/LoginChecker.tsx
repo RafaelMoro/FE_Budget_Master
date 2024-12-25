@@ -38,6 +38,14 @@ const LoginChecker = () => {
     }, 1000);
   }, []);
 
+  useEffect(() => {
+    if (userLoggedOn) {
+      setTimeout(() => {
+        navigate(DASHBOARD_ROUTE);
+      }, 2000);
+    }
+  }, [navigate, userLoggedOn]);
+
   return (
     <Main>
       <Typography variant="h1">

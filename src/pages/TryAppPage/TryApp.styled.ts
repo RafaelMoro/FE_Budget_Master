@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 import { Typography } from '@mui/material';
-import { AppColors, globalConfiguration, responsiveBreakpoints } from '../../styles';
+import {
+  AppColors, globalConfiguration, responsiveBreakpoints, TransparentButton,
+} from '../../styles';
 
 export const Main = styled.main`
   margin-top: 5rem;
@@ -32,7 +34,7 @@ export const Description = styled(Typography)`
   max-width: 75ch;
 `;
 
-export const ButtonContainer = styled.div`
+export const ActionsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas: "image-with-data"
@@ -73,4 +75,9 @@ export const PrimaryButtonContainer = styled.div`
 
 export const SecondaryButtonContainer = styled.div`
   grid-area: secondary-button;
+`;
+
+export const SkipStepButton = styled(TransparentButton)`
+  border-bottom: 1px solid ${AppColors.black};
+  margin-bottom: 5rem;
 `;

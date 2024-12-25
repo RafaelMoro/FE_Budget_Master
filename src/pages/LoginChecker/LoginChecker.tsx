@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Typography } from '@mui/material';
 
 import { useGuestUser, useSyncLoginInfo } from '../../hooks';
-import { DASHBOARD_ROUTE } from '../RoutesConstants';
+import { DASHBOARD_ROUTE, LOGIN_ROUTE } from '../RoutesConstants';
 import { BrandTitle } from '../../styles';
 import { Main } from './LoginChecker.styled';
 import { HorizontalLoader } from '../../components/UI/HorizontalLoader';
@@ -44,7 +44,12 @@ const LoginChecker = () => {
         navigate(DASHBOARD_ROUTE);
       }, 2000);
     }
-  }, [navigate, userLoggedOn]);
+    if (!isGuestUser && !userLoggedOn && !showInitialMessage) {
+      setTimeout(() => {
+        navigate(LOGIN_ROUTE);
+      }, 3000);
+    }
+  }, [navigate, userLoggedOn, isGuestUser, showInitialMessage]);
 
   return (
     <Main>
@@ -61,6 +66,11 @@ const LoginChecker = () => {
       }
       {
         (userLoggedOn && !showInitialMessage) && (<Typography>Ya has iniciado sesión. Redirigiendote hacia tu panel de cuentas.</Typography>)
+      }
+      {
+        (!isGuestUser && !userLoggedOn && !showInitialMessage) && (
+        <Typography>No has iniciado sesión. Redirigiendote hacia el inicio de sesión.</Typography>
+        )
       }
     </Main>
   );

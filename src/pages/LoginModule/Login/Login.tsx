@@ -30,6 +30,8 @@ const Login = () => {
   const locationState = { prevPath: location.pathname };
 
   useEffect(() => {
+    console.log('hasSignedOn', hasSignedOn);
+    console.log('isGuestUser', isGuestUser);
     if (hasSignedOn && !isGuestUser) {
       navigateToDashboard();
     }
@@ -39,12 +41,12 @@ const Login = () => {
   return (
     <>
       {notification && (
-      <Notification
-        title={notificationInfo.current.title}
-        description={notificationInfo.current.description}
-        status={notificationInfo.current.status}
-        close={handleShowNotification}
-      />
+        <Notification
+          title={notificationInfo.current.title}
+          description={notificationInfo.current.description}
+          status={notificationInfo.current.status}
+          close={handleShowNotification}
+        />
       )}
       <Main>
         <LogoContainer>

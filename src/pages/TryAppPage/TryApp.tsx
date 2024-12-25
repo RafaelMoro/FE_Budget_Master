@@ -1,6 +1,9 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { Typography } from '@mui/material';
+
 import { DASHBOARD_ROUTE } from '../RoutesConstants';
+import { useSyncLoginInfo } from '../../hooks';
 import { PrimaryButton, SecondaryButton } from '../../styles';
 import {
   ButtonContainer, Description, LogoTitleLogin, Main,
@@ -8,7 +11,13 @@ import {
 
 const TryApp = () => {
   const navigate = useNavigate();
+  const { verifyGuestUser } = useSyncLoginInfo();
   const handleClickSampleData = () => navigate(DASHBOARD_ROUTE);
+
+  useEffect(() => {
+    verifyGuestUser();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Main>

@@ -5,9 +5,9 @@ import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutl
 
 import { DASHBOARD_ROUTE } from '../RoutesConstants';
 import { useSyncLoginInfo } from '../../hooks';
-import { PrimaryButton, SecondaryButton } from '../../styles';
+import { BrandTitle, PrimaryButton, SecondaryButton } from '../../styles';
 import {
-  ActionsContainer, Description, GoBackAnchor, ImageWithData, ImageWithNoData, LogoTitleLogin, Main,
+  ActionsContainer, Description, GoBackAnchor, ImageWithData, ImageWithNoData, Main,
   PrimaryButtonContainer,
   SecondaryButtonContainer,
   SkipStepButton,
@@ -39,9 +39,9 @@ const TryApp = () => {
       <Typography variant="h1">
         Bienvenido a
         {' '}
-        <LogoTitleLogin>
+        <BrandTitle>
           Budget Master
-        </LogoTitleLogin>
+        </BrandTitle>
       </Typography>
       <Description>Para probar la aplicación podemos cargar datos de prueba o puedes decidir crear todos los datos por ti mismo.</Description>
       <ActionsContainer>

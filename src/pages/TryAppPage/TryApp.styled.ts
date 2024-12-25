@@ -19,21 +19,6 @@ export const GoBackAnchor = styled(OutsideAnchor)`
   justify-self: start;
 `;
 
-export const LogoTitleLogin = styled(Typography)`
-  font-family: 'Russo One', sans-serif;
-  color: ${AppColors.primary};
-  display: inline;
-  font-size: ${globalConfiguration.mobile.fontSizes.H1} !important;
-  font-weight: 400;
-
-  @media ${responsiveBreakpoints.tablet} {
-    font-size: ${globalConfiguration.tablet.fontSizes.H1};
-  }
-  @media ${responsiveBreakpoints.desktop} {
-    font-size: ${globalConfiguration.desktop.fontSizes.H1} !important;
-  }
-`;
-
 export const Description = styled(Typography)`
   max-width: 75ch;
 `;

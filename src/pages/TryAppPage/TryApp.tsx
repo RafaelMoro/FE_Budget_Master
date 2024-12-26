@@ -5,7 +5,9 @@ import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutl
 
 import { DASHBOARD_ROUTE } from '../RoutesConstants';
 import { useGuestUser, useSyncLoginInfo } from '../../hooks';
-import { BrandTitle, PrimaryButton, SecondaryButton } from '../../styles';
+import {
+  BrandTitle, PrimaryButton, SecondaryButton,
+} from '../../styles';
 import {
   ActionsContainer, Description, GoBackAnchor, ImageWithData, ImageWithNoData, Main,
   PrimaryButtonContainer,
@@ -19,7 +21,7 @@ import { BUDGET_MASTER_LANDING } from '../../constants';
 const TryApp = () => {
   const navigate = useNavigate();
   const { verifyGuestUser } = useSyncLoginInfo();
-  const { addGuestUserWithData, addGuesUserWithoutData } = useGuestUser();
+  const { addGuestUserWithData, addGuesUserWithoutData, isGuestUser } = useGuestUser();
 
   const handleOwnData = () => {
     addGuesUserWithoutData();
@@ -32,9 +34,12 @@ const TryApp = () => {
   };
 
   useEffect(() => {
-    verifyGuestUser();
+    if (isGuestUser) {
+      verifyGuestUser();
+      navigate(DASHBOARD_ROUTE);
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isGuestUser]);
 
   return (
     <Main>

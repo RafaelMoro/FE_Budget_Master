@@ -21,7 +21,9 @@ import { BUDGET_MASTER_LANDING } from '../../constants';
 const TryApp = () => {
   const navigate = useNavigate();
   const { verifyGuestUser } = useSyncLoginInfo();
-  const { addGuestUserWithData, addGuesUserWithoutData, isGuestUser } = useGuestUser();
+  const {
+    addGuestUserWithData, addGuesUserWithoutData, isGuestUser, userLoggedOn,
+  } = useGuestUser();
 
   const handleOwnData = () => {
     addGuesUserWithoutData();
@@ -34,12 +36,12 @@ const TryApp = () => {
   };
 
   useEffect(() => {
-    if (isGuestUser) {
+    if (isGuestUser || userLoggedOn) {
       verifyGuestUser();
       navigate(DASHBOARD_ROUTE);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isGuestUser]);
+  }, [isGuestUser, userLoggedOn]);
 
   return (
     <Main>

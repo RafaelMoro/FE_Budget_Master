@@ -5,11 +5,25 @@ import {
 } from '../../../styles';
 import { ButtonPanelLoginProps } from './interface';
 
-export const ButtonContainer = styled.div`
+export const LoginButtonsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
   align-items: center;
+  margin-bottom: 3rem;
+
+  @media ${responsiveBreakpoints.tabletAndDesktop} {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  order: 2;
 
   @media ${responsiveBreakpoints.tabletAndDesktop} {
     flex-direction: row;
@@ -29,9 +43,8 @@ export const AnchorRegisterButton = styled(AnchorButton)`
 export const AnchorTryAppButton = styled(AnchorButton)`
   color: ${AppColors.black};
   border-bottom: 1px solid ${AppColors.black};
-  margin-bottom: 3rem;
+  max-width: 10rem;
   display: flex;
-  order: 3;
 
   @media ${responsiveBreakpoints.tabletAndDesktop} {
     order: 1;

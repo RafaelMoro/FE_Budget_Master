@@ -1,3 +1,9 @@
+## v1.7.1 (2024-12-28)
+
+### Pull Requests
+[#54](https://github.com/RafaelMoro/FE_Budget_Master/pull/54) | Remove Google  Analytics
+
+
 ## v1.7.0 (2024-12-10)
 
 ### Pull Requests

@@ -1,9 +1,9 @@
-import { REGISTER_ROUTE } from '../../../pages/RoutesConstants';
-import { AppColors } from '../../../styles';
+import { REGISTER_ROUTE, TRY_APP_ROUTE } from '../../../pages/RoutesConstants';
+import { AppColors, TransparentButton } from '../../../styles';
 import { AppIcon } from '../../UI/Icons';
 import { LoadingSpinner } from '../../UI/LoadingSpinner';
 import {
-  AnchorRegisterButton, ButtonContainer, PrimaryButtonLoginForm, SecondaryButtonForm,
+  AnchorRegisterButton, AnchorTryAppButton, ButtonContainer, PrimaryButtonLoginForm, SecondaryButtonForm,
 } from './LoginButtons.styled';
 
 interface LoginButtonsProps {
@@ -23,6 +23,9 @@ const LoginButtons = ({
     <AnchorRegisterButton to={REGISTER_ROUTE} state={cancelStateLink}>
       <SecondaryButtonForm minWidth="12" variant="contained" size="medium">Register</SecondaryButtonForm>
     </AnchorRegisterButton>
+    <AnchorTryAppButton to={TRY_APP_ROUTE} title="Try app in the free version">
+      <TransparentButton>Try app</TransparentButton>
+    </AnchorTryAppButton>
     <PrimaryButtonLoginForm
       data-testid="login-button"
       disabled={loading || success}

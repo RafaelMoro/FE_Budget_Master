@@ -22,6 +22,18 @@ export const AnchorRegisterButton = styled(AnchorButton)`
   order: 2;
 
   @media ${responsiveBreakpoints.tabletAndDesktop} {
+    order: 2;
+  }
+`;
+
+export const AnchorTryAppButton = styled(AnchorButton)`
+  color: ${AppColors.black};
+  border-bottom: 1px solid ${AppColors.black};
+  margin-bottom: 3rem;
+  display: flex;
+  order: 3;
+
+  @media ${responsiveBreakpoints.tabletAndDesktop} {
     order: 1;
   }
 `;
@@ -31,7 +43,7 @@ export const PrimaryButtonLoginForm = styled(PrimaryButton, { shouldForwardProp:
   order: 1;
 
   @media ${responsiveBreakpoints.tabletAndDesktop} {
-    order: 2;
+    order: 3;
   }
 
   &.Mui-disabled, &:disabled {

@@ -45,13 +45,13 @@ const useSyncLoginInfo = () => {
     };
   };
 
-  const verifyGuestUser = () => {
+  const verifyGuestUser = ():string => {
     const localStorageInfo: BudgetMasterLocalStorage = getLocalStorageInfo();
     const IsEmptyLocalStorage = Object.keys(localStorageInfo).length < 1;
 
-    if (IsEmptyLocalStorage) return;
+    if (IsEmptyLocalStorage) return 'empty local storage';
     const { user } = localStorageInfo;
-    if (!user) return;
+    if (!user) return 'user not found';
 
     const accounts = localStorageInfo?.accounts ?? [];
     const records = localStorageInfo?.records ?? [];
@@ -59,11 +59,12 @@ const useSyncLoginInfo = () => {
     if (user?.user?.firstName === 'Guest') {
       // This means that the user has already logged on as guest user
       if (accountsReduxState && accountsReduxState.length > 1) {
-        console.log('there are accounts');
-        return;
+        return 'guest user found';
       }
       loadGuestUser({ accountsLocalStorage: accounts, recordsLocalStorage: records });
+      return 'guest user loaded into redux';
     }
+    return 'the user is not a guest user';
   };
 
   useEffect(() => {

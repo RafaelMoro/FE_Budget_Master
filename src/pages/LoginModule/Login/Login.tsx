@@ -5,12 +5,11 @@ import {
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { REGISTER_ROUTE } from '../../RoutesConstants';
 import { useGuestUser, useSyncLoginInfo, useLogin } from '../../../hooks';
 import { LoginSchema } from '../../../validationsSchemas';
 import { Notification } from '../../../components/UI';
 import { TogglePasswordAdornment } from '../../../components/UI/TogglePasswordAdornment';
-import { ActionButtonPanel, BrandLogoName, LoginButtons } from '../../../components/templates';
+import { BrandLogoName, LoginButtons } from '../../../components/templates';
 import {
   Main, LoginCard, LogoContainer,
   FormLoginTitle, FormInstructions, LoginInput, ForgotPasswordLink,

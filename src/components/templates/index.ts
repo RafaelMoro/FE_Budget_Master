@@ -5,3 +5,4 @@ export { LoadingFormAnimated } from './LoadingFormAnimated';
 export { ResultFormAnimated, ErrorResultFormAnimated, SuccessResultFormAnimated } from './ResultFormAnimated';
 export { NoBudgetsCreatedForRecords } from './NoBudgetsCreatedForRecords';
 export { RecordsOverviewCard } from './RecordsOverviewCard';
+export { LoginButtons } from './LoginButtons';

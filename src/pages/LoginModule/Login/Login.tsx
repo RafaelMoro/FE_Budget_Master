@@ -10,7 +10,7 @@ import { useGuestUser, useSyncLoginInfo, useLogin } from '../../../hooks';
 import { LoginSchema } from '../../../validationsSchemas';
 import { Notification } from '../../../components/UI';
 import { TogglePasswordAdornment } from '../../../components/UI/TogglePasswordAdornment';
-import { ActionButtonPanel, BrandLogoName } from '../../../components/templates';
+import { ActionButtonPanel, BrandLogoName, LoginButtons } from '../../../components/templates';
 import {
   Main, LoginCard, LogoContainer,
   FormLoginTitle, FormInstructions, LoginInput, ForgotPasswordLink,
@@ -85,18 +85,11 @@ const Login = () => {
                   />
                   <ForgotPasswordLink to="/forgot-password">Do you forgot your password? </ForgotPasswordLink>
                 </CardContent>
-                <ActionButtonPanel
-                  minWidthNumber="12"
-                  submitButtonText="Login"
-                  actionDataTestId="login-button"
+                <LoginButtons
                   submitForm={submitForm}
-                  cancelButtonText="Register"
-                  routeCancelButton={REGISTER_ROUTE}
                   cancelStateLink={locationState}
-                  useSecondaryButton
                   success={loginSuccess}
                   loading={loginLoading}
-                  disableSubmitButton={loginSuccess || loginLoading}
                 />
               </Form>
             )}

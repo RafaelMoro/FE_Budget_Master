@@ -103,6 +103,17 @@ const ViewAccounts = ({ hide, accountsActions }: ViewAccountsProps) => {
     );
   }
 
+  if (!accountsUI) {
+    return (
+      <AccountDialog
+        open={openAccountModal}
+        onClose={handleCloseAccountModal}
+        accountAction={accountAction}
+        account={modifyAccount}
+      />
+    );
+  }
+
   if (windowSize === 'Tablet') {
     return (
       <AccountSectionTablet hide={hide}>

@@ -16,7 +16,7 @@ import {
   AnchorButton, AppColors, FlexContainer, PrimaryButton, SecondaryButton,
 } from '../../../styles';
 import {
-  GuestUserButton, HeaderContainer, HeaderNav, HeaderNavAnchor, HeaderShadow,
+  HeaderContainer, HeaderNav, HeaderNavAnchor, HeaderShadow,
 } from './Header.styled';
 
 const Header = ({ isLandingPage = false }: HeaderProps) => {
@@ -59,16 +59,6 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
               <AppIcon fillColor={isLandingPage ? AppColors.white : AppColors.primary} icon="LogOut" />
             </IconButton>
           ) }
-          { (isGuestUser && !isMobile) && (
-            <GuestUserButton
-              isLandingPage={isLandingPage}
-              variant="text"
-              size="medium"
-              onClick={toggleGuestUserModal}
-            >
-              Get Personalized Experience
-            </GuestUserButton>
-          )}
           { (!isGuestUser && !userLoggedOn && !isMobile) && (
             <FlexContainer gap={3} justifyContent="space-between">
               <AnchorButton to={LOGIN_ROUTE}>

@@ -56,6 +56,7 @@ const useLogin = () => {
     dispatch(resetAccountsLocalStorage());
     dispatch(resetCategoriesLocalStorage());
     dispatch(signOff());
+    saveInfoToLocalStorage({});
   };
 
   const signOut = () => {

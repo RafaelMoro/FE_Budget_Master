@@ -10,7 +10,7 @@ import { BUDGET_MASTER_LANDING } from '../../../../../constants';
 import { LOGIN_ROUTE, REGISTER_ROUTE } from '../../../../../pages/RoutesConstants';
 import { AppIcon } from '../../../../UI/Icons';
 import {
-  AnchorButton, CancelButton, FlexContainer, PrimaryButton, SecondaryButton,
+  AnchorButton, CancelButton, PrimaryButton, SecondaryButton,
 } from '../../../../../styles';
 import {
   CloseModalBox, GuestUserButtonContainer, GuestUserLoginButtonContainer, GuestUserModalBox, GuestUserModalTitle,
@@ -40,10 +40,10 @@ const GuestUserModal = ({ open, onClose }: GuestUserModalProps) => {
       {
         (!showEraseData) && (
           <GuestUserModalBox>
-            <GuestUserModalTitle variant="h3">Secure your data</GuestUserModalTitle>
             <CloseModalBox onClick={onClose}>
               <AppIcon icon="Close" />
             </CloseModalBox>
+            <GuestUserModalTitle variant="h3">Secure your data</GuestUserModalTitle>
             <Typography>Save your progress by creating an account or continue your journey by signing in</Typography>
             <GuestUserButtonContainer>
               <CancelButton onClick={toggleShowEraseData}>
@@ -64,10 +64,10 @@ const GuestUserModal = ({ open, onClose }: GuestUserModalProps) => {
       {
         (showEraseData) && (
           <GuestUserModalBox>
-            <GuestUserModalTitle variant="h3">Are you sure to erase your data?</GuestUserModalTitle>
             <CloseModalBox onClick={onClose}>
               <AppIcon icon="Close" />
             </CloseModalBox>
+            <GuestUserModalTitle variant="h3">Are you sure to erase your data?</GuestUserModalTitle>
             <Typography>There&apos;s no way to recover your data if you erase it. Are you sure you want to erase your data?</Typography>
             <GuestUserLoginButtonContainer>
               <SecondaryButton onClick={toggleShowEraseData}>

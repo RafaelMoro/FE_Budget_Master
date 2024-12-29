@@ -111,10 +111,13 @@ export const GuestUserModalBox = styled.div`
 `;
 
 export const GuestUserModalTitle = styled(Typography)`
-  grid-row: 1 / 2;
-  grid-column: 1 / 2;
   justify-self: center;
   align-self: center;
+
+  ${responsiveBreakpoints.tabletAndDesktop} {
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+  }
 `;
 
 export const GuestUserButtonContainer = styled.div`
@@ -139,7 +142,10 @@ export const GuestUserLoginButtonContainer = styled.div`
 `;
 
 export const CloseModalBox = styled(IconButton)`
-  grid-row: 1 / 2;
-  grid-column: 1 / 2;
   justify-self: end;
+
+  ${responsiveBreakpoints.tabletAndDesktop} {
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+  }
 `;

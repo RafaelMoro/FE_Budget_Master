@@ -17,7 +17,7 @@ import {
 
 const Login = () => {
   const location = useLocation();
-  const { navigateToDashboard } = useSyncLoginInfo();
+  const { navigateToDashboard, verifyGuestUser } = useSyncLoginInfo();
   const { isGuestUser, userLoggedOn } = useGuestUser();
   const {
     handleSubmit, handleShowNotification, notificationInfo, notification, submitOnPressEnter, loginSuccess, loginLoading,
@@ -27,11 +27,16 @@ const Login = () => {
   const locationState = { prevPath: location.pathname };
 
   useEffect(() => {
-    if (userLoggedOn && !isGuestUser) {
+    verifyGuestUser();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (userLoggedOn || isGuestUser) {
       navigateToDashboard();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userLoggedOn]);
+  }, [userLoggedOn, isGuestUser]);
 
   return (
     <>

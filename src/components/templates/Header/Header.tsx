@@ -35,6 +35,11 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
   const toggleLoggedDrawer = () => setOpenLoggedDrawer((prevState) => !prevState);
   const toggleHamburguerMenu = (!isGuestUser && userLoggedOn) ? toggleLoggedDrawer : toggleNotLoggedDrawer;
 
+  const handleGuestUserModalMobile = () => {
+    toggleNotLoggedDrawer();
+    toggleGuestUserModal();
+  };
+
   const activeDashboardPage = location.pathname === DASHBOARD_ROUTE;
   const activeBudgetsPage = location.pathname === BUDGETS_ROUTE;
 
@@ -81,7 +86,7 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
           )}
         </HeaderContainer>
       </HeaderShadow>
-      <NotLoggedDrawer open={openNotLoggedDrawer} toggleDrawer={toggleNotLoggedDrawer} />
+      <NotLoggedDrawer open={openNotLoggedDrawer} toggleDrawer={toggleNotLoggedDrawer} handleGuestUser={handleGuestUserModalMobile} />
       <LoggedUserDrawer
         open={openLoggedDrawer}
         activeBudgetsPage={activeBudgetsPage}

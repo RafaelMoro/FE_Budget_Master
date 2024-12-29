@@ -13,8 +13,9 @@ import {
   AnchorButton, CancelButton, PrimaryButton, SecondaryButton,
 } from '../../../../../styles';
 import {
-  CloseModalBox, GuestUserButtonContainer, GuestUserLoginButtonContainer, GuestUserModalBox, GuestUserModalTitle,
-} from '../../Header.styled';
+  ButtonContainer, EraseButton, LoginButtonContainer, Title, CloseModalBox,
+  ModalBox,
+} from './GuestUserModal.styled';
 
 interface GuestUserModalProps {
   open: boolean;
@@ -39,45 +40,45 @@ const GuestUserModal = ({ open, onClose }: GuestUserModalProps) => {
     <Dialog onClose={onClose} open={open}>
       {
         (!showEraseData) && (
-          <GuestUserModalBox>
+          <ModalBox>
             <CloseModalBox onClick={onClose}>
               <AppIcon icon="Close" />
             </CloseModalBox>
-            <GuestUserModalTitle variant="h3">Secure your data</GuestUserModalTitle>
+            <Title variant="h3">Secure your data</Title>
             <Typography>Save your progress by creating an account or continue your journey by signing in</Typography>
-            <GuestUserButtonContainer>
-              <CancelButton onClick={toggleShowEraseData}>
+            <ButtonContainer>
+              <EraseButton onClick={toggleShowEraseData}>
                 Erase data
-              </CancelButton>
-              <GuestUserLoginButtonContainer>
+              </EraseButton>
+              <LoginButtonContainer>
                 <AnchorButton to={LOGIN_ROUTE}>
                   <SecondaryButton fullWidth variant="contained" size="medium">Log in</SecondaryButton>
                 </AnchorButton>
                 <AnchorButton to={REGISTER_ROUTE} state={locationState}>
                   <PrimaryButton fullWidth variant="contained" size="medium">Register</PrimaryButton>
                 </AnchorButton>
-              </GuestUserLoginButtonContainer>
-            </GuestUserButtonContainer>
-          </GuestUserModalBox>
+              </LoginButtonContainer>
+            </ButtonContainer>
+          </ModalBox>
         )
       }
       {
         (showEraseData) && (
-          <GuestUserModalBox>
+          <ModalBox>
             <CloseModalBox onClick={onClose}>
               <AppIcon icon="Close" />
             </CloseModalBox>
-            <GuestUserModalTitle variant="h3">Are you sure to erase your data?</GuestUserModalTitle>
+            <Title variant="h3">Are you sure to erase your data?</Title>
             <Typography>There&apos;s no way to recover your data if you erase it. Are you sure you want to erase your data?</Typography>
-            <GuestUserLoginButtonContainer>
+            <ButtonContainer>
               <SecondaryButton onClick={toggleShowEraseData}>
                 Cancel
               </SecondaryButton>
               <CancelButton onClick={handleConfirmEraseData}>
                 Confirm erasing data
               </CancelButton>
-            </GuestUserLoginButtonContainer>
-          </GuestUserModalBox>
+            </ButtonContainer>
+          </ModalBox>
         )
       }
     </Dialog>

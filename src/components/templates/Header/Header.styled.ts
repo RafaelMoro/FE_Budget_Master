@@ -1,12 +1,11 @@
 import styled from '@emotion/styled';
-import { IconButton, Typography } from '@mui/material';
+import { IconButton } from '@mui/material';
 import {
   DrawerMenuLinkProps, GuestUserButtonProps, HeaderNavAnchorProps, HeaderShadowProps,
 } from './Header.interface';
 import {
   Anchor, AppColors, globalConfiguration, responsiveBreakpoints, SecondaryButton,
 } from '../../../styles';
-import { appTheme } from '../../../styles/theme';
 
 export const HeaderShadow = styled.header`
   padding: 2rem;
@@ -101,51 +100,4 @@ export const ActiveDrawerMenuLink = styled(Anchor, { shouldForwardProp: (props) 
   border-bottom: 1px solid black;
   border-color: ${({ active }: DrawerMenuLinkProps) => (active ? AppColors.primary : AppColors.black)};
   cursor: pointer;
-`;
-
-export const GuestUserModalBox = styled.div`
-  padding: 3rem;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-`;
-
-export const GuestUserModalTitle = styled(Typography)`
-  justify-self: center;
-  align-self: center;
-
-  ${responsiveBreakpoints.tabletAndDesktop} {
-    grid-row: 1 / 2;
-    grid-column: 1 / 2;
-  }
-`;
-
-export const GuestUserButtonContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: ${appTheme.spacing(5)};
-
-  ${responsiveBreakpoints.tabletAndDesktop} {
-    flex-direction: row;
-  }
-`;
-
-export const GuestUserLoginButtonContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${appTheme.spacing(3)};
-
-  ${responsiveBreakpoints.tabletAndDesktop} {
-    flex-direction: row;
-  }
-`;
-
-export const CloseModalBox = styled(IconButton)`
-  justify-self: end;
-
-  ${responsiveBreakpoints.tabletAndDesktop} {
-    grid-row: 1 / 2;
-    grid-column: 1 / 2;
-  }
 `;

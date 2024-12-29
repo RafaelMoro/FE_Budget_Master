@@ -12,7 +12,9 @@ import { AppIcon } from '../../../../UI/Icons';
 import {
   AnchorButton, CancelButton, FlexContainer, PrimaryButton, SecondaryButton,
 } from '../../../../../styles';
-import { CloseModalBox, GuestUserModalBox, GuestUserModalTitle } from '../../Header.styled';
+import {
+  CloseModalBox, GuestUserButtonContainer, GuestUserLoginButtonContainer, GuestUserModalBox, GuestUserModalTitle,
+} from '../../Header.styled';
 
 interface GuestUserModalProps {
   open: boolean;
@@ -43,19 +45,19 @@ const GuestUserModal = ({ open, onClose }: GuestUserModalProps) => {
               <AppIcon icon="Close" />
             </CloseModalBox>
             <Typography>Save your progress by creating an account or continue your journey by signing in</Typography>
-            <FlexContainer gap={3} justifyContent="space-between">
+            <GuestUserButtonContainer>
               <CancelButton onClick={toggleShowEraseData}>
                 Erase data
               </CancelButton>
-              <FlexContainer gap={3}>
+              <GuestUserLoginButtonContainer>
                 <AnchorButton to={LOGIN_ROUTE}>
-                  <SecondaryButton variant="contained" size="medium">Log in</SecondaryButton>
+                  <SecondaryButton fullWidth variant="contained" size="medium">Log in</SecondaryButton>
                 </AnchorButton>
                 <AnchorButton to={REGISTER_ROUTE} state={locationState}>
-                  <PrimaryButton variant="contained" size="medium">Register</PrimaryButton>
+                  <PrimaryButton fullWidth variant="contained" size="medium">Register</PrimaryButton>
                 </AnchorButton>
-              </FlexContainer>
-            </FlexContainer>
+              </GuestUserLoginButtonContainer>
+            </GuestUserButtonContainer>
           </GuestUserModalBox>
         )
       }
@@ -67,14 +69,14 @@ const GuestUserModal = ({ open, onClose }: GuestUserModalProps) => {
               <AppIcon icon="Close" />
             </CloseModalBox>
             <Typography>There&apos;s no way to recover your data if you erase it. Are you sure you want to erase your data?</Typography>
-            <FlexContainer gap={3} justifyContent="space-between">
+            <GuestUserLoginButtonContainer>
               <SecondaryButton onClick={toggleShowEraseData}>
                 Cancel
               </SecondaryButton>
               <CancelButton onClick={handleConfirmEraseData}>
                 Confirm erasing data
               </CancelButton>
-            </FlexContainer>
+            </GuestUserLoginButtonContainer>
           </GuestUserModalBox>
         )
       }

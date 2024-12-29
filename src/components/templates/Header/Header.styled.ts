@@ -6,6 +6,7 @@ import {
 import {
   Anchor, AppColors, globalConfiguration, responsiveBreakpoints, SecondaryButton,
 } from '../../../styles';
+import { appTheme } from '../../../styles/theme';
 
 export const HeaderShadow = styled.header`
   padding: 2rem;
@@ -114,6 +115,27 @@ export const GuestUserModalTitle = styled(Typography)`
   grid-column: 1 / 2;
   justify-self: center;
   align-self: center;
+`;
+
+export const GuestUserButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: ${appTheme.spacing(5)};
+
+  ${responsiveBreakpoints.tabletAndDesktop} {
+    flex-direction: row;
+  }
+`;
+
+export const GuestUserLoginButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${appTheme.spacing(3)};
+
+  ${responsiveBreakpoints.tabletAndDesktop} {
+    flex-direction: row;
+  }
 `;
 
 export const CloseModalBox = styled(IconButton)`

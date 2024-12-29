@@ -16,8 +16,7 @@ const LoginChecker = () => {
   const [showInitialMessage, setShowInitialMessage] = useState(true);
 
   useEffect(() => {
-    const res = verifyGuestUser();
-    console.log('res', res);
+    verifyGuestUser();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

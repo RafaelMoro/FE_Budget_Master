@@ -32,7 +32,7 @@ const Login = () => {
   }, []);
 
   useEffect(() => {
-    if (userLoggedOn || isGuestUser) {
+    if (userLoggedOn === true || isGuestUser === true) {
       navigateToDashboard();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

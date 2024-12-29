@@ -51,17 +51,17 @@ const RecordList = ({ handleOpenCreateAccount }: RecordListProps) => {
       <CurrentMonthRecords
         color={color}
         accountId={accountId}
-        isGuestUser={isGuestUser}
+        isGuestUser={isGuestUser ?? false}
       />
       <LastMonthRecords
         color={color}
         accountId={accountId}
-        isGuestUser={isGuestUser}
+        isGuestUser={isGuestUser ?? false}
       />
       <OlderRecords
         color={color}
         accountId={accountId}
-        isGuestUser={isGuestUser}
+        isGuestUser={isGuestUser ?? false}
       />
     </List>
   );

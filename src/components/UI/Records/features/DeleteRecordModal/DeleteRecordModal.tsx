@@ -28,10 +28,10 @@ const DeleteRecordModal = ({
   const handleDeleteRecord = () => {
     // If it's type expense and not transfer, call delete expense function.
     if (isTypeExpense) {
-      deleteExpense({ isGuestUser });
+      deleteExpense({ isGuestUser: isGuestUser ?? false });
       return;
     }
-    deleteRecord({ deleteTransfer: isTransfer, isGuestUser });
+    deleteRecord({ deleteTransfer: isTransfer, isGuestUser: isGuestUser ?? false });
   };
 
   return (

@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { useNotification } from '../../hooks/useNotification';
 import { useDashboardActions } from '../../components/UI/SpeedDial/useDashboardActions';
 import { useAppSelector } from '../../redux/hooks';
@@ -12,18 +15,33 @@ import {
 } from './Dashboard.styled';
 import { useResizeWindow } from '../../hooks/useResizeWindow';
 import { useLogin } from '../../hooks/useLogin';
+import { useGuestUser } from '../../hooks';
+import { LOGIN_ROUTE } from '../RoutesConstants';
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const windowSize = useAppSelector((state) => state.userInterface.windowSize);
   const accountsUI = useAppSelector((state) => state.accounts.accounts);
   const {
     globalNotification, toggleGlobalNotification,
   } = useNotification();
   const { visible, scrollToTop, toggleVisibleDesktop } = useBackToTopButton({ windowSize });
-  const { isEmptyLocalStorage } = useSyncLoginInfo();
+  const { isEmptyLocalStorage, verifyGuestUser } = useSyncLoginInfo();
+  const { isGuestUser, userLoggedOn } = useGuestUser();
   const { signOut } = useLogin();
 
   if (isEmptyLocalStorage) signOut();
+
+  useEffect(() => {
+    verifyGuestUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (userLoggedOn === false && isGuestUser === false) {
+      navigate(LOGIN_ROUTE);
+    }
+  }, [userLoggedOn, isGuestUser, navigate]);
 
   const { dashboardActions, accountActions } = useDashboardActions({
     // Set it as true if accountsUI array has more than 1 item.

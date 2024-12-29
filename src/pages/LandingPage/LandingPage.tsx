@@ -34,7 +34,7 @@ const LandingPage = () => {
   const { addGuestUserWithData, isGuestUser, userLoggedOn } = useGuestUser();
   const { verifyGuestUser } = useSyncLoginInfo();
 
-  const heroButtonText = getHeroButtonText(isGuestUser, userLoggedOn);
+  const heroButtonText = getHeroButtonText((isGuestUser ?? false), (userLoggedOn ?? false));
 
   useEffect(() => {
     verifyGuestUser();

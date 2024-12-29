@@ -13,9 +13,9 @@ import { transformRecordReduxtoAnyRecord } from './utils';
 const useGuestUser = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.userInfo);
-  const firstName = user?.user?.firstName ?? '';
-  const isGuestUser: boolean = firstName === 'Guest';
-  const userLoggedOn = !!firstName && firstName !== 'Guest';
+  const firstName = user?.user?.firstName ?? null;
+  const isGuestUser = user === null ? null : firstName === 'Guest';
+  const userLoggedOn = user === null ? null : (Boolean(firstName) && !isGuestUser);
   const recordsLocalStorageSelectedAccount = useAppSelector((state) => state.records.recordsLocalStorageSelectedAccount);
   const recordsLocalStorageCurrentMonth: RecordRedux[] = recordsLocalStorageSelectedAccount?.records?.currentMonth ?? [];
   const recordsLocalStorageLastMonth: RecordRedux[] = recordsLocalStorageSelectedAccount?.records?.lastMonth ?? [];

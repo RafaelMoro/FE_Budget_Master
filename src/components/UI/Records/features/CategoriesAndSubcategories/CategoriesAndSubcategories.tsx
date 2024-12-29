@@ -44,7 +44,7 @@ const CategoriesAndSubcategories = ({
   const [createLocalCategoriesMutation, { isLoading: isLoadingCreateCategories }] = useCreateLocalCategoriesMutation();
   const {
     currentData, isError, isFetching, isSuccess,
-  } = useFetchCategoriesQuery({ bearerToken }, { skip: !bearerToken && isGuestUser });
+  } = useFetchCategoriesQuery({ bearerToken }, { skip: !bearerToken && (isGuestUser ?? false) });
 
   const onlyCategoriesFetched = useMemo(() => (currentData ?? []).map((item) => ({
     name: item.categoryName,

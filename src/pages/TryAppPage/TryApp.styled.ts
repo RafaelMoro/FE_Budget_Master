@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { Typography } from '@mui/material';
 import {
-  AppColors, OutsideAnchor, responsiveBreakpoints, TransparentButton,
+  AppColors, Anchor, responsiveBreakpoints, TransparentButton,
 } from '../../styles';
 
 export const Main = styled.main`
@@ -15,8 +15,10 @@ export const Main = styled.main`
   justify-items: center;
 `;
 
-export const GoBackAnchor = styled(OutsideAnchor)`
+export const GoBackAnchor = styled(Anchor)`
   justify-self: start;
+  color: ${AppColors.black};
+  text-decoration: none;
 `;
 
 export const Description = styled(Typography)`

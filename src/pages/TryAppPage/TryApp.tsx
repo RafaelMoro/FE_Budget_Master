@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Typography } from '@mui/material';
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
@@ -19,6 +19,9 @@ import tryAppWithDataImage from '../../assets/try-app/try-app-with-data.webp';
 import { BUDGET_MASTER_LANDING } from '../../constants';
 
 const TryApp = () => {
+  const location = useLocation();
+  const locationState = location?.state;
+  const returnRoute = locationState ? locationState?.prevPath : BUDGET_MASTER_LANDING;
   const navigate = useNavigate();
   const { verifyGuestUser } = useSyncLoginInfo();
   const {
@@ -45,7 +48,7 @@ const TryApp = () => {
 
   return (
     <Main>
-      <GoBackAnchor href={BUDGET_MASTER_LANDING} title="Volver atrás hacia Budget Master">
+      <GoBackAnchor to={returnRoute} title="Volver atrás hacia Budget Master">
         <ArrowBackIosNewOutlinedIcon />
         Volver atrás
       </GoBackAnchor>

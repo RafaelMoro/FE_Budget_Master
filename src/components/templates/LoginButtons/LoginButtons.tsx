@@ -37,7 +37,7 @@ const LoginButtons = ({
         { (!loading && !success) && 'Login' }
       </PrimaryButtonLoginForm>
     </ButtonContainer>
-    <AnchorTryAppButton to={TRY_APP_ROUTE} title="Try app in the free version">
+    <AnchorTryAppButton to={TRY_APP_ROUTE} title="Try app in the free version" state={cancelStateLink}>
       <TransparentButton>Try app</TransparentButton>
     </AnchorTryAppButton>
   </LoginButtonsContainer>

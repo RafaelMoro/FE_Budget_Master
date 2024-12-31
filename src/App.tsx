@@ -16,12 +16,11 @@ import { NotFound } from './pages/NotFound';
 import { store } from './redux/store';
 import { appTheme } from './styles/theme';
 import {
-  BUDGETS_ROUTE, BUDGET_EDITOR_PAGE_ROUTE, LOGIN_CHECKER_ROUTE, LOGIN_ROUTE, TRY_APP_ROUTE,
+  BUDGETS_ROUTE, BUDGET_EDITOR_PAGE_ROUTE, LOGIN_ROUTE, TRY_APP_ROUTE,
 } from './pages/RoutesConstants';
 import { BudgetsPage } from './pages/Budgets';
 import { BudgetEditorPage } from './pages/Budgets/BudgetEditorPage/BudgetEditorPage';
 import { TryApp } from './pages/TryAppPage';
-import { LoginChecker } from './pages/LoginChecker';
 import { LandingPage } from './pages/LandingPage';
 
 function App() {
@@ -31,7 +30,6 @@ function App() {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Global styles={GlobalStyles} />
           <Routes>
-            <Route path={LOGIN_CHECKER_ROUTE} element={<LoginChecker />} />
             <Route path="/landing" element={<LandingPage />} />
             <Route path={LOGIN_ROUTE} element={<Login />} />
             <Route path={TRY_APP_ROUTE} element={<TryApp />} />

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { Typography } from '@mui/material';
 import {
-  AppColors, OutsideAnchor, TransparentButton,
+  AppColors, OutsideAnchor, responsiveBreakpoints, TransparentButton,
 } from '../../styles';
 
 export const Main = styled.main`
@@ -58,10 +58,28 @@ export const ActionsContainer = styled.div`
 
 export const ImageWithData = styled.img`
   grid-area: image-with-data;
+  aspect-ratio: 200/294.92;
+
+  @media ${responsiveBreakpoints.tablet} {
+    aspect-ratio: 300/502.42;
+  }
+
+  @media ${responsiveBreakpoints.desktop} {
+    aspect-ratio: 400/649.23;
+  }
 `;
 
 export const ImageWithNoData = styled.img`
   grid-area: image-with-no-data;
+  aspect-ratio: 200/324.61;
+
+  @media ${responsiveBreakpoints.tablet} {
+    aspect-ratio: 300/502.42;
+  }
+
+  @media ${responsiveBreakpoints.desktop} {
+    aspect-ratio: 400/649.23;
+  }
 `;
 
 export const PrimaryButtonContainer = styled.div`

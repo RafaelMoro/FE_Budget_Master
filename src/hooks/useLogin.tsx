@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { DASHBOARD_ROUTE, LANDING_ROUTE } from '../pages/RoutesConstants';
+import { DASHBOARD_ROUTE, LOGIN_ROUTE } from '../pages/RoutesConstants';
 import { LoginValues } from '../pages/LoginModule/Login/interface';
 import { SystemStateEnum } from '../enums';
 import { useNotification } from './useNotification';
@@ -69,7 +69,7 @@ const useLogin = () => {
     if (hasSignedOn) dispatch(toggleSignedOn());
     saveInfoToLocalStorage({});
     resetLoginIn();
-    navigate(LANDING_ROUTE);
+    navigate(LOGIN_ROUTE);
   };
 
   const handleSubmit = async (values: LoginValues) => {

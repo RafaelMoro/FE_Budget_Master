@@ -21,7 +21,6 @@ import {
 import { BudgetsPage } from './pages/Budgets';
 import { BudgetEditorPage } from './pages/Budgets/BudgetEditorPage/BudgetEditorPage';
 import { TryApp } from './pages/TryAppPage';
-import { LandingPage } from './pages/LandingPage';
 
 function App() {
   return (
@@ -30,7 +29,6 @@ function App() {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Global styles={GlobalStyles} />
           <Routes>
-            <Route path="/landing" element={<LandingPage />} />
             <Route path={LOGIN_ROUTE} element={<Login />} />
             <Route path={TRY_APP_ROUTE} element={<TryApp />} />
             <Route path={BUDGETS_ROUTE} element={<BudgetsPage />} />

@@ -34,7 +34,6 @@ const RecordList = ({ handleOpenCreateAccount }: RecordListProps) => {
       <LoadingStatus text="Loading accounts...." />
     );
   }
-  console.log('!accounts', !accounts);
 
   if ((accounts && accounts.length === 0) || (!accounts && isGuestUser)) {
     return (

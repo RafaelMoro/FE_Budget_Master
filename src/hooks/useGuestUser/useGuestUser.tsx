@@ -85,8 +85,15 @@ const useGuestUser = () => {
     dispatch(signOn(guestUser));
     // Check is the account local american express exist.
     const amexExist = accountsLocalStorage.some((account) => account._id === AMERICAN_EXPRESS_ID);
+    let selectedAccountId = null;
+
     // Make the local american express as the selected account. If it does not exist, select the first account.
-    const selectedAccountId = amexExist ? AMERICAN_EXPRESS_ID : null;
+    if (amexExist) {
+      selectedAccountId = AMERICAN_EXPRESS_ID;
+    }
+    if (accountsLocalStorage?.length > 0 && !amexExist) {
+      selectedAccountId = accountsLocalStorage?.[0]?._id;
+    }
     // Load accounts local storage
     dispatch(updateAccountsLocalStorage(accountsLocalStorage));
 

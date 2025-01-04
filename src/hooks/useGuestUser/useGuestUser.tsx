@@ -37,7 +37,10 @@ const useGuestUser = () => {
   const addGuesUserWithoutData = () => {
     // Add user
     dispatch(signOn(guestUser));
-    addToLocalStorage({ newInfo: { user: guestUser } });
+    // Set accounts to empty array
+    dispatch(updateAccounts([]));
+    dispatch(updateAccountsLocalStorage([]));
+    addToLocalStorage({ newInfo: { user: guestUser, accounts: [] } });
   };
 
   const addGuestUserAccountsRecords = () => {

@@ -98,7 +98,10 @@ const useGuestUser = () => {
 
       // Load records
       loadRecords(newSelectedAccount, recordsLocalStorage);
+      return;
     }
+
+    dispatch(updateAccounts([]));
   };
 
   return {

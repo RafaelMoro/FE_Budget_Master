@@ -103,7 +103,7 @@ const ViewAccounts = ({ hide, accountsActions }: ViewAccountsProps) => {
     );
   }
 
-  if (!accountsUI) {
+  if (accountsUI?.length === 0 && isGuestUser) {
     return (
       <AccountDialog
         open={openAccountModal}

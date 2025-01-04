@@ -67,8 +67,7 @@ const useSyncLoginInfo = () => {
       }
       return 'the user is not a guest user';
     } catch (err) {
-      console.error('Error in verifyGuestUser', err);
-      return 'an error happened';
+      return 'an error happened in verifyGuestUser';
     }
   };
 

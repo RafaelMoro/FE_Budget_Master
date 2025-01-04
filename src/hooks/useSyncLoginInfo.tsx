@@ -46,25 +46,30 @@ const useSyncLoginInfo = () => {
   };
 
   const verifyGuestUser = ():string => {
-    const localStorageInfo: BudgetMasterLocalStorage = getLocalStorageInfo();
-    const IsEmptyLocalStorage = Object.keys(localStorageInfo).length < 1;
+    try {
+      const localStorageInfo: BudgetMasterLocalStorage = getLocalStorageInfo();
+      const IsEmptyLocalStorage = Object.keys(localStorageInfo).length < 1;
 
-    if (IsEmptyLocalStorage) return 'empty local storage';
-    const { user } = localStorageInfo;
-    if (!user) return 'user not found';
+      if (IsEmptyLocalStorage) return 'empty local storage';
+      const { user } = localStorageInfo;
+      if (!user) return 'user not found';
 
-    const accounts = localStorageInfo?.accounts ?? [];
-    const records = localStorageInfo?.records ?? [];
+      const accounts = localStorageInfo?.accounts ?? [];
+      const records = localStorageInfo?.records ?? [];
 
-    if (user?.user?.firstName === 'Guest') {
+      if (user?.user?.firstName === 'Guest') {
       // This means that the user has already logged on as guest user
-      if (accountsReduxState && accountsReduxState.length > 1) {
-        return 'guest user found';
+        if (accountsReduxState && accountsReduxState.length > 1) {
+          return 'guest user found';
+        }
+        loadGuestUser({ accountsLocalStorage: accounts, recordsLocalStorage: records });
+        return 'guest user loaded into redux';
       }
-      loadGuestUser({ accountsLocalStorage: accounts, recordsLocalStorage: records });
-      return 'guest user loaded into redux';
+      return 'the user is not a guest user';
+    } catch (err) {
+      console.error('Error in verifyGuestUser', err);
+      return 'an error happened';
     }
-    return 'the user is not a guest user';
   };
 
   useEffect(() => {

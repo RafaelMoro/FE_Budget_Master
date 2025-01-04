@@ -86,16 +86,19 @@ const useGuestUser = () => {
     const selectedAccountId = amexExist ? AMERICAN_EXPRESS_ID : null;
     // Load accounts local storage
     dispatch(updateAccountsLocalStorage(accountsLocalStorage));
-    // Format accounts
-    const accountsUI = formatAccounts({ accounts: accountsLocalStorage, selectedAccountId });
-    const newSelectedAccount = accountsUI.find((account) => account._id === AMERICAN_EXPRESS_ID) ?? accountsUI[0];
 
-    // Load accounts UI
-    dispatch(updateAccounts(accountsUI));
-    dispatch(updateSelectedAccount(newSelectedAccount));
+    if (selectedAccountId) {
+      // Format accounts
+      const accountsUI = formatAccounts({ accounts: accountsLocalStorage, selectedAccountId });
+      const newSelectedAccount = accountsUI.find((account) => account._id === AMERICAN_EXPRESS_ID) ?? accountsUI[0];
 
-    // Load records
-    loadRecords(newSelectedAccount, recordsLocalStorage);
+      // Load accounts UI
+      dispatch(updateAccounts(accountsUI));
+      dispatch(updateSelectedAccount(newSelectedAccount));
+
+      // Load records
+      loadRecords(newSelectedAccount, recordsLocalStorage);
+    }
   };
 
   return {

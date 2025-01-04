@@ -16,6 +16,7 @@ import {
   AnchorButton, AppColors, FlexContainer, PrimaryButton, SecondaryButton,
 } from '../../../styles';
 import {
+  GuestUserButton,
   HeaderContainer, HeaderNav, HeaderNavAnchor, HeaderShadow,
 } from './Header.styled';
 
@@ -73,6 +74,16 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
             <IconButton data-testid="hamburguer-menu-header" onClick={toggleHamburguerMenu}>
               <AppIcon icon="HamburguerMenu" fillColor={isLandingPage ? AppColors.white : AppColors.primary} />
             </IconButton>
+          )}
+          { (isGuestUser && !isMobile) && (
+            <GuestUserButton
+              isLandingPage={isLandingPage}
+              variant="text"
+              size="medium"
+              onClick={toggleGuestUserModal}
+            >
+              Get Personalized Experience
+            </GuestUserButton>
           )}
         </HeaderContainer>
       </HeaderShadow>

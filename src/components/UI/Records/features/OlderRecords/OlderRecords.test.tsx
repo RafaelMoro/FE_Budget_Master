@@ -13,7 +13,7 @@ import {
 } from '../../Record.mocks';
 import { OlderRecords } from './OlderRecords';
 import {
-  getCurrentDate, getFutureDate, getLastMonthDate, getTwoMonthBeforeLastMonth,
+  getCurrentDate, getDateInfo, getFutureDate, getLastMonthDate, getTwoMonthBeforeLastMonth,
 } from '../../../../../utils';
 
 describe('Older Records', () => {
@@ -136,6 +136,7 @@ describe('Older Records', () => {
 
   test('Show older records, click a month beyond the current month, click on search expenses and should show error', async () => {
     const { futureMonth, futureMonthName } = getFutureDate();
+    const { month, year } = getDateInfo({ isOlderRecords: false });
 
     fetchMock.once(JSON.stringify(olderRecordsResponse));
     renderWithProviders(
@@ -163,11 +164,24 @@ describe('Older Records', () => {
     fireEvent.click(options[futureMonth]);
     expect(await screen.findByText(futureMonthName)).toBeInTheDocument();
 
+    if (month === 'Jan' || month === 'Dec') {
+      const selectYearTestId = screen.getByTestId('select-year');
+      const selectYearButton = within(selectYearTestId).getByRole('combobox');
+      fireEvent.mouseDown(selectYearButton);
+      const listboxYear = within(screen.getByRole('presentation')).getByRole(
+        'listbox',
+      );
+      const optionsYear = within(listboxYear).getAllByRole('option');
+      const yearIndex = optionsYear.findIndex((option) => option.textContent === year);
+      fireEvent.click(optionsYear[yearIndex]);
+      expect(await screen.findByText(year)).toBeInTheDocument();
+    }
+
     // Click on search expenses button
     const searchExpensesButton = screen.getByRole('button', { name: /search records/i });
     userEvent.click(searchExpensesButton);
 
-    let errorMessage: RegExp | string = new RegExp(`You are selecting a date in the future: ${futureMonthName} 2024`);
+    let errorMessage: RegExp | string = new RegExp(`You are selecting a date in the future: ${futureMonthName} ${year}`);
 
     if (futureMonth === 0) {
       // The error changes because the next year option is not shown. Hence, the error message won't appear with 2025.

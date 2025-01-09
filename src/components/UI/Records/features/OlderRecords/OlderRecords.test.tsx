@@ -1,5 +1,5 @@
 import {
-  fireEvent, screen, waitFor, within,
+  fireEvent, screen, within,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Router } from 'react-router-dom';

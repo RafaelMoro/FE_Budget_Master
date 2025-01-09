@@ -18,12 +18,11 @@ export const validateMonthOlderRecords = ({ month, year }: ValidateMonthOlderRec
 
   const monthFormatted = ABBREVIATED_MONTHS.indexOf(month);
   const yearFormatted = Number(year);
-
   const inputDate = new Date(yearFormatted, monthFormatted);
 
   const isCurrentMonth = monthFormatted === currentMonth && yearFormatted === currentYear;
   const isLastMonth = (monthFormatted === currentMonth - 1 && yearFormatted === currentYear)
-    || (currentMonth === 0 && monthFormatted === 12 && yearFormatted === currentYear - 1);
+    || (currentMonth === 0 && (monthFormatted === 12 || monthFormatted === 11) && yearFormatted === currentYear - 1);
   const isFutureMonth = inputDate > now;
 
   return {
@@ -57,7 +56,14 @@ export const getCurrentDate = () => {
 
 export const getLastMonthDate = () => {
   const now = new Date();
-  const lastMonth = now.getMonth() - 1;
+  const currentMonth = now.getMonth();
+  let numberToSubtract = -1;
+
+  if (currentMonth === 0) {
+    numberToSubtract = 11;
+  }
+
+  const lastMonth = currentMonth + numberToSubtract;
   const lastMonthName = MONTHS[lastMonth];
 
   return { lastMonth, lastMonthName };

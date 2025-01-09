@@ -27,7 +27,7 @@ const OlderRecords = ({
 }: OlderRecordsProps) => {
   const dispatch = useAppDispatch();
   const {
-    completeMonth, month, yearOlderRecords, years,
+    completeMonth, month, yearOlderRecords, years, year,
   } = getDateInfo({ isOlderRecords: true });
 
   const [fetchOlderRecordsMutation, {
@@ -50,7 +50,7 @@ const OlderRecords = ({
   const handleFetchRecords = async ({ newMonth, newYear, completeMonth: newCompleteMonth }: LazyFetchRecords) => {
     try {
       const monthParam: AbbreviatedMonthsType = newMonth ?? month;
-      const yearParam = newYear ?? yearOlderRecords;
+      const yearParam = newYear ?? year;
       const completeMonthParam = newCompleteMonth ?? completeMonth;
 
       const newMessage = showMessageOnDate({ monthParam, yearParam, completeMonth: completeMonthParam });

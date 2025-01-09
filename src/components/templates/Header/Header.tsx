@@ -16,7 +16,8 @@ import {
   AnchorButton, AppColors, FlexContainer, PrimaryButton, SecondaryButton,
 } from '../../../styles';
 import {
-  GuestUserButton, HeaderContainer, HeaderNav, HeaderNavAnchor, HeaderShadow,
+  GuestUserButton,
+  HeaderContainer, HeaderNav, HeaderNavAnchor, HeaderShadow,
 } from './Header.styled';
 
 const Header = ({ isLandingPage = false }: HeaderProps) => {
@@ -34,6 +35,11 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
   const toggleNotLoggedDrawer = () => setOpenNotLoggedDrawer((prevState) => !prevState);
   const toggleLoggedDrawer = () => setOpenLoggedDrawer((prevState) => !prevState);
   const toggleHamburguerMenu = (!isGuestUser && userLoggedOn) ? toggleLoggedDrawer : toggleNotLoggedDrawer;
+
+  const handleGuestUserModalMobile = () => {
+    toggleNotLoggedDrawer();
+    toggleGuestUserModal();
+  };
 
   const activeDashboardPage = location.pathname === DASHBOARD_ROUTE;
   const activeBudgetsPage = location.pathname === BUDGETS_ROUTE;
@@ -54,16 +60,6 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
               <AppIcon fillColor={isLandingPage ? AppColors.white : AppColors.primary} icon="LogOut" />
             </IconButton>
           ) }
-          { (isGuestUser && !isMobile) && (
-            <GuestUserButton
-              isLandingPage={isLandingPage}
-              variant="text"
-              size="medium"
-              onClick={toggleGuestUserModal}
-            >
-              Get Personalized Experience
-            </GuestUserButton>
-          )}
           { (!isGuestUser && !userLoggedOn && !isMobile) && (
             <FlexContainer gap={3} justifyContent="space-between">
               <AnchorButton to={LOGIN_ROUTE}>
@@ -79,9 +75,19 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
               <AppIcon icon="HamburguerMenu" fillColor={isLandingPage ? AppColors.white : AppColors.primary} />
             </IconButton>
           )}
+          { (isGuestUser && !isMobile) && (
+            <GuestUserButton
+              isLandingPage={isLandingPage}
+              variant="text"
+              size="medium"
+              onClick={toggleGuestUserModal}
+            >
+              Get Personalized Experience
+            </GuestUserButton>
+          )}
         </HeaderContainer>
       </HeaderShadow>
-      <NotLoggedDrawer open={openNotLoggedDrawer} toggleDrawer={toggleNotLoggedDrawer} />
+      <NotLoggedDrawer open={openNotLoggedDrawer} toggleDrawer={toggleNotLoggedDrawer} handleGuestUser={handleGuestUserModalMobile} />
       <LoggedUserDrawer
         open={openLoggedDrawer}
         activeBudgetsPage={activeBudgetsPage}

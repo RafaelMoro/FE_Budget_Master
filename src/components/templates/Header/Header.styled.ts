@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { IconButton, Typography } from '@mui/material';
+import { IconButton } from '@mui/material';
 import {
   DrawerMenuLinkProps, GuestUserButtonProps, HeaderNavAnchorProps, HeaderShadowProps,
 } from './Header.interface';
@@ -100,24 +100,4 @@ export const ActiveDrawerMenuLink = styled(Anchor, { shouldForwardProp: (props) 
   border-bottom: 1px solid black;
   border-color: ${({ active }: DrawerMenuLinkProps) => (active ? AppColors.primary : AppColors.black)};
   cursor: pointer;
-`;
-
-export const GuestUserModalBox = styled.div`
-  padding: 3rem;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-`;
-
-export const GuestUserModalTitle = styled(Typography)`
-  grid-row: 1 / 2;
-  grid-column: 1 / 2;
-  justify-self: center;
-  align-self: center;
-`;
-
-export const CloseModalBox = styled(IconButton)`
-  grid-row: 1 / 2;
-  grid-column: 1 / 2;
-  justify-self: end;
 `;

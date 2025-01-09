@@ -35,7 +35,7 @@ const RecordList = ({ handleOpenCreateAccount }: RecordListProps) => {
     );
   }
 
-  if (accounts && accounts.length === 0) {
+  if ((accounts && accounts.length === 0) || (!accounts && isGuestUser)) {
     return (
       <NotElementFound
         description="You have not created accounts yet. Start now!"
@@ -50,17 +50,17 @@ const RecordList = ({ handleOpenCreateAccount }: RecordListProps) => {
       <CurrentMonthRecords
         color={color}
         accountId={accountId}
-        isGuestUser={isGuestUser}
+        isGuestUser={isGuestUser ?? false}
       />
       <LastMonthRecords
         color={color}
         accountId={accountId}
-        isGuestUser={isGuestUser}
+        isGuestUser={isGuestUser ?? false}
       />
       <OlderRecords
         color={color}
         accountId={accountId}
-        isGuestUser={isGuestUser}
+        isGuestUser={isGuestUser ?? false}
       />
     </List>
   );

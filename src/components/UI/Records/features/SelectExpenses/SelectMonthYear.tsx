@@ -35,7 +35,7 @@ const SelectMonthYear = ({
       onSubmit={(values) => handleSubmit(values)}
     >
       {({ submitForm }) => (
-        <SelectMonthYearBox isDashboard={isDashboard} isGuestUser={isGuestUser}>
+        <SelectMonthYearBox isDashboard={isDashboard} isGuestUser={isGuestUser ?? false}>
           <SelectInput
             labelId="select-month"
             dataTestId="select-month"

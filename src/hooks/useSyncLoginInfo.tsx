@@ -19,6 +19,7 @@ const useSyncLoginInfo = () => {
   const dispatch = useAppDispatch();
   const { loadGuestUser } = useGuestUser();
   const userReduxState = useAppSelector((state) => state.user);
+  const accountsReduxState = useAppSelector((state) => state.accounts.accounts);
   const [recordToBeEdited, setRecordtoBeEdited] = useState<null | AnyRecord>(null);
   const [isEmptyLocalStorage, setIsEmptyLocalStorage] = useState<boolean>(false);
 
@@ -44,19 +45,29 @@ const useSyncLoginInfo = () => {
     };
   };
 
-  const verifyGuestUser = () => {
-    const localStorageInfo: BudgetMasterLocalStorage = getLocalStorageInfo();
-    const IsEmptyLocalStorage = Object.keys(localStorageInfo).length < 1;
+  const verifyGuestUser = ():string => {
+    try {
+      const localStorageInfo: BudgetMasterLocalStorage = getLocalStorageInfo();
+      const IsEmptyLocalStorage = Object.keys(localStorageInfo).length < 1;
 
-    if (IsEmptyLocalStorage) return;
-    const { user } = localStorageInfo;
-    if (!user) return;
+      if (IsEmptyLocalStorage) return 'empty local storage';
+      const { user } = localStorageInfo;
+      if (!user) return 'user not found';
 
-    const accounts = localStorageInfo?.accounts ?? [];
-    const records = localStorageInfo?.records ?? [];
+      const accounts = localStorageInfo?.accounts ?? [];
+      const records = localStorageInfo?.records ?? [];
 
-    if (user?.user?.firstName === 'Guest') {
-      loadGuestUser({ accountsLocalStorage: accounts, recordsLocalStorage: records });
+      if (user?.user?.firstName === 'Guest') {
+      // This means that the user has already logged on as guest user
+        if (accountsReduxState && accountsReduxState.length > 1) {
+          return 'guest user found';
+        }
+        loadGuestUser({ accountsLocalStorage: accounts, recordsLocalStorage: records });
+        return 'guest user loaded into redux';
+      }
+      return 'the user is not a guest user';
+    } catch (err) {
+      return 'an error happened in verifyGuestUser';
     }
   };
 

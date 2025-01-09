@@ -9,7 +9,7 @@ import fetchMock from 'jest-fetch-mock';
 
 import { ResetPassword } from './ResetPassword';
 import { WrapperRedux } from '../../../tests/WrapperRedux';
-import { LANDING_ROUTE } from '../../RoutesConstants';
+import { LOGIN_ROUTE } from '../../RoutesConstants';
 
 beforeEach(() => {
   // having console error because of formik.
@@ -248,7 +248,7 @@ describe('Reset password page', () => {
       });
 
       await waitFor(() => {
-        expect(history.location.pathname).toBe(LANDING_ROUTE);
+        expect(history.location.pathname).toBe(LOGIN_ROUTE);
       }, {
         timeout: 4000,
       });

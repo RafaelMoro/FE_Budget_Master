@@ -4,14 +4,14 @@ import { BrandLogoNameProps } from './interface';
 import { BrandLogoButton, LogoImageContainer, LogoTitleLogin } from './BrandLogoName.styled';
 import logoWebp from '../../../assets/logo-webp.webp';
 import logoPng from '../../../assets/logo-png.png';
-import { LANDING_ROUTE } from '../../../pages/RoutesConstants';
+import { LOGIN_ROUTE } from '../../../pages/RoutesConstants';
 
 const BrandLogoName = ({ isLandingPage = false, isLoginPage = false }: BrandLogoNameProps) => {
   const navigate = useNavigate();
-  const navigateHome = () => navigate(LANDING_ROUTE);
+  const navigateLogin = () => navigate(LOGIN_ROUTE);
 
   return (
-    <BrandLogoButton type="button" onClick={navigateHome} isLoginPage={isLoginPage}>
+    <BrandLogoButton type="button" onClick={navigateLogin} isLoginPage={isLoginPage}>
       <LogoImageContainer isLandingPage={isLandingPage} isLoginPage={isLoginPage}>
         <source srcSet={logoWebp} type="image/webp" />
         <img src={logoPng} alt="Budget Master logo" />

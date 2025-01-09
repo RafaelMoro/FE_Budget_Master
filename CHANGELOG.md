@@ -1,3 +1,9 @@
+## v1.8.0 (2025-01-09)
+
+### Pull Requests
+[#56](https://github.com/RafaelMoro/FE_Budget_Master/pull/56) | Remove landing
+
+
 ## v1.7.1 (2024-12-28)
 
 ### Pull Requests

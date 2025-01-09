@@ -76,14 +76,6 @@ const AccountDialog = ({
 
       if (isGuestUser) {
         createAccountGuestUser(createAccountValues);
-
-        // Show success notification
-        updateGlobalNotification({
-          newTitle: `Account ${values.title} created`,
-          newDescription: '',
-          newStatus: SystemStateEnum.Success,
-        });
-
         onClose();
         return;
       }

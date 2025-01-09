@@ -27,7 +27,7 @@ const OlderRecords = ({
 }: OlderRecordsProps) => {
   const dispatch = useAppDispatch();
   const {
-    completeMonth, month, year, years,
+    completeMonth, month, yearOlderRecords, years, year,
   } = getDateInfo({ isOlderRecords: true });
 
   const [fetchOlderRecordsMutation, {
@@ -83,7 +83,7 @@ const OlderRecords = ({
 
   const getLocalRecords = ({ newMonth, newYear, completeMonth: newCompleteMonth }: LazyFetchRecords) => {
     const monthParam = newMonth ?? month;
-    const yearParam = newYear ?? year;
+    const yearParam = newYear ?? yearOlderRecords;
     const completeMonthParam = newCompleteMonth ?? completeMonth;
 
     const newMessage = showMessageOnDate({ monthParam, yearParam, completeMonth: completeMonthParam });
@@ -107,13 +107,13 @@ const OlderRecords = ({
     if (isGuestUser) {
       const fetchedLocalRecords = getOlderLocalRecords({
         month,
-        year,
+        year: yearOlderRecords,
         recordsLocalStorageSelectedAccount,
       });
       setOlderLocalRecords(fetchedLocalRecords);
       return;
     }
-    handleFetchRecords({ newMonth: month, newYear: year });
+    handleFetchRecords({ newMonth: month, newYear: yearOlderRecords });
   };
 
   const handleGetRecords = isGuestUser ? getLocalRecords : handleFetchRecords;
@@ -142,7 +142,7 @@ const OlderRecords = ({
     >
       <SelectMonthYear
         completeMonth={completeMonth}
-        currentYear={year}
+        currentYear={yearOlderRecords}
         yearsArray={years}
         fetchRecordsCb={handleGetRecords}
         buttonText="Search records"

@@ -5,13 +5,11 @@ import {
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { REGISTER_ROUTE } from '../../RoutesConstants';
-import { useAppSelector } from '../../../redux/hooks';
 import { useGuestUser, useSyncLoginInfo, useLogin } from '../../../hooks';
 import { LoginSchema } from '../../../validationsSchemas';
 import { Notification } from '../../../components/UI';
 import { TogglePasswordAdornment } from '../../../components/UI/TogglePasswordAdornment';
-import { ActionButtonPanel, BrandLogoName } from '../../../components/templates';
+import { BrandLogoName, LoginButtons } from '../../../components/templates';
 import {
   Main, LoginCard, LogoContainer,
   FormLoginTitle, FormInstructions, LoginInput, ForgotPasswordLink,
@@ -19,32 +17,36 @@ import {
 
 const Login = () => {
   const location = useLocation();
-  const { navigateToDashboard } = useSyncLoginInfo();
-  const { isGuestUser } = useGuestUser();
+  const { navigateToDashboard, verifyGuestUser } = useSyncLoginInfo();
+  const { isGuestUser, userLoggedOn } = useGuestUser();
   const {
     handleSubmit, handleShowNotification, notificationInfo, notification, submitOnPressEnter, loginSuccess, loginLoading,
   } = useLogin();
-  const hasSignedOn = useAppSelector((state) => state.userInterface.hasSignedOn);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const toggleShowPassword = () => setShowPassword(!showPassword);
   const locationState = { prevPath: location.pathname };
 
   useEffect(() => {
-    if (hasSignedOn && !isGuestUser) {
+    verifyGuestUser();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (userLoggedOn === true || isGuestUser === true) {
       navigateToDashboard();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hasSignedOn]);
+  }, [userLoggedOn, isGuestUser]);
 
   return (
     <>
       {notification && (
-      <Notification
-        title={notificationInfo.current.title}
-        description={notificationInfo.current.description}
-        status={notificationInfo.current.status}
-        close={handleShowNotification}
-      />
+        <Notification
+          title={notificationInfo.current.title}
+          description={notificationInfo.current.description}
+          status={notificationInfo.current.status}
+          close={handleShowNotification}
+        />
       )}
       <Main>
         <LogoContainer>
@@ -87,18 +89,11 @@ const Login = () => {
                   />
                   <ForgotPasswordLink to="/forgot-password">Do you forgot your password? </ForgotPasswordLink>
                 </CardContent>
-                <ActionButtonPanel
-                  minWidthNumber="12"
-                  submitButtonText="Login"
-                  actionDataTestId="login-button"
+                <LoginButtons
                   submitForm={submitForm}
-                  cancelButtonText="Register"
-                  routeCancelButton={REGISTER_ROUTE}
                   cancelStateLink={locationState}
-                  useSecondaryButton
                   success={loginSuccess}
                   loading={loginLoading}
-                  disableSubmitButton={loginSuccess || loginLoading}
                 />
               </Form>
             )}

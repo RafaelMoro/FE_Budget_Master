@@ -689,7 +689,7 @@ const useRecords = ({
   const createExpenseIncomeLocalStorage = (values: CreateExpenseValuesApiRequest | CreateIncomeValuesApiRequest) => {
     // this could be part of a hook formatting the expense
     const { category, date } = values;
-    const categoryFound = categoriesLocalStorage.find((cat) => cat.categoryName === category);
+    const categoryFound = categoriesLocalStorage.find((cat) => cat._id === category);
     if (!categoryFound) {
       console.error('Category not found while creating expense locally');
       return;

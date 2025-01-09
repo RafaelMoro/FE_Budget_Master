@@ -65,7 +65,20 @@ export const getLastMonthDate = () => {
 
 export const getTwoMonthBeforeLastMonth = () => {
   const now = new Date();
-  const passedMonth = now.getMonth() - 3;
+  const currentMonth = now.getMonth();
+  let numberToSubtract = -3;
+
+  if (currentMonth === 0) {
+    numberToSubtract = 7;
+  }
+  if (currentMonth === 11) {
+    numberToSubtract = 8;
+  }
+  if (currentMonth === 10) {
+    numberToSubtract = 9;
+  }
+
+  const passedMonth = currentMonth + numberToSubtract;
   const passedMonthName = MONTHS[passedMonth];
 
   return { passedMonth, passedMonthName };

@@ -90,8 +90,8 @@ const CreateAccount = ():ReactElement => {
   return (
     <Main>
       <MainContainer>
-        <FormTitle variant="h1">Create account</FormTitle>
-        <FormDescription>Fill the following information to create your account.</FormDescription>
+        <FormTitle variant="h1">Crear cuenta</FormTitle>
+        <FormDescription>Llene la siguiente información para crear su cuenta.</FormDescription>
         <PersonalInformation goNext={goNext} counterView={counterView} direction={direction} />
         <UserAndPassword
           goBack={goPreviousView}
@@ -110,8 +110,8 @@ const CreateAccount = ():ReactElement => {
               () => (
                 <ErrorResultFormAnimated
                   redirectRoute={LOGIN_ROUTE}
-                  secondaryButtonText="Go to Login"
-                  primaryButtonText="Try Again"
+                  secondaryButtonText="Ir al inicio de sesión"
+                  primaryButtonText="Volver a intentar"
                   error={errorText}
                   resetCounterView={resetCounterView}
                 />
@@ -119,7 +119,7 @@ const CreateAccount = ():ReactElement => {
             }
             onSuccess={() => (
               <SuccessResultFormAnimated
-                title="Your account has being created."
+                title="Su cuenta ha sido creada."
                 buttonText="Go to Login"
                 redirectRoute={LOGIN_ROUTE}
               />

@@ -66,15 +66,15 @@ const Login = () => {
                 }}
               >
                 <CardContent>
-                  <FormLoginTitle variant="h2">Welcome back</FormLoginTitle>
-                  <FormInstructions>Enter your credentials to enter your account.</FormInstructions>
+                  <FormLoginTitle variant="h2">Bienvenido de vuelta</FormLoginTitle>
+                  <FormInstructions>Ingrese sus credenciales para entrar a su cuenta.</FormInstructions>
                   <Field
                     component={LoginInput}
                     name="email"
                     type="email"
                     variant="standard"
                     fullWidth
-                    label="Email"
+                    label="Correo electrónico"
                   />
                   <Field
                     component={LoginInput}
@@ -82,12 +82,17 @@ const Login = () => {
                     type={(showPassword) ? 'text' : 'password'}
                     variant="standard"
                     fullWidth
-                    label="Password"
+                    label="Contraseña"
                     InputProps={{
                       endAdornment: <TogglePasswordAdornment showPassword={showPassword} toggleShowPassword={toggleShowPassword} />,
                     }}
                   />
-                  <ForgotPasswordLink to="/forgot-password">Do you forgot your password? </ForgotPasswordLink>
+                  <ForgotPasswordLink
+                    title="¿Olvidé mi contraseña? Iniciar proceso de recuperar contraseña"
+                    to="/forgot-password"
+                  >
+                    Ha olvidado su contraseña?
+                  </ForgotPasswordLink>
                 </CardContent>
                 <LoginButtons
                   submitForm={submitForm}

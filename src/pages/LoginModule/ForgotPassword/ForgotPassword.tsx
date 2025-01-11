@@ -95,10 +95,9 @@ const ForgotPassword = (): ReactElement => {
       )}
       <Main>
         <MainContainer>
-          <FormTitle variant="h1">Forgot password</FormTitle>
+          <FormTitle variant="h1">¿Olvidaste tu contraseña? Recuperémosla juntos</FormTitle>
           <FormDescription>
-            Please enter your email and
-            we will send you the instructions to reset your password.
+            Ingrese su correo electrónico y le enviaremos las instrucciones para recuperar su contraseña.
           </FormDescription>
           <Formik
             initialValues={{ email: '' }}
@@ -113,12 +112,12 @@ const ForgotPassword = (): ReactElement => {
                   name="email"
                   type="email"
                   variant="standard"
-                  label="Email"
+                  label="Correo Electrónico"
                 />
                 <ActionButtonPanel
                   routeCancelButton={LOGIN_ROUTE}
                   minWidthNumber="10.5"
-                  submitButtonText="Send"
+                  submitButtonText="Enviar"
                   actionDataTestId="forgot-password-button"
                   loading={isLoading}
                   success={isSuccess}

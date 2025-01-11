@@ -18,8 +18,8 @@ import { ForgotPasswordSchema } from '../../../validationsSchemas/login.schema';
 import { ActionButtonPanel } from '../../../components/templates';
 import { Notification } from '../../../components/UI';
 import {
-  Main, FormTitle, FormDescription, FormContainer, MainContainer,
-} from '../../../styles/LoginModule.styled';
+  Main, MainContainer, FormContainer, FormTitle, FormDescription,
+} from './ForgotPassword.styled';
 import {
   InputForm, SecondaryButton,
 } from '../../../styles';
@@ -116,7 +116,7 @@ const ForgotPassword = (): ReactElement => {
                 />
                 <ActionButtonPanel
                   routeCancelButton={LOGIN_ROUTE}
-                  minWidthNumber="10.5"
+                  minWidthNumber="11.5"
                   submitButtonText="Enviar"
                   actionDataTestId="forgot-password-button"
                   loading={isLoading}

@@ -33,7 +33,7 @@ export const ButtonContainer = styled.div`
 
 export const AnchorRegisterButton = styled(AnchorButton)`
   display: flex;
-  order: 2;
+  min-width: 150px;
 
   @media ${responsiveBreakpoints.tabletAndDesktop} {
     order: 2;
@@ -43,7 +43,6 @@ export const AnchorRegisterButton = styled(AnchorButton)`
 export const AnchorTryAppButton = styled(AnchorButton)`
   color: ${AppColors.black};
   border-bottom: 1px solid ${AppColors.black};
-  max-width: 10rem;
   display: flex;
 
   @media ${responsiveBreakpoints.tabletAndDesktop} {
@@ -66,6 +65,6 @@ export const PrimaryButtonLoginForm = styled(PrimaryButton, { shouldForwardProp:
   }
 `;
 
-export const SecondaryButtonForm = styled(SecondaryButton, { shouldForwardProp: (props) => props !== 'minWidth' })`
-  min-width: ${({ minWidth }: ButtonPanelLoginProps) => minWidth}rem;
+export const SecondaryButtonForm = styled(SecondaryButton)`
+  width: 100%;
 `;

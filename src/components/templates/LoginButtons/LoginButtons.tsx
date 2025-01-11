@@ -21,8 +21,8 @@ const LoginButtons = ({
 }: LoginButtonsProps) => (
   <LoginButtonsContainer>
     <ButtonContainer>
-      <AnchorRegisterButton to={REGISTER_ROUTE} state={cancelStateLink} title="Register into Budget Master">
-        <SecondaryButtonForm minWidth="12" variant="contained" size="medium">Registrarse</SecondaryButtonForm>
+      <AnchorRegisterButton to={REGISTER_ROUTE} state={cancelStateLink} title="Registrarse en Budget Master">
+        <SecondaryButtonForm variant="contained" size="medium">Registrarse</SecondaryButtonForm>
       </AnchorRegisterButton>
       <PrimaryButtonLoginForm
         data-testid="login-button"

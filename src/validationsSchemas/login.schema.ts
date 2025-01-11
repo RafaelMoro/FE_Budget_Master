@@ -26,6 +26,6 @@ export const PersonalInformationSchema = Yup.object({
 
 export const UserAndPasswordSchema = Yup.object({
   email: emailValidation,
-  password: passwordValidation('Password is required'),
+  password: passwordValidation('Por favor, ingrese una contraseña'),
   confirmPassword: confirmPasswordValidation,
 });

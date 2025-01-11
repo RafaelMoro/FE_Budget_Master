@@ -99,7 +99,7 @@ const CreateAccount = ():ReactElement => {
           counterView={counterView}
           direction={direction}
         />
-        <LoadingFormAnimated text="Your account is being created. Please wait..." order={2} counterView={counterView} direction={direction} />
+        <LoadingFormAnimated text="Su cuenta está siendo creada. Por favor, espere..." order={2} counterView={counterView} direction={direction} />
         { (!isLoadingUser || isLoadingCategories) && (
           <ResultFormAnimated
             counterView={counterView}

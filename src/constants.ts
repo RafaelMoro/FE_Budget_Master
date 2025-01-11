@@ -15,7 +15,7 @@ export const ERROR_CATCH_USER_CREATED = 'Try with other email.';
 export const EXPENSES_NOT_FOUND = 'Expenses not found.';
 
 export const ERROR_TITLE_GENERAL = 'Error';
-export const ERROR_MESSAGE_GENERAL = 'Oops! Something went wrong. Try again later.';
+export const ERROR_MESSAGE_GENERAL = 'Oops! Algo no salió como esperabamos. Por favor, intente de nuevo más tarde.';
 export const NETWORK_ERROR_MESSAGE = 'There is a network error. Please check you are connected to Internet.';
 
 /** Errors Login Module */
@@ -24,7 +24,7 @@ export const TOKEN_EXPIRED_TITLE = 'Your token to reset your password has expire
 export const TOKEN_EXPIRED_DESC = 'Redirecting you to forgot password to try again.';
 export const UNAUTHORIZED_ERROR = 'Email or Password incorrect.';
 export const ERROR_MESSAGE_UNAUTHORIZED = 'Email or Password incorrect.';
-export const ERROR_MESSAGE_EMAIL_EXISTS = 'The email entered is registered to other user. Please try with a different email.';
+export const ERROR_MESSAGE_EMAIL_EXISTS = 'El correo electrónico ya está registrado. Intente con otro correo electrónico.';
 
 export const ERROR_MESSAGE_FETCH_CATEGORIES = 'We could not get your categories. Please try again later';
 export const ERROR_CREATE_LOCAL_CATEGORIES = 'We could not create your categories. Please try again later';

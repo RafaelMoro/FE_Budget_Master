@@ -87,9 +87,9 @@ const ResetPassword = (): ReactElement => {
       )}
       <Main>
         <MainContainer>
-          <FormTitle variant="h1">Reset Password</FormTitle>
+          <FormTitle variant="h1">Restablecer Contraseña</FormTitle>
           <FormDescription>
-            Enter your new password in the fields below:
+            Ingrese su nueva contraseña en los siguientes campos:
           </FormDescription>
           <Formik
             initialValues={{ password: '', confirmPassword: '' }}
@@ -104,7 +104,7 @@ const ResetPassword = (): ReactElement => {
                   name="password"
                   type={(showPassword) ? 'text' : 'password'}
                   variant="standard"
-                  label="New Password"
+                  label="Nueva Contraseña"
                   InputProps={{
                     endAdornment: <TogglePasswordAdornment showPassword={showPassword} toggleShowPassword={toggleShowPassword} />,
                   }}
@@ -114,14 +114,14 @@ const ResetPassword = (): ReactElement => {
                   name="confirmPassword"
                   type={(showPassword) ? 'text' : 'password'}
                   variant="standard"
-                  label="Confirm Password"
+                  label="Confirmar Contraseña"
                   InputProps={{
                     endAdornment: <TogglePasswordAdornment showPassword={showPassword} toggleShowPassword={toggleShowPassword} />,
                   }}
                 />
                 <ActionButtonPanel
                   minWidthNumber="19"
-                  submitButtonText="Reset Password"
+                  submitButtonText="Cambiar"
                   actionDataTestId="reset-password-button"
                   submitForm={submitForm}
                   routeCancelButton={LOGIN_ROUTE}

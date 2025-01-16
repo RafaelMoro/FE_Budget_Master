@@ -23,7 +23,7 @@ export const USER_NOT_FOUND_CATCH_ERROR = 'User not found.';
 export const TOKEN_EXPIRED_TITLE = 'Your token to reset your password has expired';
 export const TOKEN_EXPIRED_DESC = 'Redirecting you to forgot password to try again.';
 export const UNAUTHORIZED_ERROR = 'Email or Password incorrect.';
-export const ERROR_MESSAGE_UNAUTHORIZED = 'Email or Password incorrect.';
+export const ERROR_MESSAGE_UNAUTHORIZED = 'Correo electronico o contraseña incorrecta.';
 export const ERROR_MESSAGE_EMAIL_EXISTS = 'El correo electrónico ya está registrado. Intente con otro correo electrónico.';
 
 export const ERROR_MESSAGE_FETCH_CATEGORIES = 'We could not get your categories. Please try again later';

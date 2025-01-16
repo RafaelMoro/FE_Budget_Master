@@ -7,7 +7,7 @@ import {
   SUCCESS_PASSWORD_RESET_TITLE, TOKEN_EXPIRED_DESC, TOKEN_EXPIRED_TITLE,
 } from '../../../constants';
 import { RESET_PASSWORD_POST_ROUTE } from './constants';
-import { LOGIN_ROUTE, FORGOT_PASSWORD_ROUTE, DASHBOARD_ROUTE } from '../../RoutesConstants';
+import { LOGIN_ROUTE, FORGOT_PASSWORD_ROUTE } from '../../RoutesConstants';
 
 import { ResetPasswordFormValues, ResetPasswordValues } from './interface';
 import { GeneralError } from '../../../globalInterface';
@@ -67,7 +67,7 @@ const ResetPassword = (): ReactElement => {
         updateStatus(SystemStateEnum.Error);
 
         setTimeout(() => {
-          navigate(DASHBOARD_ROUTE);
+          navigate(LOGIN_ROUTE);
         }, 5000);
       }
 

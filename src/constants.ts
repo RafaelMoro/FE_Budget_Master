@@ -20,8 +20,8 @@ export const NETWORK_ERROR_MESSAGE = 'There is a network error. Please check you
 
 /** Errors Login Module */
 export const USER_NOT_FOUND_CATCH_ERROR = 'User not found.';
-export const TOKEN_EXPIRED_TITLE = 'Your token to reset your password has expired';
-export const TOKEN_EXPIRED_DESC = 'Redirecting you to forgot password to try again.';
+export const TOKEN_EXPIRED_TITLE = 'Su token para restablecer su contraseña ha caducado';
+export const TOKEN_EXPIRED_DESC = 'Redirigiendo a la página de olvidé contraseña para volver a intentarlo.';
 export const UNAUTHORIZED_ERROR = 'Email or Password incorrect.';
 export const ERROR_MESSAGE_UNAUTHORIZED = 'Correo electronico o contraseña incorrecta.';
 export const ERROR_MESSAGE_EMAIL_EXISTS = 'El correo electrónico ya está registrado. Intente con otro correo electrónico.';

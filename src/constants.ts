@@ -34,8 +34,9 @@ export const ERROR_INCORRECT_MAIL_DESC = 'Verify that your email is correct or c
 /** Success Login Module */
 export const SUCCESS_PASSWORD_RESET_TITLE = 'Password reset successfully';
 export const SUCCESS_PASSWORD_RESET_DESC = 'You may login with your new password.';
-export const SUCCESS_FORGOT_PASSWORD_TITLE = 'Email Sent.';
-export const SUCCESS_FORGOT_PASSWORD_DESC = 'Kindly check your email inbox and follow the instructions. Redirecting to sign in page';
+export const SUCCESS_FORGOT_PASSWORD_TITLE = 'Correo electrónico enviado.';
+// eslint-disable-next-line max-len
+export const SUCCESS_FORGOT_PASSWORD_DESC = 'Por favor, revise su correo electrónico y siga las instrucciones. Redirigiendo a la página de inicio de sesión.';
 
 export const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 export const ZERO_CURRENCY = '$0.00';

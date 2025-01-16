@@ -10,6 +10,7 @@ import { useForgotPasswordMutation } from '../../../redux/slices/User/actions/fo
 import { LOGIN_ROUTE } from '../../RoutesConstants';
 import {
   ERROR_MESSAGE_GENERAL, ERROR_TITLE_GENERAL, USER_NOT_FOUND_CATCH_ERROR, SUCCESS_FORGOT_PASSWORD_DESC, SUCCESS_FORGOT_PASSWORD_TITLE,
+  ERROR_MESSAGE_USER_NOT_FOUND,
 } from '../../../constants';
 import { GeneralError, MockedError } from '../../../globalInterface';
 import { ForgotPasswordValues } from './interface';
@@ -24,7 +25,7 @@ import {
   InputForm, SecondaryButton,
 } from '../../../styles';
 
-const createAccountButton: EmotionJSX.Element = <SecondaryButton variant="contained" size="medium">Create Account</SecondaryButton>;
+const createAccountButton: EmotionJSX.Element = <SecondaryButton variant="contained" size="medium">Crear cuenta</SecondaryButton>;
 
 const ForgotPassword = (): ReactElement => {
   const navigate = useNavigate();
@@ -60,11 +61,11 @@ const ForgotPassword = (): ReactElement => {
       const message = error?.data?.error?.message;
 
       // Message catched for unit test.
-      const messageFromMock = JSON.parse((err as MockedError)?.error)?.error?.message;
-      if (message === USER_NOT_FOUND_CATCH_ERROR || messageFromMock === USER_NOT_FOUND_CATCH_ERROR) {
+      // const messageFromMock = JSON.parse((err as MockedError)?.error)?.error?.message;
+      if (message === USER_NOT_FOUND_CATCH_ERROR) {
         toggleUserNotFound();
         updateTitle('Oops!');
-        updateDescription("We don't have any email associated to an account.");
+        updateDescription(ERROR_MESSAGE_USER_NOT_FOUND);
         updateStatus(SystemStateEnum.Info);
         showNotification();
         return;

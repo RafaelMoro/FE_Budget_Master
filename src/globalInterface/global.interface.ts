@@ -54,9 +54,15 @@ export interface GeneralResponse {
 export interface RequestBearerTokenProps {
   bearerToken: string;
 }
+export interface ErrorResponse {
+  error: string;
+  message: string;
+  statusCode: number;
+}
 
 export interface GeneralError {
   data: GeneralResponse;
+  error: ErrorResponse;
   status: number
 }
 

@@ -26,6 +26,7 @@ export const TOKEN_EXPIRED_DESC = 'Redirigiendo a la página de olvidé contrase
 export const UNAUTHORIZED_ERROR = 'Email or Password incorrect.';
 export const ERROR_MESSAGE_UNAUTHORIZED = 'Correo electronico o contraseña incorrecta.';
 export const ERROR_MESSAGE_EMAIL_EXISTS = 'El correo electrónico ya está registrado. Intente con otro correo electrónico.';
+export const ERROR_MESSAGE_USER_NOT_FOUND = 'El correo electrónico no está registrado a una cuenta.';
 
 export const ERROR_MESSAGE_FETCH_CATEGORIES = 'We could not get your categories. Please try again later';
 export const ERROR_CREATE_LOCAL_CATEGORIES = 'We could not create your categories. Please try again later';

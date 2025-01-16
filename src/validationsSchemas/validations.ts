@@ -9,7 +9,7 @@ export const lastNameValidation = Yup.string().required('Por favor, ingrese su a
 export const middleNameValidation = Yup.string().min(2);
 
 export const confirmPasswordValidation = Yup.string()
-  .required('Por favor, ingrese su contraseña')
+  .required('Por favor, ingrese su contraseña nuevamente')
   .oneOf([Yup.ref('password'), null], 'Contraseña y confirmar contraseña deben ser iguales.');
 
 export const passwordValidation = (requiredMessage: string, onlyRequired = false) => {

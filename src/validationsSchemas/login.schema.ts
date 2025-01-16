@@ -14,7 +14,7 @@ export const ForgotPasswordSchema = Yup.object({
 });
 
 export const ResetPasswordSchema = Yup.object({
-  password: passwordValidation('New Password is required'),
+  password: passwordValidation('Por favor, ingrese su nueva contraseña'),
   confirmPassword: confirmPasswordValidation,
 });
 

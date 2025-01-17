@@ -59,12 +59,12 @@ describe('<Login />', () => {
     jest.spyOn(console, 'error').mockImplementation(() => {});
   });
 
-  test("Render Login Page with the title 'welcome back', email and password input and login button", () => {
-    const title = screen.getByRole('heading', { name: /welcome back/i });
-    const emailInput = screen.getByRole('textbox', { name: /email/i });
-    const passwordInput = screen.getByLabelText(/password/i);
-    const loginButton = screen.getByRole('button', { name: /login/i });
-    const registerButton = screen.getByRole('button', { name: /register/i });
+  test("Render Login Page with the title 'bienvenido de vuelta', email and password input and login button", () => {
+    const title = screen.getByRole('heading', { name: /bienvenido de vuelta/i });
+    const emailInput = screen.getByRole('textbox', { name: /correo electrónico/i });
+    const passwordInput = screen.getByLabelText(/contraseña/i);
+    const loginButton = screen.getByRole('button', { name: /iniciar sesión/i });
+    const registerButton = screen.getByRole('button', { name: /registrarse/i });
     expect(title).toBeInTheDocument();
     expect(emailInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();

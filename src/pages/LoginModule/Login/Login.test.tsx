@@ -133,9 +133,9 @@ describe('Test Login re routes', () => {
       </WrapperRedux>,
     );
 
-    const emailInput = screen.getByRole('textbox', { name: /email/i });
-    const passwordInput = screen.getByLabelText(/password/i);
-    const loginButton = screen.getByRole('button', { name: /login/i });
+    const emailInput = screen.getByRole('textbox', { name: /correo electrónico/i });
+    const passwordInput = screen.getByLabelText(/contraseña/i);
+    const loginButton = screen.getByRole('button', { name: /iniciar sesión/i });
 
     // Mock the rejected value response
 
@@ -151,7 +151,7 @@ describe('Test Login re routes', () => {
     });
   });
 
-  test.only('The user loggs in.', async () => {
+  test('The user loggs in.', async () => {
     const history: MemoryHistory = createMemoryHistory();
     fetchMock.once(JSON.stringify(successfulLoginResponse));
     render(

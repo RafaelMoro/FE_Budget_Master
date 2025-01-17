@@ -111,7 +111,7 @@ describe('Test Login re routes', () => {
         </Router>
       </WrapperRedux>,
     );
-    const registerLink = screen.getByRole('link', { name: /register/i });
+    const registerLink = screen.getByRole('link', { name: /registrarse/i });
 
     fireEvent.click(registerLink);
 

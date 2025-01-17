@@ -72,7 +72,7 @@ describe('<Login />', () => {
     expect(registerButton).toBeInTheDocument();
   });
 
-  test.only('If the email and password input are empty, a validation error must appear in each input', async () => {
+  test('If the email and password input are empty, a validation error must appear in each input', async () => {
     const loginButton = screen.getByRole('button', { name: /iniciar sesión/i });
 
     fireEvent.click(loginButton);
@@ -91,7 +91,7 @@ describe('<Login />', () => {
     fireEvent.click(loginButton);
 
     await waitFor(() => {
-      expect(screen.getByText(/invalid email/i)).toBeInTheDocument();
+      expect(screen.getByText(/correo electronico inválido/i)).toBeInTheDocument();
     });
   });
 });

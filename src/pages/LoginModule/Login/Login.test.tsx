@@ -151,7 +151,7 @@ describe('Test Login re routes', () => {
     });
   });
 
-  test('The user loggs in.', async () => {
+  test.only('The user loggs in.', async () => {
     const history: MemoryHistory = createMemoryHistory();
     fetchMock.once(JSON.stringify(successfulLoginResponse));
     render(
@@ -162,8 +162,8 @@ describe('Test Login re routes', () => {
       </WrapperRedux>,
     );
     const emailInput = screen.getByRole('textbox', { name: /correo electrónico/i });
-    const passwordInput = screen.getByLabelText(/¿Olvidaste tu contraseña? Recuperémosla juntos"/i);
-    const loginButton = screen.getByRole('button', { name: /login/i });
+    const passwordInput = screen.getByLabelText(/contraseña/i);
+    const loginButton = screen.getByRole('button', { name: /iniciar sesión/i });
 
     userEvent.type(emailInput, credentials.email);
     userEvent.type(passwordInput, credentials.password);

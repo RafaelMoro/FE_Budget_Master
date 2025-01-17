@@ -6,7 +6,7 @@ import {
 
 export const LoginSchema = Yup.object({
   email: emailValidation,
-  password: passwordValidation('Password is required', true),
+  password: passwordValidation('Por favor, ingrese su contraseña', true),
 });
 
 export const ForgotPasswordSchema = Yup.object({

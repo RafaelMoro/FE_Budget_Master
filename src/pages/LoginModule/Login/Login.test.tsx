@@ -161,8 +161,8 @@ describe('Test Login re routes', () => {
         </Router>
       </WrapperRedux>,
     );
-    const emailInput = screen.getByRole('textbox', { name: /email/i });
-    const passwordInput = screen.getByLabelText(/password/i);
+    const emailInput = screen.getByRole('textbox', { name: /correo electrónico/i });
+    const passwordInput = screen.getByLabelText(/¿Olvidaste tu contraseña? Recuperémosla juntos"/i);
     const loginButton = screen.getByRole('button', { name: /login/i });
 
     userEvent.type(emailInput, credentials.email);

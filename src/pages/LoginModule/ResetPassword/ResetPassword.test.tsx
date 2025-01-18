@@ -145,29 +145,29 @@ describe('Reset password page', () => {
 
     test(`Type 8 characters, 1 capital letter, 1 number, 1 special character, a space and click button.
     Return error message to do not include white`, async () => {
-      passwordInput = screen.getByLabelText(/new password/i);
-      resetPasswordButton = screen.getByRole('button', { name: /reset password/i });
+      passwordInput = screen.getByLabelText(/nueva contraseña/i);
+      resetPasswordButton = screen.getByRole('button', { name: /cambiar/i });
       textForPasswordInput = 'aksyctdkC1@ ';
 
       userEvent.type(passwordInput, textForPasswordInput);
       fireEvent.click(resetPasswordButton);
 
       await waitFor(() => {
-        errorMessage = screen.getByText(/the password should not contain white spaces/i);
+        errorMessage = screen.getByText(/la contraseña no debe contener espacios en blanco\./i);
         expect(errorMessage).toBeInTheDocument();
       });
     });
 
     test('Type 32 characters and click button. Return error message to type password less than 32 characters', async () => {
-      passwordInput = screen.getByLabelText(/new password/i);
-      resetPasswordButton = screen.getByRole('button', { name: /reset password/i });
+      passwordInput = screen.getByLabelText(/nueva contraseña/i);
+      resetPasswordButton = screen.getByRole('button', { name: /cambiar/i });
       textForPasswordInput = 'alsocuetdhskcirtshdleoapsowkrndiww ';
 
       userEvent.type(passwordInput, textForPasswordInput);
       fireEvent.click(resetPasswordButton);
 
       await waitFor(() => {
-        errorMessage = screen.getByText(/the password should be 32 characters maximum/i);
+        errorMessage = screen.getByText(/la contraseña puede tener un máximo de 32 caracteres\. ha excedido los 32 caracteres/i);
         expect(errorMessage).toBeInTheDocument();
       });
     });

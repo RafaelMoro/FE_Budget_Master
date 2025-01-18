@@ -246,7 +246,7 @@ describe('Reset password page', () => {
 
       await waitFor(() => {
         expect(fetchMock).toHaveBeenCalled();
-        const successNotification = screen.getByRole('heading', { name: /password reset successfully/i });
+        const successNotification = screen.getByRole('heading', { name: /Contraseña reestablecida correctamente/i });
         expect(successNotification).toBeInTheDocument();
       });
 

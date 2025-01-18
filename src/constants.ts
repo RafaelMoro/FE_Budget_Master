@@ -33,8 +33,8 @@ export const ERROR_CREATE_LOCAL_CATEGORIES = 'We could not create your categorie
 export const ERROR_INCORRECT_MAIL_DESC = 'Verify that your email is correct or create an account.';
 
 /** Success Login Module */
-export const SUCCESS_PASSWORD_RESET_TITLE = 'Password reset successfully';
-export const SUCCESS_PASSWORD_RESET_DESC = 'You may login with your new password.';
+export const SUCCESS_PASSWORD_RESET_TITLE = 'Contraseña reestablecida correctamente';
+export const SUCCESS_PASSWORD_RESET_DESC = 'Ahora puede iniciar sesión con su nueva contraseña.';
 export const SUCCESS_FORGOT_PASSWORD_TITLE = 'Correo electrónico enviado.';
 // eslint-disable-next-line max-len
 export const SUCCESS_FORGOT_PASSWORD_DESC = 'Por favor, revise su correo electrónico y siga las instrucciones. Redirigiendo a la página de inicio de sesión.';

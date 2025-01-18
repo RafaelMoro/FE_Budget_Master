@@ -173,9 +173,9 @@ describe('Reset password page', () => {
     });
 
     test('Fill the password input correctly, type a character, click button. Return error message that both inputs should match.', async () => {
-      passwordInput = screen.getByLabelText(/new password/i);
-      confirmPasswordInput = screen.getByLabelText(/confirm password/i);
-      resetPasswordButton = screen.getByRole('button', { name: /reset password/i });
+      passwordInput = screen.getByLabelText(/nueva contraseña/i);
+      confirmPasswordInput = screen.getByLabelText(/confirmar contraseña/i);
+      resetPasswordButton = screen.getByRole('button', { name: /cambiar/i });
       textForPasswordInput = 'ThisIsMyPassword1@';
 
       userEvent.type(passwordInput, textForPasswordInput);
@@ -183,7 +183,7 @@ describe('Reset password page', () => {
       fireEvent.click(resetPasswordButton);
 
       await waitFor(() => {
-        errorMessage = screen.getByText(/new password and confirm password must match/i);
+        errorMessage = screen.getByText(/contraseña y confirmar contraseña deben ser iguales\./i);
         expect(errorMessage).toBeInTheDocument();
       });
     });

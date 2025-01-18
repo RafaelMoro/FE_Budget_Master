@@ -1,3 +1,9 @@
+## v1.8.1 (2025-01-18)
+
+### Pull Requests
+[#58](https://github.com/RafaelMoro/FE_Budget_Master/pull/58) | Change login module to spanish
+
+
 ## v1.8.0 (2025-01-09)
 
 ### Pull Requests

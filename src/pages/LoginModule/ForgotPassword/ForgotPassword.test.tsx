@@ -72,21 +72,21 @@ describe('Reset password page tests', () => {
     });
 
     test('When the user leaves the email input empty, then he clicks the button, a required email error should appear', async () => {
-      emailInput = screen.getByRole('textbox', { name: /email/i });
-      changePasswordButton = screen.getByRole('button', { name: /send/i });
+      emailInput = screen.getByRole('textbox', { name: /correo electrónico/i });
+      changePasswordButton = screen.getByRole('button', { name: /enviar/i });
 
       fireEvent.click(changePasswordButton);
 
       await waitFor(() => {
         expect(emailInput).toBeInTheDocument();
-        const error = screen.getByText(/email is required/i);
+        const error = screen.getByText(/Por favor, ingrese su correo electrónico/i);
         expect(error).toBeInTheDocument();
       });
     });
 
     test('When the user enters an invalid email, then he clicks on the button send, an invalid email error should appear', async () => {
-      emailInput = screen.getByRole('textbox', { name: /email/i });
-      changePasswordButton = screen.getByRole('button', { name: /send/i });
+      emailInput = screen.getByRole('textbox', { name: /correo electrónico/i });
+      changePasswordButton = screen.getByRole('button', { name: /enviar/i });
 
       userEvent.type(emailInput, 'a');
       fireEvent.click(changePasswordButton);
@@ -112,8 +112,8 @@ describe('Reset password page tests', () => {
         </Router>
       </WrapperRedux>,
     );
-    emailInput = screen.getByRole('textbox', { name: /email/i });
-    changePasswordButton = screen.getByRole('button', { name: /send/i });
+    emailInput = screen.getByRole('textbox', { name: /correo electrónico/i });
+    changePasswordButton = screen.getByRole('button', { name: /enviar/i });
 
     userEvent.type(emailInput, email);
     userEvent.click(changePasswordButton);
@@ -141,8 +141,8 @@ describe('Reset password page tests', () => {
         </Router>
       </WrapperRedux>,
     );
-    emailInput = screen.getByRole('textbox', { name: /email/i });
-    changePasswordButton = screen.getByRole('button', { name: /send/i });
+    emailInput = screen.getByRole('textbox', { name: /correo electrónico/i });
+    changePasswordButton = screen.getByRole('button', { name: /enviar/i });
 
     userEvent.type(emailInput, email);
     userEvent.click(changePasswordButton);

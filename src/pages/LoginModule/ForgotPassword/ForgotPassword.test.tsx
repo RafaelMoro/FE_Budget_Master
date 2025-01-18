@@ -148,7 +148,7 @@ describe('Reset password page tests', () => {
 
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalled();
-      const successNotification = screen.getByRole('heading', { name: /email sent/i });
+      const successNotification = screen.getByRole('heading', { name: /Correo electrónico enviado./i });
       expect(successNotification).toBeInTheDocument();
     });
 

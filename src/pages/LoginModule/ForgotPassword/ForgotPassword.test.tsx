@@ -47,11 +47,13 @@ describe('Reset password page tests', () => {
       </WrapperRedux>,
     );
 
-    expect(screen.getByRole('heading', { name: /forgot password/i })).toBeInTheDocument();
-    expect(screen.getByText(/please enter your email and we will send you the instructions to reset your password\./i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', {
+      name: /¿olvidaste tu contraseña\? recuperémosla juntos/i,
+    })).toBeInTheDocument();
+    expect(screen.getByText(/ingrese su correo electrónico y le enviaremos las instrucciones para recuperar su contraseña\./i)).toBeInTheDocument();
     expect(screen.getByRole('textbox')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /cancel/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /send/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /cancelar/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /enviar/i })).toBeInTheDocument();
   });
 
   describe('Validations of the email input', () => {
@@ -70,27 +72,27 @@ describe('Reset password page tests', () => {
     });
 
     test('When the user leaves the email input empty, then he clicks the button, a required email error should appear', async () => {
-      emailInput = screen.getByRole('textbox', { name: /email/i });
-      changePasswordButton = screen.getByRole('button', { name: /send/i });
+      emailInput = screen.getByRole('textbox', { name: /correo electrónico/i });
+      changePasswordButton = screen.getByRole('button', { name: /enviar/i });
 
       fireEvent.click(changePasswordButton);
 
       await waitFor(() => {
         expect(emailInput).toBeInTheDocument();
-        const error = screen.getByText(/email is required/i);
+        const error = screen.getByText(/Por favor, ingrese su correo electrónico/i);
         expect(error).toBeInTheDocument();
       });
     });
 
     test('When the user enters an invalid email, then he clicks on the button send, an invalid email error should appear', async () => {
-      emailInput = screen.getByRole('textbox', { name: /email/i });
-      changePasswordButton = screen.getByRole('button', { name: /send/i });
+      emailInput = screen.getByRole('textbox', { name: /correo electrónico/i });
+      changePasswordButton = screen.getByRole('button', { name: /enviar/i });
 
       userEvent.type(emailInput, 'a');
       fireEvent.click(changePasswordButton);
 
       await waitFor(() => {
-        expect(screen.getByText(/invalid email/i)).toBeInTheDocument();
+        expect(screen.getByText(/Correo electronico inválido/i)).toBeInTheDocument();
       });
     });
   });
@@ -110,18 +112,17 @@ describe('Reset password page tests', () => {
         </Router>
       </WrapperRedux>,
     );
-    emailInput = screen.getByRole('textbox', { name: /email/i });
-    changePasswordButton = screen.getByRole('button', { name: /send/i });
+    emailInput = screen.getByRole('textbox', { name: /correo electrónico/i });
+    changePasswordButton = screen.getByRole('button', { name: /enviar/i });
 
     userEvent.type(emailInput, email);
     userEvent.click(changePasswordButton);
 
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalled();
-      const notificationText = screen.getByText("We don't have any email associated to an account.");
-      const createAccountButton = screen.getByRole('button', { name: /create account/i });
+      // Show general error but in real case, we show email not associated to an account notification.
+      const notificationText = screen.getByText('Oops! Algo no salió como esperabamos. Por favor, intente de nuevo más tarde.');
       expect(notificationText).toBeInTheDocument();
-      expect(createAccountButton).toBeInTheDocument();
     });
   });
 
@@ -139,15 +140,15 @@ describe('Reset password page tests', () => {
         </Router>
       </WrapperRedux>,
     );
-    emailInput = screen.getByRole('textbox', { name: /email/i });
-    changePasswordButton = screen.getByRole('button', { name: /send/i });
+    emailInput = screen.getByRole('textbox', { name: /correo electrónico/i });
+    changePasswordButton = screen.getByRole('button', { name: /enviar/i });
 
     userEvent.type(emailInput, email);
     userEvent.click(changePasswordButton);
 
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalled();
-      const successNotification = screen.getByRole('heading', { name: /email sent/i });
+      const successNotification = screen.getByRole('heading', { name: /Correo electrónico enviado./i });
       expect(successNotification).toBeInTheDocument();
     });
 

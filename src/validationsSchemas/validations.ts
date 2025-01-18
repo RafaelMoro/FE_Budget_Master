@@ -3,26 +3,29 @@ import * as Yup from 'yup';
 // General validations
 export const stringRequired = (message: string) => Yup.string().required(message);
 
-export const emailValidation = Yup.string().email('Invalid email').required('Email is required');
-export const firstNameValidation = Yup.string().required('First name is required').min(2);
-export const lastNameValidation = Yup.string().required('Last name is required').min(2);
+export const emailValidation = Yup.string().email('Correo electronico inválido').required('Por favor, ingrese su correo electrónico');
+export const firstNameValidation = Yup.string().required('Por favor, ingrese su nombre').min(2);
+export const lastNameValidation = Yup.string().required('Por favor, ingrese su apellido').min(2);
 export const middleNameValidation = Yup.string().min(2);
 
 export const confirmPasswordValidation = Yup.string()
-  .required('Confirm Password is required')
-  .oneOf([Yup.ref('password'), null], 'New Password and Confirm Password must match');
+  .required('Por favor, ingrese su contraseña nuevamente')
+  .oneOf([Yup.ref('password'), null], 'Contraseña y confirmar contraseña deben ser iguales.');
 
 export const passwordValidation = (requiredMessage: string, onlyRequired = false) => {
   if (onlyRequired) return Yup.string().required(requiredMessage);
   return Yup.string()
     .required(requiredMessage)
-    .min(8, 'The password should be 8 characters minimum')
-    .max(32, 'The password should be 32 characters maximum')
-    .matches(/[A-Z]+/, 'The password should contain at least 1 capital letter')
-    .matches(/[a-z]+/, 'The password should contain at least 1 lowercase letter')
-    .matches(/[0-9]+/, 'The password should contain at least 1 number')
-    .matches(/^\S*$/, 'The password should not contain white spaces')
-    .matches(/[!@#$%^&*()[\]{}+*\-_.,;:/<>?=`~\\|']+/, 'The password should contain at least 1 special character');
+    .min(8, 'La contraseña debe tener al menos 8 caracteres. Ingrese más caracteres')
+    .max(32, 'La contraseña puede tener un máximo de 32 caracteres. Ha excedido los 32 caracteres')
+    .matches(/[A-Z]+/, 'La contraseña debe contener al menos 1 mayúscula')
+    .matches(/[a-z]+/, 'La contraseña debe contener al menos 1 minúscula')
+    .matches(/[0-9]+/, 'La contraseña debe contener al menos 1 número')
+    .matches(/^\S*$/, 'La contraseña no debe contener espacios en blanco.')
+    .matches(
+      /[!@#$%^&*()[\]{}+*\-_.,;:/<>?=`~\\|']+/,
+      'La contraseña debe contener al menos 1 caracter especial como !@#$%^&*()[]{}+*-_.,;:/<>?=`~|\\|',
+    );
 };
 
 //  ****** Account validations

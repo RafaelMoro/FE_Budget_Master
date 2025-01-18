@@ -11,30 +11,33 @@ export const DELETE_METHOD = 'DELETE';
 /** Errors */
 export const NETWORK_CATCH_ERROR = 'Network Error';
 export const JWT_EXPIRED_CATCH_ERROR = 'jwt expired';
+export const INVALID_SIGNATURE_ERROR = 'invalid signature';
 export const ERROR_CATCH_USER_CREATED = 'Try with other email.';
 export const EXPENSES_NOT_FOUND = 'Expenses not found.';
 
 export const ERROR_TITLE_GENERAL = 'Error';
-export const ERROR_MESSAGE_GENERAL = 'Oops! Something went wrong. Try again later.';
+export const ERROR_MESSAGE_GENERAL = 'Oops! Algo no salió como esperabamos. Por favor, intente de nuevo más tarde.';
 export const NETWORK_ERROR_MESSAGE = 'There is a network error. Please check you are connected to Internet.';
 
 /** Errors Login Module */
 export const USER_NOT_FOUND_CATCH_ERROR = 'User not found.';
-export const TOKEN_EXPIRED_TITLE = 'Your token to reset your password has expired';
-export const TOKEN_EXPIRED_DESC = 'Redirecting you to forgot password to try again.';
+export const TOKEN_EXPIRED_TITLE = 'Su token para restablecer su contraseña ha caducado';
+export const TOKEN_EXPIRED_DESC = 'Redirigiendo a la página de olvidé contraseña. Vuelva a intentar todo el proceso por favor.';
 export const UNAUTHORIZED_ERROR = 'Email or Password incorrect.';
-export const ERROR_MESSAGE_UNAUTHORIZED = 'Email or Password incorrect.';
-export const ERROR_MESSAGE_EMAIL_EXISTS = 'The email entered is registered to other user. Please try with a different email.';
+export const ERROR_MESSAGE_UNAUTHORIZED = 'Correo electronico o contraseña incorrecta.';
+export const ERROR_MESSAGE_EMAIL_EXISTS = 'El correo electrónico ya está registrado. Intente con otro correo electrónico.';
+export const ERROR_MESSAGE_USER_NOT_FOUND = 'El correo electrónico no está registrado a una cuenta.';
 
 export const ERROR_MESSAGE_FETCH_CATEGORIES = 'We could not get your categories. Please try again later';
 export const ERROR_CREATE_LOCAL_CATEGORIES = 'We could not create your categories. Please try again later';
 export const ERROR_INCORRECT_MAIL_DESC = 'Verify that your email is correct or create an account.';
 
 /** Success Login Module */
-export const SUCCESS_PASSWORD_RESET_TITLE = 'Password reset successfully';
-export const SUCCESS_PASSWORD_RESET_DESC = 'You may login with your new password.';
-export const SUCCESS_FORGOT_PASSWORD_TITLE = 'Email Sent.';
-export const SUCCESS_FORGOT_PASSWORD_DESC = 'Kindly check your email inbox and follow the instructions. Redirecting to sign in page';
+export const SUCCESS_PASSWORD_RESET_TITLE = 'Contraseña reestablecida correctamente';
+export const SUCCESS_PASSWORD_RESET_DESC = 'Ahora puede iniciar sesión con su nueva contraseña.';
+export const SUCCESS_FORGOT_PASSWORD_TITLE = 'Correo electrónico enviado.';
+// eslint-disable-next-line max-len
+export const SUCCESS_FORGOT_PASSWORD_DESC = 'Por favor, revise su correo electrónico y siga las instrucciones. Redirigiendo a la página de inicio de sesión.';
 
 export const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 export const ZERO_CURRENCY = '$0.00';

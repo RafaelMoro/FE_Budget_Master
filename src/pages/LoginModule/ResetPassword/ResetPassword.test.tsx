@@ -5,6 +5,7 @@ import {
 import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import fetchMock from 'jest-fetch-mock';
 
 import { ResetPassword } from './ResetPassword';
@@ -54,11 +55,12 @@ describe('Reset password page', () => {
       </WrapperRedux>,
     );
 
-    expect(screen.getByRole('heading', { name: /reset password/i })).toBeInTheDocument();
-    expect(screen.getByText(/enter your new password in the fields below:/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/new password/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/confirm password/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /reset password/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /restablecer contraseña/i })).toBeInTheDocument();
+    expect(screen.getByText(/ingrese su nueva contraseña en los siguientes campos:/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/nueva contraseña/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/confirmar contraseña/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /cancelar/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /cambiar/i })).toBeInTheDocument();
   });
 
   describe('Validations of the inputs form and submit form', () => {
@@ -74,105 +76,106 @@ describe('Reset password page', () => {
     });
 
     test('Password and confirm password inputs are empty and click button, return error message where those inputs are required', async () => {
-      resetPasswordButton = screen.getByRole('button', { name: /reset password/i });
+      resetPasswordButton = screen.getByRole('button', { name: /cambiar/i });
 
       fireEvent.click(resetPasswordButton);
 
       await waitFor(() => {
-        expect(screen.getByText(/new password is required/i)).toBeInTheDocument();
-        expect(screen.getByText(/confirm password is required/i)).toBeInTheDocument();
+        expect(screen.getByText(/por favor, ingrese su nueva contraseña/i)).toBeInTheDocument();
+        expect(screen.getByText(/por favor, ingrese su nueva contraseña/i)).toBeInTheDocument();
       });
     });
 
     test('Type one character in password input and click button, return error message to have 8 minimum characters', async () => {
-      passwordInput = screen.getByLabelText(/new password/i);
-      resetPasswordButton = screen.getByRole('button', { name: /reset password/i });
+      passwordInput = screen.getByLabelText(/nueva contraseña/i);
+      resetPasswordButton = screen.getByRole('button', { name: /cambiar/i });
 
       userEvent.type(passwordInput, 'a');
       fireEvent.click(resetPasswordButton);
 
       await waitFor(() => {
-        errorMessage = screen.getByText(/the password should be 8 characters minimum/i);
+        errorMessage = screen.getByText(/la contraseña debe tener al menos 8 caracteres\. ingrese más caracteres/i);
         expect(errorMessage).toBeInTheDocument();
       });
     });
 
     test('Type 8 characters with no capital letter and click button, return error message to include 1 capital letter', async () => {
-      passwordInput = screen.getByLabelText(/new password/i);
-      resetPasswordButton = screen.getByRole('button', { name: /reset password/i });
+      passwordInput = screen.getByLabelText(/nueva contraseña/i);
+      resetPasswordButton = screen.getByRole('button', { name: /cambiar/i });
       textForPasswordInput = 'aksyctdk';
 
       userEvent.type(passwordInput, textForPasswordInput);
       fireEvent.click(resetPasswordButton);
 
       await waitFor(() => {
-        errorMessage = screen.getByText(/the password should contain at least 1 capital letter/i);
+        errorMessage = screen.getByText(/la contraseña debe contener al menos 1 mayúscula/i);
         expect(errorMessage).toBeInTheDocument();
       });
     });
 
     test('Type 8 characters, 1 capital letter and click button. Return error message to include at least 1 number', async () => {
-      passwordInput = screen.getByLabelText(/new password/i);
-      resetPasswordButton = screen.getByRole('button', { name: /reset password/i });
+      passwordInput = screen.getByLabelText(/nueva contraseña/i);
+      resetPasswordButton = screen.getByRole('button', { name: /cambiar/i });
       textForPasswordInput = 'aksyctdkC';
 
       userEvent.type(passwordInput, textForPasswordInput);
       fireEvent.click(resetPasswordButton);
 
       await waitFor(() => {
-        errorMessage = screen.getByText(/the password should contain at least 1 number/i);
+        errorMessage = screen.getByText(/la contraseña debe contener al menos 1 número/i);
         expect(errorMessage).toBeInTheDocument();
       });
     });
 
     test(`Type 8 characters, 1 capital letter, 1 number and click button.
     Return error message to include at least 1 special character`, async () => {
-      passwordInput = screen.getByLabelText(/new password/i);
-      resetPasswordButton = screen.getByRole('button', { name: /reset password/i });
+      passwordInput = screen.getByLabelText(/nueva contraseña/i);
+      resetPasswordButton = screen.getByRole('button', { name: /cambiar/i });
       textForPasswordInput = 'aksyctdkC1';
 
       userEvent.type(passwordInput, textForPasswordInput);
       fireEvent.click(resetPasswordButton);
 
       await waitFor(() => {
-        errorMessage = screen.getByText(/the password should contain at least 1 special character/i);
+        // eslint-disable-next-line max-len, no-useless-escape
+        errorMessage = screen.getByText(/la contraseña debe contener al menos 1 caracter especial como !@#\$%\^&\*\(\)\[\]\{\}\+\*\-_\.,;:\/<>\?=`~\|\\\|/i);
         expect(errorMessage).toBeInTheDocument();
       });
     });
 
     test(`Type 8 characters, 1 capital letter, 1 number, 1 special character, a space and click button.
     Return error message to do not include white`, async () => {
-      passwordInput = screen.getByLabelText(/new password/i);
-      resetPasswordButton = screen.getByRole('button', { name: /reset password/i });
+      passwordInput = screen.getByLabelText(/nueva contraseña/i);
+      resetPasswordButton = screen.getByRole('button', { name: /cambiar/i });
       textForPasswordInput = 'aksyctdkC1@ ';
 
       userEvent.type(passwordInput, textForPasswordInput);
       fireEvent.click(resetPasswordButton);
 
       await waitFor(() => {
-        errorMessage = screen.getByText(/the password should not contain white spaces/i);
+        errorMessage = screen.getByText(/la contraseña no debe contener espacios en blanco\./i);
         expect(errorMessage).toBeInTheDocument();
       });
     });
 
     test('Type 32 characters and click button. Return error message to type password less than 32 characters', async () => {
-      passwordInput = screen.getByLabelText(/new password/i);
-      resetPasswordButton = screen.getByRole('button', { name: /reset password/i });
+      passwordInput = screen.getByLabelText(/nueva contraseña/i);
+      resetPasswordButton = screen.getByRole('button', { name: /cambiar/i });
       textForPasswordInput = 'alsocuetdhskcirtshdleoapsowkrndiww ';
 
       userEvent.type(passwordInput, textForPasswordInput);
       fireEvent.click(resetPasswordButton);
 
       await waitFor(() => {
-        errorMessage = screen.getByText(/the password should be 32 characters maximum/i);
+        errorMessage = screen.getByText(/la contraseña puede tener un máximo de 32 caracteres\. ha excedido los 32 caracteres/i);
         expect(errorMessage).toBeInTheDocument();
       });
     });
 
     test('Fill the password input correctly, type a character, click button. Return error message that both inputs should match.', async () => {
-      passwordInput = screen.getByLabelText(/new password/i);
-      confirmPasswordInput = screen.getByLabelText(/confirm password/i);
-      resetPasswordButton = screen.getByRole('button', { name: /reset password/i });
+      passwordInput = screen.getByLabelText(/nueva contraseña/i);
+      confirmPasswordInput = screen.getByLabelText(/confirmar contraseña/i);
+      resetPasswordButton = screen.getByRole('button', { name: /cambiar/i });
       textForPasswordInput = 'ThisIsMyPassword1@';
 
       userEvent.type(passwordInput, textForPasswordInput);
@@ -180,7 +183,7 @@ describe('Reset password page', () => {
       fireEvent.click(resetPasswordButton);
 
       await waitFor(() => {
-        errorMessage = screen.getByText(/new password and confirm password must match/i);
+        errorMessage = screen.getByText(/contraseña y confirmar contraseña deben ser iguales\./i);
         expect(errorMessage).toBeInTheDocument();
       });
     });
@@ -203,9 +206,9 @@ describe('Reset password page', () => {
           </Router>
         </WrapperRedux>,
       );
-      passwordInput = screen.getByLabelText(/new password/i);
-      confirmPasswordInput = screen.getByLabelText(/confirm password/i);
-      resetPasswordButton = screen.getByRole('button', { name: /reset password/i });
+      passwordInput = screen.getByLabelText(/nueva contraseña/i);
+      confirmPasswordInput = screen.getByLabelText(/confirmar contraseña/i);
+      resetPasswordButton = screen.getByRole('button', { name: /cambiar/i });
 
       // Mock the rejected value response
 
@@ -233,9 +236,9 @@ describe('Reset password page', () => {
       );
 
       const password = 'MiContraseña2022!';
-      passwordInput = screen.getByLabelText(/new password/i);
-      confirmPasswordInput = screen.getByLabelText(/confirm password/i);
-      resetPasswordButton = screen.getByRole('button', { name: /reset password/i });
+      passwordInput = screen.getByLabelText(/nueva contraseña/i);
+      confirmPasswordInput = screen.getByLabelText(/confirmar contraseña/i);
+      resetPasswordButton = screen.getByRole('button', { name: /cambiar/i });
 
       userEvent.type(passwordInput, password);
       userEvent.type(confirmPasswordInput, password);
@@ -243,7 +246,7 @@ describe('Reset password page', () => {
 
       await waitFor(() => {
         expect(fetchMock).toHaveBeenCalled();
-        const successNotification = screen.getByRole('heading', { name: /password reset successfully/i });
+        const successNotification = screen.getByRole('heading', { name: /Contraseña reestablecida correctamente/i });
         expect(successNotification).toBeInTheDocument();
       });
 

@@ -28,7 +28,7 @@ export const LoginCard = styled.div`
 
   @media ${responsiveBreakpoints.tabletAndDesktop} {
     min-height: 45rem;
-    width: 45rem;
+    width: 60rem;
     padding: 3rem;
     box-shadow: 0 .4rem .8rem rgba(0, 0, 0, 0.2);
     transition: 0.3s;

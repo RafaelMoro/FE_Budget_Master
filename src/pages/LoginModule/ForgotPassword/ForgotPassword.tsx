@@ -10,6 +10,7 @@ import { useForgotPasswordMutation } from '../../../redux/slices/User/actions/fo
 import { LOGIN_ROUTE } from '../../RoutesConstants';
 import {
   ERROR_MESSAGE_GENERAL, ERROR_TITLE_GENERAL, USER_NOT_FOUND_CATCH_ERROR, SUCCESS_FORGOT_PASSWORD_DESC, SUCCESS_FORGOT_PASSWORD_TITLE,
+  ERROR_MESSAGE_USER_NOT_FOUND,
 } from '../../../constants';
 import { GeneralError, MockedError } from '../../../globalInterface';
 import { ForgotPasswordValues } from './interface';
@@ -18,13 +19,13 @@ import { ForgotPasswordSchema } from '../../../validationsSchemas/login.schema';
 import { ActionButtonPanel } from '../../../components/templates';
 import { Notification } from '../../../components/UI';
 import {
-  Main, FormTitle, FormDescription, FormContainer, MainContainer,
-} from '../../../styles/LoginModule.styled';
+  Main, MainContainer, FormContainer, FormTitle, FormDescription,
+} from './ForgotPassword.styled';
 import {
   InputForm, SecondaryButton,
 } from '../../../styles';
 
-const createAccountButton: EmotionJSX.Element = <SecondaryButton variant="contained" size="medium">Create Account</SecondaryButton>;
+const createAccountButton: EmotionJSX.Element = <SecondaryButton variant="contained" size="medium">Crear cuenta</SecondaryButton>;
 
 const ForgotPassword = (): ReactElement => {
   const navigate = useNavigate();
@@ -59,12 +60,10 @@ const ForgotPassword = (): ReactElement => {
       const error = err as GeneralError;
       const message = error?.data?.error?.message;
 
-      // Message catched for unit test.
-      const messageFromMock = JSON.parse((err as MockedError)?.error)?.error?.message;
-      if (message === USER_NOT_FOUND_CATCH_ERROR || messageFromMock === USER_NOT_FOUND_CATCH_ERROR) {
+      if (message === USER_NOT_FOUND_CATCH_ERROR) {
         toggleUserNotFound();
         updateTitle('Oops!');
-        updateDescription("We don't have any email associated to an account.");
+        updateDescription(ERROR_MESSAGE_USER_NOT_FOUND);
         updateStatus(SystemStateEnum.Info);
         showNotification();
         return;
@@ -95,10 +94,9 @@ const ForgotPassword = (): ReactElement => {
       )}
       <Main>
         <MainContainer>
-          <FormTitle variant="h1">Forgot password</FormTitle>
+          <FormTitle variant="h1">¿Olvidaste tu contraseña? Recuperémosla juntos</FormTitle>
           <FormDescription>
-            Please enter your email and
-            we will send you the instructions to reset your password.
+            Ingrese su correo electrónico y le enviaremos las instrucciones para recuperar su contraseña.
           </FormDescription>
           <Formik
             initialValues={{ email: '' }}
@@ -113,12 +111,12 @@ const ForgotPassword = (): ReactElement => {
                   name="email"
                   type="email"
                   variant="standard"
-                  label="Email"
+                  label="Correo Electrónico"
                 />
                 <ActionButtonPanel
                   routeCancelButton={LOGIN_ROUTE}
-                  minWidthNumber="10.5"
-                  submitButtonText="Send"
+                  minWidthNumber="11.5"
+                  submitButtonText="Enviar"
                   actionDataTestId="forgot-password-button"
                   loading={isLoading}
                   success={isSuccess}

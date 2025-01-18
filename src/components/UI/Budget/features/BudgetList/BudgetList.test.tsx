@@ -67,6 +67,6 @@ describe('Budget List', () => {
       { preloadedState: { user: userMock } },
     );
 
-    expect(await screen.findByText('Oops! Something went wrong. Try again later.')).toBeInTheDocument();
+    expect(await screen.findByText('Oops! Algo no salió como esperabamos. Por favor, intente de nuevo más tarde.')).toBeInTheDocument();
   });
 });

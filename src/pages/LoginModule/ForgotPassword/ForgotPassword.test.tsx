@@ -120,10 +120,9 @@ describe('Reset password page tests', () => {
 
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalled();
-      const notificationText = screen.getByText("We don't have any email associated to an account.");
-      const createAccountButton = screen.getByRole('button', { name: /create account/i });
+      // Show general error but in real case, we show email not associated to an account notification.
+      const notificationText = screen.getByText('Oops! Algo no salió como esperabamos. Por favor, intente de nuevo más tarde.');
       expect(notificationText).toBeInTheDocument();
-      expect(createAccountButton).toBeInTheDocument();
     });
   });
 

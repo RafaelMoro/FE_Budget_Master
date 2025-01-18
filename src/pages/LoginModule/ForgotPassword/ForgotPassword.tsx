@@ -60,8 +60,6 @@ const ForgotPassword = (): ReactElement => {
       const error = err as GeneralError;
       const message = error?.data?.error?.message;
 
-      // Message catched for unit test.
-      // const messageFromMock = JSON.parse((err as MockedError)?.error)?.error?.message;
       if (message === USER_NOT_FOUND_CATCH_ERROR) {
         toggleUserNotFound();
         updateTitle('Oops!');

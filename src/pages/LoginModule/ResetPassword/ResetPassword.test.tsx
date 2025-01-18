@@ -100,15 +100,15 @@ describe('Reset password page', () => {
     });
 
     test('Type 8 characters with no capital letter and click button, return error message to include 1 capital letter', async () => {
-      passwordInput = screen.getByLabelText(/new password/i);
-      resetPasswordButton = screen.getByRole('button', { name: /reset password/i });
+      passwordInput = screen.getByLabelText(/nueva contraseña/i);
+      resetPasswordButton = screen.getByRole('button', { name: /cambiar/i });
       textForPasswordInput = 'aksyctdk';
 
       userEvent.type(passwordInput, textForPasswordInput);
       fireEvent.click(resetPasswordButton);
 
       await waitFor(() => {
-        errorMessage = screen.getByText(/the password should contain at least 1 capital letter/i);
+        errorMessage = screen.getByText(/la contraseña debe contener al menos 1 mayúscula/i);
         expect(errorMessage).toBeInTheDocument();
       });
     });

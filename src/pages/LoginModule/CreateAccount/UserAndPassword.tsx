@@ -40,6 +40,7 @@ const UserAndPassword = ({
             />
             <Field
               component={InputForm}
+              data-testid="password-input"
               name="password"
               type={(showPassword) ? 'text' : 'password'}
               variant="standard"
@@ -51,6 +52,7 @@ const UserAndPassword = ({
             <Field
               component={InputForm}
               name="confirmPassword"
+              data-testid="confirm-password-input"
               type={(showPassword) ? 'text' : 'password'}
               variant="standard"
               label="Confirmar Contraseña"

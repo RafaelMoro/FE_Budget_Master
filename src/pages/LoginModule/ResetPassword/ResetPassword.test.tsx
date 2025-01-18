@@ -76,13 +76,13 @@ describe('Reset password page', () => {
     });
 
     test('Password and confirm password inputs are empty and click button, return error message where those inputs are required', async () => {
-      resetPasswordButton = screen.getByRole('button', { name: /reset password/i });
+      resetPasswordButton = screen.getByRole('button', { name: /cambiar/i });
 
       fireEvent.click(resetPasswordButton);
 
       await waitFor(() => {
-        expect(screen.getByText(/new password is required/i)).toBeInTheDocument();
-        expect(screen.getByText(/confirm password is required/i)).toBeInTheDocument();
+        expect(screen.getByText(/por favor, ingrese su nueva contraseña/i)).toBeInTheDocument();
+        expect(screen.getByText(/por favor, ingrese su nueva contraseña/i)).toBeInTheDocument();
       });
     });
 

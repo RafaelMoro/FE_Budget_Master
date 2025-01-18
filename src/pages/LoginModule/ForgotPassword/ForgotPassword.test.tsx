@@ -47,11 +47,13 @@ describe('Reset password page tests', () => {
       </WrapperRedux>,
     );
 
-    expect(screen.getByRole('heading', { name: /forgot password/i })).toBeInTheDocument();
-    expect(screen.getByText(/please enter your email and we will send you the instructions to reset your password\./i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', {
+      name: /¿olvidaste tu contraseña\? recuperémosla juntos/i,
+    })).toBeInTheDocument();
+    expect(screen.getByText(/ingrese su correo electrónico y le enviaremos las instrucciones para recuperar su contraseña\./i)).toBeInTheDocument();
     expect(screen.getByRole('textbox')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /cancel/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /send/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /cancelar/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /enviar/i })).toBeInTheDocument();
   });
 
   describe('Validations of the email input', () => {

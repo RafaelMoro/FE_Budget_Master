@@ -5,6 +5,7 @@ import {
 import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import fetchMock from 'jest-fetch-mock';
 
 import { ResetPassword } from './ResetPassword';
@@ -54,11 +55,12 @@ describe('Reset password page', () => {
       </WrapperRedux>,
     );
 
-    expect(screen.getByRole('heading', { name: /reset password/i })).toBeInTheDocument();
-    expect(screen.getByText(/enter your new password in the fields below:/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/new password/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/confirm password/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /reset password/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /restablecer contraseña/i })).toBeInTheDocument();
+    expect(screen.getByText(/ingrese su nueva contraseña en los siguientes campos:/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/nueva contraseña/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/confirmar contraseña/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /cancelar/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /cambiar/i })).toBeInTheDocument();
   });
 
   describe('Validations of the inputs form and submit form', () => {

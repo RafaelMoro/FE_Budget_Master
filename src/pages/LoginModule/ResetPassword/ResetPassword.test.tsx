@@ -87,14 +87,14 @@ describe('Reset password page', () => {
     });
 
     test('Type one character in password input and click button, return error message to have 8 minimum characters', async () => {
-      passwordInput = screen.getByLabelText(/new password/i);
-      resetPasswordButton = screen.getByRole('button', { name: /reset password/i });
+      passwordInput = screen.getByLabelText(/nueva contraseña/i);
+      resetPasswordButton = screen.getByRole('button', { name: /cambiar/i });
 
       userEvent.type(passwordInput, 'a');
       fireEvent.click(resetPasswordButton);
 
       await waitFor(() => {
-        errorMessage = screen.getByText(/the password should be 8 characters minimum/i);
+        errorMessage = screen.getByText(/la contraseña debe tener al menos 8 caracteres\. ingrese más caracteres/i);
         expect(errorMessage).toBeInTheDocument();
       });
     });

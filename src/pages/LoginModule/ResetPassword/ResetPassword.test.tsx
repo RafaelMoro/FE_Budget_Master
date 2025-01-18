@@ -129,15 +129,16 @@ describe('Reset password page', () => {
 
     test(`Type 8 characters, 1 capital letter, 1 number and click button.
     Return error message to include at least 1 special character`, async () => {
-      passwordInput = screen.getByLabelText(/new password/i);
-      resetPasswordButton = screen.getByRole('button', { name: /reset password/i });
+      passwordInput = screen.getByLabelText(/nueva contraseña/i);
+      resetPasswordButton = screen.getByRole('button', { name: /cambiar/i });
       textForPasswordInput = 'aksyctdkC1';
 
       userEvent.type(passwordInput, textForPasswordInput);
       fireEvent.click(resetPasswordButton);
 
       await waitFor(() => {
-        errorMessage = screen.getByText(/the password should contain at least 1 special character/i);
+        // eslint-disable-next-line max-len, no-useless-escape
+        errorMessage = screen.getByText(/la contraseña debe contener al menos 1 caracter especial como !@#\$%\^&\*\(\)\[\]\{\}\+\*\-_\.,;:\/<>\?=`~\|\\\|/i);
         expect(errorMessage).toBeInTheDocument();
       });
     });

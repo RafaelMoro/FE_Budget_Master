@@ -92,7 +92,7 @@ describe('Reset password page tests', () => {
       fireEvent.click(changePasswordButton);
 
       await waitFor(() => {
-        expect(screen.getByText(/invalid email/i)).toBeInTheDocument();
+        expect(screen.getByText(/Correo electronico inválido/i)).toBeInTheDocument();
       });
     });
   });

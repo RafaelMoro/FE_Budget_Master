@@ -236,9 +236,9 @@ describe('Reset password page', () => {
       );
 
       const password = 'MiContraseña2022!';
-      passwordInput = screen.getByLabelText(/new password/i);
-      confirmPasswordInput = screen.getByLabelText(/confirm password/i);
-      resetPasswordButton = screen.getByRole('button', { name: /reset password/i });
+      passwordInput = screen.getByLabelText(/nueva contraseña/i);
+      confirmPasswordInput = screen.getByLabelText(/confirmar contraseña/i);
+      resetPasswordButton = screen.getByRole('button', { name: /cambiar/i });
 
       userEvent.type(passwordInput, password);
       userEvent.type(confirmPasswordInput, password);

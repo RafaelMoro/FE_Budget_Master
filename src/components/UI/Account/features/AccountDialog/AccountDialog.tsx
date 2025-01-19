@@ -81,16 +81,10 @@ const AccountDialog = ({
       }
 
       await createAccountMutation(createAccountMutationProps).unwrap();
-      // Show success notification
-      updateGlobalNotification({
-        newTitle: `Account ${values.title} created`,
-        newDescription: '',
-        newStatus: SystemStateEnum.Success,
-      });
       onClose();
     } catch (err) {
       updateGlobalNotification({
-        newTitle: 'Create Account: Error',
+        newTitle: 'Error al crear su cuenta',
         newDescription: ERROR_MESSAGE_GENERAL,
         newStatus: SystemStateEnum.Error,
       });

@@ -115,16 +115,10 @@ const AccountDialog = ({
       const modifyAccountMutationProps: ModifyAccountMutationProps = { values: accountModifiedValues, bearerToken };
       await modifyAccountMutation(modifyAccountMutationProps);
 
-      // Show success notification
-      updateGlobalNotification({
-        newTitle: `Account ${accountModifiedValues.title} updated`,
-        newDescription: '',
-        newStatus: SystemStateEnum.Success,
-      });
       onClose();
     } catch (err) {
       updateGlobalNotification({
-        newTitle: 'Modify Account: Error',
+        newTitle: 'Error al modificar su cuenta',
         newDescription: ERROR_MESSAGE_GENERAL,
         newStatus: SystemStateEnum.Error,
       });

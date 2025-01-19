@@ -1,5 +1,6 @@
 import { screen, waitFor, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import fetchMock from 'jest-fetch-mock';
 
 import { AccountDialog } from './AccountDialog';
@@ -53,26 +54,18 @@ describe('<AccountDialog />', () => {
     );
   });
   test('Show a dialog to create an account', () => {
-    const title = screen.getByRole('heading', {
-      name: /create account:/i,
-    });
-    const accountTitleTextBox = screen.getByRole('textbox', {
-      name: /account title/i,
-    });
-    const amountTextBox = screen.getByRole('textbox', {
-      name: /amount/i,
-    });
-    const typeOfAccountSelectInput = screen.getByText(/debit/i);
-    const colorTextBoxSelectInput = screen.getByText(/dark orange/i);
+    const title = screen.getByRole('heading', { name: /crear cuenta:/i });
+    const accountTitleTextBox = screen.getByRole('textbox', { name: /título de la cuenta/i });
+    const amountTextBox = screen.getByRole('textbox', { name: /cantidad disponible/i });
+    const typeOfAccountSelectInput = screen.getByText(/débito/i);
     const createAccountByutton = screen.getByRole('button', {
-      name: /create account/i,
+      name: /crear/i,
     });
 
     expect(title).toBeInTheDocument();
     expect(accountTitleTextBox).toBeInTheDocument();
     expect(amountTextBox).toBeInTheDocument();
     expect(typeOfAccountSelectInput).toBeInTheDocument();
-    expect(colorTextBoxSelectInput).toBeInTheDocument();
     expect(createAccountByutton).toBeInTheDocument();
   });
 

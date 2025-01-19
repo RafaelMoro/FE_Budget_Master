@@ -32,7 +32,7 @@ const Record = ({ record, backgroundColor }: RecordProps) => {
   } = record;
   const windowSize = useAppSelector((state) => state.userInterface.windowSize);
   const selectedAccount = useAppSelector((state) => state.accounts.accountSelected);
-  const isCredit = selectedAccount?.accountType === 'Credit';
+  const isCredit = selectedAccount?.accountType === 'Crédito';
   const [openLongView, setOpenLongView] = useState(false);
   const [shortedName, setShortedName] = useState('');
   const [shortedDescription, setShortedDescription] = useState('');

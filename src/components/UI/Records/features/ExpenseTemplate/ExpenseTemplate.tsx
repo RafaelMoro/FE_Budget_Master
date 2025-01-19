@@ -70,7 +70,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
 
   const bearerToken = user.userInfo?.bearerToken as string;
   const categoryToBeEdited = recordToBeEdited?.category ?? null;
-  const isCredit = selectedAccount?.accountType === 'Credit';
+  const isCredit = selectedAccount?.accountType === 'Crédito';
   const action: string = edit ? 'Edit' : 'Create';
   const buttonText = `${action} record`;
 

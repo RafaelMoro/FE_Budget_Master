@@ -9,7 +9,7 @@ const account: AccountUI = {
   title: 'BBVA',
   amount: 20000,
   amountFormatted: '$20,000.00',
-  accountType: 'Debit',
+  accountType: 'Débito',
   backgroundColor: 'red',
   color: 'white',
   backgroundColorUI: { name: 'red', color: 'red' },

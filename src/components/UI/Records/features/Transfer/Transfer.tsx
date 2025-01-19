@@ -115,7 +115,7 @@ const Transfer = ({ action, typeOfRecord, edit = false }: TransferProps) => {
         budgets: recordToBeEdited.budgets,
       };
       // Show add expense button if destination is credit
-      const destinationIsCredit = accounts?.find((account) => account._id === newInitialValues.destinationAccount)?.accountType === 'Credit';
+      const destinationIsCredit = accounts?.find((account) => account._id === newInitialValues.destinationAccount)?.accountType === 'Crédito';
       if (destinationIsCredit) {
         setDestinationAsCredit();
       }

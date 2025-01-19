@@ -162,7 +162,7 @@ const AccountDialog = ({
                 name="title"
                 type="text"
                 variant="standard"
-                label="Titulo de la cuenta"
+                label="Título de la cuenta"
               />
               <CurrencyField setFieldValue={setFieldValue} amount={initialAmount.current} updateAmount={updateAmount} />
               <SelectInput

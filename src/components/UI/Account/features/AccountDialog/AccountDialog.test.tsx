@@ -133,14 +133,10 @@ describe('AccountDialog creation account', () => {
       { preloadedState: {} },
     );
 
-    const accountTitleTextBox = screen.getByRole('textbox', {
-      name: /account title/i,
-    });
-    const amountTextBox = screen.getByRole('textbox', {
-      name: /amount/i,
-    });
+    const accountTitleTextBox = screen.getByRole('textbox', { name: /título de la cuenta/i });
+    const amountTextBox = screen.getByRole('textbox', { name: /cantidad disponible/i });
     const createAccountByutton = screen.getByRole('button', {
-      name: /create account/i,
+      name: /crear/i,
     });
 
     userEvent.type(accountTitleTextBox, 'Bank account');

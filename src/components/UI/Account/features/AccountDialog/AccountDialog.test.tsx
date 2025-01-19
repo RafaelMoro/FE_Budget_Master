@@ -71,14 +71,14 @@ describe('<AccountDialog />', () => {
 
   test('If account title and amount are empty, show validaton error', async () => {
     const createAccountByutton = screen.getByRole('button', {
-      name: /create account/i,
+      name: /crear/i,
     });
 
     userEvent.click(createAccountByutton);
 
     await waitFor(() => {
-      expect(screen.getByText(/the title of your account is required\./i)).toBeInTheDocument();
-      expect(screen.getByText(/the initial amount of your account is required\./i)).toBeInTheDocument();
+      expect(screen.getByText(/por favor, ingrese el título de su cuenta\./i)).toBeInTheDocument();
+      expect(screen.getByText(/por favor, ingrese la cantidad actual de su cuenta\./i)).toBeInTheDocument();
     });
   });
 });

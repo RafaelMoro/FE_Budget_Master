@@ -19,7 +19,7 @@ interface SelectMonthYearProps {
 }
 
 const SelectMonthYear = ({
-  completeMonth, currentYear, yearsArray, fetchRecordsCb, isDashboard = false, buttonText = 'Search expenses',
+  completeMonth, currentYear, yearsArray, fetchRecordsCb, isDashboard = false, buttonText = 'Buscar gastos',
 }: SelectMonthYearProps) => {
   const { isGuestUser } = useGuestUser();
   const handleSubmit = (values: SelectMonthYearValues) => {
@@ -40,7 +40,7 @@ const SelectMonthYear = ({
           <SelectInput
             labelId="select-month"
             dataTestId="select-month"
-            labelName="Month"
+            labelName="Mes"
             fieldName="month"
             stringOptions={[...MONTHS]}
             colorOptions={[]}
@@ -48,7 +48,7 @@ const SelectMonthYear = ({
           <SelectInput
             labelId="select-year"
             dataTestId="select-year"
-            labelName="Year"
+            labelName="Año"
             fieldName="year"
             stringOptions={yearsArray}
             colorOptions={[]}

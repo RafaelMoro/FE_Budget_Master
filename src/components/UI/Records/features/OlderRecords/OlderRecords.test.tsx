@@ -32,11 +32,11 @@ describe('Older Records', () => {
     );
 
     const buttonExpandAccordion = screen.getByRole('button', {
-      name: /older records/i,
+      name: /Transacciones anteriores/i,
     });
     const icon = within(buttonExpandAccordion).getByTestId('ExpandMoreIcon');
 
-    expect(screen.getByText('Older Records')).toBeInTheDocument();
+    expect(screen.getByText('Transacciones anteriores')).toBeInTheDocument();
     expect(icon).toBeInTheDocument();
   });
 
@@ -49,7 +49,7 @@ describe('Older Records', () => {
     );
 
     const accordion = screen.getByRole('button', {
-      name: /older records/i,
+      name: /Transacciones anteriores/i,
     });
 
     userEvent.click(accordion);
@@ -60,7 +60,7 @@ describe('Older Records', () => {
     const selectMonthComboBox = within(selectMonthTestId).getByRole('combobox');
     const selectYearTestId = screen.getByTestId('select-month');
     const selectYearComboBox = within(selectYearTestId).getByRole('combobox');
-    const searchExpensesButton = screen.getByRole('button', { name: /search records/i });
+    const searchExpensesButton = screen.getByRole('button', { name: /buscar/i });
     const loadingSkeletons = screen.getAllByTestId('record-loading-skeleton');
 
     expect(totalExpenseText).toBeInTheDocument();
@@ -81,7 +81,7 @@ describe('Older Records', () => {
     );
 
     const accordion = screen.getByRole('button', {
-      name: /older records/i,
+      name: /Transacciones anteriores/i,
     });
 
     userEvent.click(accordion);
@@ -103,7 +103,7 @@ describe('Older Records', () => {
     );
 
     const accordion = screen.getByRole('button', {
-      name: /older records/i,
+      name: /Transacciones anteriores/i,
     });
 
     userEvent.click(accordion);
@@ -125,7 +125,7 @@ describe('Older Records', () => {
     );
 
     const accordion = screen.getByRole('button', {
-      name: /older records/i,
+      name: /Transacciones anteriores/i,
     });
 
     userEvent.click(accordion);
@@ -148,7 +148,7 @@ describe('Older Records', () => {
 
     // Click accordion
     const accordion = screen.getByRole('button', {
-      name: /older records/i,
+      name: /Transacciones anteriores/i,
     });
     userEvent.click(accordion);
     await screen.findByText(/Casa a solesta gym/i);
@@ -164,7 +164,7 @@ describe('Older Records', () => {
     fireEvent.click(options[futureMonth]);
     expect(await screen.findByText(futureMonthName)).toBeInTheDocument();
 
-    if (month === 'Jan' || month === 'Dec') {
+    if (month === 'Ene' || month === 'Dic') {
       const selectYearTestId = screen.getByTestId('select-year');
       const selectYearButton = within(selectYearTestId).getByRole('combobox');
       fireEvent.mouseDown(selectYearButton);
@@ -178,7 +178,7 @@ describe('Older Records', () => {
     }
 
     // Click on search expenses button
-    const searchExpensesButton = screen.getByRole('button', { name: /search records/i });
+    const searchExpensesButton = screen.getByRole('button', { name: /buscar/i });
     userEvent.click(searchExpensesButton);
 
     let errorMessage: RegExp | string = new RegExp(`You are selecting a date in the future: ${futureMonthName} ${year}`);
@@ -205,7 +205,7 @@ describe('Older Records', () => {
 
     // Click accordion
     const accordion = screen.getByRole('button', {
-      name: /older records/i,
+      name: /Transacciones anteriores/i,
     });
     userEvent.click(accordion);
     await screen.findByText(/Casa a solesta gym/i);
@@ -221,7 +221,7 @@ describe('Older Records', () => {
     fireEvent.click(options[currentMonth]);
     expect(await screen.findByText(currentMonthName)).toBeInTheDocument();
 
-    if (month === 'Jan' || month === 'Dec') {
+    if (month === 'Ene' || month === 'Dic') {
       const selectYearTestId = screen.getByTestId('select-year');
       const selectYearButton = within(selectYearTestId).getByRole('combobox');
       fireEvent.mouseDown(selectYearButton);
@@ -235,7 +235,7 @@ describe('Older Records', () => {
     }
 
     // Click on search expenses button
-    const searchExpensesButton = screen.getByRole('button', { name: /search records/i });
+    const searchExpensesButton = screen.getByRole('button', { name: /buscar/i });
     userEvent.click(searchExpensesButton);
 
     const errorMessage = new RegExp(`${currentMonthName} records are shown above. Please select an older month.`);
@@ -256,7 +256,7 @@ describe('Older Records', () => {
 
     // Click accordion
     const accordion = screen.getByRole('button', {
-      name: /older records/i,
+      name: /Transacciones anteriores/i,
     });
     userEvent.click(accordion);
     await screen.findByText(/Casa a solesta gym/i);
@@ -273,7 +273,7 @@ describe('Older Records', () => {
     expect(await screen.findByText(lastMonthName)).toBeInTheDocument();
 
     // Click on search expenses button
-    const searchExpensesButton = screen.getByRole('button', { name: /search records/i });
+    const searchExpensesButton = screen.getByRole('button', { name: /buscar/i });
     userEvent.click(searchExpensesButton);
 
     const errorMessage = new RegExp(`${lastMonthName} records are shown above. Please select an older month.`);
@@ -297,7 +297,7 @@ describe('Older Records', () => {
 
     // Click accordion
     const accordion = screen.getByRole('button', {
-      name: /older records/i,
+      name: /Transacciones anteriores/i,
     });
     userEvent.click(accordion);
     await screen.findByText(/Casa a solesta gym/i);
@@ -320,7 +320,7 @@ describe('Older Records', () => {
     expect(await screen.findByText(passedMonthName)).toBeInTheDocument();
 
     // Click on search expenses button
-    const searchExpensesButton = screen.getByRole('button', { name: /search records/i });
+    const searchExpensesButton = screen.getByRole('button', { name: /buscar/i });
     userEvent.click(searchExpensesButton);
 
     await screen.findAllByText('$0.00');

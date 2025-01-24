@@ -69,20 +69,20 @@ const DeleteAccountDialog = ({
   return (
     <Dialog onClose={onClose} open={open}>
       <AccountDialogContainer>
-        <DeleteAccountTitle variant="h4">Delete Account</DeleteAccountTitle>
+        <DeleteAccountTitle variant="h4">Eliminar cuenta</DeleteAccountTitle>
         <DeleteAccountIconButton onClick={onClose}>
           <AppIcon icon="Close" />
         </DeleteAccountIconButton>
-        <DialogParagraphWarning>THERE IS NO WAY OF RECOVERING YOUR ACCOUNT.</DialogParagraphWarning>
+        <DialogParagraphWarning>NO HAY FORMA DE RECUPERAR LOS DATOS DE SU CUENTA.</DialogParagraphWarning>
         <DialogParagraph>
-          Are you sure you want to delete the account
+          Esta seguro(a) de que desea eliminar su cuenta
           {' '}
           {accountName}
           ?
         </DialogParagraph>
-        <SecondaryButton variant="contained" size="medium" onClick={onClose}>Go Back</SecondaryButton>
+        <SecondaryButton variant="contained" size="medium" onClick={onClose}>Volver</SecondaryButton>
         <CancelButton disabled={isLoading} variant="contained" onClick={handleSubmit} size="medium">
-          { (isLoading) ? (<LoadingSpinner />) : 'Delete Account' }
+          { (isLoading) ? (<LoadingSpinner />) : 'Eliminar cuenta' }
         </CancelButton>
       </AccountDialogContainer>
     </Dialog>

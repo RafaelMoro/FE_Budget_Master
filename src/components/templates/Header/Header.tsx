@@ -51,8 +51,8 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
           <BrandLogoName isLandingPage={isLandingPage} />
           { (windowSize === 'Desktop' && !isGuestUser && !isLandingPage) && (
             <HeaderNav>
-              <HeaderNavAnchor active={activeDashboardPage} to={DASHBOARD_ROUTE}>Accounts</HeaderNavAnchor>
-              <HeaderNavAnchor active={activeBudgetsPage} to="/budgets">Budgets</HeaderNavAnchor>
+              <HeaderNavAnchor active={activeDashboardPage} to={DASHBOARD_ROUTE}>Cuentas</HeaderNavAnchor>
+              <HeaderNavAnchor active={activeBudgetsPage} to="/budgets">Presupuestos</HeaderNavAnchor>
             </HeaderNav>
           ) }
           { (!isGuestUser && userLoggedOn && isDesktop) && (

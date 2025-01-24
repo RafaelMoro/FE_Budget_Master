@@ -2,9 +2,10 @@ import { Formik } from 'formik';
 import { SelectMonthYearValues } from '../../interface';
 import { SelectMonthYearBox } from '../Features.styled';
 import { SelectInput } from '../../../SelectInput';
-import { MONTHS } from '../../../../../constants';
 import { SecondaryButton } from '../../../../../styles';
-import { AbbreviatedMonthsType, CompleteMonthsType, LazyFetchRecords } from '../../../../../globalInterface';
+import {
+  AbbreviatedMonthsType, CompleteMonthsType, LazyFetchRecords, MONTHS,
+} from '../../../../../globalInterface';
 import { updateAbbreviatedMonth } from '../../../../../utils/DateUtils/date.utils';
 import { useGuestUser } from '../../../../../hooks';
 
@@ -41,7 +42,7 @@ const SelectMonthYear = ({
             dataTestId="select-month"
             labelName="Month"
             fieldName="month"
-            stringOptions={MONTHS}
+            stringOptions={[...MONTHS]}
             colorOptions={[]}
           />
           <SelectInput

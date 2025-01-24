@@ -8,7 +8,7 @@ import { AppColors } from '../../../../../styles';
 const AddAccount = ({ onClick }: AddAccountProps) => (
   <AddAccountContainer onClick={onClick}>
     <AddOutlined sx={{ fontSize: '4.5rem', fill: AppColors.primary }} />
-    <Typography>Create Account</Typography>
+    <Typography>Crear cuenta</Typography>
   </AddAccountContainer>
 );
 

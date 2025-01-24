@@ -6,6 +6,6 @@ describe('<AddAccount />', () => {
     const onClickfn = jest.fn();
     render(<AddAccount onClick={onClickfn} />);
     expect(screen.getByTestId('AddOutlinedIcon')).toBeInTheDocument();
-    expect(screen.getByText('Create Account')).toBeInTheDocument();
+    expect(screen.getByText('Crear cuenta')).toBeInTheDocument();
   });
 });

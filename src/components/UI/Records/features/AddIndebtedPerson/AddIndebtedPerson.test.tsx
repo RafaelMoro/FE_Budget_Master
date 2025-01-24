@@ -49,7 +49,7 @@ describe('<AddIndebtedPerson />', () => {
     expect(screen.getByRole('textbox', {
       name: /full name/i,
     })).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: /amount$/i })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /Cantidad disponible$/i })).toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: /amount paid/i })).toBeInTheDocument();
     expect(screen.getByRole('checkbox', { name: /Transaction paid/i })).toBeInTheDocument();
     expect(
@@ -78,7 +78,7 @@ describe('<AddIndebtedPerson />', () => {
     const fullNameInput = screen.getByRole('textbox', {
       name: /full name/i,
     });
-    const amountInput = screen.getByRole('textbox', { name: /amount$/i });
+    const amountInput = screen.getByRole('textbox', { name: /Cantidad disponible$/i });
     const amountPaidInput = screen.getByRole('textbox', { name: /amount paid/i });
     const button = screen.getByRole('button', { name: /add person/i });
 
@@ -123,7 +123,7 @@ describe('<AddIndebtedPerson />', () => {
     expect(screen.getByRole('textbox', {
       name: /full name/i,
     })).toHaveValue('John');
-    expect(screen.getByRole('textbox', { name: /amount$/i })).toHaveValue('100');
+    expect(screen.getByRole('textbox', { name: /Cantidad disponible$/i })).toHaveValue('100');
     expect(screen.getByRole('textbox', { name: /amount paid/i })).toHaveValue('0');
     expect(screen.getByRole('checkbox', { name: /Transaction paid/i })).not.toBeChecked();
     expect(
@@ -139,7 +139,7 @@ describe('<AddIndebtedPerson />', () => {
     const fullNameInput = screen.getByRole('textbox', {
       name: /full name/i,
     });
-    const amountInput = screen.getByRole('textbox', { name: /amount$/i });
+    const amountInput = screen.getByRole('textbox', { name: /Cantidad disponible$/i });
     const amountPaidInput = screen.getByRole('textbox', { name: /amount paid/i });
     const button = screen.getByRole('button', { name: /modify person/i });
 

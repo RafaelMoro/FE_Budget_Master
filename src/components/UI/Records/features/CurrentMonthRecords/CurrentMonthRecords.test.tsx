@@ -1,4 +1,5 @@
 import { screen, within } from '@testing-library/react';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import fetchMock from 'jest-fetch-mock';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
@@ -85,7 +86,7 @@ describe('Current month records', () => {
       { preloadedState: { user: userInitialState } },
     );
 
-    const errorText = await screen.findByText(/An error has ocurred. Please try again later\./i);
+    const errorText = await screen.findByText(/Oops! Algo no salió como esperabamows\. Por favor, intente de nuevo más tarde\./i);
     expect(errorText).toBeInTheDocument();
   });
 });

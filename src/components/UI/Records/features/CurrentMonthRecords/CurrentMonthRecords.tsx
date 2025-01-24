@@ -10,6 +10,7 @@ import { NoRecordsFound } from '../NoRecordsFound';
 import { ShowMultipleRecordLoader } from '../ShowMultipleRecordLoaders';
 import { useGuestUser } from '../../../../../hooks';
 import { Error } from '../../../Error';
+import { ERROR_MESSAGE_GENERAL } from '../../../../../constants';
 
 interface CurrentMonthRecordsProps {
   color: string;
@@ -55,7 +56,7 @@ const CurrentMonthRecords = ({
     <MonthRecords
       color={color}
       openedAccordeon
-      titleMonthAccordeon={`Current month: ${completeCurrentMonth}`}
+      titleMonthAccordeon={`Mes actual: ${completeCurrentMonth}`}
       totalExpense={totalRecords.currentMonth.expenseTotal}
       totalIncome={totalRecords.currentMonth.incomeTotal}
       accountId={accountId}
@@ -64,7 +65,7 @@ const CurrentMonthRecords = ({
       error={isGuestUser ? false : isError}
       isGuestUser={isGuestUser}
       onEmptyCb={() => <NoRecordsFound />}
-      onErrorCb={() => <Error hideIcon description="An error has ocurred. Please try again later." />}
+      onErrorCb={() => <Error hideIcon description={ERROR_MESSAGE_GENERAL} />}
       onLoadingCb={() => (
         <ShowMultipleRecordLoader numberOfSkeletons={3} keyMap="current-month" />
       )}

@@ -113,7 +113,7 @@ const Record = ({ record, backgroundColor }: RecordProps) => {
             ) }
             { (isTransferIncome || isTransferExpense) && (
               <RecordStatusContainer>
-                <PaymentStatusChip label={status} variant="filled" status="Transfer" />
+                <PaymentStatusChip label={status} variant="filled" status="Transferencia" />
               </RecordStatusContainer>
             )}
             { (!isExpense && expensesPaid.length > 0 && !openLongView && !isTransferIncome) && (
@@ -199,7 +199,7 @@ const Record = ({ record, backgroundColor }: RecordProps) => {
           ) }
           { (isTransferIncome || isTransferExpense) && (
           <RecordStatusContainer>
-            <PaymentStatusChip label={status} variant="filled" status="Transfer" />
+            <PaymentStatusChip label={status} variant="filled" status="Transferencia" />
           </RecordStatusContainer>
           )}
           { (!isExpense && expensesPaid.length > 0 && !openLongView && !isTransferIncome) && (

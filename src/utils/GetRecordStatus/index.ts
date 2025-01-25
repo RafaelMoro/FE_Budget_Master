@@ -3,10 +3,10 @@ import { TypeOfRecord } from '../../globalInterface';
 
 export const getRecordStatus = ({ typeOfRecord, isPaid }: { typeOfRecord: TypeOfRecord, isPaid?: boolean }): RecordStatusType => {
   if (typeOfRecord === 'transfer') {
-    return 'Transfer';
+    return 'Transferencia';
   }
   if (typeOfRecord === 'expense' && isPaid) {
-    return 'Paid';
+    return 'Pagado';
   }
-  return 'Unpaid';
+  return 'Sin pagar';
 };

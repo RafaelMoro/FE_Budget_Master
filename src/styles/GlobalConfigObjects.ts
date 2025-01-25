@@ -38,9 +38,9 @@ export const AppColors = {
 };
 
 export const RecordStatusTypeColors = {
-  Transfer: AppColors.info,
-  Paid: AppColors.positiveDark,
-  Unpaid: AppColors.negativeDark,
+  Transferencia: AppColors.info,
+  Pagado: AppColors.positiveDark,
+  'Sin pagar': AppColors.negativeDark,
 };
 
 export const AllTextColors: TextColors[] = [

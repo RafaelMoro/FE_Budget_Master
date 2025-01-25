@@ -30,17 +30,17 @@ describe('Current month records', () => {
     );
 
     const buttonExpandAccordion = screen.getByRole('button', {
-      name: `Current month: ${currentMonthName}`,
+      name: `Mes actual: ${currentMonthName}`,
     });
     const icon = within(buttonExpandAccordion).getByTestId('ExpandLessIcon');
-    const totalExpenseText = await screen.findByText(/total expense:/i);
-    const totalIncomeText = screen.getByText(/total income:/i);
+    const totalExpenseText = await screen.findByText(/gastos:/i);
+    const totalIncomeText = screen.getByText(/ingresos:/i);
     const loadingSkeletons = screen.getAllByTestId('record-loading-skeleton');
 
     expect(totalExpenseText).toBeInTheDocument();
     expect(totalIncomeText).toBeInTheDocument();
     expect(loadingSkeletons).toHaveLength(3);
-    expect(screen.getByText(`Current month: ${currentMonthName}`)).toBeInTheDocument();
+    expect(screen.getByText(`Mes actual: ${currentMonthName}`)).toBeInTheDocument();
     expect(icon).toBeInTheDocument();
   });
 
@@ -53,8 +53,8 @@ describe('Current month records', () => {
       { preloadedState: { user: userInitialState } },
     );
 
-    const noRecordsFoundText = await screen.findByText(/you have not created records for this month\./i);
-    const createRecordButton = screen.getByRole('button', { name: /create record/i });
+    const noRecordsFoundText = await screen.findByText(/No has creado transacciones para este mes\./i);
+    const createRecordButton = screen.getByRole('button', { name: /crear registro/i });
 
     expect(noRecordsFoundText).toBeInTheDocument();
     expect(createRecordButton).toBeInTheDocument();
@@ -86,7 +86,7 @@ describe('Current month records', () => {
       { preloadedState: { user: userInitialState } },
     );
 
-    const errorText = await screen.findByText(/Oops! Algo no salió como esperabamows\. Por favor, intente de nuevo más tarde\./i);
+    const errorText = await screen.findByText(/Oops! Algo no salió como esperabamos\. Por favor, intente de nuevo más tarde\./i);
     expect(errorText).toBeInTheDocument();
   });
 });

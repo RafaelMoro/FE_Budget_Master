@@ -50,12 +50,12 @@ const MonthRecords = ({
       { (!isGuestUser) && (
       <ShowTotalContianer>
         <FlexContainer gap={2}>
-          <Typography>Total Expense: </Typography>
+          <Typography>Gastos: </Typography>
           <RecordExpense data-testid="total-expense-number">{totalExpense}</RecordExpense>
         </FlexContainer>
         { (isOlderRecords && children) && children }
         <FlexContainer gap={2}>
-          <Typography>Total Income: </Typography>
+          <Typography>Ingresos: </Typography>
           <RecordIncome data-testid="total-income-number">{totalIncome}</RecordIncome>
         </FlexContainer>
       </ShowTotalContianer>

@@ -31,9 +31,9 @@ describe('<MonthRecords />', () => {
     );
 
     expect(screen.getByText(/January/i)).toBeInTheDocument();
-    expect(screen.getByText(/Total Expense:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Gastos:/i)).toBeInTheDocument();
     expect(screen.getByText(/\$100\.00/i)).toBeInTheDocument();
-    expect(screen.getByText(/Total Income:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Ingresos:/i)).toBeInTheDocument();
     expect(screen.getByText(/\$200\.00/i)).toBeInTheDocument();
 
     // records

@@ -9,8 +9,8 @@ describe('GraphicsCard', () => {
       <GraphicsCard records={[]} />,
     );
 
-    expect(screen.getByText('Useful statistics of your finances')).toBeInTheDocument();
-    expect(screen.getByText('No records created yet. Start creating records this month to start showing statistics.')).toBeInTheDocument();
+    expect(screen.getByText('Estadísticas de tus finanzas')).toBeInTheDocument();
+    expect(screen.getByText('No hay transacciones. Empieza a crear registros este mes para mostrar estadísticas.')).toBeInTheDocument();
   });
 
   test('Show Graphics Card with data', () => {
@@ -18,7 +18,7 @@ describe('GraphicsCard', () => {
       <GraphicsCard records={recordsChart} />,
     );
 
-    expect(screen.getByText('Useful statistics of your finances')).toBeInTheDocument();
+    expect(screen.getByText('Estadísticas de tus finanzas')).toBeInTheDocument();
     expect(screen.getByTestId('chart-bar-expensive-days')).toBeInTheDocument();
     expect(screen.getByTestId('categories-chart')).toBeInTheDocument();
   });

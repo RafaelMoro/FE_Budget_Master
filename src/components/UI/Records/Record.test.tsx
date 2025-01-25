@@ -125,8 +125,8 @@ describe('<Records />', () => {
       expect(screen.getByText(/- \$150\.09/i)).toBeInTheDocument();
       expect(screen.getByText(/may 20/i)).toBeInTheDocument();
       expect(screen.getByText(/12:34pm/i)).toBeInTheDocument();
-      expect(screen.getByText(/no budgets/i)).toBeInTheDocument();
-      expect(screen.getByText(/no tags/i)).toBeInTheDocument();
+      expect(screen.getByText(/sin presupuestos/i)).toBeInTheDocument();
+      expect(screen.getByText(/sin etiquetas/i)).toBeInTheDocument();
     });
 
     // No need to test it with different type of records and in different Views (mobile, desktop, tablet)
@@ -175,8 +175,8 @@ describe('<Records />', () => {
       expect(screen.getByText(/\+ \$110\.24/i)).toBeInTheDocument();
       expect(screen.getByText(/may 21/i)).toBeInTheDocument();
       expect(screen.getByText(/1:50pm/i)).toBeInTheDocument();
-      expect(screen.getByText(/no budgets/i)).toBeInTheDocument();
-      expect(screen.getByText(/no tags/i)).toBeInTheDocument();
+      expect(screen.getByText(/sin presupuestos/i)).toBeInTheDocument();
+      expect(screen.getByText(/sin etiquetas/i)).toBeInTheDocument();
       expect(screen.getByText(/records paid: 2/i)).toBeInTheDocument();
     });
 
@@ -248,8 +248,8 @@ describe('<Records />', () => {
       expect(screen.getByText('- $76.00')).toBeInTheDocument();
       expect(screen.getByText(/sat, jun 29/i)).toBeInTheDocument();
       expect(screen.getByText(/10:25pm/i)).toBeInTheDocument();
-      expect(screen.getByText(/no budgets/i)).toBeInTheDocument();
-      expect(screen.getByText(/no tags/i)).toBeInTheDocument();
+      expect(screen.getByText(/sin presupuestos/i)).toBeInTheDocument();
+      expect(screen.getByText(/sin etiquetas/i)).toBeInTheDocument();
       expect(screen.getByText(/transfer/i)).toBeInTheDocument();
     });
 
@@ -270,8 +270,8 @@ describe('<Records />', () => {
       expect(screen.getByText('+ $76.00')).toBeInTheDocument();
       expect(screen.getByText(/sat, jun 29/i)).toBeInTheDocument();
       expect(screen.getByText(/10:25pm/i)).toBeInTheDocument();
-      expect(screen.getByText(/no budgets/i)).toBeInTheDocument();
-      expect(screen.getByText(/no tags/i)).toBeInTheDocument();
+      expect(screen.getByText(/sin presupuestos/i)).toBeInTheDocument();
+      expect(screen.getByText(/sin etiquetas/i)).toBeInTheDocument();
       expect(screen.getByText(/transfer/i)).toBeInTheDocument();
     });
   });
@@ -296,8 +296,8 @@ describe('<Records />', () => {
       expect(screen.getByText(/- \$150\.09/i)).toBeInTheDocument();
       expect(screen.getByText(/may 20/i)).toBeInTheDocument();
       expect(screen.getByText(/12:34pm/i)).toBeInTheDocument();
-      expect(screen.getByText(/no budgets/i)).toBeInTheDocument();
-      expect(screen.getByText(/no tags/i)).toBeInTheDocument();
+      expect(screen.getByText(/sin presupuestos/i)).toBeInTheDocument();
+      expect(screen.getByText(/sin etiquetas/i)).toBeInTheDocument();
     });
 
     test('Show expense record in Drawer on Desktop', async () => {
@@ -346,8 +346,8 @@ describe('<Records />', () => {
       expect(screen.getByText(/\+ \$110\.24/i)).toBeInTheDocument();
       expect(screen.getByText(/may 21/i)).toBeInTheDocument();
       expect(screen.getByText(/1:50pm/i)).toBeInTheDocument();
-      expect(screen.getByText(/no budgets/i)).toBeInTheDocument();
-      expect(screen.getByText(/no tags/i)).toBeInTheDocument();
+      expect(screen.getByText(/sin presupuestos/i)).toBeInTheDocument();
+      expect(screen.getByText(/sin etiquetas/i)).toBeInTheDocument();
       expect(screen.getByText(/records paid: 2/i)).toBeInTheDocument();
     });
 
@@ -422,8 +422,8 @@ describe('<Records />', () => {
       expect(screen.getByText('- $76.00')).toBeInTheDocument();
       expect(screen.getByText(/sat, jun 29/i)).toBeInTheDocument();
       expect(screen.getByText(/10:25pm/i)).toBeInTheDocument();
-      expect(screen.getByText(/no budgets/i)).toBeInTheDocument();
-      expect(screen.getByText(/no tags/i)).toBeInTheDocument();
+      expect(screen.getByText(/sin presupuestos/i)).toBeInTheDocument();
+      expect(screen.getByText(/sin etiquetas/i)).toBeInTheDocument();
       expect(screen.getByText(/transfer/i)).toBeInTheDocument();
     });
 
@@ -445,8 +445,8 @@ describe('<Records />', () => {
       expect(screen.getByText('+ $76.00')).toBeInTheDocument();
       expect(screen.getByText(/sat, jun 29/i)).toBeInTheDocument();
       expect(screen.getByText(/10:25pm/i)).toBeInTheDocument();
-      expect(screen.getByText(/no budgets/i)).toBeInTheDocument();
-      expect(screen.getByText(/no tags/i)).toBeInTheDocument();
+      expect(screen.getByText(/sin presupuestos/i)).toBeInTheDocument();
+      expect(screen.getByText(/sin etiquetas/i)).toBeInTheDocument();
       expect(screen.getByText(/transfer/i)).toBeInTheDocument();
     });
 

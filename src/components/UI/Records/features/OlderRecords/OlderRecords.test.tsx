@@ -54,8 +54,8 @@ describe('Older Records', () => {
 
     userEvent.click(accordion);
 
-    const totalExpenseText = await screen.findByText(/total expense:/i);
-    const totalIncomeText = screen.getByText(/total income:/i);
+    const totalExpenseText = await screen.findByText(/gastos:/i);
+    const totalIncomeText = screen.getByText(/ingresos:/i);
     const selectMonthTestId = screen.getByTestId('select-month');
     const selectMonthComboBox = within(selectMonthTestId).getByRole('combobox');
     const selectYearTestId = screen.getByTestId('select-month');
@@ -86,8 +86,8 @@ describe('Older Records', () => {
 
     userEvent.click(accordion);
 
-    const noRecordsFoundText = await screen.findByText(/you have not created records for this month\./i);
-    const createRecordButton = screen.getByRole('button', { name: /create record/i });
+    const noRecordsFoundText = await screen.findByText(/No has creado transacciones para este mes\./i);
+    const createRecordButton = screen.getByRole('button', { name: /crear registro/i });
 
     expect(noRecordsFoundText).toBeInTheDocument();
     expect(createRecordButton).toBeInTheDocument();
@@ -306,7 +306,7 @@ describe('Older Records', () => {
     const totalIncomeNumber = screen.getByTestId('total-income-number');
     expect(totalExpenseNumber).toHaveTextContent('$150.09');
     expect(totalIncomeNumber).toHaveTextContent('$110.24');
-    expect(screen.queryByText(/you have not created records for this month\./i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/No has creado transacciones para este mes\./i)).not.toBeInTheDocument();
 
     // Change month on combobox
     const selectMonthTestId = screen.getByTestId('select-month');
@@ -326,6 +326,6 @@ describe('Older Records', () => {
     await screen.findAllByText('$0.00');
     expect(totalExpenseNumber).toHaveTextContent('$0.00');
     expect(totalIncomeNumber).toHaveTextContent('$0.00');
-    expect(await screen.findByText(/you have not created records for this month\./i)).toBeInTheDocument();
+    expect(await screen.findByText(/No has creado transacciones para este mes\./i)).toBeInTheDocument();
   });
 });

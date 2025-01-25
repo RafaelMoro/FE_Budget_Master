@@ -1,4 +1,5 @@
 import { screen, within } from '@testing-library/react';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import fetchMock from 'jest-fetch-mock';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
@@ -52,8 +53,8 @@ describe('Last Month Records', () => {
 
     userEvent.click(accordion);
 
-    const totalExpenseText = await screen.findByText(/total expense:/i);
-    const totalIncomeText = screen.getByText(/total income:/i);
+    const totalExpenseText = await screen.findByText(/gastos:/i);
+    const totalIncomeText = screen.getByText(/ingresos:/i);
     const loadingSkeletons = screen.getAllByTestId('record-loading-skeleton');
 
     expect(totalExpenseText).toBeInTheDocument();
@@ -76,8 +77,8 @@ describe('Last Month Records', () => {
 
     userEvent.click(accordion);
 
-    const noRecordsFoundText = await screen.findByText(/you have not created records for this month\./i);
-    const createRecordButton = screen.getByRole('button', { name: /create record/i });
+    const noRecordsFoundText = await screen.findByText(/No has creado transacciones para este mes\./i);
+    const createRecordButton = screen.getByRole('button', { name: /crear registro/i });
 
     expect(noRecordsFoundText).toBeInTheDocument();
     expect(createRecordButton).toBeInTheDocument();

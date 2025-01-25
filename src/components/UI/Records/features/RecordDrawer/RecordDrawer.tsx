@@ -103,11 +103,11 @@ const RecordDrawer = ({
       </TransferInformation>
       ) }
       <Typography>
-        <DrawerTypographyBold component="span">Category: </DrawerTypographyBold>
+        <DrawerTypographyBold component="span">Categoría: </DrawerTypographyBold>
         {category.categoryName}
       </Typography>
       <Typography>
-        <DrawerTypographyBold component="span">Subcategory: </DrawerTypographyBold>
+        <DrawerTypographyBold component="span">Subcategoría: </DrawerTypographyBold>
         {subCategory}
       </Typography>
       <RecordDrawerDescription>{description}</RecordDrawerDescription>

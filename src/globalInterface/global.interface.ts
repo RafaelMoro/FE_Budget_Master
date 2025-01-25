@@ -24,7 +24,7 @@ export interface User {
 export const TYPE_OF_ACCOUNTS = ['Crédito', 'Débito', 'Vales de comida', 'Vales de restaurante', 'Cuenta de ahorro'] as const;
 export type AccountType = typeof TYPE_OF_ACCOUNTS[number];
 
-export const ABBREVIATED_MONTHS = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sept', 'Oct', 'Nov', 'Dic'] as const;
+export const ABBREVIATED_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] as const;
 export type AbbreviatedMonthsType = typeof ABBREVIATED_MONTHS[number];
 
 export const MONTHS = [

@@ -164,7 +164,7 @@ describe('Older Records', () => {
     fireEvent.click(options[futureMonth]);
     expect(await screen.findByText(futureMonthName)).toBeInTheDocument();
 
-    if (month === 'Ene' || month === 'Dic') {
+    if (month === 'Jan' || month === 'Dec') {
       const selectYearTestId = screen.getByTestId('select-year');
       const selectYearButton = within(selectYearTestId).getByRole('combobox');
       fireEvent.mouseDown(selectYearButton);
@@ -221,7 +221,7 @@ describe('Older Records', () => {
     fireEvent.click(options[currentMonth]);
     expect(await screen.findByText(currentMonthName)).toBeInTheDocument();
 
-    if (month === 'Ene' || month === 'Dic') {
+    if (month === 'Jan' || month === 'Dec') {
       const selectYearTestId = screen.getByTestId('select-year');
       const selectYearButton = within(selectYearTestId).getByRole('combobox');
       fireEvent.mouseDown(selectYearButton);

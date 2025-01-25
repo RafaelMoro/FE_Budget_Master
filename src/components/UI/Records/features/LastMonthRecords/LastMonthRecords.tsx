@@ -20,7 +20,7 @@ interface LastMonthRecordsProps {
 const LastMonthRecords = ({ color, accountId, isGuestUser }: LastMonthRecordsProps) => {
   const dispatch = useAppDispatch();
   const {
-    completeLastMonth, year, lastMonth,
+    completeLastMonth, lastMonth, yearLastMonth,
   } = getDateInfo();
   const { recordsLastMonthLocalStorage } = useGuestUser();
   const [fetchLastMonthRecordsMutation, {
@@ -36,7 +36,7 @@ const LastMonthRecords = ({ color, accountId, isGuestUser }: LastMonthRecordsPro
   const handleFetchLastMonthRecords = async () => {
     try {
       if (isGuestUser) return;
-      const recordsLastMonthRoute = `${GET_EXPENSES_AND_INCOMES_BY_MONTH_ROUTE}/${accountId}/${lastMonth}/${year}`;
+      const recordsLastMonthRoute = `${GET_EXPENSES_AND_INCOMES_BY_MONTH_ROUTE}/${accountId}/${lastMonth}/${yearLastMonth}`;
       const response = await fetchLastMonthRecordsMutation({ route: recordsLastMonthRoute, bearerToken }).unwrap();
       // Update total balance of expenses and incomes after fetch of last month records
       if (response && response?.records) {

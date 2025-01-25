@@ -84,8 +84,8 @@ describe('<Records />', () => {
     );
 
     // Show unpaid badge and do not show paid status badge
-    expect(screen.getByText(/unpaid/i)).toBeInTheDocument();
-    expect(screen.queryByText(/^paid/i)).not.toBeInTheDocument();
+    expect(screen.getByText(/sin pagar/i)).toBeInTheDocument();
+    expect(screen.queryByText(/pagado/i)).not.toBeInTheDocument();
   });
 
   test('Show paid badge in record with credit account', () => {
@@ -103,8 +103,8 @@ describe('<Records />', () => {
     );
 
     // Show unpaid badge and do not show paid status badge
-    expect(screen.queryByText(/unpaid/i)).not.toBeInTheDocument();
-    expect(screen.queryByText(/^paid/i)).toBeInTheDocument();
+    expect(screen.queryByText(/sin pagar/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/pagado/i)).toBeInTheDocument();
   });
 
   describe('<Record /> for Mobile View', () => {

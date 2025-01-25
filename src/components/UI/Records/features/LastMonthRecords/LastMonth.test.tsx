@@ -31,11 +31,11 @@ describe('Last Month Records', () => {
     );
 
     const buttonExpandAccordion = screen.getByRole('button', {
-      name: `Last month: ${lastMonthName}`,
+      name: `Mes pasado: ${lastMonthName}`,
     });
     const icon = within(buttonExpandAccordion).getByTestId('ExpandMoreIcon');
 
-    expect(screen.getByText(`Last month: ${lastMonthName}`)).toBeInTheDocument();
+    expect(screen.getByText(`Mes pasado: ${lastMonthName}`)).toBeInTheDocument();
     expect(icon).toBeInTheDocument();
   });
 
@@ -48,7 +48,7 @@ describe('Last Month Records', () => {
     );
 
     const accordion = screen.getByRole('button', {
-      name: `Last month: ${lastMonthName}`,
+      name: `Mes pasado: ${lastMonthName}`,
     });
 
     userEvent.click(accordion);
@@ -72,7 +72,7 @@ describe('Last Month Records', () => {
     );
 
     const accordion = screen.getByRole('button', {
-      name: `Last month: ${lastMonthName}`,
+      name: `Mes pasado: ${lastMonthName}`,
     });
 
     userEvent.click(accordion);
@@ -94,7 +94,7 @@ describe('Last Month Records', () => {
     );
 
     const accordion = screen.getByRole('button', {
-      name: `Last month: ${lastMonthName}`,
+      name: `Mes pasado: ${lastMonthName}`,
     });
 
     userEvent.click(accordion);
@@ -116,12 +116,12 @@ describe('Last Month Records', () => {
     );
 
     const accordion = screen.getByRole('button', {
-      name: `Last month: ${lastMonthName}`,
+      name: `Mes pasado: ${lastMonthName}`,
     });
 
     userEvent.click(accordion);
 
-    const errorText = await screen.findByText(/An error has ocurred. Please try again later\./i);
+    const errorText = await screen.findByText(/Oops! Algo no salió como esperabamos\. Por favor, intente de nuevo más tarde\./i);
     expect(errorText).toBeInTheDocument();
   });
 });

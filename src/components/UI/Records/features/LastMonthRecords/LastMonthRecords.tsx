@@ -9,6 +9,7 @@ import { GET_EXPENSES_AND_INCOMES_BY_MONTH_ROUTE } from '../../../../../redux/co
 import { MonthRecords } from '../MonthRecords';
 import { NoRecordsFound } from '../NoRecordsFound';
 import { ShowMultipleRecordLoader } from '../ShowMultipleRecordLoaders';
+import { ERROR_MESSAGE_GENERAL } from '../../../../../constants';
 
 interface LastMonthRecordsProps {
   color: string;
@@ -59,7 +60,7 @@ const LastMonthRecords = ({ color, accountId, isGuestUser }: LastMonthRecordsPro
     <MonthRecords
       color={color}
       openedAccordeon={false}
-      titleMonthAccordeon={`Last month: ${completeLastMonth}`}
+      titleMonthAccordeon={`Mes pasado: ${completeLastMonth}`}
       totalExpense={totalRecords.lastMonth.expenseTotal}
       totalIncome={totalRecords.lastMonth.incomeTotal}
       onClickCb={handleFetchLastMonthRecords}
@@ -69,7 +70,7 @@ const LastMonthRecords = ({ color, accountId, isGuestUser }: LastMonthRecordsPro
       loading={isGuestUser ? false : isFetching}
       error={isGuestUser ? false : isError}
       onEmptyCb={() => <NoRecordsFound />}
-      onErrorCb={() => <Error hideIcon description="An error has ocurred. Please try again later." />}
+      onErrorCb={() => <Error hideIcon description={ERROR_MESSAGE_GENERAL} />}
       onLoadingCb={() => (
         <ShowMultipleRecordLoader numberOfSkeletons={3} keyMap="last-month" />
       )}

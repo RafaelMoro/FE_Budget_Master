@@ -24,7 +24,7 @@ describe('<ExpenseTemplate />', () => {
     const subCategoryCombobox = screen.getByTestId('select-record-subcategory');
     const budgetCombobox = screen.getByTestId('select-record-budget');
 
-    expect(screen.getByRole('textbox', { name: /amount/i })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /Cantidad disponible/i })).toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: /date and time/i })).toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: /short description/i })).toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: /description \(optional\)/i })).toBeInTheDocument();

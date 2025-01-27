@@ -9,7 +9,7 @@ const account: AccountUI = {
   title: 'BBVA',
   amount: 20000,
   amountFormatted: '$20,000.00',
-  accountType: 'Debit',
+  accountType: 'Débito',
   backgroundColor: 'red',
   color: 'white',
   backgroundColorUI: { name: 'red', color: 'red' },
@@ -33,6 +33,6 @@ describe('<Account />', () => {
 
     expect(screen.getByText('BBVA')).toBeInTheDocument();
     expect(screen.getByText('$20,000.00')).toBeInTheDocument();
-    expect(screen.getByText('Debit')).toBeInTheDocument();
+    expect(screen.getByText('Débito')).toBeInTheDocument();
   });
 });

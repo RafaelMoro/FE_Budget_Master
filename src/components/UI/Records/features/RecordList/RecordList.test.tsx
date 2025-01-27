@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import fetchMock from 'jest-fetch-mock';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';

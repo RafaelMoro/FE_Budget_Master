@@ -32,11 +32,11 @@ describe('Older Records', () => {
     );
 
     const buttonExpandAccordion = screen.getByRole('button', {
-      name: /older records/i,
+      name: /Transacciones anteriores/i,
     });
     const icon = within(buttonExpandAccordion).getByTestId('ExpandMoreIcon');
 
-    expect(screen.getByText('Older Records')).toBeInTheDocument();
+    expect(screen.getByText('Transacciones anteriores')).toBeInTheDocument();
     expect(icon).toBeInTheDocument();
   });
 
@@ -49,18 +49,18 @@ describe('Older Records', () => {
     );
 
     const accordion = screen.getByRole('button', {
-      name: /older records/i,
+      name: /Transacciones anteriores/i,
     });
 
     userEvent.click(accordion);
 
-    const totalExpenseText = await screen.findByText(/total expense:/i);
-    const totalIncomeText = screen.getByText(/total income:/i);
+    const totalExpenseText = await screen.findByText(/gastos:/i);
+    const totalIncomeText = screen.getByText(/ingresos:/i);
     const selectMonthTestId = screen.getByTestId('select-month');
     const selectMonthComboBox = within(selectMonthTestId).getByRole('combobox');
     const selectYearTestId = screen.getByTestId('select-month');
     const selectYearComboBox = within(selectYearTestId).getByRole('combobox');
-    const searchExpensesButton = screen.getByRole('button', { name: /search records/i });
+    const searchExpensesButton = screen.getByRole('button', { name: /buscar/i });
     const loadingSkeletons = screen.getAllByTestId('record-loading-skeleton');
 
     expect(totalExpenseText).toBeInTheDocument();
@@ -81,13 +81,13 @@ describe('Older Records', () => {
     );
 
     const accordion = screen.getByRole('button', {
-      name: /older records/i,
+      name: /Transacciones anteriores/i,
     });
 
     userEvent.click(accordion);
 
-    const noRecordsFoundText = await screen.findByText(/you have not created records for this month\./i);
-    const createRecordButton = screen.getByRole('button', { name: /create record/i });
+    const noRecordsFoundText = await screen.findByText(/No has creado transacciones para este mes\./i);
+    const createRecordButton = screen.getByRole('button', { name: /crear registro/i });
 
     expect(noRecordsFoundText).toBeInTheDocument();
     expect(createRecordButton).toBeInTheDocument();
@@ -103,7 +103,7 @@ describe('Older Records', () => {
     );
 
     const accordion = screen.getByRole('button', {
-      name: /older records/i,
+      name: /Transacciones anteriores/i,
     });
 
     userEvent.click(accordion);
@@ -125,7 +125,7 @@ describe('Older Records', () => {
     );
 
     const accordion = screen.getByRole('button', {
-      name: /older records/i,
+      name: /Transacciones anteriores/i,
     });
 
     userEvent.click(accordion);
@@ -148,7 +148,7 @@ describe('Older Records', () => {
 
     // Click accordion
     const accordion = screen.getByRole('button', {
-      name: /older records/i,
+      name: /Transacciones anteriores/i,
     });
     userEvent.click(accordion);
     await screen.findByText(/Casa a solesta gym/i);
@@ -178,7 +178,7 @@ describe('Older Records', () => {
     }
 
     // Click on search expenses button
-    const searchExpensesButton = screen.getByRole('button', { name: /search records/i });
+    const searchExpensesButton = screen.getByRole('button', { name: /buscar/i });
     userEvent.click(searchExpensesButton);
 
     let errorMessage: RegExp | string = new RegExp(`You are selecting a date in the future: ${futureMonthName} ${year}`);
@@ -205,7 +205,7 @@ describe('Older Records', () => {
 
     // Click accordion
     const accordion = screen.getByRole('button', {
-      name: /older records/i,
+      name: /Transacciones anteriores/i,
     });
     userEvent.click(accordion);
     await screen.findByText(/Casa a solesta gym/i);
@@ -235,7 +235,7 @@ describe('Older Records', () => {
     }
 
     // Click on search expenses button
-    const searchExpensesButton = screen.getByRole('button', { name: /search records/i });
+    const searchExpensesButton = screen.getByRole('button', { name: /buscar/i });
     userEvent.click(searchExpensesButton);
 
     const errorMessage = new RegExp(`${currentMonthName} records are shown above. Please select an older month.`);
@@ -256,7 +256,7 @@ describe('Older Records', () => {
 
     // Click accordion
     const accordion = screen.getByRole('button', {
-      name: /older records/i,
+      name: /Transacciones anteriores/i,
     });
     userEvent.click(accordion);
     await screen.findByText(/Casa a solesta gym/i);
@@ -273,7 +273,7 @@ describe('Older Records', () => {
     expect(await screen.findByText(lastMonthName)).toBeInTheDocument();
 
     // Click on search expenses button
-    const searchExpensesButton = screen.getByRole('button', { name: /search records/i });
+    const searchExpensesButton = screen.getByRole('button', { name: /buscar/i });
     userEvent.click(searchExpensesButton);
 
     const errorMessage = new RegExp(`${lastMonthName} records are shown above. Please select an older month.`);
@@ -297,7 +297,7 @@ describe('Older Records', () => {
 
     // Click accordion
     const accordion = screen.getByRole('button', {
-      name: /older records/i,
+      name: /Transacciones anteriores/i,
     });
     userEvent.click(accordion);
     await screen.findByText(/Casa a solesta gym/i);
@@ -306,7 +306,7 @@ describe('Older Records', () => {
     const totalIncomeNumber = screen.getByTestId('total-income-number');
     expect(totalExpenseNumber).toHaveTextContent('$150.09');
     expect(totalIncomeNumber).toHaveTextContent('$110.24');
-    expect(screen.queryByText(/you have not created records for this month\./i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/No has creado transacciones para este mes\./i)).not.toBeInTheDocument();
 
     // Change month on combobox
     const selectMonthTestId = screen.getByTestId('select-month');
@@ -320,12 +320,12 @@ describe('Older Records', () => {
     expect(await screen.findByText(passedMonthName)).toBeInTheDocument();
 
     // Click on search expenses button
-    const searchExpensesButton = screen.getByRole('button', { name: /search records/i });
+    const searchExpensesButton = screen.getByRole('button', { name: /buscar/i });
     userEvent.click(searchExpensesButton);
 
     await screen.findAllByText('$0.00');
     expect(totalExpenseNumber).toHaveTextContent('$0.00');
     expect(totalIncomeNumber).toHaveTextContent('$0.00');
-    expect(await screen.findByText(/you have not created records for this month\./i)).toBeInTheDocument();
+    expect(await screen.findByText(/No has creado transacciones para este mes\./i)).toBeInTheDocument();
   });
 });

@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import fetchMock from 'jest-fetch-mock';
 import { waitFor, screen } from '@testing-library/react';
 import { renderWithProviders } from '../../../../../tests/CustomWrapperRedux';
@@ -77,12 +78,12 @@ describe('ViewAccounts', () => {
         // First account
         expect(screen.getByText('Citibanamex Debit')).toBeInTheDocument();
         expect(screen.getByText('$8,246.41')).toBeInTheDocument();
-        expect(screen.getByText('Debit')).toBeInTheDocument();
+        expect(screen.getByText('Débito')).toBeInTheDocument();
 
         // Second Account
         expect(screen.getByText('American Express')).toBeInTheDocument();
         expect(screen.getByText('$80,000.00')).toBeInTheDocument();
-        expect(screen.getByText('Credit')).toBeInTheDocument();
+        expect(screen.getByText('Crédito')).toBeInTheDocument();
       });
     });
 
@@ -125,12 +126,12 @@ describe('ViewAccounts', () => {
         // First account
         expect(screen.getByText('Citibanamex Debit')).toBeInTheDocument();
         expect(screen.getByText('$8,246.41')).toBeInTheDocument();
-        expect(screen.getByText('Debit')).toBeInTheDocument();
+        expect(screen.getByText('Débito')).toBeInTheDocument();
 
         // Second Account
         expect(screen.getByText('American Express')).toBeInTheDocument();
         expect(screen.getByText('$80,000.00')).toBeInTheDocument();
-        expect(screen.getByText('Credit')).toBeInTheDocument();
+        expect(screen.getByText('Crédito')).toBeInTheDocument();
       });
     });
 

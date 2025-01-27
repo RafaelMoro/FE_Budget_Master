@@ -19,13 +19,13 @@ const RecordsOverviewCard = ({ records, color, viewAllRecords }: RecordsOverview
 
   return (
     <Container>
-      <Typography variant="h5">Records overview</Typography>
+      <Typography variant="h5">Visión general de las transacciones</Typography>
       { records.length === 0 && (
-      <Typography variant="body2">No records created yet. Start creating records this month to start showing statistics.</Typography>
+      <Typography variant="body2">No tienes transacciones aún. Empieza a crear registros este mes para ver las estadísticas.</Typography>
       )}
       { last10Records.length > 0 && (
         <>
-          <ViewAllFirstButton onClick={viewAllRecords}>View all records</ViewAllFirstButton>
+          <ViewAllFirstButton onClick={viewAllRecords}>Ver transacciones</ViewAllFirstButton>
           { last10Records.map((record, index) => (
             <RecordContainer key={record._id}>
               <Record
@@ -35,7 +35,7 @@ const RecordsOverviewCard = ({ records, color, viewAllRecords }: RecordsOverview
               { (index !== last10Records.length - 1) && (<Divider />) }
             </RecordContainer>
           ))}
-          <PrimaryButton onClick={viewAllRecords}>View all records</PrimaryButton>
+          <PrimaryButton onClick={viewAllRecords}>Ver transacciones</PrimaryButton>
         </>
       )}
     </Container>

@@ -26,17 +26,17 @@ const Account = ({
       <AccountTitle variant="h4">{ title }</AccountTitle>
       <Typography>{ amountFormatted }</Typography>
       <AccountIconsContainer>
-        <IconButton aria-label={`edit-button-account-${title}`} onClick={() => openModifyAccountModal(accountId)}>
+        <IconButton aria-label={`boton-editar-cuenta-${title}`} onClick={() => openModifyAccountModal(accountId)}>
           <AppIcon icon="Edit" fillColor={AppColors.bgColorDark} />
         </IconButton>
-        <IconButton aria-label={`delete-button-account-${title}`} onClick={() => openDeleteAccountModal(accountId, title)}>
+        <IconButton aria-label={`boton-eliminar-cuenta-${title}`} onClick={() => openDeleteAccountModal(accountId, title)}>
           <AppIcon icon="Delete" fillColor={AppColors.bgColorDark} />
         </IconButton>
       </AccountIconsContainer>
       <Typography>{ accountType }</Typography>
       { (selected) && (
         <SelectedTextBox backgroundColor={AppColors.black}>
-          <Typography>Selected</Typography>
+          <Typography>Actual</Typography>
         </SelectedTextBox>
       ) }
     </AccountContainerColoroued>

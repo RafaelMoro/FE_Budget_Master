@@ -19,7 +19,7 @@ import {
 import { SelectInput } from '../../../SelectInput';
 import { AppIcon } from '../../../Icons';
 import {
-  DialogTitle, InputForm, PrimaryButton, AllBackgroundColors, FlexContainer,
+  DialogTitle, InputForm, PrimaryButton, FlexContainer,
 } from '../../../../../styles';
 import { AccountDialogFormContainer } from '../../Account.styled';
 import { LoadingSpinner } from '../../../LoadingSpinner';
@@ -30,7 +30,7 @@ import { useAccount } from '../../../../../hooks/useAccount';
 
 const initialValuesCreateAccount: CreateAccountInitialValues = {
   title: '',
-  accountType: 'Debit',
+  accountType: 'Débito',
   amount: '',
   backgroundColor: 'Dark Orange',
 };
@@ -53,8 +53,8 @@ const AccountDialog = ({
 
   // Copying constant because it is readyonly
   const typeAccounts = [...TYPE_OF_ACCOUNTS];
-  const titleModal = accountAction === 'Create' ? 'Create Account:' : 'Modify Account:';
-  const buttonModalText = accountAction === 'Create' ? 'Create Account' : 'Modify Account';
+  const titleModal = accountAction === 'Create' ? 'Crear cuenta:' : 'Modificar cuenta:';
+  const buttonModalText = accountAction === 'Create' ? 'Crear' : 'Modificar';
 
   // Transforming amount from account to string;
   const accountToBeModified = useMemo(() => {
@@ -81,16 +81,10 @@ const AccountDialog = ({
       }
 
       await createAccountMutation(createAccountMutationProps).unwrap();
-      // Show success notification
-      updateGlobalNotification({
-        newTitle: `Account ${values.title} created`,
-        newDescription: '',
-        newStatus: SystemStateEnum.Success,
-      });
       onClose();
     } catch (err) {
       updateGlobalNotification({
-        newTitle: 'Create Account: Error',
+        newTitle: 'Error al crear su cuenta',
         newDescription: ERROR_MESSAGE_GENERAL,
         newStatus: SystemStateEnum.Error,
       });
@@ -121,16 +115,10 @@ const AccountDialog = ({
       const modifyAccountMutationProps: ModifyAccountMutationProps = { values: accountModifiedValues, bearerToken };
       await modifyAccountMutation(modifyAccountMutationProps);
 
-      // Show success notification
-      updateGlobalNotification({
-        newTitle: `Account ${accountModifiedValues.title} updated`,
-        newDescription: '',
-        newStatus: SystemStateEnum.Success,
-      });
       onClose();
     } catch (err) {
       updateGlobalNotification({
-        newTitle: 'Modify Account: Error',
+        newTitle: 'Error al modificar su cuenta',
         newDescription: ERROR_MESSAGE_GENERAL,
         newStatus: SystemStateEnum.Error,
       });
@@ -162,25 +150,16 @@ const AccountDialog = ({
                 name="title"
                 type="text"
                 variant="standard"
-                label="Account Title"
+                label="Título de la cuenta"
               />
               <CurrencyField setFieldValue={setFieldValue} amount={initialAmount.current} updateAmount={updateAmount} />
               <SelectInput
                 dataTestId="select-account-type"
                 labelId="select-account-type"
-                labelName="Type of Account"
+                labelName="Tipo de cuenta"
                 fieldName="accountType"
                 stringOptions={typeAccounts}
                 colorOptions={[]}
-              />
-              <SelectInput
-                labelId="select-background-color"
-                dataTestId="select-background-color"
-                labelName="Color:"
-                fieldName="backgroundColor"
-                stringOptions={[]}
-                colorOptions={AllBackgroundColors}
-                selectInputColors
               />
               <PrimaryButton disabled={disableSubmitButton} variant="contained" onClick={submitForm} size="medium">
                 { (isLoadingCreateAccount || isLoadingModifyAccount) ? (<LoadingSpinner />) : buttonModalText }

@@ -39,7 +39,6 @@ export const SUCCESS_FORGOT_PASSWORD_TITLE = 'Correo electrónico enviado.';
 // eslint-disable-next-line max-len
 export const SUCCESS_FORGOT_PASSWORD_DESC = 'Por favor, revise su correo electrónico y siga las instrucciones. Redirigiendo a la página de inicio de sesión.';
 
-export const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 export const ZERO_CURRENCY = '$0.00';
 
 const FOOD_AND_DRINK_CATEGORY: Category = {

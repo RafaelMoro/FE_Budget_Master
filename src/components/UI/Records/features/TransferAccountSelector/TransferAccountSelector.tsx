@@ -29,10 +29,10 @@ const TransferAccountSelector = ({
     if (value !== lastDestinationAccountId) {
       lastDestinationAccountId = value;
       const destinationAccount = (accounts ?? []).find((account) => account._id === value);
-      if (destinationAccount && destinationAccount.accountType === 'Credit') {
+      if (destinationAccount && destinationAccount.accountType === 'Crédito') {
         setDestinationAsCredit();
         updateDestinationAccountId(value);
-      } else if (destinationAccount && destinationAccount.accountType !== 'Credit') {
+      } else if (destinationAccount && destinationAccount.accountType !== 'Crédito') {
         setDestinationAsNonCredit();
       }
     }

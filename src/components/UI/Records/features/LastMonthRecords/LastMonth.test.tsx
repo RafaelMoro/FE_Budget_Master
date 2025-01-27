@@ -1,4 +1,5 @@
 import { screen, within } from '@testing-library/react';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import fetchMock from 'jest-fetch-mock';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
@@ -30,11 +31,11 @@ describe('Last Month Records', () => {
     );
 
     const buttonExpandAccordion = screen.getByRole('button', {
-      name: `Last month: ${lastMonthName}`,
+      name: `Mes pasado: ${lastMonthName}`,
     });
     const icon = within(buttonExpandAccordion).getByTestId('ExpandMoreIcon');
 
-    expect(screen.getByText(`Last month: ${lastMonthName}`)).toBeInTheDocument();
+    expect(screen.getByText(`Mes pasado: ${lastMonthName}`)).toBeInTheDocument();
     expect(icon).toBeInTheDocument();
   });
 
@@ -47,13 +48,13 @@ describe('Last Month Records', () => {
     );
 
     const accordion = screen.getByRole('button', {
-      name: `Last month: ${lastMonthName}`,
+      name: `Mes pasado: ${lastMonthName}`,
     });
 
     userEvent.click(accordion);
 
-    const totalExpenseText = await screen.findByText(/total expense:/i);
-    const totalIncomeText = screen.getByText(/total income:/i);
+    const totalExpenseText = await screen.findByText(/gastos:/i);
+    const totalIncomeText = screen.getByText(/ingresos:/i);
     const loadingSkeletons = screen.getAllByTestId('record-loading-skeleton');
 
     expect(totalExpenseText).toBeInTheDocument();
@@ -71,13 +72,13 @@ describe('Last Month Records', () => {
     );
 
     const accordion = screen.getByRole('button', {
-      name: `Last month: ${lastMonthName}`,
+      name: `Mes pasado: ${lastMonthName}`,
     });
 
     userEvent.click(accordion);
 
-    const noRecordsFoundText = await screen.findByText(/you have not created records for this month\./i);
-    const createRecordButton = screen.getByRole('button', { name: /create record/i });
+    const noRecordsFoundText = await screen.findByText(/No has creado transacciones para este mes\./i);
+    const createRecordButton = screen.getByRole('button', { name: /crear registro/i });
 
     expect(noRecordsFoundText).toBeInTheDocument();
     expect(createRecordButton).toBeInTheDocument();
@@ -93,7 +94,7 @@ describe('Last Month Records', () => {
     );
 
     const accordion = screen.getByRole('button', {
-      name: `Last month: ${lastMonthName}`,
+      name: `Mes pasado: ${lastMonthName}`,
     });
 
     userEvent.click(accordion);
@@ -115,12 +116,12 @@ describe('Last Month Records', () => {
     );
 
     const accordion = screen.getByRole('button', {
-      name: `Last month: ${lastMonthName}`,
+      name: `Mes pasado: ${lastMonthName}`,
     });
 
     userEvent.click(accordion);
 
-    const errorText = await screen.findByText(/An error has ocurred. Please try again later\./i);
+    const errorText = await screen.findByText(/Oops! Algo no salió como esperabamos\. Por favor, intente de nuevo más tarde\./i);
     expect(errorText).toBeInTheDocument();
   });
 });

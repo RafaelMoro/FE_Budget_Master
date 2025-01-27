@@ -16,20 +16,20 @@ const GraphicsCard = ({ records }: GraphicsCardProps) => {
   if (records.length === 0) {
     return (
       <NoRecordsGraphicsCardContainer>
-        <Typography variant="h5">Useful statistics of your finances</Typography>
-        <Typography variant="body2">No records created yet. Start creating records this month to start showing statistics.</Typography>
+        <Typography variant="h5">Estadísticas de tus finanzas</Typography>
+        <Typography variant="body2">No hay transacciones. Empieza a crear registros este mes para mostrar estadísticas.</Typography>
       </NoRecordsGraphicsCardContainer>
     );
   }
 
   return (
     <GraphicsCardContainer>
-      <TextWithMarginBottom margin="2" variant="h5">Useful statistics of your finances</TextWithMarginBottom>
+      <TextWithMarginBottom margin="2" variant="h5">Estadísticas de tus finanzas</TextWithMarginBottom>
       { (isEmptyChart) && (
         <>
-          <Typography variant="body2">Oops! It looks like there are no expenses to display right now. </Typography>
+          <Typography variant="body2">Oops! No hay gastos que mostrar en este momento. </Typography>
           <TextWithMarginBottom margin="5" variant="body2">
-            Add some expenses to start tracking your spending and see the data visualized here.
+            Agrega gastos para comenzar a monitorear tus finanzas y visualizar los datos aquí.
           </TextWithMarginBottom>
         </>
       )}

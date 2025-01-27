@@ -1,3 +1,9 @@
+## v1.9.0 (2025-01-27)
+
+### Pull Requests
+[#59](https://github.com/RafaelMoro/FE_Budget_Master/pull/59) | Translate dashboard to spanish
+
+
 ## v1.8.1 (2025-01-18)
 
 ### Pull Requests

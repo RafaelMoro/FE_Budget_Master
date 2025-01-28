@@ -49,7 +49,7 @@ const AddChip = ({
     <ChipForm>
       { (chipsData.length === 0) && (
         <FlexContainer justifyContent="center">
-          <RecordSubtitleText variant="body2">{`No ${name}s added`}</RecordSubtitleText>
+          <RecordSubtitleText variant="body2">{`No has añadido ninguna ${name} aún`}</RecordSubtitleText>
         </FlexContainer>
       ) }
       { (chipsData.length > 0) && (
@@ -85,7 +85,7 @@ const AddChip = ({
             </div>
             <AddChipButtonContainer>
               <SecondaryButtonForm variant="contained" onClick={submitForm} size="medium">
-                Add
+                Agregar
                 {' '}
                 {action}
               </SecondaryButtonForm>

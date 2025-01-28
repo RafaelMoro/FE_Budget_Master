@@ -41,12 +41,12 @@ const ShowIndebtedPeople = ({
         <RecordTable isGrid={inRecordDrawer}>
           <TableHead>
             <TableRow>
-              <NameCellTitle>Name:</NameCellTitle>
-              <IndebtedTableCell>Amount:</IndebtedTableCell>
-              <IndebtedTableCell>Amount Paid:</IndebtedTableCell>
-              <IndebtedTableCell>Resting Debt:</IndebtedTableCell>
+              <NameCellTitle>Nombre:</NameCellTitle>
+              <IndebtedTableCell>Cantidad a deber:</IndebtedTableCell>
+              <IndebtedTableCell>Cantidad Pagada:</IndebtedTableCell>
+              <IndebtedTableCell>Deuda restante:</IndebtedTableCell>
               { /** Show the extra column Actions if we are not in mobile */ }
-              { (windowSize !== 'Mobile' && !inRecordDrawer) && (<TableCell>Actions:</TableCell>) }
+              { (windowSize !== 'Mobile' && !inRecordDrawer) && (<TableCell>Acciones:</TableCell>) }
             </TableRow>
           </TableHead>
           <TableBody>

@@ -64,9 +64,9 @@ const AddIndebtedPerson = ({
       <Container>
         <FlexContainer justifyContent="space-between">
           <Typography variant="h4">
-            { (modifyAction) ? 'Modify' : 'Add' }
+            { (modifyAction) ? 'Modificar' : 'Agregar' }
             {' '}
-            Person
+            persona
           </Typography>
           <TransparentButton onClick={onClose}>
             <AppIcon icon="Close" />
@@ -85,7 +85,7 @@ const AddIndebtedPerson = ({
                 name="name"
                 type="text"
                 variant="standard"
-                label="Full Name"
+                label="Nombre completo"
                 validate={checkRepeatedValue}
               />
               <CurrencyField setFieldValue={setFieldValue} updateAmount={updateAmount} amount={initialAmount.current} />
@@ -94,7 +94,7 @@ const AddIndebtedPerson = ({
                 updateAmount={updateAmountPaid}
                 amount={initialAmountPaid.current}
                 fieldName="amountPaid"
-                labelName="Amount Paid"
+                labelName="Cantidad pagada"
               />
               <FormControlLabel
                 control={(
@@ -106,12 +106,12 @@ const AddIndebtedPerson = ({
                     component={Switch}
                   />
                 )}
-                label="Transaction paid"
+                label="Deuda pagada"
               />
               <PrimaryButton variant="contained" size="medium" onClick={submitForm}>
-                { (modifyAction) ? 'Modify' : 'Add'}
+                { (modifyAction) ? 'Modificar' : 'Agregar'}
                 {' '}
-                Person
+                persona
               </PrimaryButton>
             </FormContainer>
           )}

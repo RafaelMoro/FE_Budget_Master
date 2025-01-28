@@ -12,8 +12,8 @@ export const TagOrBudgetSchema = (name: string) => {
 
 export const IndebtedPeopleFormSchema = Yup.object({
   name: indebtedName,
-  amount: stringRequired('Amount is required'),
-  amountPaid: stringRequired('Amount Paid is required'),
+  amount: stringRequired('Por favor, ingrese una cantidad'),
+  amountPaid: stringRequired('Por favor, ingrese la cantidad pagada hasta ahora'),
   isPaid: indebtedIsPaid,
 });
 

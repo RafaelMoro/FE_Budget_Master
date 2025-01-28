@@ -41,5 +41,5 @@ export const shortNameValidation = Yup
   .max(50, 'Short description is too long. Use Description field instead.');
 export const tagOrBudgetValidation = (message: string) => Yup.string().min(3).max(20).required(message);
 export const tagOrBudgetValidationRequired = Yup.string().min(3).max(20).required();
-export const indebtedName = Yup.string().min(3, 'Full name must be at least 3 characters.').required('Full name is required');
+export const indebtedName = Yup.string().min(3, 'El nombre debe contener al menos 3 caracteres.').required('Por favor, ingrese un nombre');
 export const indebtedIsPaid = Yup.boolean().required();

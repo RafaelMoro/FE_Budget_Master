@@ -282,7 +282,9 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
                   modifyIndebtedPerson={fetchPersonToModify}
                 />
                 <FlexContainer justifyContent="center">
-                  <SecondaryButtonForm variant="contained" onClick={() => openAddPersonModal(values)} size="medium">Add Person</SecondaryButtonForm>
+                  <SecondaryButtonForm variant="contained" onClick={() => openAddPersonModal(values)} size="medium">
+                    Agregar persona
+                  </SecondaryButtonForm>
                 </FlexContainer>
               </ShowIndebtedPeopleContainer>
               <ActionButtonPanel

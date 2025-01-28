@@ -45,7 +45,7 @@ const AddIndebtedPerson = ({
 
     const repeatedName = indebtedPeople.find((person) => person.name.toLowerCase() === name.toLowerCase());
     if (!repeatedName) return error;
-    error = `${name} cannot be repeated. Try a different one.`;
+    error = `${name} no puede repetirse. Intente otro nombre.`;
     return error;
   };
 

@@ -109,7 +109,7 @@ describe('<AddIndebtedPerson />', () => {
     userEvent.type(fullNameInput, 'John');
     userEvent.click(button);
 
-    expect(await screen.findByText(/John cannot be repeated. Try a different one./i)).toBeInTheDocument();
+    expect(await screen.findByText(/John no puede repetirse. Intente otro nombre./i)).toBeInTheDocument();
   });
 
   test('If a user wants to modify an indebted person, show Modify in title and button', () => {

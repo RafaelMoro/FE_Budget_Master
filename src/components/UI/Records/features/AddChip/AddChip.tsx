@@ -30,13 +30,13 @@ const AddChip = ({
   const showError = (value: string) => {
     let error;
     if (chipsData.length > 7) {
-      error = `You cannot add more than 8 ${name}s.`;
+      error = `No puedes agregar más de 8 ${name}s.`;
       return error;
     }
 
     const repeatedChip = chipsData.find((chip) => chip === value);
     if (!repeatedChip) return error;
-    error = `${value} cannot be repeated. Try a different one.`;
+    error = `${value} no puede repetirse. Intente otra etiqueta.`;
     return error;
   };
 

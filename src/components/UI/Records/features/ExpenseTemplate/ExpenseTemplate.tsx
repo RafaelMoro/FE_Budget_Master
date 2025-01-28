@@ -267,12 +267,12 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
                   <Field
                     type="checkbox"
                     checked={values.isPaid}
-                    label="Transaction paid (Optional)"
+                    label="Transacción pagada (Opcional)"
                     name="isPaid"
                     component={Switch}
                   />
               )}
-                label="Transaction paid"
+                label="Transacción pagada (Opcional)"
               />
               ) }
               <ShowIndebtedPeopleContainer>

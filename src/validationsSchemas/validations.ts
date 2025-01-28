@@ -36,9 +36,9 @@ export const accountAmountValidation = Yup.string().required('Por favor, ingrese
 /** Record validations  */
 export const shortNameValidation = Yup
   .string()
-  .required('Short description is required')
-  .min(3, 'Short description is too short')
-  .max(50, 'Short description is too long. Use Description field instead.');
+  .required('Por favor, ingrese una pequeña descripción')
+  .min(3, 'La pequeña descripción debe contener más de 3 caracteres')
+  .max(50, 'La pequeña descripción debe contener menos de 50 caracteres.');
 export const tagOrBudgetValidation = (message: string) => Yup.string().min(3).max(20).required(message);
 export const tagOrBudgetValidationRequired = Yup.string().min(3).max(20).required();
 export const indebtedName = Yup.string().min(3, 'El nombre debe contener al menos 3 caracteres.').required('Por favor, ingrese un nombre');

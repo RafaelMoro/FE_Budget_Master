@@ -18,15 +18,17 @@ export const IndebtedPeopleFormSchema = Yup.object({
 });
 
 const categorySubcategoryValidation = {
-  category: stringRequired('Category is required'),
-  subCategory: stringRequired('Subcategory is required'),
+  category: stringRequired('Por favor, selecciona una categoría'),
+  subCategory: stringRequired('Por favor, seleccione una subcategoría'),
 };
 
 const createRecordValidation = {
   ...categorySubcategoryValidation,
   shortName: shortNameValidation,
-  description: Yup.string().min(3, 'Description is too short').max(300, 'Description is too long'),
-  amount: stringRequired('Amount is required'),
+  description: Yup.string()
+    .min(3, 'Por favor, ingrese una descripción de más de 3 caracteres')
+    .max(300, 'Por favor, ingrese una descripción con mmenos de 300 caracteres.'),
+  amount: stringRequired('Por favor, ingrese una cantidad'),
 };
 
 export const CreateRecordSchema = Yup.object(createRecordValidation);

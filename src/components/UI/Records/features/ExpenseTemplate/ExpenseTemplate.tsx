@@ -90,7 +90,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
   const budgetsAvailable: ExpenseBudget[] = useMemo(
     () => {
       const budgetsFetched = (budgets ?? []).map((budget) => ({ budgetId: budget._id, budgetName: budget.name }));
-      budgetsFetched.unshift({ budgetId: 'None', budgetName: 'None' });
+      budgetsFetched.unshift({ budgetId: 'None', budgetName: 'Ninguno' });
       return budgetsFetched;
     },
     [budgets],

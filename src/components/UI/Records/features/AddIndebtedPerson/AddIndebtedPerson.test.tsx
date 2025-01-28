@@ -47,11 +47,11 @@ describe('<AddIndebtedPerson />', () => {
       name: /agregar persona/i,
     })).toBeInTheDocument();
     expect(screen.getByRole('textbox', {
-      name: /full name/i,
+      name: /nombre completo/i,
     })).toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: /Cantidad disponible$/i })).toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: /cantidad pagada/i })).toBeInTheDocument();
-    expect(screen.getByRole('checkbox', { name: /Transaction paid/i })).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: /deuda pagada/i })).toBeInTheDocument();
     expect(
       screen.getByRole('button', { name: /agregar persona/i }),
     ).toBeInTheDocument();
@@ -65,9 +65,9 @@ describe('<AddIndebtedPerson />', () => {
     const button = screen.getByRole('button', { name: /agregar persona/i });
     userEvent.click(button);
 
-    expect(await screen.findByText(/full name is required/i)).toBeInTheDocument();
-    expect(screen.getByText(/amount is required/i)).toBeInTheDocument();
-    expect(screen.getByText(/amount paid is required/i)).toBeInTheDocument();
+    expect(await screen.findByText(/por favor, ingrese un nombre/i)).toBeInTheDocument();
+    expect(screen.getByText(/por favor, ingrese una cantidad/i)).toBeInTheDocument();
+    expect(screen.getByText(/por favor, ingrese la cantidad pagada hasta ahora/i)).toBeInTheDocument();
   });
 
   test('If the user fills the information, the add indebted person modal is closed', async () => {
@@ -76,7 +76,7 @@ describe('<AddIndebtedPerson />', () => {
     );
 
     const fullNameInput = screen.getByRole('textbox', {
-      name: /full name/i,
+      name: /nombre completo/i,
     });
     const amountInput = screen.getByRole('textbox', { name: /Cantidad disponible$/i });
     const amountPaidInput = screen.getByRole('textbox', { name: /cantidad pagada/i });
@@ -102,7 +102,7 @@ describe('<AddIndebtedPerson />', () => {
     );
 
     const fullNameInput = screen.getByRole('textbox', {
-      name: /full name/i,
+      name: /nombre completo/i,
     });
     const button = screen.getByRole('button', { name: /agregar persona/i });
 
@@ -118,16 +118,16 @@ describe('<AddIndebtedPerson />', () => {
     );
 
     expect(screen.getByRole('heading', {
-      name: /modify person/i,
+      name: /modificar persona/i,
     })).toBeInTheDocument();
     expect(screen.getByRole('textbox', {
-      name: /full name/i,
+      name: /nombre completo/i,
     })).toHaveValue('John');
     expect(screen.getByRole('textbox', { name: /Cantidad disponible$/i })).toHaveValue('100');
     expect(screen.getByRole('textbox', { name: /cantidad pagada/i })).toHaveValue('0');
-    expect(screen.getByRole('checkbox', { name: /Transaction paid/i })).not.toBeChecked();
+    expect(screen.getByRole('checkbox', { name: /deuda pagada/i })).not.toBeChecked();
     expect(
-      screen.getByRole('button', { name: /modify person/i }),
+      screen.getByRole('button', { name: /modificar persona/i }),
     ).toBeInTheDocument();
   });
 
@@ -137,11 +137,11 @@ describe('<AddIndebtedPerson />', () => {
     );
 
     const fullNameInput = screen.getByRole('textbox', {
-      name: /full name/i,
+      name: /nombre completo/i,
     });
     const amountInput = screen.getByRole('textbox', { name: /Cantidad disponible$/i });
     const amountPaidInput = screen.getByRole('textbox', { name: /cantidad pagada/i });
-    const button = screen.getByRole('button', { name: /modify person/i });
+    const button = screen.getByRole('button', { name: /modificar persona/i });
 
     userEvent.type(fullNameInput, 'Beto');
     userEvent.type(amountInput, '150');

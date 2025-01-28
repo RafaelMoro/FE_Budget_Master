@@ -1,3 +1,9 @@
+## v1.9.1 (2025-01-28)
+
+### Pull Requests
+[#60](https://github.com/RafaelMoro/FE_Budget_Master/pull/60) | Make date cell adjustments in table for mobile
+
+
 ## v1.9.0 (2025-01-27)
 
 ### Pull Requests

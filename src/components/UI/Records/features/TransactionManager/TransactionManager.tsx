@@ -20,8 +20,9 @@ const TransactionManager = ({ edit = false }: { edit?: boolean }) => {
   const typeOfRecordState: TypeOfRecord | undefined = location?.state?.typeOfRecord;
   const accounts = useAppSelector((state) => state.accounts.accounts);
   const hasOnlyOneAccount = accounts?.length === 1;
+  // TODO: Translate type of record to spanish
   const [typeOfRecord, setTypeOfRecord] = useState<TypeOfRecord>(typeOfRecordState ?? 'expense');
-  const action: string = edit ? 'Edit' : 'Create';
+  const action: string = edit ? 'Editar' : 'Crear';
 
   const changeTypeOfRecord = (event: React.MouseEvent<HTMLElement>, newTypeOfRecord: TypeOfRecord) => {
     setTypeOfRecord(newTypeOfRecord);

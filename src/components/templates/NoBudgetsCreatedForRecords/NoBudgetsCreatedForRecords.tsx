@@ -10,8 +10,10 @@ const NoBudgetsCreatedForRecords = () => {
 
   return (
     <FlexContainer flexDirection="column" justifyContent="center" alignItems="center" gap={3}>
-      <Typography variant="body2">You have not created your budgets yet. If you want to add this expense into a budget, first create one.</Typography>
-      <SecondaryButton onClick={goToCreateBudget}>Create Budget</SecondaryButton>
+      <Typography variant="body2">
+        No has creado presupuestos todavía. Si quieres añadir este gasto a un presupuesto, primero crea un presupuesto.
+      </Typography>
+      <SecondaryButton onClick={goToCreateBudget}>Crear presupuesto</SecondaryButton>
     </FlexContainer>
   );
 };

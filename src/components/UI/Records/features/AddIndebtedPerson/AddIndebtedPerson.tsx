@@ -3,7 +3,7 @@ import { Dialog, Typography } from '@mui/material';
 import { Field, Formik } from 'formik';
 import { Switch } from 'formik-mui';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { IndebtedPeopleFormSchema } from '../../../../../validationsSchemas/records.schema';
 import { FormContainer } from '../Features.styled';
 import {
@@ -33,6 +33,13 @@ const AddIndebtedPerson = ({
     amountPaid: '',
     isPaid: false,
   };
+
+  useEffect(() => {
+    if (modifyAction) {
+      initialAmount.current = indebtedPerson?.amount ?? '';
+      initialAmountPaid.current = indebtedPerson?.amountPaid ?? '';
+    }
+  }, [indebtedPerson?.amount, indebtedPerson?.amountPaid, initialAmount, modifyAction]);
 
   const updateAmountPaid = (amount: string) => {
     initialAmountPaid.current = amount;

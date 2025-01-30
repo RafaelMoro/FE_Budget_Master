@@ -4,7 +4,6 @@ import { ModalAction } from '../aliasType';
 
 const useIndebtedPeople = () => {
   const [indebtedPeople, setIndebtedPeople] = useState<IndebtedPeople []>([]);
-  console.log(indebtedPeople);
   const [personToModify, setPersonToModify] = useState<IndebtedPeople | null>(null);
   const [action, setAction] = useState<ModalAction>('Create');
 

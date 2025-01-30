@@ -23,7 +23,6 @@ const AddIndebtedPerson = ({
 }: AddIndebtedPersonProps) => {
   const { updateAmount, initialAmount } = useCurrencyField();
   const initialAmountPaid = useRef('');
-  console.log(indebtedPerson);
   const initialValues = modifyAction ? {
     name: indebtedPerson?.name ?? '',
     amount: indebtedPerson?.amount ?? '',

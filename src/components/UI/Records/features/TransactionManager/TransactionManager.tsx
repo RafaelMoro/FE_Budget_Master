@@ -46,9 +46,9 @@ const TransactionManager = ({ edit = false }: { edit?: boolean }) => {
         onChange={changeTypeOfRecord}
         aria-label="Select type of record"
       >
-        <ToggleButton value="expense">Expense</ToggleButton>
-        <ToggleButton value="income">Income</ToggleButton>
-        { (!hasOnlyOneAccount) && (<ToggleButton value="transfer">Transfer</ToggleButton>) }
+        <ToggleButton value="expense">Gasto</ToggleButton>
+        <ToggleButton value="income">Ingreso</ToggleButton>
+        { (!hasOnlyOneAccount) && (<ToggleButton value="transfer">Transferencia</ToggleButton>) }
       </ToggleButtonGroup>
       ) }
       <Typography variant="h3" align="center">

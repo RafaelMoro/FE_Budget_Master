@@ -70,7 +70,7 @@ const IncomeTemplate = ({ edit = false, typeOfRecord }: IncomeTemplateProps) => 
     setInitialValues({ ...values, tag: newChips });
   };
 
-  const showExpenseText = expensesSelected.length === 0 ? 'Add Expense' : 'Add or Remove Expense';
+  const showExpenseText = expensesSelected.length === 0 ? 'Agregar gasto' : 'Agregar o quitar gasto';
   const buttonText = `${action} record`;
 
   // Update edit data to the initial values

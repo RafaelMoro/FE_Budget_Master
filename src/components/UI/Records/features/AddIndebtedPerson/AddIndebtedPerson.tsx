@@ -16,12 +16,14 @@ import { Container } from './AddIndebtedPeople.styled';
 import { AppIcon } from '../../../Icons';
 import { CurrencyField } from '../../../../Other';
 import { useCurrencyField } from '../../../../Other/CurrencyField/useCurrencyField';
+import { createTransferId } from '../../../../../utils/CreateTransferId';
 
 const AddIndebtedPerson = ({
   open, onClose, addPerson, indebtedPeople = [], indebtedPerson, modifyAction, updatePerson,
 }: AddIndebtedPersonProps) => {
   const { updateAmount, initialAmount } = useCurrencyField();
   const initialAmountPaid = useRef('');
+  console.log(indebtedPerson);
   const initialValues = modifyAction ? {
     name: indebtedPerson?.name ?? '',
     amount: indebtedPerson?.amount ?? '',
@@ -58,11 +60,15 @@ const AddIndebtedPerson = ({
 
   const handleSubmit = (values: IndebtedPeople) => {
     if (modifyAction) {
-      updatePerson({ ...values, amount: initialAmount.current, amountPaid: initialAmountPaid.current });
+      updatePerson({
+        ...values, amount: initialAmount.current, amountPaid: initialAmountPaid.current, _id: indebtedPerson?._id,
+      });
       onClose();
       return;
     }
-    addPerson({ ...values, amount: initialAmount.current, amountPaid: initialAmountPaid.current });
+    addPerson({
+      ...values, amount: initialAmount.current, amountPaid: initialAmountPaid.current, _id: createTransferId(),
+    });
     onClose();
   };
 

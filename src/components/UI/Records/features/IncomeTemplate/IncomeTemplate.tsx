@@ -71,7 +71,7 @@ const IncomeTemplate = ({ edit = false, typeOfRecord }: IncomeTemplateProps) => 
   };
 
   const showExpenseText = expensesSelected.length === 0 ? 'Agregar gasto' : 'Agregar o quitar gasto';
-  const buttonText = `${action} registro`;
+  const buttonText = `${action} ingreso`;
 
   // Update edit data to the initial values
   useEffect(() => {

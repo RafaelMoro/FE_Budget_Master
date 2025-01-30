@@ -12,25 +12,25 @@ const headCells: readonly HeadCell[] = [
     id: 'shortName',
     numeric: false,
     disablePadding: false,
-    label: 'Short Description',
+    label: 'Descripción',
   },
   {
     id: 'amountFormatted',
     numeric: false,
     disablePadding: false,
-    label: 'Amount',
+    label: 'Monto',
   },
   {
     id: 'fullDate',
     numeric: false,
     disablePadding: false,
-    label: 'Date',
+    label: 'Fecha',
   },
   {
     id: 'isPaid',
     numeric: false,
     disablePadding: false,
-    label: 'Paid',
+    label: 'Pagado',
   },
 ];
 

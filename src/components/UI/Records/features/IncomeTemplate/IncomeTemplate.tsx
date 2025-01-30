@@ -50,7 +50,7 @@ const IncomeTemplate = ({ edit = false, typeOfRecord }: IncomeTemplateProps) => 
   const recordToBeEdited = useAppSelector((state) => state.records.recordToBeModified);
   const selectedAccount = useAppSelector((state) => state.accounts.accountSelected);
 
-  const action: string = edit ? 'Edit' : 'Create';
+  const action: string = edit ? 'Editar' : 'Crear';
   const categoryToBeEdited = recordToBeEdited?.category ?? null;
   const isCredit = selectedAccount?.accountType === 'Crédito';
   const [showExpenses, setShowExpenses] = useState<boolean>(false);
@@ -71,7 +71,7 @@ const IncomeTemplate = ({ edit = false, typeOfRecord }: IncomeTemplateProps) => 
   };
 
   const showExpenseText = expensesSelected.length === 0 ? 'Agregar gasto' : 'Agregar o quitar gasto';
-  const buttonText = `${action} record`;
+  const buttonText = `${action} registro`;
 
   // Update edit data to the initial values
   useEffect(() => {

@@ -145,6 +145,7 @@ function SelectExpensesTable({
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        labelRowsPerPage="Filas por página"
       />
       <FlexContainer justifyContent="space-between">
         <CancelButton onClick={closeDrawer}>Cancelar</CancelButton>

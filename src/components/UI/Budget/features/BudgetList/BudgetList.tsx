@@ -43,7 +43,7 @@ const BudgetList = () => {
   return (
     <AnimatePresence>
       <BudgetListContainer>
-        <BudgetsTitle variant="h2" align="center">Budgets:</BudgetsTitle>
+        <BudgetsTitle variant="h2" align="center">Presupuestos:</BudgetsTitle>
         { (isLoading && isMobile) && <BudgetSkeleton /> }
         { (isLoading && !isMobile) && (
         <>

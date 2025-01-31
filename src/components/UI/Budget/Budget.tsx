@@ -30,7 +30,7 @@ const Budget = ({
   } = budget;
   const windowSize = useAppSelector((state) => state.userInterface.windowSize);
   const isMobile = windowSize === 'Mobile';
-  const dateText = `From ${startDateFormatted} to ${endDateFormatted}`;
+  const dateText = `Desde ${startDateFormatted} hasta ${endDateFormatted}`;
   const progress = calculateProgress({ limit, currentAmount });
 
   const [title, setTitle] = useState(name);
@@ -56,7 +56,7 @@ const Budget = ({
         </TextTwoColumns>
         <Title variant="h4">{title}</Title>
         <TextTwoColumns align="center">
-          Limit:
+          Límite:
           {' '}
           {limitFormatted}
         </TextTwoColumns>

@@ -38,7 +38,7 @@ const DeleteRecordModal = ({
     <Dialog open={open} onClose={onClose}>
       <DeleteRecordContainer>
         <DeleteRecordTitle>
-          Esta seguro que desea borrar la transacción:
+          ¿Está seguro que desea borrar la transacción:
           {' '}
           &quot;
           {recordName}

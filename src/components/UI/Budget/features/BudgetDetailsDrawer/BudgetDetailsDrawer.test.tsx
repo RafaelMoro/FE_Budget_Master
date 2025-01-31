@@ -28,7 +28,7 @@ describe('BudgetDetailsDrawer', () => {
     expect(screen.getByText(dateText)).toBeInTheDocument();
     expect(screen.getByText('Fast food and beverages.')).toBeInTheDocument();
     expect(screen.getByText('6 days left')).toBeInTheDocument();
-    expect(screen.getByText(/limit/i)).toBeInTheDocument();
+    expect(screen.getByText(/límite/i)).toBeInTheDocument();
     expect(screen.getByText('20%')).toBeInTheDocument();
     expect(screen.getByText('$200.00')).toBeInTheDocument();
     expect(screen.getByText('This budget is to control the amount of money spent in fast food')).toBeInTheDocument();
@@ -57,6 +57,6 @@ describe('BudgetDetailsDrawer', () => {
     );
 
     expect(screen.getByText('periodic')).toBeInTheDocument();
-    expect(screen.getByText('Previous periods:')).toBeInTheDocument();
+    expect(screen.getByText('Periodos previos:')).toBeInTheDocument();
   });
 });

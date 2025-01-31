@@ -54,7 +54,7 @@ const BudgetDetailsDrawer = ({
         </IconButton>
       </IconsContainer>
       <Typography>
-        Limit:
+        Límite:
         {' '}
         {budget.limitFormatted}
       </Typography>
@@ -67,7 +67,7 @@ const BudgetDetailsDrawer = ({
       <BudgetChip label={budget.period} />
       { (budget.typeBudget === 'periodic' && budget.previousPeriods?.length > 0) && (
         <>
-          <TextTwoColumns align="center">Previous periods: </TextTwoColumns>
+          <TextTwoColumns align="center">Periodos previos: </TextTwoColumns>
           <List>
             { budget.previousPeriods.map((period) => (
               <Typography key={period}>{period}</Typography>

@@ -54,7 +54,7 @@ const BudgetList = () => {
         { (data && data.length > 0) && data.map((budget) => (
           <Budget key={budget._id} budget={budget} />
         )) }
-        <CreateBudgetButton onClick={navigateCreateBudget}>Create budget</CreateBudgetButton>
+        <CreateBudgetButton onClick={navigateCreateBudget}>Crear presupuesto</CreateBudgetButton>
       </BudgetListContainer>
     </AnimatePresence>
   );

@@ -1,4 +1,5 @@
 import { Field, Formik } from 'formik';
+import { FormControl, InputLabel } from '@mui/material';
 import { useRef } from 'react';
 
 import { BudgetSchema } from '../../../../../validationsSchemas/budget.schema';
@@ -9,11 +10,11 @@ import { TYPE_BUDGET_OPTIONS } from '../../Budget.constants';
 import { AnimateBox } from '../../../../../animations';
 import { CurrencyField } from '../../../../Other';
 import { useCurrencyField } from '../../../../Other/CurrencyField/useCurrencyField';
-import { SelectInput } from '../../../SelectInput';
 import { FormContainer } from '../../Budget.styled';
 import {
-  AnchorButton, CancelButton, FlexContainer, InputForm, PrimaryButton,
+  AnchorButton, CancelButton, FlexContainer, InputForm, MenuItem, PrimaryButton,
 } from '../../../../../styles';
+import { SelectFormik } from '../../../SelectInput/SelectFormik';
 
 const BudgetDetailsView = ({
   data, counterView, direction, goNext, toggleIsPeriodic,
@@ -53,14 +54,21 @@ const BudgetDetailsView = ({
               variant="standard"
               label="Nombre"
             />
-            <SelectInput
-              labelId="select-type-budget"
-              dataTestId="select-type-budget"
-              labelName="Tipo de presupuesto"
-              fieldName="typeBudget"
-              onClickCb={toggleIsPeriodic}
-              stringOptions={TYPE_BUDGET_OPTIONS}
-            />
+            <FormControl variant="standard">
+              <InputLabel id="select-type-budget">Tipo de presupuesto</InputLabel>
+              <Field
+                dataTestId="select-type-budget"
+                name="typeBudget"
+                component={SelectFormik}
+                onClickCb={toggleIsPeriodic}
+              >
+                {
+                Object.entries(TYPE_BUDGET_OPTIONS).map((option) => (
+                  <MenuItem key={option[0]} value={option[0]}>{option[1]}</MenuItem>
+                ))
+              }
+              </Field>
+            </FormControl>
             <CurrencyField
               setFieldValue={setFieldValue}
               amount={initialAmount.current}

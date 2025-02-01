@@ -47,10 +47,10 @@ const BudgetDetailsDrawer = ({
       <BudgetDateDrawer align="center" variant="body2">{dateText}</BudgetDateDrawer>
       <Title variant="h4">{budget.name}</Title>
       <IconsContainer>
-        <IconButton onClick={handleEditBudget}>
+        <IconButton aria-label={`boton-editar-presupuesto-${budget.name}`} onClick={handleEditBudget}>
           <AppIcon icon="Edit" />
         </IconButton>
-        <IconButton onClick={toggleDeleteModal}>
+        <IconButton aria-label={`boton-eliminar-presupuesto-${budget.name}`} onClick={toggleDeleteModal}>
           <AppIcon icon="Delete" />
         </IconButton>
       </IconsContainer>

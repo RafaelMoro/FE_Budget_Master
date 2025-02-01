@@ -51,12 +51,12 @@ const BudgetDetailsView = ({
               name="name"
               type="text"
               variant="standard"
-              label="Name"
+              label="Nombre"
             />
             <SelectInput
               labelId="select-type-budget"
               dataTestId="select-type-budget"
-              labelName="Type of budget"
+              labelName="Tipo de presupuesto"
               fieldName="typeBudget"
               onClickCb={toggleIsPeriodic}
               stringOptions={TYPE_BUDGET_OPTIONS}
@@ -66,20 +66,20 @@ const BudgetDetailsView = ({
               amount={initialAmount.current}
               updateAmount={updateAmount}
               fieldName="limit"
-              labelName="Budget limit"
+              labelName="Límite del presupuesto"
             />
             <CurrencyField
               setFieldValue={setFieldValue}
               amount={currentAmountRef.current}
               updateAmount={updateCurrentAmount}
               fieldName="currentAmount"
-              labelName="Amount Spent"
+              labelName="Cantidad gastada hasta ahora"
             />
             <FlexContainer justifyContent="space-between">
               <AnchorButton to={BUDGETS_ROUTE}>
-                <CancelButton variant="contained" size="medium">Cancel</CancelButton>
+                <CancelButton variant="contained" size="medium">Cancelar</CancelButton>
               </AnchorButton>
-              <PrimaryButton variant="contained" onClick={submitForm} size="medium">Next</PrimaryButton>
+              <PrimaryButton variant="contained" onClick={submitForm} size="medium">Siguiente</PrimaryButton>
             </FlexContainer>
           </FormContainer>
         </AnimateBox>

@@ -11,6 +11,7 @@ export const Container = styled.div`
 
 export const Title = styled(Typography)`
   grid-column: 1 / 3;
+  text-wrap: pretty;
 `;
 
 export const WarnText = styled(ErrorParagraphValidation)`

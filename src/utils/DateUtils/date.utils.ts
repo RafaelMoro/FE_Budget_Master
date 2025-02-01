@@ -98,13 +98,23 @@ export const getRemainingDays = (endDate: string) => {
   return restingDays;
 };
 
+export const getMonthName = (date: Date) => {
+  const month = date.getMonth();
+  return MONTHS[month];
+};
+
+export const getMonth = (dateToFormat: string) => {
+  // Transforming into date because came as string due non serializable redux state
+  const date = new Date(dateToFormat);
+  return getMonthName(date);
+};
+
 export const transformDateToMonthDay = (dateToFormat: string) => {
   // Transforming into date because came as string due non serializable redux state
   const date = new Date(dateToFormat);
-  const month = date.getMonth();
+  const month = getMonthName(date);
   const day = date.getDate();
-
-  return `${MONTHS[month]} ${day}`;
+  return `${month} ${day}`;
 };
 
 export const formatDateToDDMMYYYY = (date: Date) => {

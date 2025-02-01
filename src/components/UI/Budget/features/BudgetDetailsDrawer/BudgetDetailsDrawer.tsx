@@ -29,8 +29,6 @@ const BudgetDetailsDrawer = ({
   const navigate = useNavigate();
   const restingDays = getRemainingDays(budget.endDate);
   const [restingDaysText, setRestingDaysText] = useState<string>(`${restingDays} days left`);
-  console.log(restingDaysText);
-  console.log('dateText', dateText);
 
   useEffect(() => {
     const message = getExpirationMessage({ days: restingDays, month, endDateParam: budget.endDate });

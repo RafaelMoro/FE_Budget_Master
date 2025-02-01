@@ -1,6 +1,7 @@
 import { screen, waitFor } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import fetchMock from 'jest-fetch-mock';
 
 import userEvent from '@testing-library/user-event';
@@ -10,7 +11,7 @@ import { renderWithProviders } from '../../../../../tests/CustomWrapperRedux';
 
 describe('DeleteBudgetModal', () => {
   const onCloseFn = jest.fn();
-  const budget = getMockBudget();
+  const { budget } = getMockBudget();
   const history = createMemoryHistory();
   beforeEach(() => {
     fetchMock.resetMocks();

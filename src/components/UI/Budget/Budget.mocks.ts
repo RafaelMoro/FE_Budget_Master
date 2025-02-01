@@ -1,4 +1,4 @@
-import { BudgetUI, TypeBudget } from '../../../globalInterface';
+import { BudgetUI, MONTHS, TypeBudget } from '../../../globalInterface';
 import { transformDateToMonthDay } from '../../../utils';
 
 export const currentBudget: BudgetUI = {
@@ -53,10 +53,12 @@ export const getMockBudget = ({
   hasLargeDescription,
   typeBudget = 'one-time',
   previousPeriods = [],
-}: GetMockBudgetProps = {}): BudgetUI => {
+}: GetMockBudgetProps = {}) => {
   const defaultTitle = 'Fast food and beverages.';
   const largeTitle = 'This is a very long title that should be truncated on the budget when shown.';
   const today = new Date();
+  const currentMonthNumber = today.getMonth() + 1;
+  const currentMonth = MONTHS[currentMonthNumber];
   const todayString = today.toLocaleString();
   const startDateFormatted = transformDateToMonthDay(todayString);
 
@@ -69,7 +71,7 @@ export const getMockBudget = ({
   // eslint-disable-next-line max-len
   const largeDescription = "This is a very long description that should be truncated on the budget when shown. Seems like it's still missing some words so the description can be truncated";
 
-  return {
+  const mockedBudget: BudgetUI = {
     _id: '1',
     __v: 0,
     name: hasLargeTitle ? largeTitle : defaultTitle,
@@ -87,6 +89,11 @@ export const getMockBudget = ({
     isActive: true,
     nextResetDate: endDateString,
     previousPeriods,
+  };
+
+  return {
+    budget: mockedBudget,
+    currentMonth,
   };
 };
 

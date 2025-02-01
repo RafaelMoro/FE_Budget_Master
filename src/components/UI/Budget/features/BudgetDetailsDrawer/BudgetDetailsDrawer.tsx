@@ -17,22 +17,25 @@ import { getExpirationMessage } from '../../Budget.util';
 interface BudgetDetailsDrawerProps {
   budget: BudgetUI;
   dateText: string;
+  month: string;
   progress: number;
   toggleDrawer: () => void;
   toggleDeleteModal: () => void;
 }
 
 const BudgetDetailsDrawer = ({
-  toggleDrawer, budget, dateText, progress, toggleDeleteModal,
+  toggleDrawer, budget, dateText, month, progress, toggleDeleteModal,
 }: BudgetDetailsDrawerProps) => {
   const navigate = useNavigate();
   const restingDays = getRemainingDays(budget.endDate);
   const [restingDaysText, setRestingDaysText] = useState<string>(`${restingDays} days left`);
+  console.log(restingDaysText);
+  console.log('dateText', dateText);
 
   useEffect(() => {
-    const message = getExpirationMessage({ days: restingDays, month: dateText, endDateParam: budget.endDate });
+    const message = getExpirationMessage({ days: restingDays, month, endDateParam: budget.endDate });
     setRestingDaysText(message);
-  }, [budget.endDate, dateText, restingDays]);
+  }, [budget.endDate, month, restingDays]);
 
   const handleEditBudget = () => {
     navigate(BUDGET_EDITOR_PAGE_ROUTE, { state: { budget } });

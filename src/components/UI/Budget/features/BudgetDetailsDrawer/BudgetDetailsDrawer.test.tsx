@@ -9,8 +9,8 @@ describe('BudgetDetailsDrawer', () => {
   test('Show Budget Details Drawer with a one time budget', () => {
     const toggleDrawer = jest.fn();
     const toggleDeleteModal = jest.fn();
-    const mockBudget = getMockBudget();
-    const dateText = `From ${mockBudget.startDateFormatted} to ${mockBudget.endDateFormatted}`;
+    const { budget, currentMonth } = getMockBudget();
+    const dateText = `From ${budget.startDateFormatted} to ${budget.endDateFormatted}`;
     const progress = 20;
 
     render(
@@ -19,8 +19,9 @@ describe('BudgetDetailsDrawer', () => {
           toggleDeleteModal={toggleDeleteModal}
           dateText={dateText}
           progress={progress}
-          budget={mockBudget}
+          budget={budget}
           toggleDrawer={toggleDrawer}
+          month={currentMonth}
         />
       </Router>,
     );
@@ -42,7 +43,7 @@ describe('BudgetDetailsDrawer', () => {
     const dateText = 'From Jul 10 to Jul 27';
     const progress = 20;
     const previousPeriods = ['2024-06-22T12:08:00 | 2024-07-06T12:08:00', '2024-07-06T12:08:00 | 2024-07-20T12:08:00'];
-    const mockBudget = getMockBudget({ typeBudget: 'periodic', previousPeriods });
+    const { budget, currentMonth } = getMockBudget({ typeBudget: 'periodic', previousPeriods });
 
     render(
       <Router location={history.location} navigator={history}>
@@ -50,7 +51,8 @@ describe('BudgetDetailsDrawer', () => {
           toggleDeleteModal={toggleDeleteModal}
           dateText={dateText}
           progress={progress}
-          budget={mockBudget}
+          budget={budget}
+          month={currentMonth}
           toggleDrawer={toggleDrawer}
         />
       </Router>,

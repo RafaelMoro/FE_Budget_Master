@@ -9,6 +9,7 @@ export const currentBudget: BudgetUI = {
   typeBudget: 'one-time',
   period: 'weekly',
   startDate: '2024-07-20T12:08:00',
+  month: 'Julio',
   startDateFormatted: 'Jul 20',
   endDate: '2024-07-27T12:08:00',
   endDateFormatted: 'Jul 27',
@@ -29,6 +30,7 @@ export const periodicBudget: BudgetUI = {
   typeBudget: 'periodic',
   period: 'bi-weekly',
   startDate: '2024-07-20T12:08:00',
+  month: 'Julio',
   startDateFormatted: 'Jul 20',
   endDate: '2024-08-03T12:08:00',
   endDateFormatted: 'Aug 03',
@@ -89,6 +91,7 @@ export const getMockBudget = ({
     isActive: true,
     nextResetDate: endDateString,
     previousPeriods,
+    month: currentMonth,
   };
 
   return {

@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { Budget, BudgetUI } from '../../../globalInterface';
-import { formatValueToCurrency, transformDateToMonthDay } from '../../../utils';
+import { formatValueToCurrency, getMonth, transformDateToMonthDay } from '../../../utils';
 
 export function calculateProgress({ limit, currentAmount }: { limit: number, currentAmount: number }) {
   if (currentAmount === 0) return 0;
@@ -16,6 +16,7 @@ export const transformBudgetUI = ({ budgets }: { budgets: Budget[] }): BudgetUI[
   currentAmountFormatted: formatValueToCurrency({ amount: budget.currentAmount }),
   startDateFormatted: transformDateToMonthDay(budget.startDate),
   endDateFormatted: transformDateToMonthDay(budget.endDate),
+  month: getMonth(budget.startDate),
 }));
 
 export const getExpirationMessage = ({ days, month, endDateParam }: { days: number, month: string, endDateParam: string }) => {

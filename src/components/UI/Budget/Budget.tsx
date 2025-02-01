@@ -27,7 +27,7 @@ const Budget = ({
     limitFormatted,
     startDateFormatted,
     endDateFormatted,
-    startDate,
+    month,
   } = budget;
   const windowSize = useAppSelector((state) => state.userInterface.windowSize);
   const isMobile = windowSize === 'Mobile';
@@ -71,7 +71,7 @@ const Budget = ({
           progress={progress}
           dateText={dateText}
           budget={budget}
-          month={startDate}
+          month={month}
           toggleDrawer={toggleBudgetDetailsDrawer}
           toggleDeleteModal={toggleDeleteModal}
         />

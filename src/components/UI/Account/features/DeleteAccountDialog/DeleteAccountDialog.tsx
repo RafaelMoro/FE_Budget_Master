@@ -75,7 +75,7 @@ const DeleteAccountDialog = ({
         </DeleteAccountIconButton>
         <DialogParagraphWarning>NO HAY FORMA DE RECUPERAR LOS DATOS DE SU CUENTA.</DialogParagraphWarning>
         <DialogParagraph>
-          Esta seguro(a) de que desea eliminar su cuenta
+          ¿Está seguro(a) de que desea eliminar su cuenta
           {' '}
           {accountName}
           ?

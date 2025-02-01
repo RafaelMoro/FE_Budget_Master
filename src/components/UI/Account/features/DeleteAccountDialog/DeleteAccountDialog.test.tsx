@@ -46,7 +46,7 @@ describe('<DeleteAccountDialog />', () => {
     );
 
     expect(screen.getByRole('heading', { name: /eliminar cuenta/i })).toBeInTheDocument();
-    expect(screen.getByText(`Esta seguro(a) de que desea eliminar su cuenta ${accountName}?`)).toBeInTheDocument();
+    expect(screen.getByText(`¿Está seguro(a) de que desea eliminar su cuenta ${accountName}?`)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /eliminar cuenta/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /volver/i })).toBeInTheDocument();
   });

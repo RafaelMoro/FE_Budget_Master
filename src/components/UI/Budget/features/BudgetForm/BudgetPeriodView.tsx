@@ -41,7 +41,7 @@ const BudgetPeriodView = ({
     const differenceTodaysDate = endDateRceived.diff(todayDate, 'days');
 
     if (differenceTodaysDate < 0) {
-      error = 'The end date cannot be before today';
+      error = 'La fecha de término no puede ser hoy. Elija una fecha posterior.';
       return error;
     }
     return error;
@@ -85,7 +85,7 @@ const BudgetPeriodView = ({
               component={DatePickerValue}
               setFieldValueCb={setFieldValue}
               name="endDate"
-              label="Fecha de termino"
+              label="Fecha de término"
               validate={validateEndDate}
             />
             { (errors.endDate) && (

@@ -88,11 +88,11 @@ describe('Budget form', () => {
     userEvent.type(amountSpentInput, '500');
     userEvent.click(nextButton);
 
-    expect(await screen.findByRole('textbox', { name: /description \(optional\)/i })).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: /start date/i })).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: /end date/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /return/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /create budget/i })).toBeInTheDocument();
+    expect(await screen.findByRole('textbox', { name: /descripción \(opcional\)/i })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /fecha de inicio/i })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /fecha de término/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /regresar/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /crear/i })).toBeInTheDocument();
   });
 
   // eslint-disable-next-line max-len

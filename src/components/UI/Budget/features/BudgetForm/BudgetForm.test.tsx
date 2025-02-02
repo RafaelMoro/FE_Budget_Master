@@ -39,7 +39,7 @@ describe('Budget form', () => {
 
     expect(await screen.findByText(/Por favor, ingrese un nombre para el presupuesto/i)).toBeInTheDocument();
     expect(screen.getByText(/Por favor, ingrese un límite para el presupuesto/i)).toBeInTheDocument();
-    expect(screen.getByText(/ Por favor, ingrese una cantidad que ha gastado hasta ahora/i)).toBeInTheDocument();
+    expect(screen.getByText(/por favor, ingrese una cantidad que ha gastado hasta ahora\. puede ser 0/i)).toBeInTheDocument();
   });
 
   test('Given a user entering a 2 character budget name, should show error validation', async () => {

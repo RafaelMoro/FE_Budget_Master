@@ -77,11 +77,11 @@ export const getTwoMonthBeforeLastMonth = () => {
   if (currentMonth === 0) {
     numberToSubtract = 7;
   }
-  if (currentMonth === 11) {
-    numberToSubtract = 8;
+  if (currentMonth === 1) {
+    numberToSubtract = 6;
   }
-  if (currentMonth === 10) {
-    numberToSubtract = 9;
+  if (currentMonth === 2) {
+    numberToSubtract = 5;
   }
 
   const passedMonth = currentMonth + numberToSubtract;

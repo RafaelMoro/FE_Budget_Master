@@ -22,13 +22,13 @@ describe('Create budget page', () => {
       </Router>,
     );
 
-    expect(screen.getByText('Create budget')).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: /name/i })).toBeInTheDocument();
+    expect(screen.getByText('Crear presupuesto')).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /nombre/i })).toBeInTheDocument();
     expect(screen.getByRole('combobox')).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: /budget limit/i })).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: /amount spent/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /cancel/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /next/i })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /Límite del presupuesto/i })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /Cantidad gastada hasta ahora/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /cancelar/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /siguiente/i })).toBeInTheDocument();
   });
 
   test('Giver a user filling the forms, then the loading screen is shown, and the success screen is shown', async () => {
@@ -39,10 +39,10 @@ describe('Create budget page', () => {
     );
 
     // Fill the first form
-    const nextButton = screen.getByRole('button', { name: /next/i });
-    const budgetNameInput = screen.getByRole('textbox', { name: /name/i });
-    const budgetLimitInput = screen.getByRole('textbox', { name: /budget limit/i });
-    const amountSpentInput = screen.getByRole('textbox', { name: /amount spent/i });
+    const nextButton = screen.getByRole('button', { name: /siguiente/i });
+    const budgetNameInput = screen.getByRole('textbox', { name: /nombre/i });
+    const budgetLimitInput = screen.getByRole('textbox', { name: /Límite del presupuesto/i });
+    const amountSpentInput = screen.getByRole('textbox', { name: /Cantidad gastada hasta ahora/i });
 
     userEvent.type(budgetNameInput, 'Budget name');
     userEvent.type(budgetLimitInput, '1000');
@@ -50,13 +50,13 @@ describe('Create budget page', () => {
     userEvent.click(nextButton);
 
     // Await on the second form to be shown.
-    expect(await screen.findByRole('textbox', { name: /description \(optional\)/i })).toBeInTheDocument();
-    const descriptionInput = screen.getByRole('textbox', { name: /description \(optional\)/i });
-    const createBudgetButton = screen.getByRole('button', { name: /create budget/i });
+    expect(await screen.findByRole('textbox', { name: /descripción \(opcional\)/i })).toBeInTheDocument();
+    const descriptionInput = screen.getByRole('textbox', { name: /descripción \(opcional\)/i });
+    const createBudgetButton = screen.getByRole('button', { name: /crear/i });
     userEvent.type(descriptionInput, 'Budget description');
     userEvent.click(createBudgetButton);
 
     // Show loading screen
-    expect(await screen.findByText('Your budget is being created. Please wait...')).toBeInTheDocument();
+    expect(await screen.findByText('Su presupuesto está siendo creado. Por favor espere...')).toBeInTheDocument();
   });
 });

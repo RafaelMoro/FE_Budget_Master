@@ -17,7 +17,7 @@ describe('Budget', () => {
     );
 
     expect(screen.getByText('Fast food and beverages.')).toBeInTheDocument();
-    expect(screen.getByText('Limit: $1,000.00')).toBeInTheDocument();
+    expect(screen.getByText('Límite: $1,000.00')).toBeInTheDocument();
     expect(screen.getByRole('progressbar')).toBeInTheDocument();
     expect(screen.getByText('$200.00')).toBeInTheDocument();
     expect(screen.getByText('20%')).toBeInTheDocument();

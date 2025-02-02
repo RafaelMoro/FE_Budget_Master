@@ -102,7 +102,7 @@ export const getMockBudget = ({
 
 export const successfulResponseFetchBudgets = {
   data: {
-    budgets: [getMockBudget()],
+    budgets: [getMockBudget()?.budget],
   },
   error: null,
   message: null,

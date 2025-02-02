@@ -44,7 +44,7 @@ const Budget = ({
   const toggleDeleteModal = () => setOpenDeleteModal((prevState) => !prevState);
 
   useEffect(() => {
-    if (name.length > 50) {
+    if (name?.length > 50) {
       setTitle(`${name.slice(0, 50)}...`);
     }
   }, [name]);

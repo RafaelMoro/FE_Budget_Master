@@ -16,10 +16,9 @@ import { useNotification } from '../../../../../hooks/useNotification';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
 import { isCategorySelected, updateCurrentCategory } from '../../../../../redux/slices/Categories/categories.slice';
 import { LoadingSpinner } from '../../../LoadingSpinner';
-import { useFetchCategoriesQuery } from '../../../../../redux/slices/Categories/categories.api';
 import { useCreateLocalCategoriesMutation } from '../../../../../redux/slices/User/actions/createUser';
 import { SelectCategory } from './SelectCategory';
-import { useGuestUser } from '../../../../../hooks/useGuestUser/useGuestUser';
+import { useCategories } from '../../../../../hooks';
 
 interface CategoriesAndSubcategoriesProps {
   errorCategory?: string;
@@ -33,18 +32,16 @@ const CategoriesAndSubcategories = ({
   errorCategory, errorSubcategory, touchedCategory, touchedSubCategory, categoryToBeEdited,
 }: CategoriesAndSubcategoriesProps) => {
   const dispatch = useAppDispatch();
-  const { isGuestUser } = useGuestUser();
+  const {
+    currentData, isError, isFetching, isSuccess, isGuestUser,
+  } = useCategories();
   const { updateGlobalNotification } = useNotification();
   const categoriesLocalStorage = useAppSelector((state) => state.categories.categoriesLocalStorage);
   const userData = useAppSelector((state) => state.user.userInfo);
   const sub = userData?.user.sub ?? '';
-  const bearerToken = userData?.bearerToken as string;
   const categoriesState = useAppSelector((state) => state.categories);
   const categoriesFieldName = 'category';
   const [createLocalCategoriesMutation, { isLoading: isLoadingCreateCategories }] = useCreateLocalCategoriesMutation();
-  const {
-    currentData, isError, isFetching, isSuccess,
-  } = useFetchCategoriesQuery({ bearerToken }, { skip: !bearerToken && (isGuestUser ?? false) });
 
   const onlyCategoriesFetched = useMemo(() => (currentData ?? []).map((item) => ({
     name: item.categoryName,

@@ -267,7 +267,7 @@ describe('Header', () => {
       { preloadedState: { userInterface: userInterfaceState, user: loggedUserState } },
     );
 
-    const signOutButton = screen.getByRole('button', { name: /sign-out-button/i });
+    const signOutButton = screen.getByRole('button', { name: /open-configuration-button/i });
     expect(signOutButton).toBeInTheDocument();
 
     userEvent.click(signOutButton);

@@ -8,7 +8,7 @@ export interface UserInfo {
   lastName: string;
   email: string;
   sub: string;
-  initials: string;
+  initials?: string;
 }
 
 export interface Actions {
@@ -21,7 +21,6 @@ export interface User {
   bearerToken: string;
   accessToken: string;
 }
-
 export const TYPE_OF_ACCOUNTS = ['Crédito', 'Débito', 'Vales de comida', 'Vales de restaurante', 'Cuenta de ahorro'] as const;
 export type AccountType = typeof TYPE_OF_ACCOUNTS[number];
 

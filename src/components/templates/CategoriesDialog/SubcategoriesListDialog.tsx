@@ -1,8 +1,9 @@
 import {
-  Collapse, List, ListItemButton, ListItemText, IconButton,
+  Collapse, List, IconButton,
 } from '@mui/material';
 import { AppIcon } from '../../UI/Icons';
 import { AppColors, FlexContainer } from '../../../styles';
+import { SubcategoryText } from './CategoriesDialog.styled';
 
 interface SubcategoriesListDialogProps {
   openList: boolean;
@@ -26,9 +27,7 @@ const SubcategoriesListDialog = ({ openList, subCategories, categoryName }: Subc
       </FlexContainer>
       <List component="div" disablePadding>
         { subCategories.map((subcategory) => (
-          <ListItemButton key={subcategory} sx={{ pl: 4 }}>
-            <ListItemText primary={subcategory} />
-          </ListItemButton>
+          <SubcategoryText key={subcategory} sx={{ pl: 4 }} primary={subcategory} />
         ))}
       </List>
     </Collapse>

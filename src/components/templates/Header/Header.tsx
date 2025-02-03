@@ -1,4 +1,6 @@
-import { IconButton } from '@mui/material';
+import {
+  IconButton, Menu, Typography, Tooltip,
+} from '@mui/material';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -13,7 +15,7 @@ import { AppIcon } from '../../UI/Icons';
 import { BrandLogoName } from '../BrandLogoName';
 import { GuestUserModal, LoggedUserDrawer, NotLoggedDrawer } from './features';
 import {
-  AnchorButton, AppColors, FlexContainer, PrimaryButton, SecondaryButton, Avatar,
+  AnchorButton, AppColors, FlexContainer, PrimaryButton, SecondaryButton, Avatar, MenuItem,
 } from '../../../styles';
 import {
   GuestUserButton,
@@ -28,6 +30,7 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
   const isMobile = windowSize === 'Mobile';
   const isDesktop = windowSize === 'Desktop';
 
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openNotLoggedDrawer, setOpenNotLoggedDrawer] = useState(false);
   const [openLoggedDrawer, setOpenLoggedDrawer] = useState(false);
   const [openGuestUserModal, setOpenGuestUserModal] = useState(false);
@@ -39,6 +42,12 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
   const handleGuestUserModalMobile = () => {
     toggleNotLoggedDrawer();
     toggleGuestUserModal();
+  };
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   const activeDashboardPage = location.pathname === DASHBOARD_ROUTE;
@@ -56,9 +65,34 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
             </HeaderNav>
           ) }
           { (!isGuestUser && userLoggedOn && isDesktop) && (
-            <IconButton aria-label="open-configuration-button" onClick={signOut}>
-              <Avatar>{initials}</Avatar>
-            </IconButton>
+            <>
+              <Tooltip title={
+                <Typography>Abrir configuración</Typography>
+              }
+              >
+                <IconButton aria-label="open-configuration-button" onClick={handleMenu}>
+                  <Avatar>{initials}</Avatar>
+                </IconButton>
+              </Tooltip>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>My account</MenuItem>
+              </Menu>
+            </>
           ) }
           {/** TODO: Change this to use avatar */}
           { (!isGuestUser && !userLoggedOn && !isMobile) && (

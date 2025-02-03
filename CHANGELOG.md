@@ -1,3 +1,9 @@
+## v1.11.0 (2025-02-03)
+
+### Pull Requests
+[#63](https://github.com/RafaelMoro/FE_Budget_Master/pull/63) | Translate last part of the site
+
+
 ## v1.10.1 (2025-02-03)
 
 ### Pull Requests

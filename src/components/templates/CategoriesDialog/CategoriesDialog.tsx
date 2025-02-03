@@ -35,7 +35,7 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
       <IconButton onClick={onClose}>
         <AppIcon icon="Close" />
       </IconButton>
-      <Typography>Categorías</Typography>
+      <Typography variant="h4" align="center">Categorías</Typography>
       <List
         sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
         component="nav"

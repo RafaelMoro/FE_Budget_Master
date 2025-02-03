@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import {
   Typography, List,
 } from '@mui/material';
+
 import { CategoryUI } from '../../../globalInterface';
+import { ShowCategoriesProps } from './CategoryDialog.interface';
 import { useCategories } from '../../../hooks';
 import { CategoriesListDialog } from './CategoriesListDialog';
 
-const ShowCategories = () => {
+const ShowCategories = ({ updateAction }: ShowCategoriesProps) => {
   const {
     currentData, isError, isFetching, isSuccess,
   } = useCategories();
@@ -43,7 +45,13 @@ const ShowCategories = () => {
           }
       {
             (categories.length > 0) && categories.map(({ category, subcategories, categoryId }) => (
-              <CategoriesListDialog key={categoryId} subCategories={subcategories} categoryName={category} />
+              <CategoriesListDialog
+                updateAction={updateAction}
+                key={categoryId}
+                categoryId={categoryId}
+                subCategories={subcategories}
+                categoryName={category}
+              />
             ))
           }
     </List>

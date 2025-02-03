@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import {
   Dialog, Typography,
 } from '@mui/material';
@@ -11,7 +11,12 @@ import { ShowCategories } from './ShowCategories';
 
 const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
   const [action, setAction] = useState<CategoryDialogAction>('show');
-  const updateAction = (newAction: CategoryDialogAction) => setAction(newAction);
+  const categoryIdRef = useRef<string>('');
+
+  const updateAction = (newAction: CategoryDialogAction, categoryId: string) => {
+    setAction(newAction);
+    categoryIdRef.current = categoryId;
+  };
 
   return (
     <Dialog onClose={onClose} open={open}>
@@ -23,7 +28,7 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
         <Typography>
           {CATEGORY_DIALOG_ACTIONS[action].description}
         </Typography>
-        { action === 'show' && (<ShowCategories />) }
+        { action === 'show' && (<ShowCategories updateAction={updateAction} />) }
       </CategoriesDialogContainer>
     </Dialog>
   );

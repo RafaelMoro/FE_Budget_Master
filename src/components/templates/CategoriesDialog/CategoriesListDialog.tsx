@@ -7,17 +7,23 @@ import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { ICON_SIZE } from '../../../constants';
 import { SubcategoriesListDialog } from './SubcategoriesListDialog';
 import { CategoryText } from './CategoriesDialog.styled';
+import { CategoriesListDialogProps } from './CategoryDialog.interface';
 
-interface CategoriesListDialogProps {
-  categoryName: string;
-  subCategories: string[];
-}
-
-const CategoriesListDialog = ({ categoryName, subCategories }: CategoriesListDialogProps) => {
+const CategoriesListDialog = ({
+  categoryName, subCategories, categoryId, updateAction,
+}: CategoriesListDialogProps) => {
   const [openList, setOpenList] = useState(false);
 
   const handleClick = () => {
     setOpenList((prevState) => !prevState);
+  };
+
+  const handleEdit = () => {
+    updateAction('edit', categoryId);
+  };
+
+  const handleDelete = () => {
+    updateAction('delete', categoryId);
   };
 
   return (
@@ -26,7 +32,13 @@ const CategoriesListDialog = ({ categoryName, subCategories }: CategoriesListDia
         <CategoryText primary={categoryName} />
         {openList ? <ExpandLess sx={ICON_SIZE} /> : <ExpandMore sx={ICON_SIZE} />}
       </ListItemButton>
-      <SubcategoriesListDialog categoryName={categoryName} subCategories={subCategories} openList={openList} />
+      <SubcategoriesListDialog
+        categoryName={categoryName}
+        subCategories={subCategories}
+        openList={openList}
+        handleDelete={handleDelete}
+        handleEdit={handleEdit}
+      />
     </>
 
   );

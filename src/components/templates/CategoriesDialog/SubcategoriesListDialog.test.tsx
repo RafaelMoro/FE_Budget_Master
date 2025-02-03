@@ -3,8 +3,9 @@ import { SubcategoriesListDialog } from './SubcategoriesListDialog';
 
 describe('<SubcategoriesListDialog />', () => {
   test('Show subcategories list', () => {
+    const categoryName = 'First category';
     const subcategories = ['First subcategory', 'Second subcategory'];
-    render(<SubcategoriesListDialog subCategories={subcategories} openList />);
+    render(<SubcategoriesListDialog categoryName={categoryName} subCategories={subcategories} openList />);
 
     expect(screen.getByText(/first subcategory/i)).toBeInTheDocument();
     expect(screen.getByText(/second subcategory/i)).toBeInTheDocument();

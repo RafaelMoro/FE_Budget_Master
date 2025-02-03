@@ -242,7 +242,7 @@ const INCOME_CATEGORY: Category = {
     'Reembolsos',
     'Regalos',
   ],
-  icon: 'savings',
+  icon: 'income',
 };
 export const CATEGORIES_RECORDS: Category[] = [
   FOOD_AND_DRINK_CATEGORY,

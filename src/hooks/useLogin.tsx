@@ -49,6 +49,7 @@ const useLogin = () => {
     title: NOTIFICATION_TITLE, description: NOTIFICATION_DESCRIPTION, status: NOTIFICATION_STATUS,
   });
   const hasSignedOn = useAppSelector((state) => state.userInterface.hasSignedOn);
+  const initialsState = useAppSelector((state) => state.user.userInfo?.user?.initials);
 
   const resetUserGuestLocalStorage = () => {
     dispatch(resetRecordsLocalStorage());
@@ -145,6 +146,7 @@ const useLogin = () => {
     notificationInfo,
     notification,
     submitOnPressEnter,
+    initials: initialsState,
   };
 };
 

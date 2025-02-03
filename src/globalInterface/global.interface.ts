@@ -105,6 +105,12 @@ export interface Category {
   icon: string;
 }
 
+export interface CategoryUI {
+  category: string;
+  categoryId: string;
+  subcategories: string[];
+}
+
 export type TypeBudget = 'one-time' | 'periodic';
 export type PeriodBudget = 'weekly' | 'bi-weekly' | 'montly' | 'daily' | 'yearly';
 

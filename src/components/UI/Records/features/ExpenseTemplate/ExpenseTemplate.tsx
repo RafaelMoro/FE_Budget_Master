@@ -24,6 +24,7 @@ import { AddIndebtedPerson } from '../AddIndebtedPerson/AddIndebtedPerson';
 import { TransactionFormFields } from '../TransactionFormFields';
 import { FormContainer, SecondaryButtonForm, ShowIndebtedPeopleContainer } from '../Features.styled';
 import { FlexContainer, FormControlLabel } from '../../../../../styles';
+import { getIndebtedPeopleWithoutId } from '../../Records.utils';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -117,11 +118,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
       const newIndebtedPeople = (recordToBeEdited?.indebtedPeople ?? []) as IndebtedPeople[];
       if (newIndebtedPeople.length > 0) {
         // Database saves these with a mongo id. We have to remove it to be able to edit the record.
-        const indebtedPeopleWithoutId = newIndebtedPeople.map((person) => {
-          // eslint-disable-next-line @typescript-eslint/naming-convention
-          const { _id, ...restValuesPerson } = person;
-          return restValuesPerson;
-        });
+        const indebtedPeopleWithoutId = newIndebtedPeople.map(getIndebtedPeopleWithoutId);
         addIndebtedPeopleForEdit(indebtedPeopleWithoutId);
       }
 
@@ -159,11 +156,12 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
         newLinkedBudgets = [];
       }
     }
+    const indebtedPeopleWithoutId = indebtedPeople.map(getIndebtedPeopleWithoutId);
     const newValues = {
       ...values,
       date: values.date.toDate(),
       amount: amountToNumber,
-      indebtedPeople,
+      indebtedPeople: indebtedPeopleWithoutId,
       account: (selectedAccount?._id ?? ''),
       typeOfRecord: 'expense',
       // If linked budgets has a value, then send the value in the array, if not, send it empty
@@ -196,13 +194,14 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
 
     const newAmount = verifyAmountEndsPeriod(initialAmount.current);
     const amountToNumber = Number(newAmount);
+    const indebtedPeopleWithoutId = indebtedPeople.map(getIndebtedPeopleWithoutId);
 
     const newValues = {
       ...values,
       // Pass value to type Date
       date: newDate.toDate(),
       amount: amountToNumber,
-      indebtedPeople,
+      indebtedPeople: indebtedPeopleWithoutId,
       account: selectedAccount?._id ?? '',
       typeOfRecord: 'expense',
       linkedBudgets: newLinkedBudgets,

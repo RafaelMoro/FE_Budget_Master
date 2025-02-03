@@ -9,6 +9,8 @@ interface CategoriesModalProps {
   onClose: () => void
 }
 
+const subcategories = ['Primera subcategoría', 'Segunda subcategoría', 'Tercera subcategoría'];
+
 const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => (
   <Dialog onClose={onClose} open={open}>
     <IconButton onClick={onClose}>
@@ -20,9 +22,9 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => (
       component="nav"
       aria-labelledby="nested-list-categories"
     >
-      <CategoriesListDialog categoryName="Primera categoria" />
-      <CategoriesListDialog categoryName="Segunda categoria" />
-      <CategoriesListDialog categoryName="Tercera categoria" />
+      <CategoriesListDialog subCategories={subcategories} categoryName="Primera categoria" />
+      <CategoriesListDialog subCategories={subcategories} categoryName="Segunda categoria" />
+      <CategoriesListDialog subCategories={subcategories} categoryName="Tercera categoria" />
     </List>
   </Dialog>
 );

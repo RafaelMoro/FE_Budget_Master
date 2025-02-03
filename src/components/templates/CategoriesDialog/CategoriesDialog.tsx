@@ -8,6 +8,7 @@ import { CATEGORY_DIALOG_ACTIONS } from './CategoryDialog.constant';
 import { AppIcon } from '../../UI/Icons';
 import { CloseIconButton, CategoriesDialogContainer } from './CategoriesDialog.styled';
 import { ShowCategories } from './ShowCategories';
+import { EditCategory } from './EditCategory';
 
 const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
   const [action, setAction] = useState<CategoryDialogAction>('show');
@@ -29,6 +30,7 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
           {CATEGORY_DIALOG_ACTIONS[action].description}
         </Typography>
         { action === 'show' && (<ShowCategories updateAction={updateAction} />) }
+        { action === 'edit' && (<EditCategory />) }
       </CategoriesDialogContainer>
     </Dialog>
   );

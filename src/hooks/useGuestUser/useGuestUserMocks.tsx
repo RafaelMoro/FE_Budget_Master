@@ -18,6 +18,7 @@ const useGuestUserMocks = () => {
       lastName: 'User',
       middleName: '',
       sub: GUEST_USER_ID,
+      initials: 'GU',
     },
   };
 

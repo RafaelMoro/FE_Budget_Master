@@ -7,7 +7,7 @@ import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { SubcategoriesListDialog } from './SubcategoriesListDialog';
 
 const CategoriesListDialog = ({ categoryName }: { categoryName: string }) => {
-  const [openList, setOpenList] = useState(true);
+  const [openList, setOpenList] = useState(false);
 
   const handleClick = () => {
     setOpenList((prevState) => !prevState);

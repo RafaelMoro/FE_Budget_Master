@@ -1,5 +1,5 @@
 import {
-  Dialog, IconButton, Typography, List, ListItemButton, ListItemText,
+  Dialog, IconButton, Typography, List,
 } from '@mui/material';
 import { AppIcon } from '../../UI/Icons';
 import { CategoriesListDialog } from './CategoriesListDialog';
@@ -20,12 +20,8 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => (
       component="nav"
       aria-labelledby="nested-list-categories"
     >
-      <ListItemButton>
-        <ListItemText primary="Primera categoria" />
-      </ListItemButton>
-      <ListItemButton>
-        <ListItemText primary="Segunda categoria" />
-      </ListItemButton>
+      <CategoriesListDialog categoryName="Primera categoria" />
+      <CategoriesListDialog categoryName="Segunda categoria" />
       <CategoriesListDialog categoryName="Tercera categoria" />
     </List>
   </Dialog>

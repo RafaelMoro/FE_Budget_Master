@@ -1,6 +1,8 @@
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { pickersLayoutClasses } from '@mui/x-date-pickers';
+import { esES } from '@mui/x-date-pickers/locales';
+import 'dayjs/locale/es';
 import { DateTimePicker, globalConfiguration } from '../../../styles';
 import {
   ArrowDropDownIcon, CalendarMonthIcon, ChevronLeftIcon, ChevronRightIcon,
@@ -18,7 +20,7 @@ function DateTimePickerValue({ label, field, setFieldValueCb }: DateTimePickerPr
   const { value } = field;
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <LocalizationProvider adapterLocale="es" localeText={esES.components.MuiLocalizationProvider.defaultProps.localeText} dateAdapter={AdapterDayjs}>
       <DateTimePicker
         label={label}
         value={value}

@@ -41,7 +41,7 @@ const BudgetPeriodView = ({
     const differenceTodaysDate = endDateRceived.diff(todayDate, 'days');
 
     if (differenceTodaysDate < 0) {
-      error = 'La fecha de término no puede ser hoy. Elija una fecha posterior.';
+      error = 'La fecha de término no puede ser hoy o una fecha en el pasado. Elija una fecha posterior.';
       return error;
     }
     return error;

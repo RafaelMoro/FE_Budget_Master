@@ -1,10 +1,10 @@
 import {
   DeleteOutlined, ErrorOutlineOutlined, EditOutlined, LogoutOutlined, Close,
   DoneOutlined, Visibility, VisibilityOff, KeyboardArrowUpOutlined,
-  Celebration, MonetizationOn, ArrowBackOutlined,
+  Celebration, SavingsOutlined, ArrowBackOutlined,
   Fastfood, House, Engineering, Language, DirectionsCar,
   AccountBalance, MedicalInformation, FamilyRestroom, ShoppingCart,
-  Menu,
+  Menu, PaymentsOutlined,
 } from '@mui/icons-material';
 import { AllCategoryIcons, AppIcons } from './Icons.interface';
 import { AppColors } from '../../../styles';
@@ -67,5 +67,6 @@ export const categoryIcons: AllCategoryIcons = {
   kids: FamilyRestroom,
   shopping: ShoppingCart,
   entertainment: Celebration,
-  savings: MonetizationOn,
+  savings: SavingsOutlined,
+  income: PaymentsOutlined,
 };

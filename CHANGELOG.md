@@ -1,3 +1,9 @@
+## v1.10.0 (2025-02-03)
+
+### Pull Requests
+[#61](https://github.com/RafaelMoro/FE_Budget_Master/pull/61) | Translate dashboard and budgets
+
+
 ## v1.9.1 (2025-01-28)
 
 ### Pull Requests

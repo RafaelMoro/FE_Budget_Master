@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import {
-  Dialog, IconButton, Typography, List, ListItemButton, ListItemText, Collapse,
+  Dialog, IconButton, Typography, List, ListItemButton, ListItemText,
 } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { AppIcon } from '../../UI/Icons';
+import { SubcategoriesListDialog } from './SubcategoriesListDialog';
 
 interface CategoriesModalProps {
   open: boolean
@@ -38,13 +39,7 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
           <ListItemText primary="Tercera categoria" />
           {openList ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
-        <Collapse in={openList} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItemButton sx={{ pl: 4 }}>
-              <ListItemText primary="Subcategoria 1" />
-            </ListItemButton>
-          </List>
-        </Collapse>
+        <SubcategoriesListDialog openList={openList} />
       </List>
     </Dialog>
   );

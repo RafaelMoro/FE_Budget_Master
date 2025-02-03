@@ -72,7 +72,7 @@ const useLogin = () => {
     navigate(LOGIN_ROUTE);
   };
 
-  const handleSubmit = async (values: LoginValues) => {
+  const handleSubmitLogin = async (values: LoginValues) => {
     try {
       // First reset local storage if we have guest user logged in.
       saveInfoToLocalStorage({});
@@ -116,7 +116,7 @@ const useLogin = () => {
   return {
     loginSuccess: isSuccess,
     loginLoading: isLoading,
-    handleSubmit,
+    handleSubmit: handleSubmitLogin,
     handleShowNotification: toggleShowNotification,
     updateTitle,
     updateDescription,

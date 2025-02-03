@@ -4,8 +4,8 @@ import {
 } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
-import { SubcategoriesListDialog } from './SubcategoriesListDialog';
 import { ICON_SIZE } from '../../../constants';
+import { SubcategoriesListDialog } from './SubcategoriesListDialog';
 
 interface CategoriesListDialogProps {
   categoryName: string;

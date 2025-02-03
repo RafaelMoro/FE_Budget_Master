@@ -224,7 +224,23 @@ const SAVINGS_CATEGORY: Category = {
     'Jubilación',
     'Inversiones',
     'Vacaciones',
-    'Automóvil / Propiedad inmobiliaria ',
+    'Automóvil / Propiedad inmobiliaria',
+  ],
+  icon: 'savings',
+};
+const INCOME_CATEGORY: Category = {
+  _id: 'local-category-12',
+  __v: 0,
+  categoryName: 'Ingreso',
+  subCategories: [
+    'Salario',
+    'Comisiones / bonos',
+    'Propinas',
+    'Inversiones',
+    'Negocios',
+    'Servicios profesionales',
+    'Reembolsos',
+    'Regalos',
   ],
   icon: 'savings',
 };
@@ -240,4 +256,5 @@ export const CATEGORIES_RECORDS: Category[] = [
   SHOPPING,
   ENTERTAINMENT_AND_LEISURE_CATEGORY,
   SAVINGS_CATEGORY,
+  INCOME_CATEGORY,
 ];

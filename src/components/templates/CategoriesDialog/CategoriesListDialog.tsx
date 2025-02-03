@@ -8,6 +8,7 @@ import { SubcategoriesListDialog } from './SubcategoriesListDialog';
 
 const CategoriesListDialog = ({ categoryName }: { categoryName: string }) => {
   const [openList, setOpenList] = useState(false);
+  const subcategories = ['Primera subcategoría', 'Segunda subcategoría', 'Tercera subcategoría'];
 
   const handleClick = () => {
     setOpenList((prevState) => !prevState);
@@ -19,7 +20,7 @@ const CategoriesListDialog = ({ categoryName }: { categoryName: string }) => {
         <ListItemText primary={categoryName} />
         {openList ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
-      <SubcategoriesListDialog openList={openList} />
+      <SubcategoriesListDialog subCategories={subcategories} openList={openList} />
     </>
 
   );

@@ -39,6 +39,7 @@ export interface AllCategoryIcons {
   shopping: ElementType;
   entertainment: ElementType;
   savings: ElementType;
+  income: ElementType;
 }
 
 export type IconKeys = keyof AllCategoryIcons;

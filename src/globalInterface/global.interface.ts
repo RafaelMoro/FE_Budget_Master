@@ -8,6 +8,8 @@ export interface UserInfo {
   lastName: string;
   email: string;
   sub: string;
+  // Putting as optional because we have to do the logic for guest user
+  initials?: string;
 }
 
 export interface Actions {

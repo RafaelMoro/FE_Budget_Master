@@ -17,7 +17,6 @@ export const EXPENSES_NOT_FOUND = 'Expenses not found.';
 
 export const ERROR_TITLE_GENERAL = 'Error';
 export const ERROR_MESSAGE_GENERAL = 'Oops! Algo no salió como esperabamos. Por favor, intente de nuevo más tarde.';
-export const NETWORK_ERROR_MESSAGE = 'There is a network error. Please check you are connected to Internet.';
 
 /** Errors Login Module */
 export const USER_NOT_FOUND_CATCH_ERROR = 'User not found.';
@@ -28,9 +27,8 @@ export const ERROR_MESSAGE_UNAUTHORIZED = 'Correo electronico o contraseña inco
 export const ERROR_MESSAGE_EMAIL_EXISTS = 'El correo electrónico ya está registrado. Intente con otro correo electrónico.';
 export const ERROR_MESSAGE_USER_NOT_FOUND = 'El correo electrónico no está registrado a una cuenta.';
 
-export const ERROR_MESSAGE_FETCH_CATEGORIES = 'We could not get your categories. Please try again later';
-export const ERROR_CREATE_LOCAL_CATEGORIES = 'We could not create your categories. Please try again later';
-export const ERROR_INCORRECT_MAIL_DESC = 'Verify that your email is correct or create an account.';
+export const ERROR_MESSAGE_FETCH_CATEGORIES = 'No fue posible obtener sus categorias. Por favor, intente de nuevo más tarde.';
+export const ERROR_CREATE_LOCAL_CATEGORIES = 'No fue posible crear sus categorias. Por favor, intente de nuevo más tarde.';
 
 /** Success Login Module */
 export const SUCCESS_PASSWORD_RESET_TITLE = 'Contraseña reestablecida correctamente';

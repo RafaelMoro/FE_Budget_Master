@@ -4,7 +4,12 @@ import {
 } from '@mui/material';
 import { Avatar, MenuItem } from '../../../styles';
 
-const HeaderAvatarConfig = ({ initials }: { initials: string | undefined }) => {
+interface HeaderAvatarConfigProps {
+  initials: string | undefined;
+  signOut: () => void
+}
+
+const HeaderAvatarConfig = ({ initials, signOut }: HeaderAvatarConfigProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const currentInitials = initials ?? 'DE';
 
@@ -40,8 +45,8 @@ const HeaderAvatarConfig = ({ initials }: { initials: string | undefined }) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleClose}>Categorías</MenuItem>
+        <MenuItem onClick={signOut}>Cerrar sesión</MenuItem>
       </Menu>
     </>
   );

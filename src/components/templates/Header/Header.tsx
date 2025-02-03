@@ -59,7 +59,7 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
             </HeaderNav>
           ) }
           { (!isGuestUser && userLoggedOn && isDesktop) && (
-            <HeaderAvatarConfig initials={initials} />
+            <HeaderAvatarConfig signOut={signOut} initials={initials} />
           ) }
           {/** TODO: Change this to use avatar */}
           { (!isGuestUser && !userLoggedOn && !isMobile) && (

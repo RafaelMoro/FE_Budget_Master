@@ -159,11 +159,16 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
         newLinkedBudgets = [];
       }
     }
+    const indebtedPeopleWithoutId = indebtedPeople.map((person) => {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const { _id, ...restValuesPerson } = person;
+      return restValuesPerson;
+    });
     const newValues = {
       ...values,
       date: values.date.toDate(),
       amount: amountToNumber,
-      indebtedPeople,
+      indebtedPeople: indebtedPeopleWithoutId,
       account: (selectedAccount?._id ?? ''),
       typeOfRecord: 'expense',
       // If linked budgets has a value, then send the value in the array, if not, send it empty

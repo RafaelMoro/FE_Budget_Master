@@ -24,6 +24,7 @@ export const getUserMock = ({ isGuestUser = false }: { isGuestUser?: boolean }):
       lastName: isGuestUser ? 'User' : 'Doe',
       middleName: '',
       sub: 'sub-user-id-123',
+      initials: isGuestUser ? 'GU' : 'JD',
     },
   },
 });

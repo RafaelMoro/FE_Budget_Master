@@ -3,6 +3,7 @@ import {
   IconButton, Menu, Typography, Tooltip,
 } from '@mui/material';
 import { Avatar, MenuItem } from '../../../styles';
+import { CategoriesDialog } from '../CategoriesDialog';
 
 interface HeaderAvatarConfigProps {
   initials: string | undefined;
@@ -11,13 +12,19 @@ interface HeaderAvatarConfigProps {
 
 const HeaderAvatarConfig = ({ initials, signOut }: HeaderAvatarConfigProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [openCategoriesDialog, setOpenCategoriesDialog] = useState(false);
   const currentInitials = initials ?? 'DE';
 
+  const toggleCategoriesDialog = () => setOpenCategoriesDialog((prevState) => !prevState);
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const handleOpenCategories = () => {
+    handleClose();
+    toggleCategoriesDialog();
   };
 
   return (
@@ -45,9 +52,10 @@ const HeaderAvatarConfig = ({ initials, signOut }: HeaderAvatarConfigProps) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Categorías</MenuItem>
+        <MenuItem onClick={handleOpenCategories}>Categorías</MenuItem>
         <MenuItem onClick={signOut}>Cerrar sesión</MenuItem>
       </Menu>
+      <CategoriesDialog onClose={toggleCategoriesDialog} open={openCategoriesDialog} />
     </>
   );
 };

@@ -267,9 +267,10 @@ describe('Header', () => {
       { preloadedState: { userInterface: userInterfaceState, user: loggedUserState } },
     );
 
-    const signOutButton = screen.getByRole('button', { name: /open-configuration-button/i });
-    expect(signOutButton).toBeInTheDocument();
-
+    const openConfigButton = screen.getByRole('button', { name: /open-configuration-button/i });
+    userEvent.click(openConfigButton);
+    await screen.findByRole('menuitem', { name: /categorías/i });
+    const signOutButton = screen.getByRole('menuitem', { name: /cerrar sesión/i });
     userEvent.click(signOutButton);
 
     await waitFor(() => {

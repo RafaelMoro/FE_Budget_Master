@@ -17,22 +17,23 @@ import { getExpirationMessage } from '../../Budget.util';
 interface BudgetDetailsDrawerProps {
   budget: BudgetUI;
   dateText: string;
+  month: string;
   progress: number;
   toggleDrawer: () => void;
   toggleDeleteModal: () => void;
 }
 
 const BudgetDetailsDrawer = ({
-  toggleDrawer, budget, dateText, progress, toggleDeleteModal,
+  toggleDrawer, budget, dateText, month, progress, toggleDeleteModal,
 }: BudgetDetailsDrawerProps) => {
   const navigate = useNavigate();
   const restingDays = getRemainingDays(budget.endDate);
   const [restingDaysText, setRestingDaysText] = useState<string>(`${restingDays} days left`);
 
   useEffect(() => {
-    const message = getExpirationMessage({ days: restingDays, month: dateText, endDateParam: budget.endDate });
+    const message = getExpirationMessage({ days: restingDays, month, endDateParam: budget.endDate });
     setRestingDaysText(message);
-  }, [budget.endDate, dateText, restingDays]);
+  }, [budget.endDate, month, restingDays]);
 
   const handleEditBudget = () => {
     navigate(BUDGET_EDITOR_PAGE_ROUTE, { state: { budget } });
@@ -46,15 +47,15 @@ const BudgetDetailsDrawer = ({
       <BudgetDateDrawer align="center" variant="body2">{dateText}</BudgetDateDrawer>
       <Title variant="h4">{budget.name}</Title>
       <IconsContainer>
-        <IconButton onClick={handleEditBudget}>
+        <IconButton aria-label={`boton-editar-presupuesto-${budget.name}`} onClick={handleEditBudget}>
           <AppIcon icon="Edit" />
         </IconButton>
-        <IconButton onClick={toggleDeleteModal}>
+        <IconButton aria-label={`boton-eliminar-presupuesto-${budget.name}`} onClick={toggleDeleteModal}>
           <AppIcon icon="Delete" />
         </IconButton>
       </IconsContainer>
       <Typography>
-        Limit:
+        Límite:
         {' '}
         {budget.limitFormatted}
       </Typography>
@@ -67,7 +68,7 @@ const BudgetDetailsDrawer = ({
       <BudgetChip label={budget.period} />
       { (budget.typeBudget === 'periodic' && budget.previousPeriods?.length > 0) && (
         <>
-          <TextTwoColumns align="center">Previous periods: </TextTwoColumns>
+          <TextTwoColumns align="center">Periodos previos: </TextTwoColumns>
           <List>
             { budget.previousPeriods.map((period) => (
               <Typography key={period}>{period}</Typography>

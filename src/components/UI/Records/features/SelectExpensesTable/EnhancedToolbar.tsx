@@ -15,18 +15,18 @@ function EnhancedTableToolbar({ numSelected }: EnhancedTableToolbarProps) {
     >
       <>
         <Typography variant="body2">
-          Note: If you cannot find your expense, it may be under other account or a different month.
+          Nota: Si no puede encontrar un gasto, puede estar en otra cuenta o en un diferente mes.
         </Typography>
         <Typography
           id="tableTitle"
         >
-          Select the expenses:
+          Seleccione los gastos a pagar:
         </Typography>
         { (numSelected > 0) && (
         <Typography>
           {numSelected}
           {' '}
-          selected
+          seleccionados
         </Typography>
         ) }
       </>

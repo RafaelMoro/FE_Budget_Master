@@ -31,7 +31,7 @@ describe('<AddChip />', () => {
     );
 
     expect(screen.getByRole('button', { name: /add tag/i })).toBeInTheDocument();
-    expect(screen.getByText(/no tags added/i)).toBeInTheDocument();
+    expect(screen.getByText(/No has añadido ninguna tag aún/i)).toBeInTheDocument();
   });
 
   test('Show an error if the input is empty and the button is clicked', async () => {
@@ -81,7 +81,7 @@ describe('<AddChip />', () => {
 
     userEvent.click(button);
 
-    expect(await screen.findByText(/You cannot add more than 8 tags/i)).toBeInTheDocument();
+    expect(await screen.findByText(/No puedes agregar más de 8 tags/i)).toBeInTheDocument();
   });
 
   test('If there exist the element one, and the user tries to add it again, show error', async () => {
@@ -100,7 +100,7 @@ describe('<AddChip />', () => {
 
     userEvent.click(button);
 
-    expect(await screen.findByText(/one cannot be repeated. Try a different one\./i)).toBeInTheDocument();
+    expect(await screen.findByText(/one no puede repetirse\. Intente otra etiqueta\./i)).toBeInTheDocument();
   });
 
   test('If there exist the element one, and the user deletes it, do not find the element', async () => {
@@ -118,6 +118,6 @@ describe('<AddChip />', () => {
     await waitFor(() => {
       expect(screen.queryByText(/one/i)).not.toBeInTheDocument();
     });
-    expect(await screen.findByText(/no tags added/i)).toBeInTheDocument();
+    expect(await screen.findByText(/No has añadido ninguna tag aún/i)).toBeInTheDocument();
   });
 });

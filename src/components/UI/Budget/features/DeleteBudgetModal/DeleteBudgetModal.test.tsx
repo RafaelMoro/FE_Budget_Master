@@ -1,6 +1,7 @@
 import { screen, waitFor } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import fetchMock from 'jest-fetch-mock';
 
 import userEvent from '@testing-library/user-event';
@@ -10,7 +11,7 @@ import { renderWithProviders } from '../../../../../tests/CustomWrapperRedux';
 
 describe('DeleteBudgetModal', () => {
   const onCloseFn = jest.fn();
-  const budget = getMockBudget();
+  const { budget } = getMockBudget();
   const history = createMemoryHistory();
   beforeEach(() => {
     fetchMock.resetMocks();
@@ -28,16 +29,16 @@ describe('DeleteBudgetModal', () => {
     );
   });
   test('Show the delete budget modal', () => {
-    expect(screen.getByText(/Are you sure that you want to delete the budget:/i)).toBeInTheDocument();
-    expect(screen.getByText(/you cannot reverse this action\./i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /cancel/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /delete/i })).toBeInTheDocument();
+    expect(screen.getByText(/¿Está seguro\(a\) que desea eliminar el presupuesto:/i)).toBeInTheDocument();
+    expect(screen.getByText(/esta acción no puede deshacerse\./i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /cancelar/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /eliminar/i })).toBeInTheDocument();
   });
 
   test('Given a user clicks on the delete button, the budget should be deleted', async () => {
     fetchMock.once(JSON.stringify(successfulResponseDeleteBudget));
 
-    const deleteButton = screen.getByRole('button', { name: /delete/i });
+    const deleteButton = screen.getByRole('button', { name: /eliminar/i });
     userEvent.click(deleteButton);
 
     await waitFor(() => {
@@ -46,7 +47,7 @@ describe('DeleteBudgetModal', () => {
   });
 
   test('Given a user clicks on the cancel button, the modal should be closed', async () => {
-    const cancelButton = screen.getByRole('button', { name: /cancel/i });
+    const cancelButton = screen.getByRole('button', { name: /cancelar/i });
     userEvent.click(cancelButton);
 
     expect(onCloseFn).toHaveBeenCalled();

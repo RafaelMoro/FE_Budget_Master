@@ -131,6 +131,7 @@ export interface BudgetUI extends Budget {
   currentAmountFormatted: string;
   startDateFormatted: string;
   endDateFormatted: string;
+  month: string;
 }
 
 export interface BudgetHistory {

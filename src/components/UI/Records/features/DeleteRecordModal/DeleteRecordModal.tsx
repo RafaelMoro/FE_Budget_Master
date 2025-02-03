@@ -38,20 +38,20 @@ const DeleteRecordModal = ({
     <Dialog open={open} onClose={onClose}>
       <DeleteRecordContainer>
         <DeleteRecordTitle>
-          Are you sure that you want to delete the record:
+          ¿Está seguro que desea borrar la transacción:
           {' '}
           &quot;
           {recordName}
           &quot;
           ?
         </DeleteRecordTitle>
-        <DeleteRecordWarn>You cannot reverse this action.</DeleteRecordWarn>
-        <SecondaryButton onClick={onClose}>Cancel</SecondaryButton>
+        <DeleteRecordWarn>Esta acción no puede deshacerse.</DeleteRecordWarn>
+        <SecondaryButton onClick={onClose}>Cancelar</SecondaryButton>
         <CancelButton
           disabled={loadingDeleteRecord}
           onClick={handleDeleteRecord}
         >
-          { (loadingDeleteRecord) ? (<LoadingSpinner />) : 'Delete' }
+          { (loadingDeleteRecord) ? (<LoadingSpinner />) : 'eliminar' }
         </CancelButton>
       </DeleteRecordContainer>
     </Dialog>

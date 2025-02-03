@@ -3,7 +3,7 @@ import { Dialog, Typography } from '@mui/material';
 import { Field, Formik } from 'formik';
 import { Switch } from 'formik-mui';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { IndebtedPeopleFormSchema } from '../../../../../validationsSchemas/records.schema';
 import { FormContainer } from '../Features.styled';
 import {
@@ -16,6 +16,7 @@ import { Container } from './AddIndebtedPeople.styled';
 import { AppIcon } from '../../../Icons';
 import { CurrencyField } from '../../../../Other';
 import { useCurrencyField } from '../../../../Other/CurrencyField/useCurrencyField';
+import { createTransferId } from '../../../../../utils/CreateTransferId';
 
 const AddIndebtedPerson = ({
   open, onClose, addPerson, indebtedPeople = [], indebtedPerson, modifyAction, updatePerson,
@@ -34,6 +35,13 @@ const AddIndebtedPerson = ({
     isPaid: false,
   };
 
+  useEffect(() => {
+    if (modifyAction) {
+      initialAmount.current = indebtedPerson?.amount ?? '';
+      initialAmountPaid.current = indebtedPerson?.amountPaid ?? '';
+    }
+  }, [indebtedPerson?.amount, indebtedPerson?.amountPaid, initialAmount, modifyAction]);
+
   const updateAmountPaid = (amount: string) => {
     initialAmountPaid.current = amount;
   };
@@ -45,17 +53,21 @@ const AddIndebtedPerson = ({
 
     const repeatedName = indebtedPeople.find((person) => person.name.toLowerCase() === name.toLowerCase());
     if (!repeatedName) return error;
-    error = `${name} cannot be repeated. Try a different one.`;
+    error = `${name} no puede repetirse. Intente otro nombre.`;
     return error;
   };
 
   const handleSubmit = (values: IndebtedPeople) => {
     if (modifyAction) {
-      updatePerson({ ...values, amount: initialAmount.current, amountPaid: initialAmountPaid.current });
+      updatePerson({
+        ...values, amount: initialAmount.current, amountPaid: initialAmountPaid.current, _id: indebtedPerson?._id,
+      });
       onClose();
       return;
     }
-    addPerson({ ...values, amount: initialAmount.current, amountPaid: initialAmountPaid.current });
+    addPerson({
+      ...values, amount: initialAmount.current, amountPaid: initialAmountPaid.current, _id: createTransferId(),
+    });
     onClose();
   };
 
@@ -64,9 +76,9 @@ const AddIndebtedPerson = ({
       <Container>
         <FlexContainer justifyContent="space-between">
           <Typography variant="h4">
-            { (modifyAction) ? 'Modify' : 'Add' }
+            { (modifyAction) ? 'Modificar' : 'Agregar' }
             {' '}
-            Person
+            persona
           </Typography>
           <TransparentButton onClick={onClose}>
             <AppIcon icon="Close" />
@@ -85,7 +97,7 @@ const AddIndebtedPerson = ({
                 name="name"
                 type="text"
                 variant="standard"
-                label="Full Name"
+                label="Nombre completo"
                 validate={checkRepeatedValue}
               />
               <CurrencyField setFieldValue={setFieldValue} updateAmount={updateAmount} amount={initialAmount.current} />
@@ -94,7 +106,7 @@ const AddIndebtedPerson = ({
                 updateAmount={updateAmountPaid}
                 amount={initialAmountPaid.current}
                 fieldName="amountPaid"
-                labelName="Amount Paid"
+                labelName="Cantidad pagada"
               />
               <FormControlLabel
                 control={(
@@ -106,12 +118,12 @@ const AddIndebtedPerson = ({
                     component={Switch}
                   />
                 )}
-                label="Transaction paid"
+                label="Deuda pagada"
               />
               <PrimaryButton variant="contained" size="medium" onClick={submitForm}>
-                { (modifyAction) ? 'Modify' : 'Add'}
+                { (modifyAction) ? 'Modificar' : 'Agregar'}
                 {' '}
-                Person
+                persona
               </PrimaryButton>
             </FormContainer>
           )}

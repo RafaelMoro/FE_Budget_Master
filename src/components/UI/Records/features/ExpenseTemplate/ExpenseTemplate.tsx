@@ -71,8 +71,8 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
   const bearerToken = user.userInfo?.bearerToken as string;
   const categoryToBeEdited = recordToBeEdited?.category ?? null;
   const isCredit = selectedAccount?.accountType === 'Crédito';
-  const action: string = edit ? 'Edit' : 'Create';
-  const buttonText = `${action} record`;
+  const action: string = edit ? 'Editar' : 'Crear';
+  const buttonText = `${action} gasto`;
 
   const [initialValues, setInitialValues] = useState<CreateExpenseValues>({
     amount: '',
@@ -90,7 +90,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
   const budgetsAvailable: ExpenseBudget[] = useMemo(
     () => {
       const budgetsFetched = (budgets ?? []).map((budget) => ({ budgetId: budget._id, budgetName: budget.name }));
-      budgetsFetched.unshift({ budgetId: 'None', budgetName: 'None' });
+      budgetsFetched.unshift({ budgetId: 'None', budgetName: 'Ninguno' });
       return budgetsFetched;
     },
     [budgets],
@@ -267,12 +267,12 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
                   <Field
                     type="checkbox"
                     checked={values.isPaid}
-                    label="Transaction paid (Optional)"
+                    label="Transacción pagada (Opcional)"
                     name="isPaid"
                     component={Switch}
                   />
               )}
-                label="Transaction paid"
+                label="Transacción pagada (Opcional)"
               />
               ) }
               <ShowIndebtedPeopleContainer>
@@ -282,7 +282,9 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
                   modifyIndebtedPerson={fetchPersonToModify}
                 />
                 <FlexContainer justifyContent="center">
-                  <SecondaryButtonForm variant="contained" onClick={() => openAddPersonModal(values)} size="medium">Add Person</SecondaryButtonForm>
+                  <SecondaryButtonForm variant="contained" onClick={() => openAddPersonModal(values)} size="medium">
+                    Agregar persona
+                  </SecondaryButtonForm>
                 </FlexContainer>
               </ShowIndebtedPeopleContainer>
               <ActionButtonPanel

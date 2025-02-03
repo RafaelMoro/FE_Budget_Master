@@ -734,13 +734,6 @@ const useRecords = ({
         amount: newRecord.amount, isExpense, accountId: newRecord.account, isGuestUser: true,
       });
 
-      // Show success notification
-      updateGlobalNotification({
-        newTitle: 'Record created',
-        newDescription: '',
-        newStatus: SystemStateEnum.Success,
-      });
-
       // Navigate to dashboard
       navigate(DASHBOARD_ROUTE);
     }
@@ -853,13 +846,6 @@ const useRecords = ({
       amount: editedExpense.amount, isExpense, previousAmount, accountId: editedExpense.account, isGuestUser: true,
     });
 
-    // Show success notification
-    updateGlobalNotification({
-      newTitle: 'Record updated',
-      newDescription: '',
-      newStatus: SystemStateEnum.Success,
-    });
-
     // Navigate to dashboard
     navigate(DASHBOARD_ROUTE);
   };
@@ -893,13 +879,6 @@ const useRecords = ({
     const isExpense = isCreateExpense(values);
     updateAmountAccountOnEditRecord({
       amount, isExpense, previousAmount, accountId: account, isGuestUser: true,
-    });
-
-    // Show success notification
-    updateGlobalNotification({
-      newTitle: 'Record updated',
-      newDescription: '',
-      newStatus: SystemStateEnum.Success,
     });
 
     // Navigate to dashboard
@@ -951,13 +930,6 @@ const useRecords = ({
       amount: amountIncome, isExpense: false, previousAmount: previousAmountIncome, accountId: accountIncome, isGuestUser: true,
     });
 
-    // Show success notification
-    updateGlobalNotification({
-      newTitle: 'Transfer edited',
-      newDescription: '',
-      newStatus: SystemStateEnum.Success,
-    });
-
     // Navigate to dashboard
     navigate(DASHBOARD_ROUTE);
   };
@@ -1002,13 +974,6 @@ const useRecords = ({
     });
     updateAmountAccount({
       amount: income.amount, isExpense: false, accountId: income.account, isGuestUser: true,
-    });
-
-    // Show success notification
-    updateGlobalNotification({
-      newTitle: 'Transfer created',
-      newDescription: '',
-      newStatus: SystemStateEnum.Success,
     });
 
     // Navigate to dashboard
@@ -1210,12 +1175,6 @@ const useRecords = ({
         }
       }
 
-      // Show success notification
-      updateGlobalNotification({
-        newTitle: 'Record Deleted Succesfully',
-        newDescription: '',
-        newStatus: SystemStateEnum.Success,
-      });
       closeDeleteRecordModalCb();
       closeDrawer();
     } catch (err) {
@@ -1265,12 +1224,6 @@ const useRecords = ({
         return;
       }
 
-      // Show success notification
-      updateGlobalNotification({
-        newTitle: 'Record Deleted Succesfully',
-        newDescription: '',
-        newStatus: SystemStateEnum.Success,
-      });
       closeDeleteRecordModalCb();
       closeDrawer();
     } catch (err) {

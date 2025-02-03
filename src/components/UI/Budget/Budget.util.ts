@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { Budget, BudgetUI } from '../../../globalInterface';
-import { formatValueToCurrency, transformDateToMonthDay } from '../../../utils';
+import { formatValueToCurrency, getMonth, transformDateToMonthDay } from '../../../utils';
 
 export function calculateProgress({ limit, currentAmount }: { limit: number, currentAmount: number }) {
   if (currentAmount === 0) return 0;
@@ -16,6 +16,7 @@ export const transformBudgetUI = ({ budgets }: { budgets: Budget[] }): BudgetUI[
   currentAmountFormatted: formatValueToCurrency({ amount: budget.currentAmount }),
   startDateFormatted: transformDateToMonthDay(budget.startDate),
   endDateFormatted: transformDateToMonthDay(budget.endDate),
+  month: getMonth(budget.startDate),
 }));
 
 export const getExpirationMessage = ({ days, month, endDateParam }: { days: number, month: string, endDateParam: string }) => {
@@ -24,16 +25,16 @@ export const getExpirationMessage = ({ days, month, endDateParam }: { days: numb
   const minute = endDate.get('minute');
 
   if (days < -10) {
-    return `Expired since ${month}`;
+    return `Expirado desde ${month}`;
   }
   if (days < 0 && days > -10) {
-    return `Expired ${Math.abs(days)} days ago`;
+    return `Expirado ${Math.abs(days)} días atrás`;
   }
   if (days === 0) {
-    return `Ending today at ${hour}:${minute}`;
+    return `Expirando hoy a las ${hour}:${minute}`;
   }
   if (days === 1) {
-    return `Ending tomorrow at ${hour}:${minute}`;
+    return `Expirando mañana a las ${hour}:${minute}`;
   }
   return `${days} days left`;
 };

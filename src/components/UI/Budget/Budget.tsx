@@ -27,10 +27,11 @@ const Budget = ({
     limitFormatted,
     startDateFormatted,
     endDateFormatted,
+    month,
   } = budget;
   const windowSize = useAppSelector((state) => state.userInterface.windowSize);
   const isMobile = windowSize === 'Mobile';
-  const dateText = `From ${startDateFormatted} to ${endDateFormatted}`;
+  const dateText = `Desde ${startDateFormatted} hasta ${endDateFormatted}`;
   const progress = calculateProgress({ limit, currentAmount });
 
   const [title, setTitle] = useState(name);
@@ -43,7 +44,7 @@ const Budget = ({
   const toggleDeleteModal = () => setOpenDeleteModal((prevState) => !prevState);
 
   useEffect(() => {
-    if (name.length > 50) {
+    if (name?.length > 50) {
       setTitle(`${name.slice(0, 50)}...`);
     }
   }, [name]);
@@ -56,7 +57,7 @@ const Budget = ({
         </TextTwoColumns>
         <Title variant="h4">{title}</Title>
         <TextTwoColumns align="center">
-          Limit:
+          Límite:
           {' '}
           {limitFormatted}
         </TextTwoColumns>
@@ -70,6 +71,7 @@ const Budget = ({
           progress={progress}
           dateText={dateText}
           budget={budget}
+          month={month}
           toggleDrawer={toggleBudgetDetailsDrawer}
           toggleDeleteModal={toggleDeleteModal}
         />

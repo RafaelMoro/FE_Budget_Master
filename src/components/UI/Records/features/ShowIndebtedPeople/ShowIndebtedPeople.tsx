@@ -28,12 +28,12 @@ const ShowIndebtedPeople = ({
     <>
       { (!inRecordDrawer) && (
         <TableNote variant="body2">
-          Note: If you are going to buy something with someone else, you may add how many does this person will owe you on this section.
-          If so, click on &quot; Add Person &quot;
+          Nota: Si vas a comprar algo con alguien, en esta sección, puedes agregar cuánto dinero te debe.
+          Si es así, haz click en &quot; Agregar persona &quot;
         </TableNote>
       ) }
       <TableTitle align="center" isGrid={inRecordDrawer}>
-        People related to this transaction:
+        Personas relacionadas a esta transacción:
         {' '}
         {indebtedPeople.length}
       </TableTitle>
@@ -41,12 +41,12 @@ const ShowIndebtedPeople = ({
         <RecordTable isGrid={inRecordDrawer}>
           <TableHead>
             <TableRow>
-              <NameCellTitle>Name:</NameCellTitle>
-              <IndebtedTableCell>Amount:</IndebtedTableCell>
-              <IndebtedTableCell>Amount Paid:</IndebtedTableCell>
-              <IndebtedTableCell>Resting Debt:</IndebtedTableCell>
+              <NameCellTitle>Nombre:</NameCellTitle>
+              <IndebtedTableCell>Cantidad a deber:</IndebtedTableCell>
+              <IndebtedTableCell>Cantidad Pagada:</IndebtedTableCell>
+              <IndebtedTableCell>Deuda restante:</IndebtedTableCell>
               { /** Show the extra column Actions if we are not in mobile */ }
-              { (windowSize !== 'Mobile' && !inRecordDrawer) && (<TableCell>Actions:</TableCell>) }
+              { (windowSize !== 'Mobile' && !inRecordDrawer) && (<TableCell>Acciones:</TableCell>) }
             </TableRow>
           </TableHead>
           <TableBody>

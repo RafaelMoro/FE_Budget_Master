@@ -59,7 +59,7 @@ export const getMockExpense = ({
 }
 : GetMockExpenseProps): AnyRecord => {
   if (hasLinkedBudgets) {
-    const budget = getMockBudget();
+    const { budget } = getMockBudget();
     return {
       ...mockExpense,
       shortName,

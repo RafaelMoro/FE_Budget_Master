@@ -219,7 +219,7 @@ describe('<Records />', () => {
       userEvent.click(record);
 
       await screen.findByTestId('record-drawer');
-      expect(screen.getByText(/expenses selected:/i)).toBeInTheDocument();
+      expect(screen.getByText(/gastos seleccionados:/i)).toBeInTheDocument();
 
       // Expenses related expected
       expect(screen.getByText(/chilaquiles/i)).toBeInTheDocument();
@@ -392,7 +392,7 @@ describe('<Records />', () => {
       userEvent.click(record);
 
       await screen.findByTestId('record-drawer');
-      expect(screen.getByText(/expenses selected:/i)).toBeInTheDocument();
+      expect(screen.getByText(/gastos seleccionados:/i)).toBeInTheDocument();
 
       // Expenses related expected
       expect(screen.getByText(/chilaquiles/i)).toBeInTheDocument();

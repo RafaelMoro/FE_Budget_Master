@@ -24,17 +24,16 @@ const DeleteBudgetModal = ({ open, onClose, budget }: DeleteBudgetModalProps) =>
     <Dialog open={open} onClose={onClose}>
       <Container>
         <Title>
-          Are you sure that you want to delete the budget:
+          ¿Está seguro(a) que desea eliminar el presupuesto:
           {' '}
           &quot;
           {name}
-          &quot;
-          ?
+          &quot;?
         </Title>
-        <WarnText>You cannot reverse this action.</WarnText>
-        <SecondaryButton onClick={onClose}>Cancel</SecondaryButton>
+        <WarnText>Esta acción no puede deshacerse.</WarnText>
+        <SecondaryButton onClick={onClose}>Cancelar</SecondaryButton>
         <CancelButton onClick={handleDelete}>
-          { (!isLoading && !isSuccess) && 'Delete' }
+          { (!isLoading && !isSuccess) && 'Eliminar' }
           { (isLoading && !isSuccess) && <LoadingSpinner /> }
           { (!isLoading && isSuccess) && (<AppIcon icon="TickMark" fillColor={AppColors.white} />) }
         </CancelButton>

@@ -116,7 +116,7 @@ export const NameCellTitle = styled(TableCell)`
 `;
 
 export const IndebtedTableCell = styled(TableCell)`
-  padding: ${appTheme.spacing(1)} 0;
+  padding: ${appTheme.spacing(1)} ${appTheme.spacing(2)};
 `;
 
 export const NameCell = styled(TableCell)`

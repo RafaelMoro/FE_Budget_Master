@@ -1,4 +1,4 @@
-import { BudgetUI, TypeBudget } from '../../../globalInterface';
+import { BudgetUI, MONTHS, TypeBudget } from '../../../globalInterface';
 import { transformDateToMonthDay } from '../../../utils';
 
 export const currentBudget: BudgetUI = {
@@ -9,6 +9,7 @@ export const currentBudget: BudgetUI = {
   typeBudget: 'one-time',
   period: 'weekly',
   startDate: '2024-07-20T12:08:00',
+  month: 'Julio',
   startDateFormatted: 'Jul 20',
   endDate: '2024-07-27T12:08:00',
   endDateFormatted: 'Jul 27',
@@ -29,6 +30,7 @@ export const periodicBudget: BudgetUI = {
   typeBudget: 'periodic',
   period: 'bi-weekly',
   startDate: '2024-07-20T12:08:00',
+  month: 'Julio',
   startDateFormatted: 'Jul 20',
   endDate: '2024-08-03T12:08:00',
   endDateFormatted: 'Aug 03',
@@ -53,10 +55,12 @@ export const getMockBudget = ({
   hasLargeDescription,
   typeBudget = 'one-time',
   previousPeriods = [],
-}: GetMockBudgetProps = {}): BudgetUI => {
+}: GetMockBudgetProps = {}) => {
   const defaultTitle = 'Fast food and beverages.';
   const largeTitle = 'This is a very long title that should be truncated on the budget when shown.';
   const today = new Date();
+  const currentMonthNumber = today.getMonth() + 1;
+  const currentMonth = MONTHS[currentMonthNumber];
   const todayString = today.toLocaleString();
   const startDateFormatted = transformDateToMonthDay(todayString);
 
@@ -69,7 +73,7 @@ export const getMockBudget = ({
   // eslint-disable-next-line max-len
   const largeDescription = "This is a very long description that should be truncated on the budget when shown. Seems like it's still missing some words so the description can be truncated";
 
-  return {
+  const mockedBudget: BudgetUI = {
     _id: '1',
     __v: 0,
     name: hasLargeTitle ? largeTitle : defaultTitle,
@@ -87,12 +91,18 @@ export const getMockBudget = ({
     isActive: true,
     nextResetDate: endDateString,
     previousPeriods,
+    month: currentMonth,
+  };
+
+  return {
+    budget: mockedBudget,
+    currentMonth,
   };
 };
 
 export const successfulResponseFetchBudgets = {
   data: {
-    budgets: [getMockBudget()],
+    budgets: [getMockBudget()?.budget],
   },
   error: null,
   message: null,

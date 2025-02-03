@@ -125,7 +125,7 @@ function SelectExpensesTable({
                   >
                     {row.shortName}
                   </SelectExpensesCell>
-                  <SelectExpensesCell align="right">{row.amountFormatted}</SelectExpensesCell>
+                  <SelectExpensesCell>{row.amountFormatted}</SelectExpensesCell>
                   <DateExpenseCell>{row.fullDate}</DateExpenseCell>
                   <SelectExpensesCell align="right" noHorizontalPadding>
                     { (row.isPaid) ? <AppIcon icon="TickMark" /> : <AppIcon icon="Close" fillColor={AppColors.negative} />}
@@ -145,10 +145,11 @@ function SelectExpensesTable({
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        labelRowsPerPage="Filas por página"
       />
       <FlexContainer justifyContent="space-between">
-        <CancelButton onClick={closeDrawer}>Cancel</CancelButton>
-        <ConfirmButton onClick={closeDrawer}>Done</ConfirmButton>
+        <CancelButton onClick={closeDrawer}>Cancelar</CancelButton>
+        <ConfirmButton onClick={closeDrawer}>Seleccionar</ConfirmButton>
       </FlexContainer>
     </SelectExpensesContainer>
   );

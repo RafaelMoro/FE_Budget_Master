@@ -41,7 +41,7 @@ const TransferAccountSelector = ({
   return (
     <>
       <FormControl variant="standard">
-        <InputLabel id="select-origin-account">Origin Account</InputLabel>
+        <InputLabel id="select-origin-account">Cuenta de origen</InputLabel>
         <Field name="originAccount" selectOriginAccount={selectOriginAccount} component={SelectOriginAccount}>
           {
             (accountsOptions ?? []).map((option) => (
@@ -54,7 +54,7 @@ const TransferAccountSelector = ({
         <ErrorParagraphValidation variant="subText">{errorOriginAccount}</ErrorParagraphValidation>
       ) }
       <FormControl variant="standard">
-        <InputLabel id="select-destination-account">Destination Account</InputLabel>
+        <InputLabel id="select-destination-account">Cuenta destino</InputLabel>
         <Field name="destinationAccount" toggleDestinationCredit={toggleDestinationCredit} component={SelectDestinationAccount}>
           {
             (accountsOptionsDestination ?? []).map((option) => (

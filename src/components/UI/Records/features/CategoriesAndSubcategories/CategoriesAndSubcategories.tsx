@@ -114,7 +114,7 @@ const CategoriesAndSubcategories = ({
           labelName={(
             <FlexContainer justifyContent="center" gap={3}>
               <LoadingSpinner color={AppColors.primary} borderSize="0.3" />
-              <Typography>{ isLoadingCreateCategories ? 'Creating local categories' : 'Loading categories' }</Typography>
+              <Typography>{ isLoadingCreateCategories ? 'Creando categorías locales' : 'Cargando categorías' }</Typography>
             </FlexContainer>
           )}
           fieldName="category"
@@ -127,7 +127,7 @@ const CategoriesAndSubcategories = ({
           labelName={(
             <FlexContainer justifyContent="center" gap={3}>
               <LoadingSpinner color={AppColors.primary} borderSize="0.3" />
-              <Typography>{ isLoadingCreateCategories ? 'Creating local subcategories' : 'Loading subcategories' }</Typography>
+              <Typography>{ isLoadingCreateCategories ? 'Creando subcategorías locales' : 'Cargando subcategorías' }</Typography>
             </FlexContainer>
           )}
           fieldName="category"
@@ -141,7 +141,7 @@ const CategoriesAndSubcategories = ({
   return (
     <>
       <FormControl variant="standard">
-        <InputLabel id="select-record-category">Category</InputLabel>
+        <InputLabel id="select-record-category">Categoría</InputLabel>
         <Field dataTestId="select-record-category" name={categoriesFieldName} setNewCategory={setNewCategory} component={SelectCategory}>
           {
             onlyCategories.map((option) => (
@@ -155,7 +155,7 @@ const CategoriesAndSubcategories = ({
       ) }
       <SelectInput
         labelId="select-record-subcategory"
-        labelName="Subcategory"
+        labelName="Subcategoría"
         fieldName="subCategory"
         dataTestId="select-record-subcategory"
         stringOptions={(categoriesState.currentCategory ?? CATEGORIES_RECORDS[0]).subCategories}

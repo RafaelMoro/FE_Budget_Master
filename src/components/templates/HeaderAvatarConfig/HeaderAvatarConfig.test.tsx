@@ -1,4 +1,4 @@
-import { screen, render } from '@testing-library/react';
+import { screen, render, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { HeaderAvatarConfig } from './HeaderAvatarConfig';
@@ -15,7 +15,7 @@ describe('<HeaderAvatarConfig />', () => {
     render(<HeaderAvatarConfig initials="JD" signOut={signOut} />);
 
     const button = screen.getByRole('button', { name: /open-configuration-button/i });
-    userEvent.click(button);
+    await act(async () => userEvent.click(button));
 
     expect(await screen.findByRole('menuitem', { name: /categorías/i })).toBeInTheDocument();
     expect(screen.getByRole('menuitem', { name: /cerrar sesión/i })).toBeInTheDocument();
@@ -26,10 +26,10 @@ describe('<HeaderAvatarConfig />', () => {
     render(<HeaderAvatarConfig initials="JD" signOut={signOut} />);
 
     const button = screen.getByRole('button', { name: /open-configuration-button/i });
-    userEvent.click(button);
+    await act(async () => userEvent.click(button));
     await screen.findByRole('menuitem', { name: /categorías/i });
     const signOutButton = screen.getByRole('menuitem', { name: /cerrar sesión/i });
-    userEvent.click(signOutButton);
+    await act(async () => userEvent.click(signOutButton));
 
     expect(signOut).toHaveBeenCalled();
   });

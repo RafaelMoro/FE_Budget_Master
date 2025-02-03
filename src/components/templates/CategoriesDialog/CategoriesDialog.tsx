@@ -1,29 +1,32 @@
+import { useState } from 'react';
 import {
   Dialog, Typography,
 } from '@mui/material';
 
+import { CategoryDialogAction, CategoriesModalProps } from './CategoryDialog.interface';
+import { CATEGORY_DIALOG_ACTIONS } from './CategoryDialog.constant';
 import { AppIcon } from '../../UI/Icons';
 import { CloseIconButton, CategoriesDialogContainer } from './CategoriesDialog.styled';
 import { ShowCategories } from './ShowCategories';
 
-interface CategoriesModalProps {
-  open: boolean
-  onClose: () => void
-}
+const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
+  const [action, setAction] = useState<CategoryDialogAction>('show');
+  const updateAction = (newAction: CategoryDialogAction) => setAction(newAction);
 
-const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => (
-  <Dialog onClose={onClose} open={open}>
-    <CategoriesDialogContainer>
-      <CloseIconButton onClick={onClose}>
-        <AppIcon icon="Close" />
-      </CloseIconButton>
-      <Typography variant="h4" align="center">Categorías</Typography>
-      <Typography>
-        Haga click en cualquier categoría para ver sus subcategorías. Dentro encontrará los botones para editar o eliminar esa categoría.
-      </Typography>
-      <ShowCategories />
-    </CategoriesDialogContainer>
-  </Dialog>
-);
+  return (
+    <Dialog onClose={onClose} open={open}>
+      <CategoriesDialogContainer>
+        <CloseIconButton onClick={onClose}>
+          <AppIcon icon="Close" />
+        </CloseIconButton>
+        <Typography variant="h4" align="center">{CATEGORY_DIALOG_ACTIONS[action].title}</Typography>
+        <Typography>
+          {CATEGORY_DIALOG_ACTIONS[action].description}
+        </Typography>
+        { action === 'show' && (<ShowCategories />) }
+      </CategoriesDialogContainer>
+    </Dialog>
+  );
+};
 
 export { CategoriesDialog };

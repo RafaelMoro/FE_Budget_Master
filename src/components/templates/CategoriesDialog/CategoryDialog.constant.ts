@@ -1,0 +1,16 @@
+import { CategoryDialogActions } from './CategoryDialog.interface';
+
+export const CATEGORY_DIALOG_ACTIONS: CategoryDialogActions = {
+  show: {
+    title: 'Categorías',
+    description: 'Haga click en cualquier categoría para ver sus subcategorías. Dentro encontrará los botones para editar o eliminar esa categoría.',
+  },
+  edit: {
+    title: 'Editar categoría',
+    description: '',
+  },
+  delete: {
+    title: 'Eliminar categoría',
+    description: '¿Está seguro que desea eliminar esta categoría? No hay forma de deshacer esta acción.',
+  },
+};

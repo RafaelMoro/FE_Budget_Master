@@ -20,4 +20,17 @@ describe('<HeaderAvatarConfig />', () => {
     expect(await screen.findByRole('menuitem', { name: /categorías/i })).toBeInTheDocument();
     expect(screen.getByRole('menuitem', { name: /cerrar sesión/i })).toBeInTheDocument();
   });
+
+  test('Click on avatar, then open menu, then click on "cerrar sesión" and sign out function is called', async () => {
+    const signOut = jest.fn();
+    render(<HeaderAvatarConfig initials="JD" signOut={signOut} />);
+
+    const button = screen.getByRole('button', { name: /open-configuration-button/i });
+    userEvent.click(button);
+    await screen.findByRole('menuitem', { name: /categorías/i });
+    const signOutButton = screen.getByRole('menuitem', { name: /cerrar sesión/i });
+    userEvent.click(signOutButton);
+
+    expect(signOut).toHaveBeenCalled();
+  });
 });

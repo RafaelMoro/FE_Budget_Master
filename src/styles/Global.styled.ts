@@ -13,6 +13,7 @@ import {
   InputAdornment as InputAdornmentMUI,
   FormControlLabel as FormControlLabelMUI,
   ToggleButton as ToggleButtonMui,
+  Avatar as MuiAvatar,
   Typography,
 } from '@mui/material';
 import { DateTimePicker as DateTimePickerMUI } from '@mui/x-date-pickers';
@@ -139,6 +140,11 @@ export const ConfirmButton = styled(Button)`
 
 export const TransparentButton = styled(Button)`
   color: inherit;
+`;
+
+export const Avatar = styled(MuiAvatar)`
+  background-color: ${AppColors.complementary};
+  color: ${AppColors.white};
 `;
 
 // **** Paragraphs

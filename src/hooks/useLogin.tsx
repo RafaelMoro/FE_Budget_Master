@@ -14,7 +14,7 @@ import { ERROR_MESSAGE_GENERAL, ERROR_MESSAGE_UNAUTHORIZED, UNAUTHORIZED_ERROR }
 import { resetRecordsLocalStorage, resetRecordsLocalStorageSelectedAccount, resetTotalBalanceRecords } from '../redux/slices/Records/records.slice';
 import { useLoginMutation } from '../redux/budgetMaster.api';
 import { LOGIN_FIXED_CACHED_KEY } from '../redux/constants';
-import { GeneralError } from '../globalInterface';
+import { GeneralError, User } from '../globalInterface';
 import { toggleSignedOn } from '../redux/slices/userInterface.slice';
 import { resetCategoriesLocalStorage } from '../redux/slices/Categories/categories.slice';
 import { resetBudgets } from '../redux/slices/Budgets/budgets.slice';
@@ -72,18 +72,37 @@ const useLogin = () => {
     navigate(LOGIN_ROUTE);
   };
 
+  const getInitials = (user: User) => {
+    const { user: { firstName, lastName } } = user;
+    return `${firstName[0]}${lastName[0]}`;
+  };
+
+  const addInitials = (user: User, initials: string) => {
+    const newUser: User = {
+      ...user,
+      user: {
+        ...user.user,
+        initials,
+      },
+    };
+    return newUser;
+  };
+
   const handleSubmitLogin = async (values: LoginValues) => {
     try {
       // First reset local storage if we have guest user logged in.
       saveInfoToLocalStorage({});
 
       const user = await loginMutation({ values }).unwrap();
-      // Save user on redux state of userInfo
-      dispatch(signOn(user));
-      if (!hasSignedOn) dispatch(toggleSignedOn());
       // Reset all information of the guest user in redux
       resetUserGuestLocalStorage();
-      addToLocalStorage({ newInfo: user });
+      const initials = getInitials(user);
+      const updatedUser = addInitials(user, initials);
+      // Save user on redux state of userInfo
+      dispatch(signOn(updatedUser));
+      if (!hasSignedOn) dispatch(toggleSignedOn());
+
+      addToLocalStorage({ newInfo: updatedUser });
       setTimeout(() => {
         navigate(DASHBOARD_ROUTE);
       }, 3000);

@@ -5,6 +5,7 @@ import {
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
 import { SubcategoriesListDialog } from './SubcategoriesListDialog';
+import { ICON_SIZE } from '../../../constants';
 
 const CategoriesListDialog = ({ categoryName }: { categoryName: string }) => {
   const [openList, setOpenList] = useState(false);
@@ -18,7 +19,7 @@ const CategoriesListDialog = ({ categoryName }: { categoryName: string }) => {
     <>
       <ListItemButton onClick={handleClick}>
         <ListItemText primary={categoryName} />
-        {openList ? <ExpandLess /> : <ExpandMore />}
+        {openList ? <ExpandLess sx={ICON_SIZE} /> : <ExpandMore sx={ICON_SIZE} />}
       </ListItemButton>
       <SubcategoriesListDialog subCategories={subcategories} openList={openList} />
     </>

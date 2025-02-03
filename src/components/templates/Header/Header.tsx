@@ -13,7 +13,7 @@ import { AppIcon } from '../../UI/Icons';
 import { BrandLogoName } from '../BrandLogoName';
 import { GuestUserModal, LoggedUserDrawer, NotLoggedDrawer } from './features';
 import {
-  AnchorButton, AppColors, FlexContainer, PrimaryButton, SecondaryButton,
+  AnchorButton, AppColors, FlexContainer, PrimaryButton, SecondaryButton, Avatar,
 } from '../../../styles';
 import {
   GuestUserButton,
@@ -22,7 +22,7 @@ import {
 
 const Header = ({ isLandingPage = false }: HeaderProps) => {
   const location = useLocation();
-  const { signOut } = useLogin();
+  const { signOut, initials } = useLogin();
   const { isGuestUser, userLoggedOn } = useGuestUser();
   const windowSize = useAppSelector((state) => state.userInterface.windowSize);
   const isMobile = windowSize === 'Mobile';
@@ -56,10 +56,11 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
             </HeaderNav>
           ) }
           { (!isGuestUser && userLoggedOn && isDesktop) && (
-            <IconButton aria-label="sign-out-button" onClick={signOut}>
-              <AppIcon fillColor={isLandingPage ? AppColors.white : AppColors.primary} icon="LogOut" />
+            <IconButton aria-label="open-configuration-button" onClick={signOut}>
+              <Avatar>{initials}</Avatar>
             </IconButton>
           ) }
+          {/** TODO: Change this to use avatar */}
           { (!isGuestUser && !userLoggedOn && !isMobile) && (
             <FlexContainer gap={3} justifyContent="space-between">
               <AnchorButton to={LOGIN_ROUTE}>

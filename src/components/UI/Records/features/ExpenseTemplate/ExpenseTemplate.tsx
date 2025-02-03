@@ -194,13 +194,14 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
 
     const newAmount = verifyAmountEndsPeriod(initialAmount.current);
     const amountToNumber = Number(newAmount);
+    const indebtedPeopleWithoutId = indebtedPeople.map(getIndebtedPeopleWithoutId);
 
     const newValues = {
       ...values,
       // Pass value to type Date
       date: newDate.toDate(),
       amount: amountToNumber,
-      indebtedPeople,
+      indebtedPeople: indebtedPeopleWithoutId,
       account: selectedAccount?._id ?? '',
       typeOfRecord: 'expense',
       linkedBudgets: newLinkedBudgets,

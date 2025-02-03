@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import {
-  ListItemButton, ListItemText,
+  ListItemButton,
 } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
 import { ICON_SIZE } from '../../../constants';
 import { SubcategoriesListDialog } from './SubcategoriesListDialog';
+import { CategoryText } from './CategoriesDialog.styled';
 
 interface CategoriesListDialogProps {
   categoryName: string;
@@ -22,7 +23,7 @@ const CategoriesListDialog = ({ categoryName, subCategories }: CategoriesListDia
   return (
     <>
       <ListItemButton onClick={handleClick}>
-        <ListItemText primary={categoryName} />
+        <CategoryText primary={categoryName} />
         {openList ? <ExpandLess sx={ICON_SIZE} /> : <ExpandMore sx={ICON_SIZE} />}
       </ListItemButton>
       <SubcategoriesListDialog categoryName={categoryName} subCategories={subCategories} openList={openList} />

@@ -10,3 +10,7 @@ export const SubcategoryText = styled(ListItemText)`
   padding-left: ${appTheme.spacing(4)};
   color: ${AppColors.subtitleColor};
 `;
+
+export const CategoryText = styled(ListItemText)`
+  font-weight: 500;
+`;

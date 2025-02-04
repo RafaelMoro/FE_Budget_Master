@@ -10,6 +10,7 @@ export type CategoryDialogAction = 'show' | 'edit' | 'delete';
 export interface ShowCategoriesProps {
   updateAction: (newAction: CategoryDialogAction, categoryId: string) => void;
   updateCategoryToEdit: (newCategory: CategoryUI | null) => void;
+  updateCategoryToDelete: (categoryId: string) => void;
 }
 
 export interface CategoriesListDialogProps {
@@ -17,7 +18,8 @@ export interface CategoriesListDialogProps {
   subCategories: string[];
   categoryId: string;
   updateAction: (newAction: CategoryDialogAction, categoryId: string) => void;
-  updateEditCategory: (categoryId: string) => void
+  updateEditCategory: (categoryId: string) => void;
+  updateCategoryToDelete: (categoryId: string) => void;
 }
 
 export interface SubcategoriesListDialogProps {

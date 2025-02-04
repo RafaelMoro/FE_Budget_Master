@@ -10,7 +10,7 @@ import { CategoryText } from './CategoriesDialog.styled';
 import { CategoriesListDialogProps } from './CategoryDialog.interface';
 
 const CategoriesListDialog = ({
-  categoryName, subCategories, categoryId, updateAction, updateEditCategory,
+  categoryName, subCategories, categoryId, updateAction, updateEditCategory, updateCategoryToDelete,
 }: CategoriesListDialogProps) => {
   const [openList, setOpenList] = useState(false);
 
@@ -25,6 +25,7 @@ const CategoriesListDialog = ({
 
   const handleDelete = () => {
     updateAction('delete', categoryId);
+    updateCategoryToDelete(categoryId);
   };
 
   return (

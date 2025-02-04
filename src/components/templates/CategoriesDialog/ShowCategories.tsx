@@ -8,7 +8,7 @@ import { ShowCategoriesProps } from './CategoryDialog.interface';
 import { useCategories } from '../../../hooks';
 import { CategoriesListDialog } from './CategoriesListDialog';
 
-const ShowCategories = ({ updateAction, updateCategoryToEdit }: ShowCategoriesProps) => {
+const ShowCategories = ({ updateAction, updateCategoryToEdit, updateCategoryToDelete }: ShowCategoriesProps) => {
   const {
     currentData, isError, isFetching, isSuccess,
   } = useCategories();
@@ -57,6 +57,7 @@ const ShowCategories = ({ updateAction, updateCategoryToEdit }: ShowCategoriesPr
                 subCategories={subcategories}
                 categoryName={category}
                 updateEditCategory={updateEditCategory}
+                updateCategoryToDelete={updateCategoryToDelete}
               />
             ))
           }

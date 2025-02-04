@@ -14,10 +14,14 @@ import { CloseIconButton, CategoriesDialogContainer } from './CategoriesDialog.s
 const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
   const [action, setAction] = useState<CategoryDialogAction>('show');
   const categoryIdRef = useRef<string>('');
+  const [categoryToDelete, setCategoryToDelete] = useState<string | null>(null);
   const [categoryToEdit, setcategoryToEdit] = useState<CategoryUI | null>(null);
 
   const updateCategoryToEdit = (newCategory: CategoryUI | null) => {
     setcategoryToEdit(newCategory);
+  };
+  const updateCategoryToDelete = (categoryId: string) => {
+    setCategoryToDelete(categoryId);
   };
   const updateAction = (newAction: CategoryDialogAction, categoryId: string) => {
     setAction(newAction);
@@ -34,7 +38,9 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
         <Typography>
           {CATEGORY_DIALOG_ACTIONS[action].description}
         </Typography>
-        { action === 'show' && (<ShowCategories updateCategoryToEdit={updateCategoryToEdit} updateAction={updateAction} />) }
+        { action === 'show' && (
+          <ShowCategories updateCategoryToDelete={updateCategoryToDelete} updateCategoryToEdit={updateCategoryToEdit} updateAction={updateAction} />
+        ) }
         { action === 'edit' && (<EditCategory categoryToEdit={categoryToEdit} />) }
       </CategoriesDialogContainer>
     </Dialog>

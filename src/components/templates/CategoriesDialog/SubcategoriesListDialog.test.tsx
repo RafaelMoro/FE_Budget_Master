@@ -42,4 +42,21 @@ describe('<SubcategoriesListDialog />', () => {
 
     expect(handleEdit).toHaveBeenCalled();
   });
+
+  test('Given a user clicking on the delete button, the function handleDelete is called', async () => {
+    render(
+      <SubcategoriesListDialog
+        handleDelete={handleDelete}
+        handleEdit={handleEdit}
+        categoryName={categoryName}
+        subCategories={subcategories}
+        openList
+      />,
+    );
+
+    const deleteCategoryButton = screen.getByRole('button', { name: /boton-eliminar-categoria-First category/i });
+    await act(async () => userEvent.click(deleteCategoryButton));
+
+    expect(handleDelete).toHaveBeenCalled();
+  });
 });

@@ -5,7 +5,7 @@ import fetchMock from 'jest-fetch-mock';
 
 import { renderWithProviders } from '../../../tests/CustomWrapperRedux';
 import { userInitialState } from '../../UI/Account/Account.mocks';
-import { successfulResponseFetchCategories } from '../../UI/Records/Record.mocks';
+import { successfulResponseFetchCategories, failedResponseFetchCategories } from '../../UI/Records/Record.mocks';
 import { ShowCategories } from './ShowCategories';
 
 describe('<ShowCategories />', () => {
@@ -16,6 +16,7 @@ describe('<ShowCategories />', () => {
   beforeEach(() => {
     fetchMock.resetMocks();
     jest.clearAllMocks();
+    jest.spyOn(console, 'error').mockImplementation(() => {});
   });
 
   test('Show loading categories state', () => {
@@ -38,5 +39,15 @@ describe('<ShowCategories />', () => {
     const button = screen.getByRole('button', { name: /food and drink/i });
     await act(async () => userEvent.click(button));
     expect(await screen.findByText(/restaurants/i)).toBeInTheDocument();
+  });
+
+  test('Give the case where the fetch of categories failed, show error message', async () => {
+    fetchMock.mockRejectedValueOnce(JSON.stringify(failedResponseFetchCategories));
+    renderWithProviders(
+      <ShowCategories updateAction={updateAction} updateCategoryToDelete={updateCategoryToDelete} updateCategoryToEdit={updateCategoryToEdit} />,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    expect(await screen.findByText(/error al cargar categorías/i)).toBeInTheDocument();
   });
 });

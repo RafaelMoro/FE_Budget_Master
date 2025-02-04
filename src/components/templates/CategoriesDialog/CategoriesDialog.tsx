@@ -10,7 +10,7 @@ import { AppIcon } from '../../UI/Icons';
 import { CategoryDialogAction, CategoriesModalProps } from './CategoryDialog.interface';
 import { CategoryUI } from '../../../globalInterface';
 import { CATEGORY_DIALOG_ACTIONS } from './CategoryDialog.constant';
-import { CloseIconButton, CategoriesDialogContainer } from './CategoriesDialog.styled';
+import { CloseIconButton, CategoriesDialogContainer, GoBackIconButton } from './CategoriesDialog.styled';
 
 const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
   const [action, setAction] = useState<CategoryDialogAction>('show');
@@ -26,10 +26,16 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
   const updateAction = (newAction: CategoryDialogAction) => {
     setAction(newAction);
   };
+  const goBackAction = () => setAction('show');
 
   return (
     <Dialog onClose={onClose} open={open}>
       <CategoriesDialogContainer>
+        { action !== 'show' && (
+          <GoBackIconButton onClick={goBackAction}>
+            <AppIcon icon="GoBack" />
+          </GoBackIconButton>
+        )}
         <CloseIconButton onClick={onClose}>
           <AppIcon icon="Close" />
         </CloseIconButton>

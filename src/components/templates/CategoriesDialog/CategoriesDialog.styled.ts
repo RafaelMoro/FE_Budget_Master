@@ -14,6 +14,12 @@ export const CategoriesDialogContainer = styled.div`
 
 export const CloseIconButton = styled(IconButton)`
   justify-self: end;
+  grid-row: 1 / 2;
+`;
+
+export const GoBackIconButton = styled(IconButton)`
+  justify-self: start;
+  grid-row: 1 / 2;
 `;
 
 export const SubcategoryText = styled(ListItemText)`

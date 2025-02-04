@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import {
   Dialog, Typography,
 } from '@mui/material';
@@ -14,7 +14,6 @@ import { CloseIconButton, CategoriesDialogContainer } from './CategoriesDialog.s
 
 const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
   const [action, setAction] = useState<CategoryDialogAction>('show');
-  const categoryIdRef = useRef<string>('');
   const [categoryToDelete, setCategoryToDelete] = useState<string | null>(null);
   const [categoryToEdit, setcategoryToEdit] = useState<CategoryUI | null>(null);
 
@@ -24,9 +23,8 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
   const updateCategoryToDelete = (categoryId: string) => {
     setCategoryToDelete(categoryId);
   };
-  const updateAction = (newAction: CategoryDialogAction, categoryId: string) => {
+  const updateAction = (newAction: CategoryDialogAction) => {
     setAction(newAction);
-    categoryIdRef.current = categoryId;
   };
 
   return (

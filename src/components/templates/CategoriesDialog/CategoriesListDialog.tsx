@@ -19,12 +19,12 @@ const CategoriesListDialog = ({
   };
 
   const handleEdit = () => {
-    updateAction('edit', categoryId);
+    updateAction('edit');
     updateEditCategory(categoryId);
   };
 
   const handleDelete = () => {
-    updateAction('delete', categoryId);
+    updateAction('delete');
     updateCategoryToDelete(categoryId);
   };
 

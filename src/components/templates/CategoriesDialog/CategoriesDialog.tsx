@@ -5,6 +5,7 @@ import {
 
 import { ShowCategories } from './ShowCategories';
 import { EditCategory } from './EditCategory';
+import { DeleteCategory } from './DeleteCategory';
 import { AppIcon } from '../../UI/Icons';
 import { CategoryDialogAction, CategoriesModalProps } from './CategoryDialog.interface';
 import { CategoryUI } from '../../../globalInterface';
@@ -42,6 +43,7 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
           <ShowCategories updateCategoryToDelete={updateCategoryToDelete} updateCategoryToEdit={updateCategoryToEdit} updateAction={updateAction} />
         ) }
         { action === 'edit' && (<EditCategory categoryToEdit={categoryToEdit} />) }
+        { action === 'delete' && (<DeleteCategory categoryToDelete={categoryToDelete} />) }
       </CategoriesDialogContainer>
     </Dialog>
   );

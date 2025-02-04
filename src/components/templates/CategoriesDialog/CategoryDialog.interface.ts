@@ -44,3 +44,7 @@ export interface CategoryDialogActions {
 export interface EditCategoryProps {
   categoryToEdit: CategoryUI | null;
 }
+
+export interface DeleteCategoryProps {
+  categoryToDelete: string | null;
+}

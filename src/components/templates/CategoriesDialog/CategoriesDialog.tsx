@@ -32,11 +32,11 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
     <Dialog onClose={onClose} open={open}>
       <CategoriesDialogContainer>
         { action !== 'show' && (
-          <GoBackIconButton onClick={goBackAction}>
+          <GoBackIconButton aria-label="boton-ir-atras-ver-categorias" onClick={goBackAction}>
             <AppIcon icon="GoBack" />
           </GoBackIconButton>
         )}
-        <CloseIconButton onClick={onClose}>
+        <CloseIconButton aria-label="boton-cerrar-dialogo-ver categorias" onClick={onClose}>
           <AppIcon icon="Close" />
         </CloseIconButton>
         <Typography variant="h4" align="center">{CATEGORY_DIALOG_ACTIONS[action].title}</Typography>

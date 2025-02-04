@@ -3,17 +3,22 @@ import {
   Dialog, Typography,
 } from '@mui/material';
 
-import { CategoryDialogAction, CategoriesModalProps } from './CategoryDialog.interface';
-import { CATEGORY_DIALOG_ACTIONS } from './CategoryDialog.constant';
-import { AppIcon } from '../../UI/Icons';
-import { CloseIconButton, CategoriesDialogContainer } from './CategoriesDialog.styled';
 import { ShowCategories } from './ShowCategories';
 import { EditCategory } from './EditCategory';
+import { AppIcon } from '../../UI/Icons';
+import { CategoryDialogAction, CategoriesModalProps } from './CategoryDialog.interface';
+import { CategoryUI } from '../../../globalInterface';
+import { CATEGORY_DIALOG_ACTIONS } from './CategoryDialog.constant';
+import { CloseIconButton, CategoriesDialogContainer } from './CategoriesDialog.styled';
 
 const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
   const [action, setAction] = useState<CategoryDialogAction>('show');
   const categoryIdRef = useRef<string>('');
+  const [categoryToEdit, setcategoryToEdit] = useState<CategoryUI | null>(null);
 
+  const updateCategoryToEdit = (newCategory: CategoryUI | null) => {
+    setcategoryToEdit(newCategory);
+  };
   const updateAction = (newAction: CategoryDialogAction, categoryId: string) => {
     setAction(newAction);
     categoryIdRef.current = categoryId;
@@ -29,8 +34,8 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
         <Typography>
           {CATEGORY_DIALOG_ACTIONS[action].description}
         </Typography>
-        { action === 'show' && (<ShowCategories updateAction={updateAction} />) }
-        { action === 'edit' && (<EditCategory />) }
+        { action === 'show' && (<ShowCategories updateCategoryToEdit={updateCategoryToEdit} updateAction={updateAction} />) }
+        { action === 'edit' && (<EditCategory categoryToEdit={categoryToEdit} />) }
       </CategoriesDialogContainer>
     </Dialog>
   );

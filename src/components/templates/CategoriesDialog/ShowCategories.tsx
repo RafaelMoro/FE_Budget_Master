@@ -8,11 +8,16 @@ import { ShowCategoriesProps } from './CategoryDialog.interface';
 import { useCategories } from '../../../hooks';
 import { CategoriesListDialog } from './CategoriesListDialog';
 
-const ShowCategories = ({ updateAction }: ShowCategoriesProps) => {
+const ShowCategories = ({ updateAction, updateCategoryToEdit }: ShowCategoriesProps) => {
   const {
     currentData, isError, isFetching, isSuccess,
   } = useCategories();
   const [categories, setCategories] = useState<CategoryUI[]>([]);
+
+  const updateEditCategory = (categoryId: string) => {
+    const newCategorySelected = categories.find((category) => category.categoryId === categoryId) ?? null;
+    updateCategoryToEdit(newCategorySelected);
+  };
 
   useEffect(() => {
     if (isSuccess && currentData) {
@@ -51,6 +56,7 @@ const ShowCategories = ({ updateAction }: ShowCategoriesProps) => {
                 categoryId={categoryId}
                 subCategories={subcategories}
                 categoryName={category}
+                updateEditCategory={updateEditCategory}
               />
             ))
           }

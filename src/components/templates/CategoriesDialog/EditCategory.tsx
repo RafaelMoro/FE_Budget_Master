@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Formik, Field } from 'formik';
 import { Typography } from '@mui/material';
 import { EditCategoryProps } from './CategoryDialog.interface';
@@ -8,6 +8,10 @@ import {
 } from '../../../styles';
 
 const EditCategory = ({ categoryToEdit }: EditCategoryProps) => {
+  const initialValues = {
+    categoryName: categoryToEdit?.category ?? '',
+    subcategories: categoryToEdit?.subcategories ?? [],
+  };
   const [subcategories, setSubcategories] = useState<string[]>([]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars, @typescript-eslint/no-explicit-any
   const handleSubmit = (values: any) => {};
@@ -19,9 +23,15 @@ const EditCategory = ({ categoryToEdit }: EditCategoryProps) => {
     setSubcategories(filteredSubcategories);
   };
 
+  useEffect(() => {
+    if (categoryToEdit && categoryToEdit.subcategories) {
+      setSubcategories(categoryToEdit.subcategories);
+    }
+  }, [categoryToEdit]);
+
   return (
     <Formik
-      initialValues={{ something: '' }}
+      initialValues={initialValues}
   // validationSchema={CreateAccountSchema}
       onSubmit={(values) => handleSubmit(values)}
       validateOnMount
@@ -36,9 +46,13 @@ const EditCategory = ({ categoryToEdit }: EditCategoryProps) => {
             label="Título de la categoría"
           />
           <Typography>Subcategorías:</Typography>
-          <div>
-            <Chip label="ejemplo" variant="outlined" color="primary" onDelete={() => handleDeleteSubcategory('ejemplo')} />
-          </div>
+          {
+            subcategories.length > 0 && subcategories.map((subcategory) => (
+              <div key={subcategory}>
+                <Chip label={subcategory} variant="outlined" color="primary" onDelete={() => handleDeleteSubcategory('ejemplo')} />
+              </div>
+            ))
+          }
           <CancelButton>
             Cancelar
           </CancelButton>

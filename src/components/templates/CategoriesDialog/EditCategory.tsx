@@ -7,6 +7,7 @@ import {
   CancelButton, FlexContainer, InputForm, LongChip, PrimaryButton,
 } from '../../../styles';
 import { SubcategoriesContainerChips } from './CategoriesDialog.styled';
+import { AddSubcategory } from './AddSubcategory';
 
 const EditCategory = ({ categoryToEdit }: EditCategoryProps) => {
   const initialValues = {
@@ -51,6 +52,7 @@ const EditCategory = ({ categoryToEdit }: EditCategoryProps) => {
             label="Título de la categoría"
           />
           <Typography>Subcategorías:</Typography>
+          <AddSubcategory />
           {
             subcategories.length > 0 && (
               <SubcategoriesContainerChips>

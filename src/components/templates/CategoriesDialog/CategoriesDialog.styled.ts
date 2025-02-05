@@ -51,3 +51,10 @@ export const SubcategoriesContainerChips = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: ${appTheme.spacing(2)};
 `;
+
+export const EditCategoryButtonContainer = styled.div`
+  margin-top: ${appTheme.spacing(3)};
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;

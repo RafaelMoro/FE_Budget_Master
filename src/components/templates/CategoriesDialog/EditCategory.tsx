@@ -5,7 +5,9 @@ import { LoadingSpinner } from '../../UI/LoadingSpinner';
 import {
   CancelButton, InputForm, LongChip, PrimaryButton,
 } from '../../../styles';
-import { EditCategoryContainer, SubcategoriesContainerChips, SubcategoryTitle } from './CategoriesDialog.styled';
+import {
+  EditCategoryButtonContainer, EditCategoryContainer, SubcategoriesContainerChips, SubcategoryTitle,
+} from './CategoriesDialog.styled';
 import { AddSubcategory } from './AddSubcategory';
 
 const EditCategory = ({ categoryToEdit }: EditCategoryProps) => {
@@ -68,12 +70,14 @@ const EditCategory = ({ categoryToEdit }: EditCategoryProps) => {
               </SubcategoriesContainerChips>
             )
           }
-          <CancelButton>
-            Cancelar
-          </CancelButton>
-          <PrimaryButton disabled={disableSubmitButton} variant="contained" onClick={submitForm} size="medium">
-            { loading ? (<LoadingSpinner />) : 'Editar' }
-          </PrimaryButton>
+          <EditCategoryButtonContainer>
+            <CancelButton>
+              Cancelar
+            </CancelButton>
+            <PrimaryButton disabled={disableSubmitButton} variant="contained" onClick={submitForm} size="medium">
+              { loading ? (<LoadingSpinner />) : 'Editar' }
+            </PrimaryButton>
+          </EditCategoryButtonContainer>
         </EditCategoryContainer>
       )}
     </Formik>

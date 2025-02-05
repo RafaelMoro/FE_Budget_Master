@@ -57,3 +57,8 @@ export interface AddSubcategoryProps {
 export interface AddSubcategoryValues {
   subcategory: string;
 }
+
+export interface EditCategoryValues {
+  categoryName: string;
+  subcategories: string[];
+}

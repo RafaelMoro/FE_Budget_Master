@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Formik, Field } from 'formik';
-import { EditCategoryProps } from './CategoryDialog.interface';
+import { EditCategoryProps, EditCategoryValues } from './CategoryDialog.interface';
 import { LoadingSpinner } from '../../UI/LoadingSpinner';
 import {
   CancelButton, InputForm, LongChip, PrimaryButton,
@@ -11,13 +11,13 @@ import {
 import { AddSubcategory } from './AddSubcategory';
 
 const EditCategory = ({ categoryToEdit, goBackAction }: EditCategoryProps) => {
-  const initialValues = {
+  const initialValues: EditCategoryValues = {
     categoryName: categoryToEdit?.category ?? '',
     subcategories: categoryToEdit?.subcategories ?? [],
   };
   const [subcategories, setSubcategories] = useState<string[]>([]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars, @typescript-eslint/no-explicit-any
-  const handleSubmit = (values: any) => {};
+
+  const handleSubmit = (values: EditCategoryValues) => {};
   const loading = false;
   const disableSubmitButton = false;
 

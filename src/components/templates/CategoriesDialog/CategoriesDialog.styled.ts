@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import {
   ListItemText, IconButton,
+  Typography,
 } from '@mui/material';
 import { appTheme } from '../../../styles/theme';
 import { AppColors } from '../../../styles';
@@ -30,6 +31,19 @@ export const SubcategoryText = styled(ListItemText)`
 
 export const CategoryText = styled(ListItemText)`
   font-weight: 500;
+`;
+
+export const EditCategoryContainer = styled.div`
+  grid-column: 1 / 3;
+  display: flex;
+  flex-direction: column;
+  gap: ${appTheme.spacing(3)};
+  justify-content: center;
+  align-items: center;
+`;
+
+export const SubcategoryTitle = styled(Typography)`
+  margin-top: ${appTheme.spacing(3)};
 `;
 
 export const SubcategoriesContainerChips = styled.div`

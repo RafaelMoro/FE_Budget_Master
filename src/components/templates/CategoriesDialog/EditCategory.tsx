@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Formik, Field } from 'formik';
-import { Typography } from '@mui/material';
 import { EditCategoryProps } from './CategoryDialog.interface';
 import { LoadingSpinner } from '../../UI/LoadingSpinner';
 import {
-  CancelButton, FlexContainer, InputForm, LongChip, PrimaryButton,
+  CancelButton, InputForm, LongChip, PrimaryButton,
 } from '../../../styles';
-import { SubcategoriesContainerChips } from './CategoriesDialog.styled';
+import { EditCategoryContainer, SubcategoriesContainerChips, SubcategoryTitle } from './CategoriesDialog.styled';
 import { AddSubcategory } from './AddSubcategory';
 
 const EditCategory = ({ categoryToEdit }: EditCategoryProps) => {
@@ -43,16 +42,17 @@ const EditCategory = ({ categoryToEdit }: EditCategoryProps) => {
       validateOnMount
     >
       {({ submitForm }) => (
-        <FlexContainer gap={3} flexDirection="column" alignItems="center">
+        <EditCategoryContainer>
           <Field
             component={InputForm}
+            fullWidth
             name="categoryName"
             type="text"
             variant="standard"
             label="Título de la categoría"
           />
-          <Typography>Subcategorías:</Typography>
           <AddSubcategory addSubcategory={addSubcategory} />
+          <SubcategoryTitle>Subcategorías:</SubcategoryTitle>
           {
             subcategories.length > 0 && (
               <SubcategoriesContainerChips>
@@ -74,7 +74,7 @@ const EditCategory = ({ categoryToEdit }: EditCategoryProps) => {
           <PrimaryButton disabled={disableSubmitButton} variant="contained" onClick={submitForm} size="medium">
             { loading ? (<LoadingSpinner />) : 'Editar' }
           </PrimaryButton>
-        </FlexContainer>
+        </EditCategoryContainer>
       )}
     </Formik>
   );

@@ -7,7 +7,8 @@ export const CATEGORY_DIALOG_ACTIONS: CategoryDialogActions = {
   },
   edit: {
     title: 'Editar categoría',
-    description: '',
+    description: `Puede cambiar el nombre de la categoría, agregar subcategoría, o bien, eliminar una subcategoría
+    dando click en el botón en forma de X que está junto a la subcategoría`,
   },
   delete: {
     title: 'Eliminar categoría',

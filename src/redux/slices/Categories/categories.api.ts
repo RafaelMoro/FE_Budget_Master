@@ -1,9 +1,9 @@
+import { ModifyCategoryMutationProps } from '../../../components/templates/CategoriesDialog/CategoryDialog.interface';
 import { CategoriesResponse } from '../../../components/UI/Records/interface';
 import { PUT_METHOD } from '../../../constants';
 import { RequestBearerTokenProps } from '../../../globalInterface';
 import { budgetMasterApi } from '../../budgetMaster.api';
 import { CATEGORIES_TAG, CATEGORIES_REST_ENDPOINT } from '../../constants';
-import { ModifyAccountMutationProps } from '../Accounts/interface';
 
 export const categoriesApiSlice = budgetMasterApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -19,7 +19,7 @@ export const categoriesApiSlice = budgetMasterApi.injectEndpoints({
     }),
 
     editCategory: builder.mutation({
-      query: ({ values, bearerToken }: ModifyAccountMutationProps) => ({
+      query: ({ values, bearerToken }: ModifyCategoryMutationProps) => ({
         url: CATEGORIES_REST_ENDPOINT,
         method: PUT_METHOD,
         body: values,

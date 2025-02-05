@@ -67,7 +67,7 @@ export interface EditCategoryBEValues extends EditCategoryValues {
   categoryId: string;
 }
 
-export interface ModifyAccountMutationProps {
+export interface ModifyCategoryMutationProps {
   values: EditCategoryBEValues;
   bearerToken: string;
 }

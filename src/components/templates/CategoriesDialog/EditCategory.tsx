@@ -1,28 +1,53 @@
 import { useEffect, useState } from 'react';
 import { Formik, Field } from 'formik';
-import { EditCategoryProps, EditCategoryValues } from './CategoryDialog.interface';
-import { LoadingSpinner } from '../../UI/LoadingSpinner';
+
 import {
+  EditCategoryBEValues, EditCategoryProps, EditCategoryValues, ModifyCategoryMutationProps,
+} from './CategoryDialog.interface';
+import { EditCategorySchema } from '../../../validationsSchemas/categories.schema';
+import { useEditCategoryMutation } from '../../../redux/slices/Categories/categories.api';
+import { LoadingSpinner } from '../../UI/LoadingSpinner';
+import { AddSubcategory } from './AddSubcategory';
+import {
+  AppColors,
   CancelButton, ErrorParagraphValidation, InputForm, LongChip, PrimaryButton,
 } from '../../../styles';
 import {
   EditCategoryButtonContainer, EditCategoryContainer, SubcategoriesContainerChips, SubcategoryTitle,
 } from './CategoriesDialog.styled';
-import { AddSubcategory } from './AddSubcategory';
-import { EditCategorySchema } from '../../../validationsSchemas/categories.schema';
+import { AppIcon } from '../../UI/Icons';
+import { useAppSelector } from '../../../redux/hooks';
+import { useNotification } from '../../../hooks';
+import { ERROR_MESSAGE_GENERAL } from '../../../constants';
+import { SystemStateEnum } from '../../../enums';
 
 const EditCategory = ({ categoryToEdit, goBackAction }: EditCategoryProps) => {
+  const userReduxState = useAppSelector((state) => state.user);
+  const bearerToken = userReduxState.userInfo?.bearerToken as string;
+  const [editCategoryMutation, { isLoading, isSuccess }] = useEditCategoryMutation();
+  const { updateGlobalNotification } = useNotification();
   const [subcategories, setSubcategories] = useState<string[]>([]);
   const initialValues: EditCategoryValues = {
     categoryName: categoryToEdit?.category ?? '',
     subcategories,
   };
 
-  const handleSubmit = (values: EditCategoryValues) => {
-    // eslint-disable-next-line no-console
-    console.log('values', values);
+  const handleSubmit = async (values: EditCategoryValues) => {
+    try {
+      const valuesToSubmit: EditCategoryBEValues = { ...values, categoryId: categoryToEdit?.categoryId ?? '' };
+      const editCategoryMutationValues: ModifyCategoryMutationProps = { values: valuesToSubmit, bearerToken };
+      await editCategoryMutation(editCategoryMutationValues).unwrap();
+    } catch (err) {
+      console.log('err', err);
+      // show error notification
+      updateGlobalNotification({
+        newTitle: 'Error al editar su categoría',
+        newDescription: ERROR_MESSAGE_GENERAL,
+        newStatus: SystemStateEnum.Error,
+      });
+      goBackAction();
+    }
   };
-  const loading = false;
   const disableSubmitButton = false;
 
   const handleDeleteSubcategory = (subcategoryToDelete: string) => {
@@ -83,7 +108,9 @@ const EditCategory = ({ categoryToEdit, goBackAction }: EditCategoryProps) => {
               Cancelar
             </CancelButton>
             <PrimaryButton disabled={disableSubmitButton} variant="contained" onClick={submitForm} size="medium">
-              { loading ? (<LoadingSpinner />) : 'Editar' }
+              { (isLoading && !isSuccess) && (<LoadingSpinner />) }
+              { (!isLoading && isSuccess) && (<AppIcon icon="TickMark" fillColor={AppColors.white} />) }
+              { (!isLoading && !isSuccess) && 'Editar' }
             </PrimaryButton>
           </EditCategoryButtonContainer>
         </EditCategoryContainer>

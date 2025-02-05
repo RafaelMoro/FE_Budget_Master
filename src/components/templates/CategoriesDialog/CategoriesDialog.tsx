@@ -46,7 +46,7 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
         { action === 'show' && (
           <ShowCategories updateCategoryToDelete={updateCategoryToDelete} updateCategoryToEdit={updateCategoryToEdit} updateAction={updateAction} />
         ) }
-        { action === 'edit' && (<EditCategory categoryToEdit={categoryToEdit} />) }
+        { action === 'edit' && (<EditCategory goBackAction={goBackAction} categoryToEdit={categoryToEdit} />) }
         { action === 'delete' && (<DeleteCategory categoryToDelete={categoryToDelete} />) }
       </CategoriesDialogContainer>
     </Dialog>

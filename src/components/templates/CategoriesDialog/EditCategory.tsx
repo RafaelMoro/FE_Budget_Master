@@ -10,7 +10,7 @@ import {
 } from './CategoriesDialog.styled';
 import { AddSubcategory } from './AddSubcategory';
 
-const EditCategory = ({ categoryToEdit }: EditCategoryProps) => {
+const EditCategory = ({ categoryToEdit, goBackAction }: EditCategoryProps) => {
   const initialValues = {
     categoryName: categoryToEdit?.category ?? '',
     subcategories: categoryToEdit?.subcategories ?? [],
@@ -71,7 +71,7 @@ const EditCategory = ({ categoryToEdit }: EditCategoryProps) => {
             )
           }
           <EditCategoryButtonContainer>
-            <CancelButton>
+            <CancelButton onClick={goBackAction}>
               Cancelar
             </CancelButton>
             <PrimaryButton disabled={disableSubmitButton} variant="contained" onClick={submitForm} size="medium">

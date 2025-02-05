@@ -43,6 +43,7 @@ export interface CategoryDialogActions {
 
 export interface EditCategoryProps {
   categoryToEdit: CategoryUI | null;
+  goBackAction: () => void;
 }
 
 export interface DeleteCategoryProps {

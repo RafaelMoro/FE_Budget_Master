@@ -35,9 +35,9 @@ describe('AddSubcategory', () => {
     expect(await screen.findByText(/por favor, ingrese una subcategoría de más de 3 caracteres/i)).toBeInTheDocument();
   });
 
-  test('Given a user adding a subcategory with more than 30 characters, the error message is shown', async () => {
+  test('Given a user adding a subcategory with more than 60 characters, the error message is shown', async () => {
     const addSubcategory = jest.fn();
-    const newSubcategory = 'a subcategory with more than 30 characters';
+    const newSubcategory = 'a subcategory with more than 60 characters that is very long this subcategory to fail this test';
     render(<AddSubcategory addSubcategory={addSubcategory} />);
 
     const addSubcategoryInput = screen.getByRole('textbox', { name: /agregar subcategoría/i });
@@ -46,7 +46,7 @@ describe('AddSubcategory', () => {
     await act(async () => userEvent.type(addSubcategoryInput, newSubcategory));
     await act(async () => userEvent.click(addSubcategoryButton));
 
-    expect(await screen.findByText(/por favor, ingrese una subcategoría con menos de 30 caracteres/i)).toBeInTheDocument();
+    expect(await screen.findByText(/por favor, ingrese una subcategoría con menos de 60 caracteres/i)).toBeInTheDocument();
   });
 
   test('Given a user adding a subcategory, the function addSubcategory is called', async () => {

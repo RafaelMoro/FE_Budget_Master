@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { ErrorSection } from './ErrorSection';
 
 describe('ErrorSection', () => {
@@ -15,5 +16,27 @@ describe('ErrorSection', () => {
     expect(screen.getByRole('button', {
       name: /boton-cerrar-error/i,
     })).toBeInTheDocument();
+  });
+
+  test('If a title is passed to the component, it should be shown', () => {
+    render(<ErrorSection description={description} title={title} onClose={onClose} />);
+
+    expect(screen.getByText(title)).toBeInTheDocument();
+  });
+
+  test('If the icon will be hidden, it should not be shown', () => {
+    render(<ErrorSection description={description} title={title} onClose={onClose} hideIcon />);
+
+    expect(screen.queryByTestId('ErrorOutlineOutlinedIcon')).not.toBeInTheDocument();
+  });
+
+  test('Given a user clicking on the close button, the onClose function should be called', async () => {
+    render(<ErrorSection description={description} title={title} onClose={onClose} />);
+
+    const closeButton = screen.getByRole('button', {
+      name: /boton-cerrar-error/i,
+    });
+    await act(async () => userEvent.click(closeButton));
+    expect(onClose).toHaveBeenCalled();
   });
 });

@@ -16,7 +16,12 @@ const AddSubcategory = ({ addSubcategory }: AddSubcategoryProps) => {
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={(values) => handleSubmit(values)}
+      onSubmit={(values, actions) => {
+        handleSubmit(values);
+        actions.setFieldValue('subcategory', '');
+        actions.setFieldTouched('subcategory', false);
+        actions.setSubmitting(false);
+      }}
       validationSchema={AddSubcategorySchema}
       validateOnMount
     >

@@ -1,6 +1,7 @@
 import { Typography } from '@mui/material';
 import { AppIcon } from '../Icons';
-import { CloseIconButton, ErrorContainer } from './ErrorSection.styled';
+import { CloseIconButton, ErrorContainer, ErrorIconContainer } from './ErrorSection.styled';
+import { AppColors } from '../../../styles';
 
 interface ErrorSectionProps {
   description: string;
@@ -16,8 +17,12 @@ const ErrorSection = ({
     <CloseIconButton aria-label="boton-cerrar-error" onClick={onClose}>
       <AppIcon icon="Close" />
     </CloseIconButton>
-    { !hideIcon && (<AppIcon icon="Error" size="4.5rem" />) }
-    { title && (<Typography variant="h4" align="center">{title}</Typography>) }
+    { !hideIcon && (
+      <ErrorIconContainer>
+        <AppIcon icon="Error" fillColor={AppColors.white} size="4.5rem" />
+      </ErrorIconContainer>
+    ) }
+    { title && (<Typography variant="subtitle1" align="center">{title}</Typography>) }
     <Typography>{description}</Typography>
   </ErrorContainer>
 );

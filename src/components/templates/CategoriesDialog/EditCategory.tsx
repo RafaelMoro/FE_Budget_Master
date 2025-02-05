@@ -9,6 +9,7 @@ import {
   EditCategoryButtonContainer, EditCategoryContainer, SubcategoriesContainerChips, SubcategoryTitle,
 } from './CategoriesDialog.styled';
 import { AddSubcategory } from './AddSubcategory';
+import { EditCategorySchema } from '../../../validationsSchemas/categories.schema';
 
 const EditCategory = ({ categoryToEdit, goBackAction }: EditCategoryProps) => {
   const initialValues: EditCategoryValues = {
@@ -39,7 +40,7 @@ const EditCategory = ({ categoryToEdit, goBackAction }: EditCategoryProps) => {
   return (
     <Formik
       initialValues={initialValues}
-  // validationSchema={CreateAccountSchema}
+      validationSchema={EditCategorySchema}
       onSubmit={(values) => handleSubmit(values)}
       validateOnMount
     >

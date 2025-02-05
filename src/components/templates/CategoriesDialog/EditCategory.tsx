@@ -4,8 +4,9 @@ import { Typography } from '@mui/material';
 import { EditCategoryProps } from './CategoryDialog.interface';
 import { LoadingSpinner } from '../../UI/LoadingSpinner';
 import {
-  CancelButton, Chip, FlexContainer, InputForm, PrimaryButton,
+  CancelButton, FlexContainer, InputForm, LongChip, PrimaryButton,
 } from '../../../styles';
+import { SubcategoriesContainerChips } from './CategoriesDialog.styled';
 
 const EditCategory = ({ categoryToEdit }: EditCategoryProps) => {
   const initialValues = {
@@ -47,11 +48,19 @@ const EditCategory = ({ categoryToEdit }: EditCategoryProps) => {
           />
           <Typography>Subcategorías:</Typography>
           {
-            subcategories.length > 0 && subcategories.map((subcategory) => (
-              <div key={subcategory}>
-                <Chip label={subcategory} variant="outlined" color="primary" onDelete={() => handleDeleteSubcategory('ejemplo')} />
-              </div>
-            ))
+            subcategories.length > 0 && (
+              <SubcategoriesContainerChips>
+                { subcategories.map((subcategory) => (
+                  <LongChip
+                    key={subcategory}
+                    label={subcategory}
+                    variant="outlined"
+                    color="primary"
+                    onDelete={() => handleDeleteSubcategory(subcategory)}
+                  />
+                ))}
+              </SubcategoriesContainerChips>
+            )
           }
           <CancelButton>
             Cancelar

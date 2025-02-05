@@ -23,6 +23,10 @@ const EditCategory = ({ categoryToEdit }: EditCategoryProps) => {
     const filteredSubcategories = subcategories.filter((subcategory) => subcategory !== subcategoryToDelete);
     setSubcategories(filteredSubcategories);
   };
+  const addSubcategory = (subcategory: string) => {
+    const newSubcategories = [...subcategories, subcategory];
+    setSubcategories(newSubcategories);
+  };
 
   useEffect(() => {
     if (categoryToEdit && categoryToEdit.subcategories) {

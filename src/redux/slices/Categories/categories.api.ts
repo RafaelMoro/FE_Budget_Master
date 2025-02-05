@@ -1,13 +1,15 @@
 import { CategoriesResponse } from '../../../components/UI/Records/interface';
+import { PUT_METHOD } from '../../../constants';
 import { RequestBearerTokenProps } from '../../../globalInterface';
 import { budgetMasterApi } from '../../budgetMaster.api';
-import { CATEGORIES_TAG, GET_CATEGORIES } from '../../constants';
+import { CATEGORIES_TAG, CATEGORIES_REST_ENDPOINT } from '../../constants';
+import { ModifyAccountMutationProps } from '../Accounts/interface';
 
 export const categoriesApiSlice = budgetMasterApi.injectEndpoints({
   endpoints: (builder) => ({
     fetchCategories: builder.query({
       query: ({ bearerToken }: RequestBearerTokenProps) => ({
-        url: GET_CATEGORIES,
+        url: CATEGORIES_REST_ENDPOINT,
         headers: {
           Authorization: bearerToken,
         },
@@ -15,7 +17,19 @@ export const categoriesApiSlice = budgetMasterApi.injectEndpoints({
       providesTags: [CATEGORIES_TAG],
       transformResponse: (response: CategoriesResponse) => response.data?.categories,
     }),
+
+    editCategory: builder.mutation({
+      query: ({ values, bearerToken }: ModifyAccountMutationProps) => ({
+        url: CATEGORIES_REST_ENDPOINT,
+        method: PUT_METHOD,
+        body: values,
+        headers: {
+          Authorization: bearerToken,
+        },
+      }),
+      invalidatesTags: [CATEGORIES_TAG],
+    }),
   }),
 });
 
-export const { useFetchCategoriesQuery } = categoriesApiSlice;
+export const { useFetchCategoriesQuery, useEditCategoryMutation } = categoriesApiSlice;

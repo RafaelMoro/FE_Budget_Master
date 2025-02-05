@@ -62,3 +62,12 @@ export interface EditCategoryValues {
   categoryName: string;
   subcategories: string[];
 }
+
+export interface EditCategoryBEValues extends EditCategoryValues {
+  categoryId: string;
+}
+
+export interface ModifyAccountMutationProps {
+  values: EditCategoryBEValues;
+  bearerToken: string;
+}

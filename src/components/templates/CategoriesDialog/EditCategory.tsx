@@ -3,7 +3,7 @@ import { Formik, Field } from 'formik';
 import { EditCategoryProps, EditCategoryValues } from './CategoryDialog.interface';
 import { LoadingSpinner } from '../../UI/LoadingSpinner';
 import {
-  CancelButton, InputForm, LongChip, PrimaryButton,
+  CancelButton, ErrorParagraphValidation, InputForm, LongChip, PrimaryButton,
 } from '../../../styles';
 import {
   EditCategoryButtonContainer, EditCategoryContainer, SubcategoriesContainerChips, SubcategoryTitle,
@@ -12,13 +12,16 @@ import { AddSubcategory } from './AddSubcategory';
 import { EditCategorySchema } from '../../../validationsSchemas/categories.schema';
 
 const EditCategory = ({ categoryToEdit, goBackAction }: EditCategoryProps) => {
+  const [subcategories, setSubcategories] = useState<string[]>([]);
   const initialValues: EditCategoryValues = {
     categoryName: categoryToEdit?.category ?? '',
-    subcategories: categoryToEdit?.subcategories ?? [],
+    subcategories,
   };
-  const [subcategories, setSubcategories] = useState<string[]>([]);
 
-  const handleSubmit = (values: EditCategoryValues) => {};
+  const handleSubmit = (values: EditCategoryValues) => {
+    // eslint-disable-next-line no-console
+    console.log('values', values);
+  };
   const loading = false;
   const disableSubmitButton = false;
 
@@ -42,9 +45,10 @@ const EditCategory = ({ categoryToEdit, goBackAction }: EditCategoryProps) => {
       initialValues={initialValues}
       validationSchema={EditCategorySchema}
       onSubmit={(values) => handleSubmit(values)}
+      enableReinitialize
       validateOnMount
     >
-      {({ submitForm }) => (
+      {({ submitForm, errors, touched }) => (
         <EditCategoryContainer>
           <Field
             component={InputForm}
@@ -56,6 +60,9 @@ const EditCategory = ({ categoryToEdit, goBackAction }: EditCategoryProps) => {
           />
           <AddSubcategory addSubcategory={addSubcategory} />
           <SubcategoryTitle>Subcategorías:</SubcategoryTitle>
+          { (touched.subcategories && errors.subcategories) && (
+            <ErrorParagraphValidation variant="subText">{errors.subcategories}</ErrorParagraphValidation>
+          ) }
           {
             subcategories.length > 0 && (
               <SubcategoriesContainerChips>

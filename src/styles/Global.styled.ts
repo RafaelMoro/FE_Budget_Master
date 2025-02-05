@@ -274,6 +274,15 @@ export const Chip = styled(ChipMUI, { shouldForwardProp: (props) => props !== 'c
   }
 `;
 
+export const LongChip = styled(ChipMUI, { shouldForwardProp: (props) => props !== 'chipColor' })`
+color: ${AppColors.black};
+border-color: ${({ chipColor }: ChipProps) => (chipColor ?? AppColors.primary)};
+
+& .MuiChip-label {
+  ${createResponsiveProps({ fontSize: 'Sub' })}
+}
+`;
+
 export const MobileChip = styled(Chip)`
   height: auto;
 

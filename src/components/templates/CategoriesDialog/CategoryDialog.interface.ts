@@ -48,3 +48,11 @@ export interface EditCategoryProps {
 export interface DeleteCategoryProps {
   categoryToDelete: string | null;
 }
+
+export interface AddSubcategoryProps {
+  addSubcategory: (subcategory: string) => void;
+}
+
+export interface AddSubcategoryValues {
+  subcategory: string;
+}

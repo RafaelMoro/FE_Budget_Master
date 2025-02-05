@@ -52,7 +52,7 @@ const EditCategory = ({ categoryToEdit }: EditCategoryProps) => {
             label="Título de la categoría"
           />
           <Typography>Subcategorías:</Typography>
-          <AddSubcategory />
+          <AddSubcategory addSubcategory={addSubcategory} />
           {
             subcategories.length > 0 && (
               <SubcategoriesContainerChips>

@@ -1,13 +1,21 @@
 import { Field, Formik } from 'formik';
 import { InputForm, SecondaryButton } from '../../../styles';
 import { AddSubcategorySchema } from '../../../validationsSchemas/categories.schema';
+import { AddSubcategoryProps, AddSubcategoryValues } from './CategoryDialog.interface';
 
-const AddSubcategory = () => {
-  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-  const handleSubmit = (values: any) => {};
+const AddSubcategory = ({ addSubcategory }: AddSubcategoryProps) => {
+  const initialValues: AddSubcategoryValues = {
+    subcategory: '',
+  };
+
+  const handleSubmit = (values: AddSubcategoryValues) => {
+    const { subcategory } = values;
+    addSubcategory(subcategory);
+  };
+
   return (
     <Formik
-      initialValues={{ subcategories: '' }}
+      initialValues={initialValues}
       onSubmit={(values) => handleSubmit(values)}
       validationSchema={AddSubcategorySchema}
       validateOnMount

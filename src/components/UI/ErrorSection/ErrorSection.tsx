@@ -3,10 +3,10 @@ import { AppIcon } from '../Icons';
 import { CloseIconButton, ErrorContainer } from './ErrorSection.styled';
 
 interface ErrorSectionProps {
-  title?: string;
-  hideIcon?: boolean;
   description: string;
   onClose: () => void;
+  title?: string;
+  hideIcon?: boolean;
 }
 
 const ErrorSection = ({

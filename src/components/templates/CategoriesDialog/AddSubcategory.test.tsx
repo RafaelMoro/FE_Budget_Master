@@ -11,6 +11,16 @@ describe('AddSubcategory', () => {
     expect(screen.getByRole('button', { name: /agregar subcategoría/i })).toBeInTheDocument();
   });
 
+  test("Given a user clicking in 'agregar subcategoria' with no subcategory in the input, the error message is shown", async () => {
+    const addSubcategory = jest.fn();
+    render(<AddSubcategory addSubcategory={addSubcategory} />);
+
+    const addSubcategoryButton = screen.getByRole('button', { name: /agregar subcategoría/i });
+    await act(async () => userEvent.click(addSubcategoryButton));
+
+    expect(await screen.findByText(/por favor, ingrese una subcategoría/i)).toBeInTheDocument();
+  });
+
   test('Given a user adding a subcategory with less than 3 characters, the error message is shown', async () => {
     const addSubcategory = jest.fn();
     const newSubcategory = 'n';

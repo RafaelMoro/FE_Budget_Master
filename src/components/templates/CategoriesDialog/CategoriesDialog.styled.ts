@@ -16,11 +16,13 @@ export const CategoriesDialogContainer = styled.div`
 export const CloseIconButton = styled(IconButton)`
   justify-self: end;
   grid-row: 1 / 2;
+  grid-column: 1 / 2;
 `;
 
 export const GoBackIconButton = styled(IconButton)`
   justify-self: start;
   grid-row: 1 / 2;
+  grid-column: 1 / 2;
 `;
 
 export const SubcategoryText = styled(ListItemText)`
@@ -34,7 +36,6 @@ export const CategoryText = styled(ListItemText)`
 `;
 
 export const EditCategoryContainer = styled.div`
-  grid-column: 1 / 3;
   display: flex;
   flex-direction: column;
   gap: ${appTheme.spacing(3)};

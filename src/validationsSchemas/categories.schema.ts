@@ -5,7 +5,7 @@ export const AddSubcategorySchema = Yup.object({
     .string()
     .required('Por favor, ingrese una subcategoría')
     .min(3, 'Por favor, ingrese una subcategoría de más de 3 caracteres')
-    .max(20, 'Por favor, ingrese una subcategoría con menos de 20 caracteres'),
+    .max(30, 'Por favor, ingrese una subcategoría con menos de 30 caracteres'),
 });
 
 export const EditCategorySchema = Yup.object({

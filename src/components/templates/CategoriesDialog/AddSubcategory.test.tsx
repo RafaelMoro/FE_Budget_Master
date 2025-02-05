@@ -7,7 +7,7 @@ describe('AddSubcategory', () => {
     const addSubcategory = jest.fn();
     render(<AddSubcategory addSubcategory={addSubcategory} />);
 
-    expect(screen.getByRole('textbox', { name: /agregar subcategoría/i })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /subcategoría/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /agregar subcategoría/i })).toBeInTheDocument();
   });
 
@@ -26,7 +26,7 @@ describe('AddSubcategory', () => {
     const newSubcategory = 'n';
     render(<AddSubcategory addSubcategory={addSubcategory} />);
 
-    const addSubcategoryInput = screen.getByRole('textbox', { name: /agregar subcategoría/i });
+    const addSubcategoryInput = screen.getByRole('textbox', { name: /subcategoría/i });
     const addSubcategoryButton = screen.getByRole('button', { name: /agregar subcategoría/i });
 
     await act(async () => userEvent.type(addSubcategoryInput, newSubcategory));
@@ -40,7 +40,7 @@ describe('AddSubcategory', () => {
     const newSubcategory = 'a subcategory with more than 60 characters that is very long this subcategory to fail this test';
     render(<AddSubcategory addSubcategory={addSubcategory} />);
 
-    const addSubcategoryInput = screen.getByRole('textbox', { name: /agregar subcategoría/i });
+    const addSubcategoryInput = screen.getByRole('textbox', { name: /subcategoría/i });
     const addSubcategoryButton = screen.getByRole('button', { name: /agregar subcategoría/i });
 
     await act(async () => userEvent.type(addSubcategoryInput, newSubcategory));
@@ -54,7 +54,7 @@ describe('AddSubcategory', () => {
     const newSubcategory = 'new subcategory';
     render(<AddSubcategory addSubcategory={addSubcategory} />);
 
-    const addSubcategoryInput = screen.getByRole('textbox', { name: /agregar subcategoría/i });
+    const addSubcategoryInput = screen.getByRole('textbox', { name: /subcategoría/i });
     const addSubcategoryButton = screen.getByRole('button', { name: /agregar subcategoría/i });
 
     await act(async () => userEvent.type(addSubcategoryInput, newSubcategory));

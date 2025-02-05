@@ -33,7 +33,7 @@ const AddSubcategory = ({ addSubcategory }: AddSubcategoryProps) => {
             name="subcategory"
             type="text"
             variant="standard"
-            label="Agregar subcategoría"
+            label="Subcategoría"
           />
           <SecondaryButton variant="contained" onClick={submitForm} size="medium">
             Agregar subcategoría

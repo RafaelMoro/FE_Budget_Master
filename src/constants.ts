@@ -30,6 +30,9 @@ export const ERROR_MESSAGE_USER_NOT_FOUND = 'El correo electrónico no está reg
 export const ERROR_MESSAGE_FETCH_CATEGORIES = 'No fue posible obtener sus categorias. Por favor, intente de nuevo más tarde.';
 export const ERROR_CREATE_LOCAL_CATEGORIES = 'No fue posible crear sus categorias. Por favor, intente de nuevo más tarde.';
 
+/** Errors for Categories module */
+export const ERROR_MESSAGE_EDIT_CATEGORY = 'No fue posible editar su categoría. Por favor, intente de nuevo más tarde.';
+
 /** Success Login Module */
 export const SUCCESS_PASSWORD_RESET_TITLE = 'Contraseña reestablecida correctamente';
 export const SUCCESS_PASSWORD_RESET_DESC = 'Ahora puede iniciar sesión con su nueva contraseña.';

@@ -17,15 +17,14 @@ import {
 } from './CategoriesDialog.styled';
 import { AppIcon } from '../../UI/Icons';
 import { useAppSelector } from '../../../redux/hooks';
-import { useNotification } from '../../../hooks';
-import { ERROR_MESSAGE_GENERAL } from '../../../constants';
-import { SystemStateEnum } from '../../../enums';
+import { ERROR_MESSAGE_EDIT_CATEGORY, ERROR_MESSAGE_GENERAL } from '../../../constants';
 
-const EditCategory = ({ categoryToEdit, goBackAction }: EditCategoryProps) => {
+const EditCategory = ({
+  categoryToEdit, goBackAction, updateError,
+}: EditCategoryProps) => {
   const userReduxState = useAppSelector((state) => state.user);
   const bearerToken = userReduxState.userInfo?.bearerToken as string;
   const [editCategoryMutation, { isLoading, isSuccess }] = useEditCategoryMutation();
-  const { updateGlobalNotification } = useNotification();
   const [subcategories, setSubcategories] = useState<string[]>([]);
   const initialValues: EditCategoryValues = {
     categoryName: categoryToEdit?.category ?? '',
@@ -38,13 +37,10 @@ const EditCategory = ({ categoryToEdit, goBackAction }: EditCategoryProps) => {
       const editCategoryMutationValues: ModifyCategoryMutationProps = { values: valuesToSubmit, bearerToken };
       await editCategoryMutation(editCategoryMutationValues).unwrap();
     } catch (err) {
-      console.log('err', err);
+      // eslint-disable-next-line no-console
+      console.error('err', err);
       // show error notification
-      updateGlobalNotification({
-        newTitle: 'Error al editar su categoría',
-        newDescription: ERROR_MESSAGE_GENERAL,
-        newStatus: SystemStateEnum.Error,
-      });
+      updateError({ newTitle: ERROR_MESSAGE_EDIT_CATEGORY, newDescription: ERROR_MESSAGE_GENERAL });
       goBackAction();
     }
   };

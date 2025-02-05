@@ -7,6 +7,17 @@ export interface CategoriesModalProps {
 
 export type CategoryDialogAction = 'show' | 'edit' | 'delete';
 
+export interface CategoryError {
+  showError: boolean;
+  title: string;
+  description: string;
+}
+
+export interface UpdateErrorProps {
+  newTitle: string;
+  newDescription: string;
+}
+
 export interface ShowCategoriesProps {
   updateAction: (newAction: CategoryDialogAction) => void;
   updateCategoryToEdit: (newCategory: CategoryUI | null) => void;
@@ -44,6 +55,7 @@ export interface CategoryDialogActions {
 export interface EditCategoryProps {
   categoryToEdit: CategoryUI | null;
   goBackAction: () => void;
+  updateError: ({ newTitle, newDescription }: UpdateErrorProps) => void;
 }
 
 export interface DeleteCategoryProps {

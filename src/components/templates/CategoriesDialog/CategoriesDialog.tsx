@@ -7,13 +7,17 @@ import { ShowCategories } from './ShowCategories';
 import { EditCategory } from './EditCategory';
 import { DeleteCategory } from './DeleteCategory';
 import { AppIcon } from '../../UI/Icons';
-import { CategoryDialogAction, CategoriesModalProps } from './CategoryDialog.interface';
+import {
+  CategoryDialogAction, CategoriesModalProps, CategoryError, UpdateErrorProps,
+} from './CategoryDialog.interface';
 import { CategoryUI } from '../../../globalInterface';
 import { CATEGORY_DIALOG_ACTIONS } from './CategoryDialog.constant';
 import { CloseIconButton, CategoriesDialogContainer, GoBackIconButton } from './CategoriesDialog.styled';
+import { Error } from '../../UI';
 
 const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
   const [action, setAction] = useState<CategoryDialogAction>('show');
+  const [error, setError] = useState<CategoryError>({ showError: false, title: '', description: '' });
   const [categoryToDelete, setCategoryToDelete] = useState<string | null>(null);
   const [categoryToEdit, setcategoryToEdit] = useState<CategoryUI | null>(null);
 
@@ -27,6 +31,14 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
     setAction(newAction);
   };
   const goBackAction = () => setAction('show');
+  const updateError = ({ newTitle, newDescription }: UpdateErrorProps) => {
+    setError({ showError: true, title: newTitle, description: newDescription });
+  };
+  const resetError = () => setError({ showError: false, title: '', description: '' });
+  const closeModal = () => {
+    resetError();
+    onClose();
+  };
 
   return (
     <Dialog onClose={onClose} open={open}>
@@ -36,17 +48,26 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
             <AppIcon icon="GoBack" />
           </GoBackIconButton>
         )}
-        <CloseIconButton aria-label="boton-cerrar-dialogo-ver categorias" onClick={onClose}>
+        <CloseIconButton aria-label="boton-cerrar-dialogo-ver categorias" onClick={closeModal}>
           <AppIcon icon="Close" />
         </CloseIconButton>
         <Typography variant="h4" align="center">{CATEGORY_DIALOG_ACTIONS[action].title}</Typography>
+        { error.showError && (
+          <Error title={error.title} description={error.description} />
+        )}
         <Typography>
           {CATEGORY_DIALOG_ACTIONS[action].description}
         </Typography>
         { action === 'show' && (
           <ShowCategories updateCategoryToDelete={updateCategoryToDelete} updateCategoryToEdit={updateCategoryToEdit} updateAction={updateAction} />
         ) }
-        { action === 'edit' && (<EditCategory goBackAction={goBackAction} categoryToEdit={categoryToEdit} />) }
+        { action === 'edit' && (
+          <EditCategory
+            goBackAction={goBackAction}
+            categoryToEdit={categoryToEdit}
+            updateError={updateError}
+          />
+        ) }
         { action === 'delete' && (<DeleteCategory categoryToDelete={categoryToDelete} />) }
       </CategoriesDialogContainer>
     </Dialog>

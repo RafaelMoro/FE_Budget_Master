@@ -33,9 +33,16 @@ const EditCategory = ({
 
   const handleSubmit = async (values: EditCategoryValues) => {
     try {
-      const valuesToSubmit: EditCategoryBEValues = { ...values, categoryId: categoryToEdit?.categoryId ?? '' };
+      const valuesToSubmit: EditCategoryBEValues = {
+        categoryName: values.categoryName,
+        subCategories: values.subcategories,
+        categoryId: categoryToEdit?.categoryId ?? '',
+      };
       const editCategoryMutationValues: ModifyCategoryMutationProps = { values: valuesToSubmit, bearerToken };
       await editCategoryMutation(editCategoryMutationValues).unwrap();
+      setTimeout(() => {
+        goBackAction();
+      }, 2000);
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error('err', err);

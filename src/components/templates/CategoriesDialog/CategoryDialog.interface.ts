@@ -75,7 +75,9 @@ export interface EditCategoryValues {
   subcategories: string[];
 }
 
-export interface EditCategoryBEValues extends EditCategoryValues {
+export interface EditCategoryBEValues {
+  categoryName: string;
+  subCategories: string[];
   categoryId: string;
 }
 

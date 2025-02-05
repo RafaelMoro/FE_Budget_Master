@@ -25,9 +25,11 @@ const EditCategory = ({
   const userReduxState = useAppSelector((state) => state.user);
   const bearerToken = userReduxState.userInfo?.bearerToken as string;
   const [editCategoryMutation, { isLoading, isSuccess }] = useEditCategoryMutation();
+
+  const [categoryName, setCategoryName] = useState<string>(categoryToEdit?.category ?? '');
   const [subcategories, setSubcategories] = useState<string[]>([]);
   const initialValues: EditCategoryValues = {
-    categoryName: categoryToEdit?.category ?? '',
+    categoryName,
     subcategories,
   };
 
@@ -85,6 +87,8 @@ const EditCategory = ({
             type="text"
             variant="standard"
             label="Título de la categoría"
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            onChange={(e: any) => setCategoryName(e.target.value)}
           />
           <AddSubcategory addSubcategory={addSubcategory} />
           <SubcategoryTitle>Subcategorías:</SubcategoryTitle>

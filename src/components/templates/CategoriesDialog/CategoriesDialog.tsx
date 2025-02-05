@@ -13,7 +13,7 @@ import {
 import { CategoryUI } from '../../../globalInterface';
 import { CATEGORY_DIALOG_ACTIONS } from './CategoryDialog.constant';
 import { CloseIconButton, CategoriesDialogContainer, GoBackIconButton } from './CategoriesDialog.styled';
-import { Error } from '../../UI';
+import { ErrorSection } from '../../UI';
 
 const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
   const [action, setAction] = useState<CategoryDialogAction>('show');
@@ -53,7 +53,7 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
         </CloseIconButton>
         <Typography variant="h4" align="center">{CATEGORY_DIALOG_ACTIONS[action].title}</Typography>
         { error.showError && (
-          <Error title={error.title} description={error.description} />
+          <ErrorSection onClose={resetError} title={error.title} description={error.description} />
         )}
         <Typography>
           {CATEGORY_DIALOG_ACTIONS[action].description}

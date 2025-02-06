@@ -4,7 +4,7 @@ import {
   CategoryTemplateProps,
   EditCategoryTemplateProps,
 } from './CategoryDialog.interface';
-import { EditCategorySchema } from '../../../validationsSchemas/categories.schema';
+import { ManageCategorySchema } from '../../../validationsSchemas/categories.schema';
 import { LoadingSpinner } from '../../UI/LoadingSpinner';
 import { AddSubcategory } from './AddSubcategory';
 import {
@@ -34,7 +34,7 @@ const CategoryTemplate = ({
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={EditCategorySchema}
+      validationSchema={ManageCategorySchema}
       onSubmit={(values) => handleSubmit(values)}
       enableReinitialize
       validateOnMount

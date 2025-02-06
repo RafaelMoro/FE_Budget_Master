@@ -4,7 +4,7 @@ import {
   Celebration, SavingsOutlined, ArrowBackOutlined,
   Fastfood, House, Engineering, Language, DirectionsCar,
   AccountBalance, MedicalInformation, FamilyRestroom, ShoppingCart,
-  Menu, PaymentsOutlined,
+  Menu, PaymentsOutlined, LocalOfferOutlined,
 } from '@mui/icons-material';
 import { AllCategoryIcons, AppIcons } from './Icons.interface';
 import { AppColors } from '../../../styles';
@@ -69,4 +69,5 @@ export const categoryIcons: AllCategoryIcons = {
   entertainment: Celebration,
   savings: SavingsOutlined,
   income: PaymentsOutlined,
+  newCategory: LocalOfferOutlined,
 };

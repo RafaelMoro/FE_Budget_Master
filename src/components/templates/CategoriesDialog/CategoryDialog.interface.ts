@@ -105,6 +105,7 @@ export interface EditCategoryBEValues {
 export interface CreateCategoryBEValues {
   categoryName: string;
   subCategories: string[];
+  icon: 'newCategory';
 }
 
 export interface DeleteCategoryBEValues {

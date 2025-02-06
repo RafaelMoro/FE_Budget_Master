@@ -31,6 +31,7 @@ const withCreateCategory = (CategoryTemplate: ({
       const valuesToSubmit: CreateCategoryBEValues = {
         categoryName: values.categoryName,
         subCategories: values.subcategories,
+        icon: 'newCategory',
       };
       const createCategoryMutationValues: CreateCategoryMutationProps = { values: valuesToSubmit, bearerToken };
       await createCategoryMutation(createCategoryMutationValues).unwrap();

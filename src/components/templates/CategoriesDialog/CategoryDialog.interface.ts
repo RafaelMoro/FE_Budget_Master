@@ -44,6 +44,7 @@ export interface SubcategoriesListDialogProps {
 export interface CategoryDialogActionInfo {
   title: string;
   description: string;
+  warning?: string;
 }
 
 export interface CategoryDialogActions {

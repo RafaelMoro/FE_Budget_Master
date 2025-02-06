@@ -12,7 +12,9 @@ import {
 } from './CategoryDialog.interface';
 import { CategoryUI } from '../../../globalInterface';
 import { CATEGORY_DIALOG_ACTIONS } from './CategoryDialog.constant';
-import { CloseIconButton, CategoriesDialogContainer, GoBackIconButton } from './CategoriesDialog.styled';
+import {
+  CloseIconButton, CategoriesDialogContainer, GoBackIconButton, WarningText,
+} from './CategoriesDialog.styled';
 import { ErrorSection } from '../../UI';
 
 const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
@@ -58,6 +60,11 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
         <Typography>
           {CATEGORY_DIALOG_ACTIONS[action].description}
         </Typography>
+        { CATEGORY_DIALOG_ACTIONS[action]?.warning && (
+          <WarningText>
+            {CATEGORY_DIALOG_ACTIONS[action].warning}
+          </WarningText>
+        ) }
         { action === 'show' && (
           <ShowCategories updateCategoryToDelete={updateCategoryToDelete} updateCategoryToEdit={updateCategoryToEdit} updateAction={updateAction} />
         ) }

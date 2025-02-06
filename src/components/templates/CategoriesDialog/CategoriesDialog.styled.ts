@@ -31,6 +31,11 @@ export const SubcategoryText = styled(ListItemText)`
   color: ${AppColors.subtitleColor};
 `;
 
+export const WarningText = styled(Typography)`
+  color: ${AppColors.negative};
+  text-transform: uppercase;
+`;
+
 export const CategoryText = styled(ListItemText)`
   font-weight: 500;
 `;

@@ -12,6 +12,7 @@ export const CATEGORY_DIALOG_ACTIONS: CategoryDialogActions = {
   },
   delete: {
     title: 'Eliminar categoría',
-    description: '¿Está seguro que desea eliminar esta categoría? No hay forma de deshacer esta acción.',
+    description: '¿Está seguro que desea eliminar esta categoría?',
+    warning: 'No hay forma de deshacer esta acción.',
   },
 };

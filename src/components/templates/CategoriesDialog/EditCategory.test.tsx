@@ -14,6 +14,7 @@ describe('EditCategory', () => {
   };
   const goBackAction = jest.fn();
   const updateError = jest.fn();
+  const veryLongCategoryName = 'Very long category name with a lot of characters and description that does not really matter but I need keep it long';
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -53,7 +54,7 @@ describe('EditCategory', () => {
     expect(await screen.findByText(/por favor, ingrese un nombre de categoría/i)).toBeInTheDocument();
   });
 
-  test('Given a user giving a category name with less than 3 characters, show error message', async () => {
+  test('Given a user editing a category name with less than 3 characters, show error message', async () => {
     renderWithProviders(
       <EditCategory categoryToEdit={categoryToEdit} goBackAction={goBackAction} updateError={updateError} />,
       { preloadedState: { user: userInitialState } },
@@ -69,5 +70,23 @@ describe('EditCategory', () => {
 
     await act(async () => userEvent.click(submitButton));
     expect(await screen.findByText(/por favor, ingrese una categoría de más de 3 caracteres/i)).toBeInTheDocument();
+  });
+
+  test('Given a user editing a category name with more than 80 characters, show error message', async () => {
+    renderWithProviders(
+      <EditCategory categoryToEdit={categoryToEdit} goBackAction={goBackAction} updateError={updateError} />,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    const categoryNameInput = screen.getByRole('textbox', { name: /título de la categoría/i });
+    const submitButton = screen.getByRole('button', { name: /editar/i });
+    await act(async () => userEvent.type(categoryNameInput, '{selectall}{backspace}'));
+    await act(async () => userEvent.type(categoryNameInput, veryLongCategoryName));
+    await waitFor(() => {
+      expect(categoryNameInput).toHaveValue(veryLongCategoryName);
+    });
+
+    await act(async () => userEvent.click(submitButton));
+    expect(await screen.findByText(/por favor, ingrese una categoría con menos de 80 caracteres/i)).toBeInTheDocument();
   });
 });

@@ -1,4 +1,6 @@
-import { screen, waitFor, act } from '@testing-library/react';
+import {
+  screen, waitFor, act, within,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { CategoryUI } from '../../../globalInterface';
@@ -88,5 +90,27 @@ describe('EditCategory', () => {
 
     await act(async () => userEvent.click(submitButton));
     expect(await screen.findByText(/por favor, ingrese una categoría con menos de 80 caracteres/i)).toBeInTheDocument();
+  });
+
+  test('Given a user deleting the last subcategory, show error message', async () => {
+    const category: CategoryUI = {
+      category: 'Food and Drink',
+      categoryId: 'category-id-1',
+      subcategories: ['Restaurants'],
+    };
+
+    renderWithProviders(
+      <EditCategory categoryToEdit={category} goBackAction={goBackAction} updateError={updateError} />,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    const subcategory = screen.getByRole('button', { name: /restaurants/i });
+    const deleteSubcategory = within(subcategory).getByTestId('CancelIcon');
+    const submitButton = screen.getByRole('button', { name: /editar/i });
+
+    await act(async () => userEvent.click(deleteSubcategory));
+    await act(async () => userEvent.click(submitButton));
+
+    expect(await screen.findByText(/por favor, agregue al menos una subcategoría/i)).toBeInTheDocument();
   });
 });

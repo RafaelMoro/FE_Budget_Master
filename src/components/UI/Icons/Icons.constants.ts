@@ -6,8 +6,13 @@ import {
   AccountBalance, MedicalInformation, FamilyRestroom, ShoppingCart,
   Menu, PaymentsOutlined, LocalOfferOutlined,
 } from '@mui/icons-material';
+import { ElementType } from 'react';
+import * as MuiIcons from '@mui/icons-material';
 import { AllCategoryIcons, AppIcons } from './Icons.interface';
 import { AppColors } from '../../../styles';
+
+export const ICONS_MATERIAL: Record<string, ElementType> = MuiIcons;
+export const DEFAULT_SIZE = '2.5rem';
 
 export const APP_ICONS: AppIcons = {
   Delete: {

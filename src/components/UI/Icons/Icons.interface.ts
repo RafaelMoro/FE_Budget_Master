@@ -49,3 +49,9 @@ export interface CategoryIconProps {
   size?: string;
   icon: IconKeys;
 }
+
+export interface SelectIconProps {
+  name: string;
+  size?: string;
+  fillColor?: string;
+}

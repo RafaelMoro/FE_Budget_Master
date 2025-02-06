@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
 import { Formik, Field } from 'formik';
 
 import {
-  EditCategoryBEValues, EditCategoryProps, EditCategoryValues, ModifyCategoryMutationProps,
+  CategoryTemplateProps,
+  EditCategoryTemplateProps,
 } from './CategoryDialog.interface';
 import { EditCategorySchema } from '../../../validationsSchemas/categories.schema';
-import { useEditCategoryMutation } from '../../../redux/slices/Categories/categories.api';
 import { LoadingSpinner } from '../../UI/LoadingSpinner';
 import { AddSubcategory } from './AddSubcategory';
 import {
@@ -16,59 +15,21 @@ import {
   EditCategoryButtonContainer, EditCategoryContainer, SubcategoriesContainerChips, SubcategoryTitle,
 } from './CategoriesDialog.styled';
 import { AppIcon } from '../../UI/Icons';
-import { useAppSelector } from '../../../redux/hooks';
-import { ERROR_MESSAGE_EDIT_CATEGORY, ERROR_MESSAGE_GENERAL } from '../../../constants';
+import { withEditCategory } from './withEditCategory';
 
-const EditCategory = ({
-  categoryToEdit, goBackAction, updateError,
-}: EditCategoryProps) => {
-  const userReduxState = useAppSelector((state) => state.user);
-  const bearerToken = userReduxState.userInfo?.bearerToken as string;
-  const [editCategoryMutation, { isLoading, isSuccess }] = useEditCategoryMutation();
-
-  const [categoryName, setCategoryName] = useState<string>(categoryToEdit?.category ?? '');
-  const [subcategories, setSubcategories] = useState<string[]>([]);
-  const initialValues: EditCategoryValues = {
-    categoryName,
-    subcategories,
-  };
-
-  const handleSubmit = async (values: EditCategoryValues) => {
-    try {
-      const valuesToSubmit: EditCategoryBEValues = {
-        categoryName: values.categoryName,
-        subCategories: values.subcategories,
-        categoryId: categoryToEdit?.categoryId ?? '',
-      };
-      const editCategoryMutationValues: ModifyCategoryMutationProps = { values: valuesToSubmit, bearerToken };
-      await editCategoryMutation(editCategoryMutationValues).unwrap();
-      setTimeout(() => {
-        goBackAction();
-      }, 2000);
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('err', err);
-      // show error notification
-      updateError({ newTitle: ERROR_MESSAGE_EDIT_CATEGORY, newDescription: ERROR_MESSAGE_GENERAL });
-      goBackAction();
-    }
-  };
-  const disableSubmitButton = false;
+const CategoryTemplate = ({
+  initialValues, subcategories, isLoading, isSuccess, goBackAction, updateCategories, updateCategoryName, handleSubmit,
+}: CategoryTemplateProps) => {
+  const disableSubmitButton = isLoading && isSuccess;
 
   const handleDeleteSubcategory = (subcategoryToDelete: string) => {
     const filteredSubcategories = subcategories.filter((subcategory) => subcategory !== subcategoryToDelete);
-    setSubcategories(filteredSubcategories);
+    updateCategories(filteredSubcategories);
   };
   const addSubcategory = (subcategory: string) => {
     const newSubcategories = [...subcategories, subcategory];
-    setSubcategories(newSubcategories);
+    updateCategories(newSubcategories);
   };
-
-  useEffect(() => {
-    if (categoryToEdit && categoryToEdit.subcategories) {
-      setSubcategories(categoryToEdit.subcategories);
-    }
-  }, [categoryToEdit]);
 
   return (
     <Formik
@@ -88,7 +49,7 @@ const EditCategory = ({
             variant="standard"
             label="Título de la categoría"
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            onChange={(e: any) => setCategoryName(e.target.value)}
+            onChange={(e: any) => updateCategoryName(e.target.value)}
           />
           <AddSubcategory addSubcategory={addSubcategory} />
           <SubcategoryTitle>Subcategorías:</SubcategoryTitle>
@@ -125,5 +86,9 @@ const EditCategory = ({
     </Formik>
   );
 };
+
+const EditCategory = ({
+  categoryToEdit, goBackAction, updateError,
+}: EditCategoryTemplateProps) => withEditCategory(CategoryTemplate)({ categoryToEdit, goBackAction, updateError });
 
 export { EditCategory };

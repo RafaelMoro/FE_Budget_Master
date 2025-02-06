@@ -53,7 +53,18 @@ export interface CategoryDialogActions {
   delete: CategoryDialogActionInfo;
 }
 
-export interface EditCategoryProps {
+export interface CategoryTemplateProps {
+  initialValues: ManageCategoriesValues;
+  subcategories: string[];
+  isLoading: boolean;
+  isSuccess: boolean;
+  goBackAction: () => void;
+  updateCategories: (newCategories: string[]) => void;
+  updateCategoryName: (newCategoryName: string) => void
+  handleSubmit: (values: ManageCategoriesValues) => Promise<void>
+}
+
+export interface EditCategoryTemplateProps {
   categoryToEdit: CategoryUI | null;
   goBackAction: () => void;
   updateError: ({ newTitle, newDescription }: UpdateErrorProps) => void;
@@ -73,7 +84,7 @@ export interface AddSubcategoryValues {
   subcategory: string;
 }
 
-export interface EditCategoryValues {
+export interface ManageCategoriesValues {
   categoryName: string;
   subcategories: string[];
 }

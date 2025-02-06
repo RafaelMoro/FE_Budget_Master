@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react';
 import { CategoryUI } from '../../../globalInterface';
 import { renderWithProviders } from '../../../tests/CustomWrapperRedux';
 import { userInitialState } from '../../UI/Account/Account.mocks';
-import { EditCategory } from './EditCategory';
+import { EditCategory } from './CategoryTemplate';
 
 describe('EditCategory', () => {
   const categoryToEdit: CategoryUI = {

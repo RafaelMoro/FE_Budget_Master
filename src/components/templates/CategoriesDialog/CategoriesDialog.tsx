@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 
 import { ShowCategories } from './ShowCategories';
-import { EditCategory } from './EditCategory';
+import { EditCategory } from './CategoryTemplate';
 import { DeleteCategory } from './DeleteCategory';
 import { AppIcon } from '../../UI/Icons';
 import {

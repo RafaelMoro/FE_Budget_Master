@@ -8,6 +8,29 @@ import { renderWithProviders } from '../../../tests/CustomWrapperRedux';
 import { userInitialState } from '../../UI/Account/Account.mocks';
 import { EditCategory } from './CategoryTemplate';
 
+const twentySubcategories = [
+  'one subcategory',
+  'two subcategory',
+  'three',
+  'four',
+  'five',
+  'six subcategory',
+  'seven',
+  'eight',
+  'nine',
+  'ten subcategory',
+  'eleven',
+  'twelve',
+  'thirteen',
+  'fourteen',
+  'fifteen',
+  'sixteen',
+  'seventeen',
+  'eighteen',
+  'nineteen',
+  'twenty',
+];
+
 describe('EditCategory', () => {
   const categoryToEdit: CategoryUI = {
     category: 'Food and Drink',
@@ -112,5 +135,29 @@ describe('EditCategory', () => {
     await act(async () => userEvent.click(submitButton));
 
     expect(await screen.findByText(/por favor, agregue al menos una subcategoría/i)).toBeInTheDocument();
+  });
+
+  test('Given a user having 20 subcategories and adds 1 more, show error message', async () => {
+    const category: CategoryUI = {
+      category: 'Food and Drink',
+      categoryId: 'category-id-1',
+      subcategories: twentySubcategories,
+    };
+    const newSubcategory = 'new subcategory 1';
+
+    renderWithProviders(
+      <EditCategory categoryToEdit={category} goBackAction={goBackAction} updateError={updateError} />,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    const subcategoryInput = screen.getByRole('textbox', { name: /subcategoría$/i });
+    const addSubcategoryButton = screen.getByRole('button', { name: /agregar subcategoría/i });
+    screen.getByRole('textbox', { name: /subcategoría$/i });
+    await act(async () => userEvent.type(subcategoryInput, newSubcategory));
+    await act(async () => userEvent.click(addSubcategoryButton));
+    const submitButton = screen.getByRole('button', { name: /editar/i });
+    await act(async () => userEvent.click(submitButton));
+
+    expect(await screen.findByText(/por favor, agregue menos de 20 subcategorías/i)).toBeInTheDocument();
   });
 });

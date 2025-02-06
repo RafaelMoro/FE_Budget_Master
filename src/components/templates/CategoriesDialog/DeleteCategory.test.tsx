@@ -36,7 +36,6 @@ describe('DeleteCategory', () => {
     );
 
     const deleteButton = screen.getByRole('button', { name: /eliminar/i });
-
     await act(async () => userEvent.click(deleteButton));
     expect(await screen.findByTestId('DoneOutlinedIcon')).toBeInTheDocument();
   });

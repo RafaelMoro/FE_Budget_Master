@@ -331,6 +331,16 @@ export const failedResponseDeleteCategory = {
   success: false,
   version: '2.0.0',
 };
+
+export const successfulEditCategoriesReponse = {
+  data: {
+    category: mockCategories,
+  },
+  error: null,
+  message: null,
+  success: true,
+  version: '2.0.0',
+};
 export const emptyCategoriesResponse = {
   data: {
     categories: [],

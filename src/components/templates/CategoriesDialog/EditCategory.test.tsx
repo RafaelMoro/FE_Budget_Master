@@ -2,11 +2,14 @@ import {
   screen, waitFor, act, within,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import fetchMock from 'jest-fetch-mock';
 
 import { CategoryUI } from '../../../globalInterface';
 import { renderWithProviders } from '../../../tests/CustomWrapperRedux';
 import { userInitialState } from '../../UI/Account/Account.mocks';
 import { EditCategory } from './CategoryTemplate';
+import { successfulEditCategoriesReponse } from '../../UI/Records/Record.mocks';
 
 const twentySubcategories = [
   'one subcategory',
@@ -40,8 +43,10 @@ describe('EditCategory', () => {
   const goBackAction = jest.fn();
   const updateError = jest.fn();
   const veryLongCategoryName = 'Very long category name with a lot of characters and description that does not really matter but I need keep it long';
+  const newSubcategory = 'new subcategory 1';
 
   beforeEach(() => {
+    fetchMock.resetMocks();
     jest.clearAllMocks();
     // jest.spyOn(console, 'error').mockImplementation(() => {});
   });
@@ -143,7 +148,6 @@ describe('EditCategory', () => {
       categoryId: 'category-id-1',
       subcategories: twentySubcategories,
     };
-    const newSubcategory = 'new subcategory 1';
 
     renderWithProviders(
       <EditCategory categoryToEdit={category} goBackAction={goBackAction} updateError={updateError} />,
@@ -159,5 +163,25 @@ describe('EditCategory', () => {
     await act(async () => userEvent.click(submitButton));
 
     expect(await screen.findByText(/por favor, agregue menos de 20 subcategorías/i)).toBeInTheDocument();
+  });
+
+  test('Given a user editing the whole category, show tick mark in the submit button', async () => {
+    fetchMock.once(JSON.stringify(successfulEditCategoriesReponse));
+    renderWithProviders(
+      <EditCategory categoryToEdit={categoryToEdit} goBackAction={goBackAction} updateError={updateError} />,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    const categoryNameInput = screen.getByRole('textbox', { name: /título de la categoría/i });
+    const submitButton = screen.getByRole('button', { name: /editar/i });
+    const subcategoryInput = screen.getByRole('textbox', { name: /subcategoría$/i });
+    const addSubcategoryButton = screen.getByRole('button', { name: /agregar subcategoría/i });
+
+    await act(async () => userEvent.type(categoryNameInput, ' 2'));
+    await act(async () => userEvent.type(subcategoryInput, newSubcategory));
+    await act(async () => userEvent.click(addSubcategoryButton));
+    await act(async () => userEvent.click(submitButton));
+
+    expect(await screen.findByTestId('DoneOutlinedIcon')).toBeInTheDocument();
   });
 });

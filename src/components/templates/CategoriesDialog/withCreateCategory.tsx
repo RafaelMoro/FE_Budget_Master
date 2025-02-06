@@ -48,6 +48,7 @@ const withCreateCategory = (CategoryTemplate: ({
 
   return (
     <CategoryTemplate
+      action="create"
       initialValues={initialValues}
       subcategories={subcategories}
       isLoading={isLoading}

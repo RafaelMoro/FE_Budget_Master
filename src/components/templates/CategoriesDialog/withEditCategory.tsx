@@ -54,6 +54,7 @@ const withEditCategory = (CategoryTemplate: ({
 
   return (
     <CategoryTemplate
+      action="edit"
       initialValues={initialValues}
       subcategories={subcategories}
       isLoading={isLoading}

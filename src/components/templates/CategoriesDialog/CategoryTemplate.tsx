@@ -20,9 +20,10 @@ import { withEditCategory } from './withEditCategory';
 import { withCreateCategory } from './withCreateCategory';
 
 const CategoryTemplate = ({
-  initialValues, subcategories, isLoading, isSuccess, goBackAction, updateCategories, updateCategoryName, handleSubmit,
+  initialValues, subcategories, isLoading, isSuccess, goBackAction, updateCategories, updateCategoryName, handleSubmit, action,
 }: CategoryTemplateProps) => {
   const disableSubmitButton = isLoading && isSuccess;
+  const buttonText = action === 'create' ? 'Crear' : 'Editar';
 
   const handleDeleteSubcategory = (subcategoryToDelete: string) => {
     const filteredSubcategories = subcategories.filter((subcategory) => subcategory !== subcategoryToDelete);
@@ -84,7 +85,7 @@ const CategoryTemplate = ({
             <PrimaryButton disabled={disableSubmitButton} variant="contained" onClick={submitForm} size="medium">
               { (isLoading && !isSuccess) && (<LoadingSpinner />) }
               { (!isLoading && isSuccess) && (<AppIcon icon="TickMark" fillColor={AppColors.white} />) }
-              { (!isLoading && !isSuccess) && 'Editar' }
+              { (!isLoading && !isSuccess) && buttonText }
             </PrimaryButton>
           </EditCategoryButtonContainer>
         </EditCategoryContainer>

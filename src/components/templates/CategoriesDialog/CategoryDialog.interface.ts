@@ -56,6 +56,7 @@ export interface CategoryDialogActions {
 
 export interface CategoryTemplateProps {
   initialValues: ManageCategoriesValues;
+  action: 'create' | 'edit';
   subcategories: string[];
   isLoading: boolean;
   isSuccess: boolean;

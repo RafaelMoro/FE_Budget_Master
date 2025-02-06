@@ -28,6 +28,17 @@ describe('DeleteCategory', () => {
     expect(screen.getByRole('button', { name: /cancelar/i })).toBeInTheDocument();
   });
 
+  test('Given a user clicking on delete button, show loading spinner', async () => {
+    renderWithProviders(
+      <DeleteCategory goBackAction={goBackAction} categoryToDelete={categoryToDelete} updateError={updateError} />,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    const deleteButton = screen.getByRole('button', { name: /eliminar/i });
+    await act(async () => userEvent.click(deleteButton));
+    expect(await screen.findByTestId('loading-spinner')).toBeInTheDocument();
+  });
+
   test('Given a user clicking on delete button, show tick icon inside the delete button', async () => {
     fetchMock.once(JSON.stringify(successfulDeleteCategoriesResponse));
     renderWithProviders(
@@ -39,4 +50,6 @@ describe('DeleteCategory', () => {
     await act(async () => userEvent.click(deleteButton));
     expect(await screen.findByTestId('DoneOutlinedIcon')).toBeInTheDocument();
   });
+
+  // The test for failed response will be done in CategoriesDialog
 });

@@ -83,7 +83,16 @@ export interface EditCategoryBEValues {
   categoryId: string;
 }
 
+export interface DeleteCategoryBEValues {
+  categoryId: string;
+}
+
 export interface ModifyCategoryMutationProps {
   values: EditCategoryBEValues;
+  bearerToken: string;
+}
+
+export interface DeleteCategoryMutationProps {
+  values: DeleteCategoryBEValues;
   bearerToken: string;
 }

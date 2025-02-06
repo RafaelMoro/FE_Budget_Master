@@ -32,6 +32,7 @@ export const ERROR_CREATE_LOCAL_CATEGORIES = 'No fue posible crear sus categoria
 
 /** Errors for Categories module */
 export const ERROR_MESSAGE_EDIT_CATEGORY = 'No fue posible editar su categoría. Por favor, intente de nuevo más tarde.';
+export const ERROR_MESSAGE_DELETE_CATEGORY = 'No fue posible eliminar su categoría.';
 
 /** Success Login Module */
 export const SUCCESS_PASSWORD_RESET_TITLE = 'Contraseña reestablecida correctamente';

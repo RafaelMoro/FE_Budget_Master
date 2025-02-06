@@ -62,6 +62,7 @@ export interface EditCategoryProps {
 export interface DeleteCategoryProps {
   categoryToDelete: string | null;
   goBackAction: () => void;
+  updateError: ({ newTitle, newDescription }: UpdateErrorProps) => void;
 }
 
 export interface AddSubcategoryProps {

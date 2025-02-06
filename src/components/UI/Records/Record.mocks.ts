@@ -312,6 +312,15 @@ export const failedResponseFetchCategories = {
   success: false,
   version: '2.0.0',
 };
+export const successfulDeleteCategoriesResponse = {
+  data: {
+    category: mockCategories,
+  },
+  error: null,
+  message: 'Category deleted',
+  success: true,
+  version: '2.0.0',
+};
 export const emptyCategoriesResponse = {
   data: {
     categories: [],

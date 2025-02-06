@@ -70,6 +70,11 @@ export interface EditCategoryTemplateProps {
   updateError: ({ newTitle, newDescription }: UpdateErrorProps) => void;
 }
 
+export interface CreateCategoryTemplateProps {
+  goBackAction: () => void;
+  updateError: ({ newTitle, newDescription }: UpdateErrorProps) => void;
+}
+
 export interface DeleteCategoryProps {
   categoryToDelete: string | null;
   goBackAction: () => void;
@@ -95,8 +100,18 @@ export interface EditCategoryBEValues {
   categoryId: string;
 }
 
+export interface CreateCategoryBEValues {
+  categoryName: string;
+  subCategories: string[];
+}
+
 export interface DeleteCategoryBEValues {
   categoryId: string;
+}
+
+export interface CreateCategoryMutationProps {
+  values: CreateCategoryBEValues;
+  bearerToken: string;
 }
 
 export interface ModifyCategoryMutationProps {

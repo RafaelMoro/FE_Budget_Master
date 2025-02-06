@@ -75,7 +75,7 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
             updateError={updateError}
           />
         ) }
-        { action === 'delete' && (<DeleteCategory categoryToDelete={categoryToDelete} />) }
+        { action === 'delete' && (<DeleteCategory goBackAction={goBackAction} categoryToDelete={categoryToDelete} />) }
       </CategoriesDialogContainer>
     </Dialog>
   );

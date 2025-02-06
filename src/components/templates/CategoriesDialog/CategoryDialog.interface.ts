@@ -61,6 +61,7 @@ export interface EditCategoryProps {
 
 export interface DeleteCategoryProps {
   categoryToDelete: string | null;
+  goBackAction: () => void;
 }
 
 export interface AddSubcategoryProps {

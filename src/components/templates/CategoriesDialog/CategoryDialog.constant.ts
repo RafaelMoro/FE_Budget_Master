@@ -19,4 +19,8 @@ export const CATEGORY_DIALOG_ACTIONS: CategoryDialogActions = {
     title: 'Crear categoría',
     description: 'Puede crear una nueva categoría, ingresando su nombre y seleccionando las subcategorías que desea agregar.',
   },
+  addSubcategoryIcon: {
+    title: 'Agregar icono de subcategoría',
+    description: 'Seleccione el icono que desea agregar a la subcategoría.',
+  },
 };

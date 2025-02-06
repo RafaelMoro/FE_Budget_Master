@@ -5,7 +5,7 @@ export interface CategoriesModalProps {
   onClose: () => void
 }
 
-export type CategoryDialogAction = 'show' | 'edit' | 'delete' | 'create';
+export type CategoryDialogAction = 'show' | 'edit' | 'delete' | 'create' | 'addSubcategoryIcon';
 
 export interface CategoryError {
   showError: boolean;
@@ -52,6 +52,7 @@ export interface CategoryDialogActions {
   edit: CategoryDialogActionInfo;
   delete: CategoryDialogActionInfo;
   create: CategoryDialogActionInfo;
+  addSubcategoryIcon: CategoryDialogActionInfo;
 }
 
 export interface CategoryTemplateProps {

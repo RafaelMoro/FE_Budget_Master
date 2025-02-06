@@ -39,7 +39,9 @@ const CategoryTemplate = ({
       enableReinitialize
       validateOnMount
     >
-      {({ submitForm, errors, touched }) => (
+      {({
+        submitForm, errors, touched, handleChange,
+      }) => (
         <EditCategoryContainer>
           <Field
             component={InputForm}
@@ -48,13 +50,15 @@ const CategoryTemplate = ({
             type="text"
             variant="standard"
             label="Título de la categoría"
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            onChange={(e: any) => updateCategoryName(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              handleChange(e);
+              updateCategoryName(e.target.value);
+            }}
           />
           <AddSubcategory addSubcategory={addSubcategory} />
           <SubcategoryTitle>Subcategorías:</SubcategoryTitle>
           { (touched.subcategories && errors.subcategories) && (
-            <ErrorParagraphValidation variant="subText">{errors.subcategories}</ErrorParagraphValidation>
+          <ErrorParagraphValidation variant="subText">{errors.subcategories}</ErrorParagraphValidation>
           ) }
           {
             subcategories.length > 0 && (

@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 
 import { ShowCategories } from './ShowCategories';
-import { EditCategory } from './CategoryTemplate';
+import { CreateCategory, EditCategory } from './CategoryTemplate';
 import { DeleteCategory } from './DeleteCategory';
 import { AppIcon } from '../../UI/Icons';
 import {
@@ -16,6 +16,7 @@ import {
   CloseIconButton, CategoriesDialogContainer, GoBackIconButton, WarningText,
 } from './CategoriesDialog.styled';
 import { ErrorSection } from '../../UI';
+import { SecondaryButton } from '../../../styles';
 
 const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
   const [action, setAction] = useState<CategoryDialogAction>('show');
@@ -32,6 +33,7 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
   const updateAction = (newAction: CategoryDialogAction) => {
     setAction(newAction);
   };
+  const setActionCreate = () => setAction('create');
   const goBackAction = () => setAction('show');
   const updateError = ({ newTitle, newDescription }: UpdateErrorProps) => {
     setError({ showError: true, title: newTitle, description: newDescription });
@@ -60,6 +62,9 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
         <Typography>
           {CATEGORY_DIALOG_ACTIONS[action].description}
         </Typography>
+        { action === 'show' && (
+          <SecondaryButton onClick={setActionCreate}>Crear categoría</SecondaryButton>
+        )}
         { CATEGORY_DIALOG_ACTIONS[action]?.warning && (
           <WarningText>
             {CATEGORY_DIALOG_ACTIONS[action].warning}
@@ -75,6 +80,9 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
             updateError={updateError}
           />
         ) }
+        { action === 'create' && (
+          <CreateCategory goBackAction={goBackAction} updateError={updateError} />
+        )}
         { action === 'delete' && (<DeleteCategory updateError={updateError} goBackAction={goBackAction} categoryToDelete={categoryToDelete} />) }
       </CategoriesDialogContainer>
     </Dialog>

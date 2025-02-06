@@ -15,4 +15,8 @@ export const CATEGORY_DIALOG_ACTIONS: CategoryDialogActions = {
     description: '¿Está seguro que desea eliminar esta categoría?',
     warning: 'No hay forma de deshacer esta acción.',
   },
+  create: {
+    title: 'Crear categoría',
+    description: 'Puede crear una nueva categoría, ingresando su nombre y seleccionando las subcategorías que desea agregar.',
+  },
 };

@@ -2,6 +2,7 @@ import { Formik, Field } from 'formik';
 
 import {
   CategoryTemplateProps,
+  CreateCategoryTemplateProps,
   EditCategoryTemplateProps,
 } from './CategoryDialog.interface';
 import { ManageCategorySchema } from '../../../validationsSchemas/categories.schema';
@@ -16,6 +17,7 @@ import {
 } from './CategoriesDialog.styled';
 import { AppIcon } from '../../UI/Icons';
 import { withEditCategory } from './withEditCategory';
+import { withCreateCategory } from './withCreateCategory';
 
 const CategoryTemplate = ({
   initialValues, subcategories, isLoading, isSuccess, goBackAction, updateCategories, updateCategoryName, handleSubmit,
@@ -95,4 +97,8 @@ const EditCategory = ({
   categoryToEdit, goBackAction, updateError,
 }: EditCategoryTemplateProps) => withEditCategory(CategoryTemplate)({ categoryToEdit, goBackAction, updateError });
 
-export { EditCategory };
+const CreateCategory = ({
+  goBackAction, updateError,
+}: CreateCategoryTemplateProps) => withCreateCategory(CategoryTemplate)({ goBackAction, updateError });
+
+export { EditCategory, CreateCategory };

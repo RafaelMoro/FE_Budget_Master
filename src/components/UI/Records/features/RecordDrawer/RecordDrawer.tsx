@@ -2,6 +2,7 @@ import {
   IconButton, Typography,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 import { RecordDrawerProps } from '../../interface';
 import { AllCategoryIcons } from '../../../Icons/Icons.interface';
@@ -27,9 +28,12 @@ import {
   DrawerTypographyBold,
   PaymentStatusChipDrawer,
   TransferInformation,
+  AlertMessageContainer,
 } from './RecordDrawer.styled';
 import { transformAnyRecordToRecordRedux } from '../../../../../hooks/useGuestUser/utils';
 import { CATEGORY_NOT_FOUND } from '../../Record.mocks';
+import { AlertMessageSection } from '../../../AlertMessageSection';
+import { WARNING_MESSAGE_MISSING_CATEGORY_DESCRIPTION, WARNING_MESSAGE_MISSING_CATEGORY_TITLE } from '../../../../../constants';
 
 const RecordDrawer = ({
   record, amountShown, expensesPaid, chipColor, onCloseCb = () => {}, openDeleteRecordModal = () => {},
@@ -41,6 +45,7 @@ const RecordDrawer = ({
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { isGuestUser } = useGuestUser();
+  const [closeAlert, setCloseAlert] = useState(false);
   const { icon: categoryIcon = 'newCategory' } = category ?? CATEGORY_NOT_FOUND;
   const windowSize = useAppSelector((state) => state.userInterface.windowSize);
   const accounts = useAppSelector((state) => state.accounts.accounts);
@@ -51,6 +56,12 @@ const RecordDrawer = ({
   const isOrigin = isExpense && isTransfer;
   const transferText = isOrigin ? 'Transfer to:' : 'Transfer from:';
   const status = getRecordStatus({ isPaid, typeOfRecord });
+
+  useEffect(() => {
+    if (!category) {
+      setCloseAlert(true);
+    }
+  }, [category]);
 
   const handleEditRecord = () => {
     if (isGuestUser) {
@@ -103,6 +114,16 @@ const RecordDrawer = ({
         {transferAccountName}
       </TransferInformation>
       ) }
+      { (!category && closeAlert) && (
+        <AlertMessageContainer>
+          <AlertMessageSection
+            state="warning"
+            onClose={() => setCloseAlert(false)}
+            title={WARNING_MESSAGE_MISSING_CATEGORY_TITLE}
+            description={WARNING_MESSAGE_MISSING_CATEGORY_DESCRIPTION}
+          />
+        </AlertMessageContainer>
+      )}
       <Typography>
         <DrawerTypographyBold component="span">Categoría: </DrawerTypographyBold>
         {(category ?? CATEGORY_NOT_FOUND).categoryName}

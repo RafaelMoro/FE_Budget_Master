@@ -1,8 +1,12 @@
 import { screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import fetchMock from 'jest-fetch-mock';
+
 import { renderWithProviders } from '../../../tests/CustomWrapperRedux';
 import { userInitialState } from '../../UI/Account/Account.mocks';
 import { CreateCategory } from './CategoryTemplate';
+import { successfulCreateEditCategoriesReponse } from '../../UI/Records/Record.mocks';
 
 const twentySubcategories = [
   'one subcategory',
@@ -33,7 +37,14 @@ describe('CreateCategory', () => {
   const updateError = jest.fn();
   const changeSelectCategoryIconFn = jest.fn();
   const categoryName = 'Food and Drink';
+  const newSubcategory = 'Restaurants';
   const veryLongCategoryName = 'Very long category name with a lot of characters and description that does not really matter but I need keep it long';
+
+  beforeEach(() => {
+    fetchMock.resetMocks();
+    jest.clearAllMocks();
+    // jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
 
   test('Show category and subcategory input, add subcategory, cancel, edit button and subcategories list', () => {
     renderWithProviders(
@@ -159,28 +170,28 @@ describe('CreateCategory', () => {
     expect(await screen.findByText(/por favor, agregue menos de 20 subcategorías/i)).toBeInTheDocument();
   });
 
-  // test('Given a user editing the whole category, show tick mark in the submit button', async () => {
-  //   fetchMock.once(JSON.stringify(successfulEditCategoriesReponse));
-  //   renderWithProviders(
-  //     <EditCategory
-  //       changeSelectCategoryIconFn={changeSelectCategoryIconFn}
-  //       categoryToEdit={categoryToEdit}
-  //       goBackAction={goBackAction}
-  //       updateError={updateError}
-  //     />,
-  //     { preloadedState: { user: userInitialState } },
-  //   );
+  test('Given a user creating the whole category, show tick mark in the submit button', async () => {
+    fetchMock.once(JSON.stringify(successfulCreateEditCategoriesReponse));
+    renderWithProviders(
+      <CreateCategory
+        changeSelectCategoryIconFn={changeSelectCategoryIconFn}
+        goBackAction={goBackAction}
+        updateError={updateError}
+      />,
+      { preloadedState: { user: userInitialState } },
+    );
 
-  //   const categoryNameInput = screen.getByRole('textbox', { name: /título de la categoría/i });
-  //   const submitButton = screen.getByRole('button', { name: /editar/i });
-  //   const subcategoryInput = screen.getByRole('textbox', { name: /subcategoría$/i });
-  //   const addSubcategoryButton = screen.getByRole('button', { name: /agregar subcategoría/i });
+    const categoryNameInput = screen.getByRole('textbox', { name: /título de la categoría/i });
+    await act(async () => userEvent.type(categoryNameInput, categoryName));
 
-  //   await act(async () => userEvent.type(categoryNameInput, ' 2'));
-  //   await act(async () => userEvent.type(subcategoryInput, newSubcategory));
-  //   await act(async () => userEvent.click(addSubcategoryButton));
-  //   await act(async () => userEvent.click(submitButton));
+    const submitButton = screen.getByRole('button', { name: /crear/i });
+    const subcategoryInput = screen.getByRole('textbox', { name: /subcategoría$/i });
+    const addSubcategoryButton = screen.getByRole('button', { name: /agregar subcategoría/i });
 
-  //   expect(await screen.findByTestId('DoneOutlinedIcon')).toBeInTheDocument();
-  // });
+    await act(async () => userEvent.type(subcategoryInput, newSubcategory));
+    await act(async () => userEvent.click(addSubcategoryButton));
+    await act(async () => userEvent.click(submitButton));
+
+    expect(await screen.findByTestId('DoneOutlinedIcon')).toBeInTheDocument();
+  });
 });

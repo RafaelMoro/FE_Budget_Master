@@ -9,7 +9,7 @@ import { CategoryUI } from '../../../globalInterface';
 import { renderWithProviders } from '../../../tests/CustomWrapperRedux';
 import { userInitialState } from '../../UI/Account/Account.mocks';
 import { EditCategory } from './CategoryTemplate';
-import { successfulEditCategoriesReponse } from '../../UI/Records/Record.mocks';
+import { successfulCreateEditCategoriesReponse } from '../../UI/Records/Record.mocks';
 
 const twentySubcategories = [
   'one subcategory',
@@ -197,7 +197,7 @@ describe('EditCategory', () => {
   });
 
   test('Given a user editing the whole category, show tick mark in the submit button', async () => {
-    fetchMock.once(JSON.stringify(successfulEditCategoriesReponse));
+    fetchMock.once(JSON.stringify(successfulCreateEditCategoriesReponse));
     renderWithProviders(
       <EditCategory
         changeSelectCategoryIconFn={changeSelectCategoryIconFn}

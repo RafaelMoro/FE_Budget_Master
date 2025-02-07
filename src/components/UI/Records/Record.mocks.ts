@@ -332,7 +332,7 @@ export const failedResponseDeleteCategory = {
   version: '2.0.0',
 };
 
-export const successfulEditCategoriesReponse = {
+export const successfulCreateEditCategoriesReponse = {
   data: {
     category: mockCategories,
   },

@@ -18,7 +18,7 @@ describe('DeleteCategory', () => {
     jest.clearAllMocks();
   });
 
-  test('show delete and cancel button', () => {
+  test('show delete, warning and cancel button', () => {
     renderWithProviders(
       <DeleteCategory goBackAction={goBackAction} categoryToDelete={categoryToDelete} updateError={updateError} />,
       { preloadedState: { user: userInitialState } },
@@ -26,6 +26,7 @@ describe('DeleteCategory', () => {
 
     expect(screen.getByRole('button', { name: /eliminar/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /cancelar/i })).toBeInTheDocument();
+    expect(screen.getByText(/Si elimina esta categoría y tiene transacciones relacionadas a la categoría/i)).toBeInTheDocument();
   });
 
   test('Given a user clicking on delete button, show loading spinner', async () => {

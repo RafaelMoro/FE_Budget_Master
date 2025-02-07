@@ -34,8 +34,9 @@ describe('<ShowCategories />', () => {
       />,
       { preloadedState: { user: userInitialState } },
     );
-
-    expect(screen.getByText('Cargando categorías')).toBeInTheDocument();
+    const skeletons = screen.getAllByTestId('show-categories-loading-skeleton');
+    expect(skeletons).toHaveLength(10);
+    expect(skeletons[0]).toBeInTheDocument();
   });
 
   test('Show categories and subcategories fetched', async () => {

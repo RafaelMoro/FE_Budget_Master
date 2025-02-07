@@ -8,6 +8,7 @@ import { ShowCategoriesProps } from './CategoryDialog.interface';
 import { useCategories } from '../../../hooks';
 import { CategoriesListDialog } from './CategoriesListDialog';
 import { SecondaryButton } from '../../../styles';
+import { CategoriesSkeleton } from './CategoriesSkeleton';
 
 const ShowCategories = ({
   updateAction, updateCategoryToEdit, updateCategoryToDelete, setActionCreate,
@@ -42,9 +43,9 @@ const ShowCategories = ({
       aria-labelledby="nested-list-categories"
     >
       {
-            (categories.length === 0 && isFetching) && (
-              <Typography>Cargando categorías</Typography>
-            )
+            (categories.length === 0 && isFetching) && Array.from({ length: 10 }).map((_, index) => (
+              <CategoriesSkeleton key={`${index + 1}-skeleton`} />
+            ))
           }
       {
             (categories.length === 0 && isError) && (

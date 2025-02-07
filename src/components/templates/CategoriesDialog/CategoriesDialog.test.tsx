@@ -6,9 +6,13 @@ import { renderWithProviders } from '../../../tests/CustomWrapperRedux';
 import { CategoriesDialog } from './CategoriesDialog';
 import { userInitialState } from '../../UI/Account/Account.mocks';
 import {
-  ERROR_MESSAGE_CREATE_CATEGORY_TITLE, ERROR_MESSAGE_EDIT_CATEGORY, ERROR_MESSAGE_FETCH_CATEGORY, ERROR_MESSAGE_GENERAL,
+  ERROR_MESSAGE_CREATE_CATEGORY_TITLE, ERROR_MESSAGE_DELETE_CATEGORY,
+  ERROR_MESSAGE_EDIT_CATEGORY, ERROR_MESSAGE_FETCH_CATEGORY, ERROR_MESSAGE_GENERAL,
 } from '../../../constants';
-import { failedCreateEditCategoriesReponse, failedResponseFetchCategories, successfulResponseFetchCategories } from '../../UI/Records/Record.mocks';
+import {
+  failedCreateEditCategoriesReponse, failedResponseDeleteCategory,
+  failedResponseFetchCategories, successfulResponseFetchCategories,
+} from '../../UI/Records/Record.mocks';
 
 describe('<CategoriesDialog />', () => {
   const onClose = jest.fn();
@@ -152,6 +156,30 @@ describe('<CategoriesDialog />', () => {
       /si elimina esta categoría y tiene transacciones relacionadas a la categoría, estas aparecerán como categoría no encontrada\./i,
     );
     expect(description).toBeInTheDocument();
+  });
+
+  test('Given a user deleting a category and fails the deletion, show the appropiate error message', async () => {
+    fetchMock.once(JSON.stringify(successfulResponseFetchCategories));
+    fetchMock.mockRejectedValueOnce(JSON.stringify(failedResponseDeleteCategory));
+    renderWithProviders(
+      <CategoriesDialog onClose={onClose} open />,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    expect(await screen.findByRole('button', { name: /Food and Drink/i })).toBeInTheDocument();
+    const categoryButton = screen.getByRole('button', { name: /Food and Drink/i });
+    await act(async () => userEvent.click(categoryButton));
+
+    expect(await screen.findByRole('button', { name: /boton-eliminar-categoria-food and drink/i }));
+    const deleteCategoryButton = screen.getByRole('button', { name: /boton-eliminar-categoria-food and drink/i });
+    await act(async () => userEvent.click(deleteCategoryButton));
+
+    const deleteButton = screen.getByRole('button', { name: /eliminar/i });
+    await act(async () => userEvent.click(deleteButton));
+
+    expect(await screen.findByRole('heading', { name: /categorías/i })).toBeInTheDocument();
+    expect(screen.getByText(ERROR_MESSAGE_DELETE_CATEGORY)).toBeInTheDocument();
+    expect(screen.getByText(ERROR_MESSAGE_GENERAL)).toBeInTheDocument();
   });
 
   test('Given an error while fetching categories, show error message', async () => {

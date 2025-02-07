@@ -25,6 +25,7 @@ import { TransactionFormFields } from '../TransactionFormFields';
 import { FormContainer, SecondaryButtonForm, ShowIndebtedPeopleContainer } from '../Features.styled';
 import { FlexContainer, FormControlLabel } from '../../../../../styles';
 import { getIndebtedPeopleWithoutId } from '../../Records.utils';
+import { CATEGORY_NOT_FOUND } from '../../Record.mocks';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -104,7 +105,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
         amount: String(recordToBeEdited.amount),
         shortName: recordToBeEdited.shortName,
         description: recordToBeEdited.description,
-        category: recordToBeEdited.category._id,
+        category: (recordToBeEdited?.category ?? CATEGORY_NOT_FOUND)._id,
         subCategory: recordToBeEdited.subCategory,
         isPaid: recordToBeEdited.isPaid ?? !isCredit,
         date: dayjs(recordToBeEdited.date).utc(),
@@ -125,7 +126,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
       setInitialValues(newInitialValues);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [recordToBeEdited?.category.categoryName, edit, isCredit]);
+  }, [recordToBeEdited?.category?.categoryName, edit, isCredit]);
 
   // Fetch budgets if they are not fetched yet
   useEffect(() => {

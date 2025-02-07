@@ -29,6 +29,7 @@ import {
   TransferInformation,
 } from './RecordDrawer.styled';
 import { transformAnyRecordToRecordRedux } from '../../../../../hooks/useGuestUser/utils';
+import { CATEGORY_NOT_FOUND } from '../../Record.mocks';
 
 const RecordDrawer = ({
   record, amountShown, expensesPaid, chipColor, onCloseCb = () => {}, openDeleteRecordModal = () => {},
@@ -40,7 +41,7 @@ const RecordDrawer = ({
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { isGuestUser } = useGuestUser();
-  const { icon: categoryIcon = 'foodAndDrink' } = category;
+  const { icon: categoryIcon = 'newCategory' } = category ?? CATEGORY_NOT_FOUND;
   const windowSize = useAppSelector((state) => state.userInterface.windowSize);
   const accounts = useAppSelector((state) => state.accounts.accounts);
   const transferAccountName = (accounts ?? []).find((account) => account._id === record.transferRecord?.account)?.title;
@@ -104,7 +105,7 @@ const RecordDrawer = ({
       ) }
       <Typography>
         <DrawerTypographyBold component="span">Categoría: </DrawerTypographyBold>
-        {category.categoryName}
+        {(category ?? CATEGORY_NOT_FOUND).categoryName}
       </Typography>
       <Typography>
         <DrawerTypographyBold component="span">Subcategoría: </DrawerTypographyBold>

@@ -1,3 +1,4 @@
+import { CATEGORY_NOT_FOUND } from '../../components/UI/Records/Record.mocks';
 import {
   ABBREVIATED_MONTHS, ExpensePaid, RecordRedux, AnyRecord,
 } from '../../globalInterface';
@@ -45,18 +46,23 @@ export const transformAnyRecordToRecordRedux = (record: AnyRecord) => {
     return {
       ...record,
       date: record.date.toISOString(),
+      category: record?.category ?? CATEGORY_NOT_FOUND,
       expensesPaid: expensesPaidFormatted,
     } as RecordRedux;
   }
+
   if (record?.isPaid !== undefined) {
     return {
       ...record,
       expensesPaid: undefined,
+      category: record?.category ?? CATEGORY_NOT_FOUND,
       date: record.date.toISOString(),
     } as RecordRedux;
   }
+
   return {
     ...record,
+    category: record?.category ?? CATEGORY_NOT_FOUND,
     date: record.date.toISOString(),
   } as RecordRedux;
 };

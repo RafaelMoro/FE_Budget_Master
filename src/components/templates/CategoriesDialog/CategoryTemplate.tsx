@@ -11,7 +11,6 @@ import { AddSubcategory } from './AddSubcategory';
 import {
   AppColors,
   CancelButton, ErrorParagraphValidation, InputForm, LongChip, PrimaryButton,
-  SecondaryButton,
 } from '../../../styles';
 import {
   EditCategoryButtonContainer, EditCategoryContainer, SubcategoriesContainerChips, SubcategoryTitle,
@@ -22,7 +21,7 @@ import { withCreateCategory } from './withCreateCategory';
 
 const CategoryTemplate = ({
   initialValues, subcategories, isLoading, isSuccess, goBackAction, updateCategories,
-  updateCategoryName, handleSubmit, action, changeSelectCategoryIcon,
+  updateCategoryName, handleSubmit, action,
 }: CategoryTemplateProps) => {
   const disableSubmitButton = isLoading && isSuccess;
   const buttonText = action === 'create' ? 'Crear' : 'Editar';
@@ -60,7 +59,6 @@ const CategoryTemplate = ({
               updateCategoryName(e.target.value);
             }}
           />
-          <SecondaryButton onClick={changeSelectCategoryIcon}>Seleccionar icono de la categoría</SecondaryButton>
           <AddSubcategory addSubcategory={addSubcategory} />
           <SubcategoryTitle>Subcategorías:</SubcategoryTitle>
           { (touched.subcategories && errors.subcategories) && (

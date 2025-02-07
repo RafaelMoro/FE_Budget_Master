@@ -1,6 +1,7 @@
 export { useAllExpenses } from './useAllExpenses';
 export { useGuestUser } from './useGuestUser';
 export { useRecords } from './useRecords';
+export { useCategories } from './useCategories';
 export * from './useAccount';
 export * from './useAccountsActions';
 export * from './useAnimateBox';

@@ -25,6 +25,7 @@ import { FlexContainer } from '../../../../../styles';
 import { SelectExpenses } from '../SelectExpenses';
 import { useGuestUser } from '../../../../../hooks/useGuestUser/useGuestUser';
 import { EditExpenseProps, EditIncomeProps } from '../../../../../hooks/useRecords/interface';
+import { CATEGORY_NOT_FOUND } from '../../Record.mocks';
 
 interface TransferProps {
   action: string;
@@ -108,14 +109,14 @@ const Transfer = ({ action, typeOfRecord, edit = false }: TransferProps) => {
         amount: String(recordToBeEdited.amount),
         shortName: recordToBeEdited.shortName,
         description: recordToBeEdited.description,
-        category: recordToBeEdited.category._id,
+        category: (recordToBeEdited?.category ?? CATEGORY_NOT_FOUND)._id,
         subCategory: recordToBeEdited.subCategory,
         date: dayjs(recordToBeEdited.date).utc(),
         tag: recordToBeEdited.tag,
         budgets: recordToBeEdited.budgets,
       };
       // Show add expense button if destination is credit
-      const destinationIsCredit = accounts?.find((account) => account._id === newInitialValues.destinationAccount)?.accountType === 'Credit';
+      const destinationIsCredit = accounts?.find((account) => account._id === newInitialValues.destinationAccount)?.accountType === 'Crédito';
       if (destinationIsCredit) {
         setDestinationAsCredit();
       }

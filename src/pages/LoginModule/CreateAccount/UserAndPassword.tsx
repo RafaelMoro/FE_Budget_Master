@@ -36,14 +36,15 @@ const UserAndPassword = ({
               name="email"
               type="email"
               variant="standard"
-              label="Email"
+              label="Correo Electrónico"
             />
             <Field
               component={InputForm}
+              data-testid="password-input"
               name="password"
               type={(showPassword) ? 'text' : 'password'}
               variant="standard"
-              label="Password"
+              label="Contraseña"
               InputProps={{
                 endAdornment: <TogglePasswordAdornment showPassword={showPassword} toggleShowPassword={toggleShowPassword} />,
               }}
@@ -51,16 +52,17 @@ const UserAndPassword = ({
             <Field
               component={InputForm}
               name="confirmPassword"
+              data-testid="confirm-password-input"
               type={(showPassword) ? 'text' : 'password'}
               variant="standard"
-              label="Confirm Password"
+              label="Confirmar Contraseña"
               InputProps={{
                 endAdornment: <TogglePasswordAdornment showPassword={showPassword} toggleShowPassword={toggleShowPassword} />,
               }}
             />
             <FormActionButtons>
-              <CancelButton variant="contained" onClick={goBack} size="medium">Return</CancelButton>
-              <PrimaryButton variant="contained" onClick={submitForm} size="medium">Create Account</PrimaryButton>
+              <CancelButton variant="contained" onClick={goBack} size="medium">Regresar</CancelButton>
+              <PrimaryButton variant="contained" onClick={submitForm} size="medium">Crear Cuenta</PrimaryButton>
             </FormActionButtons>
           </FormContainer>
         </AnimateBox>

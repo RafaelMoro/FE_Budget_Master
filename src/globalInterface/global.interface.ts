@@ -8,6 +8,7 @@ export interface UserInfo {
   lastName: string;
   email: string;
   sub: string;
+  initials?: string;
 }
 
 export interface Actions {
@@ -20,26 +21,25 @@ export interface User {
   bearerToken: string;
   accessToken: string;
 }
-
-export const TYPE_OF_ACCOUNTS = ['Credit', 'Debit', 'Food Voucher', 'Restaurant Voucher', 'Savings'] as const;
+export const TYPE_OF_ACCOUNTS = ['Crédito', 'Débito', 'Vales de comida', 'Vales de restaurante', 'Cuenta de ahorro'] as const;
 export type AccountType = typeof TYPE_OF_ACCOUNTS[number];
 
-export const ABBREVIATED_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'] as const;
+export const ABBREVIATED_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] as const;
 export type AbbreviatedMonthsType = typeof ABBREVIATED_MONTHS[number];
 
 export const MONTHS = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
+  'Enero',
+  'Febrero',
+  'Marzo',
+  'Abril',
+  'Mayo',
+  'Junio',
+  'Julio',
+  'Agosto',
+  'Septiembre',
+  'Octubre',
+  'Noviembre',
+  'Diciembre',
 ] as const;
 export type CompleteMonthsType = typeof MONTHS[number];
 
@@ -54,9 +54,15 @@ export interface GeneralResponse {
 export interface RequestBearerTokenProps {
   bearerToken: string;
 }
+export interface ErrorResponse {
+  error: string;
+  message: string;
+  statusCode: number;
+}
 
 export interface GeneralError {
   data: GeneralResponse;
+  error: ErrorResponse;
   status: number
 }
 
@@ -99,6 +105,12 @@ export interface Category {
   icon: string;
 }
 
+export interface CategoryUI {
+  category: string;
+  categoryId: string;
+  subcategories: string[];
+}
+
 export type TypeBudget = 'one-time' | 'periodic';
 export type PeriodBudget = 'weekly' | 'bi-weekly' | 'montly' | 'daily' | 'yearly';
 
@@ -125,6 +137,7 @@ export interface BudgetUI extends Budget {
   currentAmountFormatted: string;
   startDateFormatted: string;
   endDateFormatted: string;
+  month: string;
 }
 
 export interface BudgetHistory {
@@ -154,7 +167,7 @@ export interface AccountRecord {
   date: Date;
   fullDate: string;
   formattedTime: string;
-  category: Category;
+  category: Category | null;
   subCategory: string;
   tag: string[];
   indebtedPeople: IndebtedPeople[];

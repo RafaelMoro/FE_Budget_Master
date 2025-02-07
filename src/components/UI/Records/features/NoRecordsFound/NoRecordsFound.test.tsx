@@ -19,8 +19,8 @@ describe('<NoRecordsFound />', () => {
       </Router>,
     );
 
-    expect(screen.getByText(/You have not created records for this month./i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /create record/i })).toBeInTheDocument();
+    expect(screen.getByText(/no has creado transacciones para este mes\./i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /crear registro/i })).toBeInTheDocument();
     expect(screen.getByAltText(/No Records Found/i)).toBeInTheDocument();
   });
 
@@ -31,7 +31,7 @@ describe('<NoRecordsFound />', () => {
       </Router>,
     );
 
-    const button = screen.getByRole('button', { name: /create record/i });
+    const button = screen.getByRole('button', { name: /crear registro/i });
     userEvent.click(button);
 
     await waitFor(() => {

@@ -20,8 +20,9 @@ const TransactionManager = ({ edit = false }: { edit?: boolean }) => {
   const typeOfRecordState: TypeOfRecord | undefined = location?.state?.typeOfRecord;
   const accounts = useAppSelector((state) => state.accounts.accounts);
   const hasOnlyOneAccount = accounts?.length === 1;
+  // TODO: Translate type of record to spanish
   const [typeOfRecord, setTypeOfRecord] = useState<TypeOfRecord>(typeOfRecordState ?? 'expense');
-  const action: string = edit ? 'Edit' : 'Create';
+  const action: string = edit ? 'Editar' : 'Crear';
 
   const changeTypeOfRecord = (event: React.MouseEvent<HTMLElement>, newTypeOfRecord: TypeOfRecord) => {
     setTypeOfRecord(newTypeOfRecord);
@@ -45,9 +46,9 @@ const TransactionManager = ({ edit = false }: { edit?: boolean }) => {
         onChange={changeTypeOfRecord}
         aria-label="Select type of record"
       >
-        <ToggleButton value="expense">Expense</ToggleButton>
-        <ToggleButton value="income">Income</ToggleButton>
-        { (!hasOnlyOneAccount) && (<ToggleButton value="transfer">Transfer</ToggleButton>) }
+        <ToggleButton value="expense">Gasto</ToggleButton>
+        <ToggleButton value="income">Ingreso</ToggleButton>
+        { (!hasOnlyOneAccount) && (<ToggleButton value="transfer">Transferencia</ToggleButton>) }
       </ToggleButtonGroup>
       ) }
       <Typography variant="h3" align="center">

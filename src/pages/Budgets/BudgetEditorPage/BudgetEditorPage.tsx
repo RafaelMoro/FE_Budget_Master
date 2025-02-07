@@ -10,7 +10,7 @@ const BudgetEditorPage = () => {
   const location = useLocation();
   const budgetToModify = location.state?.budget;
   const isModify = !!budgetToModify;
-  const pageTitle = isModify ? 'Edit budget' : 'Create budget';
+  const pageTitle = isModify ? 'Editar presupuesto' : 'Crear presupuesto';
 
   const handleGoBack = () => navigate(BUDGETS_ROUTE);
 

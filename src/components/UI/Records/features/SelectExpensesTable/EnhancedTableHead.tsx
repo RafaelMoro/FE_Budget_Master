@@ -6,62 +6,37 @@ import { visuallyHidden } from '@mui/utils';
 import { EnhancedTableProps, ExpensePaidTable, HeadCell } from './interface';
 import { TableCell } from '../../../../../styles';
 import { SelectExpensesCell } from '../Features.styled';
-import { useAppSelector } from '../../../../../redux/hooks';
 
-const headCellsDesktop: readonly HeadCell[] = [
+const headCells: readonly HeadCell[] = [
   {
     id: 'shortName',
     numeric: false,
     disablePadding: false,
-    label: 'Short Description',
+    label: 'Descripción',
   },
   {
     id: 'amountFormatted',
     numeric: false,
     disablePadding: false,
-    label: 'Amount',
+    label: 'Monto',
   },
   {
     id: 'fullDate',
     numeric: false,
     disablePadding: false,
-    label: 'Date',
+    label: 'Fecha',
   },
   {
     id: 'isPaid',
     numeric: false,
     disablePadding: false,
-    label: 'Paid',
-  },
-];
-
-const headCellsMobile: readonly HeadCell[] = [
-  {
-    id: 'shortName',
-    numeric: false,
-    disablePadding: false,
-    label: 'Short Description',
-  },
-  {
-    id: 'amountFormatted',
-    numeric: false,
-    disablePadding: false,
-    label: 'Amount',
-  },
-  {
-    id: 'isPaid',
-    numeric: false,
-    disablePadding: false,
-    label: 'Paid',
+    label: 'Pagado',
   },
 ];
 
 function EnhancedTableHead({
   onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort,
 }: EnhancedTableProps) {
-  const windowSize = useAppSelector((state) => state.userInterface.windowSize);
-  const isMobile = windowSize === 'Mobile';
-  const headCells = isMobile ? headCellsMobile : headCellsDesktop;
   const createSortHandler = (property: keyof ExpensePaidTable) => (event: React.MouseEvent<unknown>) => {
     onRequestSort(event, property);
   };
@@ -83,7 +58,7 @@ function EnhancedTableHead({
           <SelectExpensesCell
             key={headCell.id}
             sortDirection={orderBy === headCell.id ? order : false}
-            align={headCell.id === 'isPaid' || headCell.id === 'fullDate' ? 'right' : 'left'}
+            align={headCell.id === 'isPaid' ? 'right' : 'left'}
           >
             <TableSortLabel
               active={orderBy === headCell.id}

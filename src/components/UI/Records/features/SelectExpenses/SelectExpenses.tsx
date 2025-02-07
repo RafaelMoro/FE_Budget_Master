@@ -60,13 +60,13 @@ const SelectExpenses = ({
       ) }
       { (loading) && (
       <LoadingExpensesContainer>
-        <Typography variant="body2">Loading expenses...</Typography>
+        <Typography variant="body2">Cargando sus gastos...</Typography>
         <HorizontalLoader />
       </LoadingExpensesContainer>
       ) }
       { (noExpensesFound && !loading && expenses && expenses.length === 0) && (
         <ExpensesNotFoundContainer>
-          <Typography align="center">{`No expenses found for this account in ${completeMonth} ${year}`}</Typography>
+          <Typography align="center">{`No hay gastos encontrados para esta cuenta en ${completeMonth} ${year}`}</Typography>
         </ExpensesNotFoundContainer>
       ) }
       { (!noExpensesFound && !loading && expenses && expenses.length > 0) && (

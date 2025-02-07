@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import fetchMock from 'jest-fetch-mock';
 import { DeleteAccountDialog } from './DeleteAccountDialog';
 import { WrapperRedux } from '../../../../../tests/WrapperRedux';
@@ -44,10 +45,10 @@ describe('<DeleteAccountDialog />', () => {
       </WrapperRedux>,
     );
 
-    expect(screen.getByRole('heading', { name: /delete account/i })).toBeInTheDocument();
-    expect(screen.getByText(`Are you sure you want to delete the account ${accountName}?`)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /delete account/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /go back/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /eliminar cuenta/i })).toBeInTheDocument();
+    expect(screen.getByText(`¿Está seguro(a) de que desea eliminar su cuenta ${accountName}?`)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /eliminar cuenta/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /volver/i })).toBeInTheDocument();
   });
 
   test('When the user wants to delete an account, the dialog opens to delete an account, then the user clicks on go back button', async () => {
@@ -62,7 +63,7 @@ describe('<DeleteAccountDialog />', () => {
       </WrapperRedux>,
     );
 
-    userEvent.click(screen.getByRole('button', { name: /go back/i }));
+    userEvent.click(screen.getByRole('button', { name: /volver/i }));
 
     expect(onClose).toHaveBeenCalled();
   });
@@ -80,7 +81,7 @@ describe('<DeleteAccountDialog />', () => {
       </WrapperRedux>,
     );
 
-    userEvent.click(screen.getByRole('button', { name: /delete account/i }));
+    userEvent.click(screen.getByRole('button', { name: /eliminar cuenta/i }));
 
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalled();

@@ -34,21 +34,21 @@ const ShowExpenses = ({ expenses = [], usePagination = false, isGrid = false }: 
   if (expenses.length === 0) {
     return (
       <InstructionsAddExpense variant="body2" align="center">
-        Note: You can link expenses to this payment to know what
-        transactions has been paid. To do so, click on &quot; Add Expense &quot;.
+        Nota: Puede relacionar gastos a este pago para saber
+        que transacciones han sido pagadas. Para ello, de click en &quot; Agregar Gasto &quot;.
       </InstructionsAddExpense>
     );
   }
   return (
     <>
-      <TableTitle align="center" isGrid={isGrid}>Expenses Selected: </TableTitle>
+      <TableTitle align="center" isGrid={isGrid}>Gastos seleccionados: </TableTitle>
       <RecordTable isGrid={isGrid}>
         <TableHead>
           <TableRow>
-            <TableCell>Name:</TableCell>
-            <TableCell>Date:</TableCell>
-            <TableCell>Time:</TableCell>
-            <TableCell>Amount:</TableCell>
+            <TableCell>Nombre:</TableCell>
+            <TableCell>Fecha:</TableCell>
+            <TableCell>Hora:</TableCell>
+            <TableCell>Monto:</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -72,6 +72,7 @@ const ShowExpenses = ({ expenses = [], usePagination = false, isGrid = false }: 
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
+          labelRowsPerPage="Filas por página"
         />
       ) }
     </>

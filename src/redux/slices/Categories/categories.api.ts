@@ -1,13 +1,17 @@
+import {
+  CreateCategoryMutationProps, DeleteCategoryMutationProps, ModifyCategoryMutationProps,
+} from '../../../components/templates/CategoriesDialog/CategoryDialog.interface';
 import { CategoriesResponse } from '../../../components/UI/Records/interface';
+import { DELETE_METHOD, POST_METHOD, PUT_METHOD } from '../../../constants';
 import { RequestBearerTokenProps } from '../../../globalInterface';
 import { budgetMasterApi } from '../../budgetMaster.api';
-import { CATEGORIES_TAG, GET_CATEGORIES } from '../../constants';
+import { CATEGORIES_TAG, CATEGORIES_REST_ENDPOINT } from '../../constants';
 
 export const categoriesApiSlice = budgetMasterApi.injectEndpoints({
   endpoints: (builder) => ({
     fetchCategories: builder.query({
       query: ({ bearerToken }: RequestBearerTokenProps) => ({
-        url: GET_CATEGORIES,
+        url: CATEGORIES_REST_ENDPOINT,
         headers: {
           Authorization: bearerToken,
         },
@@ -15,7 +19,45 @@ export const categoriesApiSlice = budgetMasterApi.injectEndpoints({
       providesTags: [CATEGORIES_TAG],
       transformResponse: (response: CategoriesResponse) => response.data?.categories,
     }),
+
+    createCategory: builder.mutation({
+      query: ({ values, bearerToken }: CreateCategoryMutationProps) => ({
+        url: CATEGORIES_REST_ENDPOINT,
+        method: POST_METHOD,
+        body: values,
+        headers: {
+          Authorization: bearerToken,
+        },
+      }),
+      invalidatesTags: [CATEGORIES_TAG],
+    }),
+
+    editCategory: builder.mutation({
+      query: ({ values, bearerToken }: ModifyCategoryMutationProps) => ({
+        url: CATEGORIES_REST_ENDPOINT,
+        method: PUT_METHOD,
+        body: values,
+        headers: {
+          Authorization: bearerToken,
+        },
+      }),
+      invalidatesTags: [CATEGORIES_TAG],
+    }),
+
+    deleteCategory: builder.mutation({
+      query: ({ values, bearerToken }: DeleteCategoryMutationProps) => ({
+        url: CATEGORIES_REST_ENDPOINT,
+        method: DELETE_METHOD,
+        body: values,
+        headers: {
+          Authorization: bearerToken,
+        },
+      }),
+      invalidatesTags: [CATEGORIES_TAG],
+    }),
   }),
 });
 
-export const { useFetchCategoriesQuery } = categoriesApiSlice;
+export const {
+  useFetchCategoriesQuery, useEditCategoryMutation, useDeleteCategoryMutation, useCreateCategoryMutation,
+} = categoriesApiSlice;

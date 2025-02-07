@@ -21,7 +21,7 @@ const ActionButtonPanel = ({
   loading = false,
   useSecondaryButton = false,
   cancelButton = 'Link',
-  cancelButtonText = 'Cancel',
+  cancelButtonText = 'Cancelar',
   cancelButtonCallback = () => {},
   submitButton = 'Button',
 }: ActionButtonPanelProps) => {

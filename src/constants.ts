@@ -11,46 +11,57 @@ export const DELETE_METHOD = 'DELETE';
 /** Errors */
 export const NETWORK_CATCH_ERROR = 'Network Error';
 export const JWT_EXPIRED_CATCH_ERROR = 'jwt expired';
+export const INVALID_SIGNATURE_ERROR = 'invalid signature';
 export const ERROR_CATCH_USER_CREATED = 'Try with other email.';
 export const EXPENSES_NOT_FOUND = 'Expenses not found.';
 
 export const ERROR_TITLE_GENERAL = 'Error';
-export const ERROR_MESSAGE_GENERAL = 'Oops! Something went wrong. Try again later.';
-export const NETWORK_ERROR_MESSAGE = 'There is a network error. Please check you are connected to Internet.';
+export const ERROR_MESSAGE_GENERAL = 'Oops! Algo no salió como esperabamos. Por favor, intente de nuevo más tarde.';
 
 /** Errors Login Module */
 export const USER_NOT_FOUND_CATCH_ERROR = 'User not found.';
-export const TOKEN_EXPIRED_TITLE = 'Your token to reset your password has expired';
-export const TOKEN_EXPIRED_DESC = 'Redirecting you to forgot password to try again.';
+export const TOKEN_EXPIRED_TITLE = 'Su token para restablecer su contraseña ha caducado';
+export const TOKEN_EXPIRED_DESC = 'Redirigiendo a la página de olvidé contraseña. Vuelva a intentar todo el proceso por favor.';
 export const UNAUTHORIZED_ERROR = 'Email or Password incorrect.';
-export const ERROR_MESSAGE_UNAUTHORIZED = 'Email or Password incorrect.';
-export const ERROR_MESSAGE_EMAIL_EXISTS = 'The email entered is registered to other user. Please try with a different email.';
+export const ERROR_MESSAGE_UNAUTHORIZED = 'Correo electronico o contraseña incorrecta.';
+export const ERROR_MESSAGE_EMAIL_EXISTS = 'El correo electrónico ya está registrado. Intente con otro correo electrónico.';
+export const ERROR_MESSAGE_USER_NOT_FOUND = 'El correo electrónico no está registrado a una cuenta.';
 
-export const ERROR_MESSAGE_FETCH_CATEGORIES = 'We could not get your categories. Please try again later';
-export const ERROR_CREATE_LOCAL_CATEGORIES = 'We could not create your categories. Please try again later';
-export const ERROR_INCORRECT_MAIL_DESC = 'Verify that your email is correct or create an account.';
+export const ERROR_MESSAGE_FETCH_CATEGORIES = 'No fue posible obtener sus categorias. Por favor, intente de nuevo más tarde.';
+export const ERROR_CREATE_LOCAL_CATEGORIES = 'No fue posible crear sus categorias. Por favor, intente de nuevo más tarde.';
+
+/** Errors for Categories module */
+export const ERROR_MESSAGE_EDIT_CATEGORY = 'No fue posible editar su categoría. Por favor, intente de nuevo más tarde.';
+export const ERROR_MESSAGE_CREATE_CATEGORY_TITLE = 'No fue posible crear su categoría.';
+export const ERROR_MESSAGE_DELETE_CATEGORY = 'No fue posible eliminar su categoría.';
+export const ERROR_MESSAGE_FETCH_CATEGORY = 'No fue posible obtener sus categorías.';
+export const WARNING_MESSAGE_MISSING_CATEGORY_TITLE = 'La categoria relacionada a esta transacción no existe.';
+export const WARNING_MESSAGE_MISSING_CATEGORY_DESCRIPTION = 'Por favor, edite esta transacción para seleccionar una nueva categoría';
+export const WARNING_MESSAGE_DELETE_CATEGORY = `Si elimina esta categoría y tiene transacciones relacionadas a la categoría,
+estas aparecerán como categoría no encontrada.`;
 
 /** Success Login Module */
-export const SUCCESS_PASSWORD_RESET_TITLE = 'Password reset successfully';
-export const SUCCESS_PASSWORD_RESET_DESC = 'You may login with your new password.';
-export const SUCCESS_FORGOT_PASSWORD_TITLE = 'Email Sent.';
-export const SUCCESS_FORGOT_PASSWORD_DESC = 'Kindly check your email inbox and follow the instructions. Redirecting to sign in page';
+export const SUCCESS_PASSWORD_RESET_TITLE = 'Contraseña reestablecida correctamente';
+export const SUCCESS_PASSWORD_RESET_DESC = 'Ahora puede iniciar sesión con su nueva contraseña.';
+export const SUCCESS_FORGOT_PASSWORD_TITLE = 'Correo electrónico enviado.';
+// eslint-disable-next-line max-len
+export const SUCCESS_FORGOT_PASSWORD_DESC = 'Por favor, revise su correo electrónico y siga las instrucciones. Redirigiendo a la página de inicio de sesión.';
 
-export const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 export const ZERO_CURRENCY = '$0.00';
+export const ICON_SIZE = { fontSize: '2.5rem' };
 
 const FOOD_AND_DRINK_CATEGORY: Category = {
   _id: 'local-category-1',
   __v: 0,
-  categoryName: 'Food and Drink',
+  categoryName: 'Comida y Bebida',
   subCategories: [
     'Bar',
-    'Alcohol & Cigarettes',
-    'Takeout',
-    'Fast Food',
-    'Cofee shops',
-    'Restaurants',
-    'Groceries',
+    'Alcohol & Cigarros',
+    'Comida para llevar',
+    'Comida rápida',
+    'Cafetería',
+    'Restaurantes',
+    'Despensa',
   ],
   icon: 'foodAndDrink',
 };
@@ -58,12 +69,12 @@ const FOOD_AND_DRINK_CATEGORY: Category = {
 const HOUSING_CATEGORY: Category = {
   _id: 'local-category-2',
   __v: 0,
-  categoryName: 'Housing',
+  categoryName: 'Vivienda',
   subCategories: [
-    'Rent',
-    'Mortgage',
-    'Home maintenance and Repairs',
-    'Property taxes',
+    'Renta',
+    'Hipoteca',
+    'Mantenimiento y reparaciones del hogar',
+    'Impuestos sobre la vivienda',
   ],
   icon: 'house',
 };
@@ -71,38 +82,45 @@ const HOUSING_CATEGORY: Category = {
 const UTILITIES_CATEGORY: Category = {
   _id: 'local-category-3',
   __v: 0,
-  categoryName: 'Utilities',
+  categoryName: 'Servicios básicos',
   subCategories: [
-    'Electricity',
+    'Luz',
     'Gas',
-    'Heating',
-    'Water',
+    'Calefacción',
+    'Agua',
     'Internet',
     'Cable',
-    'Mobile communication',
-    'Safety',
+    'Communicación móvil',
+    'Seguridad',
   ],
   icon: 'utilities',
 };
 const SUSCRIPTIONS_CATEGORY: Category = {
   _id: 'local-category-4',
   __v: 0,
-  categoryName: 'Subscriptions',
-  subCategories: ['Streaming services', 'Gym', 'Software'],
+  categoryName: 'Suscripciones',
+  subCategories: [
+    'Servicios de streaming',
+    'Gimnasio',
+    'Software',
+    'Membresías',
+    'Aprendizaje y educación',
+    'Suscripciones en línea',
+  ],
   icon: 'subcriptions',
 };
 const TRANSPORTATION_CATEGORY: Category = {
   _id: 'local-category-5',
   __v: 0,
-  categoryName: 'Transportation',
+  categoryName: 'Transporte',
   subCategories: [
-    'Gas/Fuel',
-    'Car Rental',
-    'Car maintenance and repair',
-    'Parking fees',
-    'Public Transportation',
+    'Gasolina',
+    'Renta de carro',
+    'Mantenimiento y reparaciones del carro',
+    'Tarifas de estacionamiento',
+    'Transporte público',
     'Uber/Didi',
-    'Airplane tickets',
+    'Boletos de avión',
     'Taxi',
   ],
   icon: 'transportation',
@@ -110,117 +128,132 @@ const TRANSPORTATION_CATEGORY: Category = {
 const FINANCIAL_EXPENSES_CATEGORY: Category = {
   _id: 'local-category-6',
   __v: 0,
-  categoryName: 'Financial Expenses',
+  categoryName: 'Gastos financieros',
   subCategories: [
-    'Counselling / Guidance',
-    'Family',
-    'Goverment fee/payment',
-    'Bank Charges / fees',
-    'Fines / Penalties',
-    'Taxes',
-    'Credit card debt',
-    'Auto insurance / Car Loan',
-    'Loan',
-    'Payment',
-    'Personal loan',
-    'Funding',
-    'Insurance',
+    'Asesoramiento u orientación',
+    'Asignación familiar',
+    'Pagos gubernamentales',
+    'Comisiones bancarias',
+    'Multas o penalizaciones',
+    'Cargos y tasas',
+    'Impuestos',
+    'Deuda de tarjeta de crédito',
+    'Seguro o préstamo del carro',
+    'Préstamo',
+    'Pago',
+    'Financiamiento',
+    'Seguro',
+    'Intereses',
   ],
   icon: 'debtAndLoans',
 };
 const HEALTHCARE_CATEGORY: Category = {
   _id: 'local-category-7',
   __v: 0,
-  categoryName: 'Health and Personal Care',
+  categoryName: 'Salud',
   subCategories: [
-    'Barber',
-    'Therapist / Mental Health',
-    'Speciality Care',
-    'Dental care',
-    'Urgent care',
-    'Medicines',
+    'Barbero / Peluquería',
+    'Psicólogo / Salud mental',
+    'Atención médica especializada',
+    'Cuidado dental',
+    'Atención de urgencia',
+    'Medicinas',
     'Hospital',
-    'Prescriptions',
-    'Out of pocket costs for primary care',
-    'Health supplements',
+    'Recetas médicas',
+    'Suplementos de salud',
   ],
   icon: 'healthCare',
 };
 const KIDS_CATEGORY: Category = {
   _id: 'local-category-8',
   __v: 0,
-  categoryName: 'Kids',
+  categoryName: 'Niños',
   subCategories: [
-    'Child support',
-    'Necessities',
-    'Tuition / Tutoring',
-    'Toys',
-    'Gifts',
-    'School supplies / lunch',
-    'Extra-curricular activities',
-    'Go out',
-    'Clothing',
-    'Footwear',
+    'Pensión alimenticiat',
+    'Necesidades básicas',
+    'Clases particulares',
+    'Juguetes',
+    'Regalos',
+    'Útiles escolares / almuerzo',
+    'Actividades extracurriculares',
+    'Salidas',
+    'Ropa',
+    'Calzado',
   ],
   icon: 'kids',
 };
 const SHOPPING: Category = {
   _id: 'local-category-9',
   __v: 0,
-  categoryName: 'Shopping',
+  categoryName: 'Compras',
   subCategories: [
-    'Clothes',
-    'Footwear',
-    'Kids',
-    'House / Garden',
-    'Electronics / accesories',
-    'Videogames',
+    'Ropa',
+    'Calzado',
+    'Niños',
+    'Casa y jardín',
+    'Electrónica o accesorios',
+    'Videojuegos',
     'Software',
-    'Pharmacy',
-    'Jewerly / accesories',
-    'Pets',
-    'Stationery / tools',
-    'Gifts',
-    'Health and beauty',
-    'Free time / Hobbies',
+    'Farmacia',
+    'Joyeria',
+    'Mascotas',
+    'Papelería / Herramientas',
+    'Regalos',
+    'Salud y belleza',
+    'Tiempo libre / Hobbies',
   ],
   icon: 'shopping',
 };
 const ENTERTAINMENT_AND_LEISURE_CATEGORY: Category = {
   _id: 'local-category-10',
   __v: 0,
-  categoryName: 'Entertainment and Leisure',
+  categoryName: 'Entretenimiento',
   subCategories: [
-    'Go Out',
-    'Wellness and beauty',
-    'Charity / Gifts',
-    'Sports events / Culture',
-    'Sports / Fitness',
-    'Education / Personal development',
-    'Special events',
-    'Books, audiobooks',
-    'Lottery / Gambling',
-    'Vacations / Hotel',
+    'Salidas',
+    'Bienestar y belleza',
+    'Donaciones / Regalos',
+    'Eventos deportivos / Cultura',
+    'Deportes / Fitness',
+    'Educación / Desarrollo personal',
+    'Eventos especiales',
+    'Libros, audiolibros',
+    'Lotería / Juegos de azar',
+    'Vacaciones / Hotel',
     'Hobbies',
-    'Concerts',
-    'Cinema',
+    'Conciertos',
+    'Cine',
   ],
   icon: 'entertainment',
 };
 const SAVINGS_CATEGORY: Category = {
   _id: 'local-category-11',
   __v: 0,
-  categoryName: 'Savings',
+  categoryName: 'Ahorro',
   subCategories: [
-    'Savings',
-    'Collectible',
-    'Emergency Fund',
-    'Retirement',
-    'Investments',
-    'Vacations',
-    'Car / Real property ',
+    'Ahorros',
+    'Fondo de emergencia',
+    'Jubilación',
+    'Inversiones',
+    'Vacaciones',
+    'Automóvil / Propiedad inmobiliaria',
   ],
   icon: 'savings',
+};
+const INCOME_CATEGORY: Category = {
+  _id: 'local-category-12',
+  __v: 0,
+  categoryName: 'Ingreso',
+  subCategories: [
+    'Salario',
+    'Comisiones / bonos',
+    'Propinas',
+    'Inversiones',
+    'Negocios',
+    'Servicios profesionales',
+    'Reembolsos',
+    'Regalos',
+  ],
+  icon: 'income',
 };
 export const CATEGORIES_RECORDS: Category[] = [
   FOOD_AND_DRINK_CATEGORY,
@@ -234,4 +267,5 @@ export const CATEGORIES_RECORDS: Category[] = [
   SHOPPING,
   ENTERTAINMENT_AND_LEISURE_CATEGORY,
   SAVINGS_CATEGORY,
+  INCOME_CATEGORY,
 ];

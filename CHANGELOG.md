@@ -1,3 +1,45 @@
+## v1.12.0 (2025-02-07)
+
+### Pull Requests
+[#64](https://github.com/RafaelMoro/FE_Budget_Master/pull/64) | Add subcategories dialog
+
+
+## v1.11.0 (2025-02-03)
+
+### Pull Requests
+[#63](https://github.com/RafaelMoro/FE_Budget_Master/pull/63) | Translate last part of the site
+
+
+## v1.10.1 (2025-02-03)
+
+### Pull Requests
+[#62](https://github.com/RafaelMoro/FE_Budget_Master/pull/62) | Fix indebted people inability to edit 
+
+
+## v1.10.0 (2025-02-03)
+
+### Pull Requests
+[#61](https://github.com/RafaelMoro/FE_Budget_Master/pull/61) | Translate dashboard and budgets
+
+
+## v1.9.1 (2025-01-28)
+
+### Pull Requests
+[#60](https://github.com/RafaelMoro/FE_Budget_Master/pull/60) | Make date cell adjustments in table for mobile
+
+
+## v1.9.0 (2025-01-27)
+
+### Pull Requests
+[#59](https://github.com/RafaelMoro/FE_Budget_Master/pull/59) | Translate dashboard to spanish
+
+
+## v1.8.1 (2025-01-18)
+
+### Pull Requests
+[#58](https://github.com/RafaelMoro/FE_Budget_Master/pull/58) | Change login module to spanish
+
+
 ## v1.8.0 (2025-01-09)
 
 ### Pull Requests

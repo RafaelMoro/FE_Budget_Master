@@ -4,6 +4,7 @@ import {
 import userEvent from '@testing-library/user-event';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import fetchMock from 'jest-fetch-mock';
 
 import { Login } from './Login';
@@ -59,12 +60,12 @@ describe('<Login />', () => {
     jest.spyOn(console, 'error').mockImplementation(() => {});
   });
 
-  test("Render Login Page with the title 'welcome back', email and password input and login button", () => {
-    const title = screen.getByRole('heading', { name: /welcome back/i });
-    const emailInput = screen.getByRole('textbox', { name: /email/i });
-    const passwordInput = screen.getByLabelText(/password/i);
-    const loginButton = screen.getByRole('button', { name: /login/i });
-    const registerButton = screen.getByRole('button', { name: /register/i });
+  test("Render Login Page with the title 'bienvenido de vuelta', email and password input and login button", () => {
+    const title = screen.getByRole('heading', { name: /bienvenido de vuelta/i });
+    const emailInput = screen.getByRole('textbox', { name: /correo electrónico/i });
+    const passwordInput = screen.getByLabelText(/contraseña/i);
+    const loginButton = screen.getByRole('button', { name: /iniciar sesión/i });
+    const registerButton = screen.getByRole('button', { name: /registrarse/i });
     expect(title).toBeInTheDocument();
     expect(emailInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
@@ -73,25 +74,25 @@ describe('<Login />', () => {
   });
 
   test('If the email and password input are empty, a validation error must appear in each input', async () => {
-    const loginButton = screen.getByRole('button', { name: /login/i });
+    const loginButton = screen.getByRole('button', { name: /iniciar sesión/i });
 
     fireEvent.click(loginButton);
 
     await waitFor(() => {
-      expect(screen.getByText(/email is required/i)).toBeInTheDocument();
-      expect(screen.getByText(/password is required/i)).toBeInTheDocument();
+      expect(screen.getByText(/por favor, ingrese su correo electrónico/i)).toBeInTheDocument();
+      expect(screen.getByText(/por favor, ingrese su contraseña/i)).toBeInTheDocument();
     });
   });
 
   test('If the email input has an invalid email, a validation error must appear in each input', async () => {
-    const emailInput = screen.getByRole('textbox', { name: /email/i });
-    const loginButton = screen.getByRole('button', { name: /login/i });
+    const emailInput = screen.getByRole('textbox', { name: /correo electrónico/i });
+    const loginButton = screen.getByRole('button', { name: /iniciar sesión/i });
 
     userEvent.type(emailInput, 'a');
     fireEvent.click(loginButton);
 
     await waitFor(() => {
-      expect(screen.getByText(/invalid email/i)).toBeInTheDocument();
+      expect(screen.getByText(/correo electronico inválido/i)).toBeInTheDocument();
     });
   });
 });
@@ -111,7 +112,7 @@ describe('Test Login re routes', () => {
         </Router>
       </WrapperRedux>,
     );
-    const registerLink = screen.getByRole('link', { name: /register/i });
+    const registerLink = screen.getByRole('link', { name: /registrarse/i });
 
     fireEvent.click(registerLink);
 
@@ -133,9 +134,9 @@ describe('Test Login re routes', () => {
       </WrapperRedux>,
     );
 
-    const emailInput = screen.getByRole('textbox', { name: /email/i });
-    const passwordInput = screen.getByLabelText(/password/i);
-    const loginButton = screen.getByRole('button', { name: /login/i });
+    const emailInput = screen.getByRole('textbox', { name: /correo electrónico/i });
+    const passwordInput = screen.getByLabelText(/contraseña/i);
+    const loginButton = screen.getByRole('button', { name: /iniciar sesión/i });
 
     // Mock the rejected value response
 
@@ -161,9 +162,9 @@ describe('Test Login re routes', () => {
         </Router>
       </WrapperRedux>,
     );
-    const emailInput = screen.getByRole('textbox', { name: /email/i });
-    const passwordInput = screen.getByLabelText(/password/i);
-    const loginButton = screen.getByRole('button', { name: /login/i });
+    const emailInput = screen.getByRole('textbox', { name: /correo electrónico/i });
+    const passwordInput = screen.getByLabelText(/contraseña/i);
+    const loginButton = screen.getByRole('button', { name: /iniciar sesión/i });
 
     userEvent.type(emailInput, credentials.email);
     userEvent.type(passwordInput, credentials.password);

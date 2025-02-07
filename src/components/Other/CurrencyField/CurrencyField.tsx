@@ -27,7 +27,7 @@ const CurrencyField = ({
       type="text"
       inputMode="numeric"
       variant="standard"
-      label={labelName ?? 'Amount'}
+      label={labelName ?? 'Cantidad disponible'}
       onChange={handleChange}
       InputProps={{
         startAdornment: CurrencyAdornment({ typeOfRecord }),

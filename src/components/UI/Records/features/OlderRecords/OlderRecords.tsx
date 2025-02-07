@@ -123,7 +123,7 @@ const OlderRecords = ({
       color={color}
       openedAccordeon={false}
       onClickCb={fetchRecordsOnOpenAccordion}
-      titleMonthAccordeon="Older Records"
+      titleMonthAccordeon="Transacciones anteriores"
       totalExpense={olderRecordsTotal.expenseTotal}
       totalIncome={olderRecordsTotal.incomeTotal}
       accountId={accountId}
@@ -145,7 +145,7 @@ const OlderRecords = ({
         currentYear={yearOlderRecords}
         yearsArray={years}
         fetchRecordsCb={handleGetRecords}
-        buttonText="Search records"
+        buttonText="Buscar"
         isDashboard
       />
     </MonthRecords>

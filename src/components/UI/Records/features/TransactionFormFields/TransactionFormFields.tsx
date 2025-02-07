@@ -39,14 +39,14 @@ const TransactionFormFields = <CreateAnyRecord,>({
       setFieldValueCb={setFieldValue}
       disableFuture
       name="date"
-      label="Date and Time"
+      label="Fecha y hora"
     />
     <Field
       component={InputForm}
       name="shortName"
       type="text"
       variant="standard"
-      label="Short Description"
+      label="Pequeña descripción"
     />
     <Field
       component={InputForm}
@@ -54,7 +54,7 @@ const TransactionFormFields = <CreateAnyRecord,>({
       rows={5}
       name="description"
       variant="standard"
-      label="Description (Optional)"
+      label="Descripción (Opcional)"
     />
     <CategoriesAndSubcategories
       errorCategory={errors.category}
@@ -63,7 +63,13 @@ const TransactionFormFields = <CreateAnyRecord,>({
       touchedSubCategory={touched.subCategory}
       categoryToBeEdited={categoryToBeEdited}
     />
-    <AddChip name="tag" label="Tag (Optional)" action="tag" updateData={(newChips) => updateTags({ values, newChips })} chipsData={tags} />
+    <AddChip
+      name="etiqueta"
+      label="Etiqueta (Opcional)"
+      action="etiqueta"
+      updateData={(newChips) => updateTags({ values, newChips })}
+      chipsData={tags}
+    />
   </>
   );
 

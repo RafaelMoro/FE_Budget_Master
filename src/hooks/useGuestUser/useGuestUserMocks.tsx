@@ -18,6 +18,7 @@ const useGuestUserMocks = () => {
       lastName: 'User',
       middleName: '',
       sub: GUEST_USER_ID,
+      initials: 'GU',
     },
   };
 
@@ -27,7 +28,7 @@ const useGuestUserMocks = () => {
       __v: 0,
       title: 'Citibanamex Debit',
       amount: 8246.41,
-      accountType: 'Debit',
+      accountType: 'Débito',
       backgroundColor: 'Blue',
       color: 'White',
     },
@@ -36,7 +37,7 @@ const useGuestUserMocks = () => {
       __v: 0,
       title: 'American Express',
       amount: 80000,
-      accountType: 'Credit',
+      accountType: 'Crédito',
       backgroundColor: 'Tomato',
       color: 'Black',
     },

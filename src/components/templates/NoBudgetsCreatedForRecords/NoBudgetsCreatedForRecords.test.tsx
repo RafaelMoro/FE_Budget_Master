@@ -18,8 +18,8 @@ describe('<NoBudgetsCreatedForRecords />', () => {
       </Router>,
     );
 
-    expect(screen.getByText(/you have not created your budgets yet\./i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /create budget/i })).toBeInTheDocument();
+    expect(screen.getByText(/no has creado presupuestos todavía\./i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /crear presupuesto/i })).toBeInTheDocument();
   });
 
   test('Given a user, when he clicks on create budget, he is redirected to the budget editor page', async () => {
@@ -29,7 +29,7 @@ describe('<NoBudgetsCreatedForRecords />', () => {
       </Router>,
     );
 
-    userEvent.click(screen.getByRole('button', { name: /create budget/i }));
+    userEvent.click(screen.getByRole('button', { name: /crear presupuesto/i }));
 
     await waitFor(() => {
       expect(history.location.pathname).toBe(BUDGET_EDITOR_PAGE_ROUTE);

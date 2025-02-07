@@ -90,6 +90,10 @@ export const SelectExpensesCell = styled(TableCell, { shouldForwardProp: (props)
   padding: ${({ noHorizontalPadding }: SelectExpensesCellProps) => (noHorizontalPadding ? '1.5rem 0' : '1.5rem 1rem 1.5rem 0')};
 `;
 
+export const DateExpenseCell = styled(SelectExpensesCell)`
+  min-width: 14rem;
+`;
+
 /** MonthRecords */
 export const ShowTotalContianer = styled.div`
   display: flex;
@@ -112,7 +116,7 @@ export const NameCellTitle = styled(TableCell)`
 `;
 
 export const IndebtedTableCell = styled(TableCell)`
-  padding: ${appTheme.spacing(1)} 0;
+  padding: ${appTheme.spacing(1)} ${appTheme.spacing(2)};
 `;
 
 export const NameCell = styled(TableCell)`

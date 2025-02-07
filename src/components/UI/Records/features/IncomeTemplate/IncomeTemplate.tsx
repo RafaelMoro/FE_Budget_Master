@@ -22,6 +22,7 @@ import { scrollToTop } from '../../../../../utils/ScrollToTop';
 import { SelectExpenses } from '../SelectExpenses';
 import { resetLocalStorageWithUserOnly, symmetricDifferenceExpensesRelated } from '../../../../../utils';
 import { EditIncomeProps } from '../../../../../hooks/useRecords/interface';
+import { CATEGORY_NOT_FOUND } from '../../Record.mocks';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -50,9 +51,9 @@ const IncomeTemplate = ({ edit = false, typeOfRecord }: IncomeTemplateProps) => 
   const recordToBeEdited = useAppSelector((state) => state.records.recordToBeModified);
   const selectedAccount = useAppSelector((state) => state.accounts.accountSelected);
 
-  const action: string = edit ? 'Edit' : 'Create';
+  const action: string = edit ? 'Editar' : 'Crear';
   const categoryToBeEdited = recordToBeEdited?.category ?? null;
-  const isCredit = selectedAccount?.accountType === 'Credit';
+  const isCredit = selectedAccount?.accountType === 'Crédito';
   const [showExpenses, setShowExpenses] = useState<boolean>(false);
   const [expensesSelected, setExpensesSelected] = useState<ExpensePaid[]>([]);
   const [initialValues, setInitialValues] = useState<CreateRecordValues>({
@@ -70,8 +71,8 @@ const IncomeTemplate = ({ edit = false, typeOfRecord }: IncomeTemplateProps) => 
     setInitialValues({ ...values, tag: newChips });
   };
 
-  const showExpenseText = expensesSelected.length === 0 ? 'Add Expense' : 'Add or Remove Expense';
-  const buttonText = `${action} record`;
+  const showExpenseText = expensesSelected.length === 0 ? 'Agregar gasto' : 'Agregar o quitar gasto';
+  const buttonText = `${action} ingreso`;
 
   // Update edit data to the initial values
   useEffect(() => {
@@ -80,7 +81,7 @@ const IncomeTemplate = ({ edit = false, typeOfRecord }: IncomeTemplateProps) => 
         amount: String(recordToBeEdited.amount),
         shortName: recordToBeEdited.shortName,
         description: recordToBeEdited.description,
-        category: recordToBeEdited.category._id,
+        category: (recordToBeEdited?.category ?? CATEGORY_NOT_FOUND)._id,
         subCategory: recordToBeEdited.subCategory,
         date: dayjs(recordToBeEdited.date).utc(),
         tag: recordToBeEdited.tag,
@@ -97,7 +98,7 @@ const IncomeTemplate = ({ edit = false, typeOfRecord }: IncomeTemplateProps) => 
       setInitialValues(newInitialValues);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [recordToBeEdited?.category.categoryName, edit, isCredit]);
+  }, [recordToBeEdited?.category?.categoryName, edit, isCredit]);
 
   const toggleShowExpenses = (values: CreateRecordValues) => {
     // save initial values

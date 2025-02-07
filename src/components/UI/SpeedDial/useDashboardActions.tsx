@@ -14,13 +14,13 @@ const useDashboardActions = ({
   const navigateToCreateRecord = () => navigate(CREATE_RECORD_ROUTE);
 
   const createRecord: SpeedDialActions = {
-    icon: <AddTask />, name: 'Create Record', actionCallback: navigateToCreateRecord,
+    icon: <AddTask />, name: 'Crear registro', actionCallback: navigateToCreateRecord,
   };
   const changeAccount: SpeedDialActions = {
-    icon: <CompareArrows />, name: 'Change Account', actionCallback: toggleChangeOtherAccountModal,
+    icon: <CompareArrows />, name: 'Cambiar cuenta', actionCallback: toggleChangeOtherAccountModal,
   };
   const createAccount: SpeedDialActions = {
-    icon: <AddCard />, name: 'Create Account', actionCallback: handleOpenCreateAccount,
+    icon: <AddCard />, name: 'Crear cuenta', actionCallback: handleOpenCreateAccount,
   };
 
   const dashboardActions = [];

@@ -32,7 +32,7 @@ const BudgetPeriodView = ({
     isActive,
     previousPeriods,
   };
-  const textButton = isEditBudget ? 'Edit Budget' : 'Create Budget';
+  const textButton = isEditBudget ? 'Editar' : 'Crear';
 
   // The validate function receives automatically the value of the field
   const validateEndDate = (endDateRceived: Dayjs) => {
@@ -41,7 +41,7 @@ const BudgetPeriodView = ({
     const differenceTodaysDate = endDateRceived.diff(todayDate, 'days');
 
     if (differenceTodaysDate < 0) {
-      error = 'The end date cannot be before today';
+      error = 'La fecha de término no puede ser hoy o una fecha en el pasado. Elija una fecha posterior.';
       return error;
     }
     return error;
@@ -64,13 +64,13 @@ const BudgetPeriodView = ({
               name="description"
               type="text"
               variant="standard"
-              label="Description (Optional)"
+              label="Descripción (Opcional)"
             />
             { (isPeriodic) && (
             <SelectInput
               labelId="select-period-budget"
               dataTestId="select-period-budget"
-              labelName="Periodicity of the budget"
+              labelName="Periodicidad del presupuesto"
               fieldName="period"
               stringOptions={PERIOD_BUDGET_OPTIONS}
             />
@@ -79,20 +79,20 @@ const BudgetPeriodView = ({
               component={DatePickerValue}
               setFieldValueCb={setFieldValue}
               name="startDate"
-              label="Start date"
+              label="Fecha de inicio"
             />
             <Field
               component={DatePickerValue}
               setFieldValueCb={setFieldValue}
               name="endDate"
-              label="End date"
+              label="Fecha de término"
               validate={validateEndDate}
             />
             { (errors.endDate) && (
             <ErrorParagraphValidation variant="subText">{errors.endDate as string}</ErrorParagraphValidation>
             ) }
             <FlexContainer justifyContent="space-between">
-              <CancelButton variant="contained" onClick={() => goBack({ data: values })} size="medium">Return</CancelButton>
+              <CancelButton variant="contained" onClick={() => goBack({ data: values })} size="medium">Regresar</CancelButton>
               <PrimaryButton variant="contained" onClick={submitForm} size="medium">{textButton}</PrimaryButton>
             </FlexContainer>
           </FormContainer>

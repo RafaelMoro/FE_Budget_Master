@@ -17,9 +17,9 @@ const useIndebtedPeople = () => {
   };
 
   const updateIndebtedPerson = (indebtedPerson: IndebtedPeople):void => {
-    const personExist = indebtedPeople.find((person) => person.name === indebtedPerson.name);
+    const personExist = indebtedPeople.find((person) => person?._id === indebtedPerson?._id);
     if (personExist) {
-      const filteredData = indebtedPeople.filter((person) => person.name !== personExist.name);
+      const filteredData = indebtedPeople.filter((person) => person?._id !== indebtedPerson?._id);
       setIndebtedPeople([...filteredData, indebtedPerson]);
     }
   };

@@ -22,17 +22,20 @@ import { MAX_LENGTH_DESCRIPTION, MAX_LENGTH_TITLE } from './constants';
 import { MainRecordData } from './features/MainRecordDataBox';
 import { AllCategoryIcons } from '../Icons/Icons.interface';
 import { getRecordStatus } from '../../../utils/GetRecordStatus';
+import { CATEGORY_NOT_FOUND } from './Record.mocks';
 
 const Record = ({ record, backgroundColor }: RecordProps) => {
   const {
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    _id, shortName, description, tag = [], category: { icon: categoryIcon },
+    _id, shortName, description, tag = [], category,
     indebtedPeople = [], linkedBudgets = [], typeOfRecord,
     formattedTime, fullDate, isPaid, amountFormatted, expensesPaid = [],
   } = record;
+  // Adding backup in case the category was alredy deleted but this record has category as null
+  const { icon: categoryIcon } = category ?? CATEGORY_NOT_FOUND;
   const windowSize = useAppSelector((state) => state.userInterface.windowSize);
   const selectedAccount = useAppSelector((state) => state.accounts.accountSelected);
-  const isCredit = selectedAccount?.accountType === 'Credit';
+  const isCredit = selectedAccount?.accountType === 'Crédito';
   const [openLongView, setOpenLongView] = useState(false);
   const [shortedName, setShortedName] = useState('');
   const [shortedDescription, setShortedDescription] = useState('');
@@ -113,7 +116,7 @@ const Record = ({ record, backgroundColor }: RecordProps) => {
             ) }
             { (isTransferIncome || isTransferExpense) && (
               <RecordStatusContainer>
-                <PaymentStatusChip label={status} variant="filled" status="Transfer" />
+                <PaymentStatusChip label={status} variant="filled" status="Transferencia" />
               </RecordStatusContainer>
             )}
             { (!isExpense && expensesPaid.length > 0 && !openLongView && !isTransferIncome) && (
@@ -133,13 +136,13 @@ const Record = ({ record, backgroundColor }: RecordProps) => {
           </RecordsPaidText>
           )}
           <BudgetChipContainer>
-            { linkedBudgets.length === 0 && (<RecordSubtitleText variant="body2">No budgets</RecordSubtitleText>) }
+            { linkedBudgets.length === 0 && (<RecordSubtitleText variant="body2">Sin presupuestos</RecordSubtitleText>) }
             { linkedBudgets.length > 0 && linkedBudgets.map((budget) => (
               <Chip key={budget._id} label={budget.name} variant="outlined" chipColor={AppColors.primary} />
             ))}
           </BudgetChipContainer>
           <TagsChipContainer>
-            { tag.length === 0 && (<RecordSubtitleText variant="body2">No tags</RecordSubtitleText>) }
+            { tag.length === 0 && (<RecordSubtitleText variant="body2">Sin etiquetas</RecordSubtitleText>) }
             { tag.length > 0 && tag.map((item) => (
               <Chip key={`${_id}-${item}`} label={item} variant="outlined" chipColor={AppColors.primary} />
             ))}
@@ -199,7 +202,7 @@ const Record = ({ record, backgroundColor }: RecordProps) => {
           ) }
           { (isTransferIncome || isTransferExpense) && (
           <RecordStatusContainer>
-            <PaymentStatusChip label={status} variant="filled" status="Transfer" />
+            <PaymentStatusChip label={status} variant="filled" status="Transferencia" />
           </RecordStatusContainer>
           )}
           { (!isExpense && expensesPaid.length > 0 && !openLongView && !isTransferIncome) && (
@@ -218,7 +221,7 @@ const Record = ({ record, backgroundColor }: RecordProps) => {
           </RecordsPaidText>
         )}
         <BudgetChipContainer>
-          { linkedBudgets.length === 0 && (<RecordSubtitleText variant="body2">No budgets</RecordSubtitleText>) }
+          { linkedBudgets.length === 0 && (<RecordSubtitleText variant="body2">Sin presupuestos</RecordSubtitleText>) }
           { linkedBudgets.length > 0 && firstTwoBudgets.map((budget) => (
             <Chip key={budget._id} label={budget.name} variant="outlined" chipColor={backgroundColor} />
           ))}
@@ -227,7 +230,7 @@ const Record = ({ record, backgroundColor }: RecordProps) => {
           ) }
         </BudgetChipContainer>
         <TagsChipContainer>
-          { tag.length === 0 && (<RecordSubtitleText variant="body2">No tags</RecordSubtitleText>) }
+          { tag.length === 0 && (<RecordSubtitleText variant="body2">Sin etiquetas</RecordSubtitleText>) }
           { tag.length > 0 && firstTwoTags.map((item) => (
             <Chip key={`${_id}-${item}`} label={item} variant="outlined" chipColor={backgroundColor} />
           ))}

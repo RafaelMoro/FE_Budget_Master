@@ -17,8 +17,8 @@ describe('<DeleteRecordModal />', () => {
       </Router>,
     );
 
-    expect(screen.getByText(/Are you sure that you want to delete the record:/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /cancel/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /delete/i })).toBeInTheDocument();
+    expect(screen.getByText(/Está seguro que desea borrar la transacción:/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /cancelar/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /eliminar/i })).toBeInTheDocument();
   });
 });

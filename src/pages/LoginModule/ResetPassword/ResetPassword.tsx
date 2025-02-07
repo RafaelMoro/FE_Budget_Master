@@ -3,11 +3,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Formik, Field } from 'formik';
 
 import {
-  ERROR_MESSAGE_GENERAL, ERROR_TITLE_GENERAL, JWT_EXPIRED_CATCH_ERROR, SUCCESS_PASSWORD_RESET_DESC,
+  ERROR_MESSAGE_GENERAL, ERROR_TITLE_GENERAL, INVALID_SIGNATURE_ERROR, JWT_EXPIRED_CATCH_ERROR, SUCCESS_PASSWORD_RESET_DESC,
   SUCCESS_PASSWORD_RESET_TITLE, TOKEN_EXPIRED_DESC, TOKEN_EXPIRED_TITLE,
 } from '../../../constants';
 import { RESET_PASSWORD_POST_ROUTE } from './constants';
-import { LOGIN_ROUTE, FORGOT_PASSWORD_ROUTE, DASHBOARD_ROUTE } from '../../RoutesConstants';
+import { LOGIN_ROUTE, FORGOT_PASSWORD_ROUTE } from '../../RoutesConstants';
 
 import { ResetPasswordFormValues, ResetPasswordValues } from './interface';
 import { GeneralError } from '../../../globalInterface';
@@ -53,7 +53,7 @@ const ResetPassword = (): ReactElement => {
     } catch (err) {
       const error = err as GeneralError;
       const message = error?.data?.error?.message;
-      if (message === JWT_EXPIRED_CATCH_ERROR) {
+      if (message === JWT_EXPIRED_CATCH_ERROR || message === INVALID_SIGNATURE_ERROR) {
         updateTitle(TOKEN_EXPIRED_TITLE);
         updateDescription(TOKEN_EXPIRED_DESC);
         updateStatus(SystemStateEnum.Error);
@@ -67,7 +67,7 @@ const ResetPassword = (): ReactElement => {
         updateStatus(SystemStateEnum.Error);
 
         setTimeout(() => {
-          navigate(DASHBOARD_ROUTE);
+          navigate(LOGIN_ROUTE);
         }, 5000);
       }
 
@@ -87,9 +87,9 @@ const ResetPassword = (): ReactElement => {
       )}
       <Main>
         <MainContainer>
-          <FormTitle variant="h1">Reset Password</FormTitle>
+          <FormTitle variant="h1">Restablecer Contraseña</FormTitle>
           <FormDescription>
-            Enter your new password in the fields below:
+            Ingrese su nueva contraseña en los siguientes campos:
           </FormDescription>
           <Formik
             initialValues={{ password: '', confirmPassword: '' }}
@@ -104,7 +104,7 @@ const ResetPassword = (): ReactElement => {
                   name="password"
                   type={(showPassword) ? 'text' : 'password'}
                   variant="standard"
-                  label="New Password"
+                  label="Nueva Contraseña"
                   InputProps={{
                     endAdornment: <TogglePasswordAdornment showPassword={showPassword} toggleShowPassword={toggleShowPassword} />,
                   }}
@@ -114,14 +114,14 @@ const ResetPassword = (): ReactElement => {
                   name="confirmPassword"
                   type={(showPassword) ? 'text' : 'password'}
                   variant="standard"
-                  label="Confirm Password"
+                  label="Confirmar Contraseña"
                   InputProps={{
                     endAdornment: <TogglePasswordAdornment showPassword={showPassword} toggleShowPassword={toggleShowPassword} />,
                   }}
                 />
                 <ActionButtonPanel
                   minWidthNumber="19"
-                  submitButtonText="Reset Password"
+                  submitButtonText="Cambiar"
                   actionDataTestId="reset-password-button"
                   submitForm={submitForm}
                   routeCancelButton={LOGIN_ROUTE}

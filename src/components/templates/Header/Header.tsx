@@ -1,8 +1,10 @@
-import { IconButton } from '@mui/material';
+import {
+  IconButton,
+} from '@mui/material';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { useAppSelector } from '../../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { useLogin, useGuestUser } from '../../../hooks';
 import {
   BUDGETS_ROUTE, DASHBOARD_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE,
@@ -19,11 +21,16 @@ import {
   GuestUserButton,
   HeaderContainer, HeaderNav, HeaderNavAnchor, HeaderShadow,
 } from './Header.styled';
+import { HeaderAvatarConfig } from '../HeaderAvatarConfig';
+import { CategoriesDialog } from '../CategoriesDialog';
+import { toggleCategoryDialog } from '../../../redux/slices/userInterface.slice';
 
 const Header = ({ isLandingPage = false }: HeaderProps) => {
   const location = useLocation();
-  const { signOut } = useLogin();
+  const { signOut, initials } = useLogin();
   const { isGuestUser, userLoggedOn } = useGuestUser();
+  const dispatch = useAppDispatch();
+  const openCategoryDialog = useAppSelector((state) => state.userInterface.openCategoriesDialog);
   const windowSize = useAppSelector((state) => state.userInterface.windowSize);
   const isMobile = windowSize === 'Mobile';
   const isDesktop = windowSize === 'Desktop';
@@ -35,6 +42,12 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
   const toggleNotLoggedDrawer = () => setOpenNotLoggedDrawer((prevState) => !prevState);
   const toggleLoggedDrawer = () => setOpenLoggedDrawer((prevState) => !prevState);
   const toggleHamburguerMenu = (!isGuestUser && userLoggedOn) ? toggleLoggedDrawer : toggleNotLoggedDrawer;
+
+  const toggleCategoriesDialog = () => dispatch(toggleCategoryDialog());
+  const openCategoriesDialog = () => {
+    toggleLoggedDrawer();
+    toggleCategoriesDialog();
+  };
 
   const handleGuestUserModalMobile = () => {
     toggleNotLoggedDrawer();
@@ -51,15 +64,14 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
           <BrandLogoName isLandingPage={isLandingPage} />
           { (windowSize === 'Desktop' && !isGuestUser && !isLandingPage) && (
             <HeaderNav>
-              <HeaderNavAnchor active={activeDashboardPage} to={DASHBOARD_ROUTE}>Accounts</HeaderNavAnchor>
-              <HeaderNavAnchor active={activeBudgetsPage} to="/budgets">Budgets</HeaderNavAnchor>
+              <HeaderNavAnchor active={activeDashboardPage} to={DASHBOARD_ROUTE}>Cuentas</HeaderNavAnchor>
+              <HeaderNavAnchor active={activeBudgetsPage} to="/budgets">Presupuestos</HeaderNavAnchor>
             </HeaderNav>
           ) }
           { (!isGuestUser && userLoggedOn && isDesktop) && (
-            <IconButton aria-label="sign-out-button" onClick={signOut}>
-              <AppIcon fillColor={isLandingPage ? AppColors.white : AppColors.primary} icon="LogOut" />
-            </IconButton>
+            <HeaderAvatarConfig toggleCategoriesDialog={toggleCategoriesDialog} signOut={signOut} initials={initials} />
           ) }
+          {/** TODO: Change this to use avatar */}
           { (!isGuestUser && !userLoggedOn && !isMobile) && (
             <FlexContainer gap={3} justifyContent="space-between">
               <AnchorButton to={LOGIN_ROUTE}>
@@ -90,12 +102,14 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
       <NotLoggedDrawer open={openNotLoggedDrawer} toggleDrawer={toggleNotLoggedDrawer} handleGuestUser={handleGuestUserModalMobile} />
       <LoggedUserDrawer
         open={openLoggedDrawer}
+        openCategoriesDialog={openCategoriesDialog}
         activeBudgetsPage={activeBudgetsPage}
         activeDashboardPage={activeDashboardPage}
         toggleDrawer={toggleLoggedDrawer}
         signOut={signOut}
       />
       <GuestUserModal open={openGuestUserModal} onClose={toggleGuestUserModal} />
+      <CategoriesDialog onClose={toggleCategoriesDialog} open={openCategoryDialog} />
     </>
   );
 };

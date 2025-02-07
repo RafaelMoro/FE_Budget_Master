@@ -1,4 +1,5 @@
 import { AnyRecord } from '../../../globalInterface';
+import { CATEGORY_NOT_FOUND } from '../Records/Record.mocks';
 
 export function getTopDaysExpensePerDay(records: AnyRecord[]) {
   const dayAmountMap = records.reduce<Record<string, number>>((acc, record) => {
@@ -32,7 +33,8 @@ export function getTopDaysExpensePerDay(records: AnyRecord[]) {
 
 export function getCategoriesTotalExpense(records: AnyRecord[]) {
   const categoryAmountMap = records.reduce<Record<string, number>>((acc, record) => {
-    const { category: { categoryName }, amount } = record;
+    const { category, amount } = record;
+    const { categoryName } = category ?? CATEGORY_NOT_FOUND;
     if (!acc[categoryName]) {
       acc[categoryName] = 0;
     }

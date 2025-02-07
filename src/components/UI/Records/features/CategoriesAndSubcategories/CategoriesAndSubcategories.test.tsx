@@ -1,5 +1,6 @@
 import { screen, waitFor } from '@testing-library/react';
 import { Formik } from 'formik';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import fetchMock from 'jest-fetch-mock';
 
 import { renderWithProviders } from '../../../../../tests/CustomWrapperRedux';
@@ -57,8 +58,8 @@ describe('<CategoriesAndSubcategories />', () => {
       <WrapperCategoriesAndSubcategories />,
     );
 
-    expect(screen.getByText(/loading categories/i)).toBeInTheDocument();
-    expect(screen.getByText(/loading subcategories/i)).toBeInTheDocument();
+    expect(screen.getByText(/cargando categorías/i)).toBeInTheDocument();
+    expect(screen.getByText(/cargando subcategorías/i)).toBeInTheDocument();
   });
 
   test('Show category and subcategory inputs', async () => {
@@ -68,8 +69,8 @@ describe('<CategoriesAndSubcategories />', () => {
       { preloadedState: { categories: categoriesInitialState, user: userInitialState } },
     );
 
-    expect(await screen.findByText(/^category/i)).toBeInTheDocument();
-    expect(screen.getByText(/subcategory/i)).toBeInTheDocument();
+    expect(await screen.findByText(/^categoría/i)).toBeInTheDocument();
+    expect(screen.getByText(/subcategoría/i)).toBeInTheDocument();
     const subCategoryContainer = screen.getByTestId('select-record-subcategory');
     const subCategoryInput = subCategoryContainer.querySelector('input');
     expect(subCategoryInput).toBeDisabled();

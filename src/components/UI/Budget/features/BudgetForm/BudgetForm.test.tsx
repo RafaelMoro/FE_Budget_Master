@@ -20,12 +20,12 @@ describe('Budget form', () => {
       </Router>,
     );
 
-    expect(screen.getByRole('textbox', { name: /name/i })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /nombre/i })).toBeInTheDocument();
     expect(screen.getByRole('combobox')).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: /budget limit/i })).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: /amount spent/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /cancel/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /next/i })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /Límite del presupuesto/i })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /Cantidad gastada hasta ahora/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /cancelar/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /siguiente/i })).toBeInTheDocument();
   });
 
   test('Given a user clicking on next without entering any data, should show error validations', async () => {
@@ -34,12 +34,12 @@ describe('Budget form', () => {
         <BudgetForm />
       </Router>,
     );
-    const nextButton = screen.getByRole('button', { name: /next/i });
+    const nextButton = screen.getByRole('button', { name: /siguiente/i });
     userEvent.click(nextButton);
 
-    expect(await screen.findByText(/budget name is required/i)).toBeInTheDocument();
-    expect(screen.getByText(/budget limit is required/i)).toBeInTheDocument();
-    expect(screen.getByText(/amount spent is required/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Por favor, ingrese un nombre para el presupuesto/i)).toBeInTheDocument();
+    expect(screen.getByText(/Por favor, ingrese un límite para el presupuesto/i)).toBeInTheDocument();
+    expect(screen.getByText(/por favor, ingrese una cantidad que ha gastado hasta ahora\. puede ser 0/i)).toBeInTheDocument();
   });
 
   test('Given a user entering a 2 character budget name, should show error validation', async () => {
@@ -48,28 +48,28 @@ describe('Budget form', () => {
         <BudgetForm />
       </Router>,
     );
-    const nextButton = screen.getByRole('button', { name: /next/i });
-    const budgetNameInput = screen.getByRole('textbox', { name: /name/i });
+    const nextButton = screen.getByRole('button', { name: /siguiente/i });
+    const budgetNameInput = screen.getByRole('textbox', { name: /nombre/i });
 
     userEvent.type(budgetNameInput, 'Li');
     userEvent.click(nextButton);
 
-    expect(await screen.findByText(/budget name must be at least 3 characters/i)).toBeInTheDocument();
+    expect(await screen.findByText(/El nombre del presupuesto debe tener al menos 3 caracteres/i)).toBeInTheDocument();
   });
 
-  test('Given a user entering a 21 character budget name, should show error validation', async () => {
+  test('Given a user entering a 51 character budget name, should show error validation', async () => {
     renderWithProviders(
       <Router location={history.location} navigator={history}>
         <BudgetForm />
       </Router>,
     );
-    const nextButton = screen.getByRole('button', { name: /next/i });
-    const budgetNameInput = screen.getByRole('textbox', { name: /name/i });
+    const nextButton = screen.getByRole('button', { name: /siguiente/i });
+    const budgetNameInput = screen.getByRole('textbox', { name: /nombre/i });
 
-    userEvent.type(budgetNameInput, 'An extremely very long budget name');
+    userEvent.type(budgetNameInput, 'An extremely very long budget name with more characters than allowed for this very time');
     userEvent.click(nextButton);
 
-    expect(await screen.findByText(/budget name must be at most 20 characters/i)).toBeInTheDocument();
+    expect(await screen.findByText(/El nombre del presupuesto no puede tener más de 50 caracteres/i)).toBeInTheDocument();
   });
 
   test('Given a user entering the first form correctly, then clicking next, should show the second form', async () => {
@@ -78,21 +78,21 @@ describe('Budget form', () => {
         <BudgetForm />
       </Router>,
     );
-    const nextButton = screen.getByRole('button', { name: /next/i });
-    const budgetNameInput = screen.getByRole('textbox', { name: /name/i });
-    const budgetLimitInput = screen.getByRole('textbox', { name: /budget limit/i });
-    const amountSpentInput = screen.getByRole('textbox', { name: /amount spent/i });
+    const nextButton = screen.getByRole('button', { name: /siguiente/i });
+    const budgetNameInput = screen.getByRole('textbox', { name: /nombre/i });
+    const budgetLimitInput = screen.getByRole('textbox', { name: /Límite del presupuesto/i });
+    const amountSpentInput = screen.getByRole('textbox', { name: /Cantidad gastada hasta ahora/i });
 
     userEvent.type(budgetNameInput, 'Budget name');
     userEvent.type(budgetLimitInput, '1000');
     userEvent.type(amountSpentInput, '500');
     userEvent.click(nextButton);
 
-    expect(await screen.findByRole('textbox', { name: /description \(optional\)/i })).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: /start date/i })).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: /end date/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /return/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /create budget/i })).toBeInTheDocument();
+    expect(await screen.findByRole('textbox', { name: /descripción \(opcional\)/i })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /fecha de inicio/i })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /fecha de término/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /regresar/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /crear/i })).toBeInTheDocument();
   });
 
   // eslint-disable-next-line max-len
@@ -113,10 +113,10 @@ describe('Budget form', () => {
       </Router>,
     );
 
-    const nextButton = screen.getByRole('button', { name: /next/i });
-    const budgetNameInput = screen.getByRole('textbox', { name: /name/i });
-    const budgetLimitInput = screen.getByRole('textbox', { name: /budget limit/i });
-    const amountSpentInput = screen.getByRole('textbox', { name: /amount spent/i });
+    const nextButton = screen.getByRole('button', { name: /siguiente/i });
+    const budgetNameInput = screen.getByRole('textbox', { name: /nombre/i });
+    const budgetLimitInput = screen.getByRole('textbox', { name: /Límite del presupuesto/i });
+    const amountSpentInput = screen.getByRole('textbox', { name: /Cantidad gastada hasta ahora/i });
 
     userEvent.type(budgetNameInput, 'Budget name');
     userEvent.type(budgetLimitInput, '1000');

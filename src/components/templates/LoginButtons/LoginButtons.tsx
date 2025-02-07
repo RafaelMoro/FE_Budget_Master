@@ -21,8 +21,8 @@ const LoginButtons = ({
 }: LoginButtonsProps) => (
   <LoginButtonsContainer>
     <ButtonContainer>
-      <AnchorRegisterButton to={REGISTER_ROUTE} state={cancelStateLink} title="Register into Budget Master">
-        <SecondaryButtonForm minWidth="12" variant="contained" size="medium">Register</SecondaryButtonForm>
+      <AnchorRegisterButton to={REGISTER_ROUTE} state={cancelStateLink} title="Registrarse en Budget Master">
+        <SecondaryButtonForm variant="contained" size="medium">Registrarse</SecondaryButtonForm>
       </AnchorRegisterButton>
       <PrimaryButtonLoginForm
         data-testid="login-button"
@@ -34,11 +34,11 @@ const LoginButtons = ({
       >
         { (loading && !success) && (<LoadingSpinner />) }
         { (!loading && success) && (<AppIcon icon="TickMark" fillColor={AppColors.white} />) }
-        { (!loading && !success) && 'Login' }
+        { (!loading && !success) && 'Iniciar sesión' }
       </PrimaryButtonLoginForm>
     </ButtonContainer>
-    <AnchorTryAppButton to={TRY_APP_ROUTE} title="Try app in the free version" state={cancelStateLink}>
-      <TransparentButton>Try app</TransparentButton>
+    <AnchorTryAppButton to={TRY_APP_ROUTE} title="Probar aplicación en su forma gratuita" state={cancelStateLink}>
+      <TransparentButton>Probar gratis</TransparentButton>
     </AnchorTryAppButton>
   </LoginButtonsContainer>
 );

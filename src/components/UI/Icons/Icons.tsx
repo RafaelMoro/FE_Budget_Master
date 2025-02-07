@@ -6,9 +6,8 @@ import { AppColors } from '../../../styles';
 import {
   AllCategoryIcons, AppIcons, CategoryIconProps, IconProps,
 } from './Icons.interface';
-import { APP_ICONS, categoryIcons } from './Icons.constants';
+import { APP_ICONS, categoryIcons, DEFAULT_SIZE } from './Icons.constants';
 
-const DEFAULT_SIZE = '2.5rem';
 const DEFAULT_SIZE_CLOSE_ICON = '3.5rem';
 
 export const AppIcon = ({ size = DEFAULT_SIZE, fillColor, icon }: IconProps) => {

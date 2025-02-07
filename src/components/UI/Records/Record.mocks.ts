@@ -8,6 +8,14 @@ import { GetMockExpenseProps } from './interface';
 
 export const mockRecords: AnyRecord[] = [];
 
+export const CATEGORY_NOT_FOUND: Category = {
+  _id: 'category-not-found-1',
+  categoryName: 'Categoría no encontrada',
+  icon: 'newCategory',
+  subCategories: ['Sin subcategoría'],
+  __v: 0,
+};
+
 export const mockExpense: AnyRecord = {
   _id: '123-456',
   userId: '987-654',
@@ -59,7 +67,7 @@ export const getMockExpense = ({
 }
 : GetMockExpenseProps): AnyRecord => {
   if (hasLinkedBudgets) {
-    const budget = getMockBudget();
+    const { budget } = getMockBudget();
     return {
       ...mockExpense,
       shortName,
@@ -84,7 +92,7 @@ export const creditAccountMock: AccountUI = {
   title: 'Bank account 2',
   amount: 30000,
   amountFormatted: '$30,000.00',
-  accountType: 'Credit',
+  accountType: 'Crédito',
   backgroundColor: 'blue',
   color: 'white',
   backgroundColorUI: { name: 'blue', color: 'blue' },
@@ -237,7 +245,7 @@ const selectedAccount: AccountUI = {
   title: 'Bank account 2',
   amount: 30000,
   amountFormatted: '$30,000.00',
-  accountType: 'Credit',
+  accountType: 'Crédito',
   backgroundColor: 'blue',
   color: 'white',
   backgroundColorUI: { name: 'blue', color: 'blue' },
@@ -300,6 +308,64 @@ export const successfulResponseFetchCategories = {
   error: null,
   message: null,
   success: true,
+  version: '2.0.0',
+};
+export const successfulResponseFetchCategoriesEmpty = {
+  data: {
+    categories: [],
+  },
+  error: null,
+  message: null,
+  success: true,
+  version: '2.0.0',
+};
+export const failedResponseFetchCategories = {
+  data: null,
+  error: {
+    statusCode: 401,
+    message: 'Unauthorized',
+  },
+  message: null,
+  success: false,
+  version: '2.0.0',
+};
+export const successfulDeleteCategoriesResponse = {
+  data: {
+    category: mockCategories,
+  },
+  error: null,
+  message: 'Category deleted',
+  success: true,
+  version: '2.0.0',
+};
+export const failedResponseDeleteCategory = {
+  data: null,
+  error: {
+    statusCode: 401,
+    message: 'Unauthorized',
+  },
+  message: null,
+  success: false,
+  version: '2.0.0',
+};
+
+export const successfulCreateEditCategoriesReponse = {
+  data: {
+    category: mockCategories,
+  },
+  error: null,
+  message: null,
+  success: true,
+  version: '2.0.0',
+};
+export const failedCreateEditCategoriesReponse = {
+  data: null,
+  error: {
+    statusCode: 401,
+    message: 'Unauthorized',
+  },
+  message: null,
+  success: false,
   version: '2.0.0',
 };
 export const emptyCategoriesResponse = {

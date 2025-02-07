@@ -39,6 +39,8 @@ export interface AllCategoryIcons {
   shopping: ElementType;
   entertainment: ElementType;
   savings: ElementType;
+  income: ElementType;
+  newCategory: ElementType;
 }
 
 export type IconKeys = keyof AllCategoryIcons;
@@ -46,4 +48,10 @@ export type IconKeys = keyof AllCategoryIcons;
 export interface CategoryIconProps {
   size?: string;
   icon: IconKeys;
+}
+
+export interface SelectIconProps {
+  name: string;
+  size?: string;
+  fillColor?: string;
 }

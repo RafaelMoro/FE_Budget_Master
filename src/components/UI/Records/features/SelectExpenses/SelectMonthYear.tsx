@@ -2,9 +2,10 @@ import { Formik } from 'formik';
 import { SelectMonthYearValues } from '../../interface';
 import { SelectMonthYearBox } from '../Features.styled';
 import { SelectInput } from '../../../SelectInput';
-import { MONTHS } from '../../../../../constants';
 import { SecondaryButton } from '../../../../../styles';
-import { AbbreviatedMonthsType, CompleteMonthsType, LazyFetchRecords } from '../../../../../globalInterface';
+import {
+  AbbreviatedMonthsType, CompleteMonthsType, LazyFetchRecords, MONTHS,
+} from '../../../../../globalInterface';
 import { updateAbbreviatedMonth } from '../../../../../utils/DateUtils/date.utils';
 import { useGuestUser } from '../../../../../hooks';
 
@@ -18,7 +19,7 @@ interface SelectMonthYearProps {
 }
 
 const SelectMonthYear = ({
-  completeMonth, currentYear, yearsArray, fetchRecordsCb, isDashboard = false, buttonText = 'Search expenses',
+  completeMonth, currentYear, yearsArray, fetchRecordsCb, isDashboard = false, buttonText = 'Buscar gastos',
 }: SelectMonthYearProps) => {
   const { isGuestUser } = useGuestUser();
   const handleSubmit = (values: SelectMonthYearValues) => {
@@ -39,15 +40,15 @@ const SelectMonthYear = ({
           <SelectInput
             labelId="select-month"
             dataTestId="select-month"
-            labelName="Month"
+            labelName="Mes"
             fieldName="month"
-            stringOptions={MONTHS}
+            stringOptions={[...MONTHS]}
             colorOptions={[]}
           />
           <SelectInput
             labelId="select-year"
             dataTestId="select-year"
-            labelName="Year"
+            labelName="Año"
             fieldName="year"
             stringOptions={yearsArray}
             colorOptions={[]}

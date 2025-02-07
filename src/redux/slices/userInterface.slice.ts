@@ -12,6 +12,7 @@ const userInterfaceInitialState: UserInterfaceInitialState = {
   },
   windowSize: 'Mobile',
   hasSignedOn: false,
+  openCategoriesDialog: false,
 };
 
 export const userInterfaceSlice = createSlice({
@@ -33,6 +34,9 @@ export const userInterfaceSlice = createSlice({
     toggleNotification: (state) => {
       state.notification.showNotification = !state.notification.showNotification;
     },
+    toggleCategoryDialog: (state) => {
+      state.openCategoriesDialog = !state.openCategoriesDialog;
+    },
     updateWindowSize: (state, action) => {
       state.windowSize = action.payload;
     },
@@ -41,7 +45,7 @@ export const userInterfaceSlice = createSlice({
 
 export const {
   updateNotificationTitle, updateNotificationDescription, updateNotificationStatus,
-  toggleNotification, updateWindowSize, toggleSignedOn,
+  toggleNotification, updateWindowSize, toggleSignedOn, toggleCategoryDialog,
 } = userInterfaceSlice.actions;
 
 export default userInterfaceSlice.reducer;

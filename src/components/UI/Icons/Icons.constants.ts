@@ -1,13 +1,18 @@
 import {
   DeleteOutlined, ErrorOutlineOutlined, EditOutlined, LogoutOutlined, Close,
   DoneOutlined, Visibility, VisibilityOff, KeyboardArrowUpOutlined,
-  Celebration, MonetizationOn, ArrowBackOutlined,
+  Celebration, SavingsOutlined, ArrowBackOutlined,
   Fastfood, House, Engineering, Language, DirectionsCar,
   AccountBalance, MedicalInformation, FamilyRestroom, ShoppingCart,
-  Menu,
+  Menu, PaymentsOutlined, LocalOfferOutlined,
 } from '@mui/icons-material';
+import { ElementType } from 'react';
+import * as MuiIcons from '@mui/icons-material';
 import { AllCategoryIcons, AppIcons } from './Icons.interface';
 import { AppColors } from '../../../styles';
+
+export const ICONS_MATERIAL: Record<string, ElementType> = MuiIcons;
+export const DEFAULT_SIZE = '2.5rem';
 
 export const APP_ICONS: AppIcons = {
   Delete: {
@@ -67,5 +72,7 @@ export const categoryIcons: AllCategoryIcons = {
   kids: FamilyRestroom,
   shopping: ShoppingCart,
   entertainment: Celebration,
-  savings: MonetizationOn,
+  savings: SavingsOutlined,
+  income: PaymentsOutlined,
+  newCategory: LocalOfferOutlined,
 };

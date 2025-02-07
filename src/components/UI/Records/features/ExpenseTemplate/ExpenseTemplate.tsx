@@ -24,6 +24,8 @@ import { AddIndebtedPerson } from '../AddIndebtedPerson/AddIndebtedPerson';
 import { TransactionFormFields } from '../TransactionFormFields';
 import { FormContainer, SecondaryButtonForm, ShowIndebtedPeopleContainer } from '../Features.styled';
 import { FlexContainer, FormControlLabel } from '../../../../../styles';
+import { getIndebtedPeopleWithoutId } from '../../Records.utils';
+import { CATEGORY_NOT_FOUND } from '../../Record.mocks';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -70,9 +72,9 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
 
   const bearerToken = user.userInfo?.bearerToken as string;
   const categoryToBeEdited = recordToBeEdited?.category ?? null;
-  const isCredit = selectedAccount?.accountType === 'Credit';
-  const action: string = edit ? 'Edit' : 'Create';
-  const buttonText = `${action} record`;
+  const isCredit = selectedAccount?.accountType === 'Crédito';
+  const action: string = edit ? 'Editar' : 'Crear';
+  const buttonText = `${action} gasto`;
 
   const [initialValues, setInitialValues] = useState<CreateExpenseValues>({
     amount: '',
@@ -90,7 +92,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
   const budgetsAvailable: ExpenseBudget[] = useMemo(
     () => {
       const budgetsFetched = (budgets ?? []).map((budget) => ({ budgetId: budget._id, budgetName: budget.name }));
-      budgetsFetched.unshift({ budgetId: 'None', budgetName: 'None' });
+      budgetsFetched.unshift({ budgetId: 'None', budgetName: 'Ninguno' });
       return budgetsFetched;
     },
     [budgets],
@@ -103,7 +105,7 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
         amount: String(recordToBeEdited.amount),
         shortName: recordToBeEdited.shortName,
         description: recordToBeEdited.description,
-        category: recordToBeEdited.category._id,
+        category: (recordToBeEdited?.category ?? CATEGORY_NOT_FOUND)._id,
         subCategory: recordToBeEdited.subCategory,
         isPaid: recordToBeEdited.isPaid ?? !isCredit,
         date: dayjs(recordToBeEdited.date).utc(),
@@ -117,18 +119,14 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
       const newIndebtedPeople = (recordToBeEdited?.indebtedPeople ?? []) as IndebtedPeople[];
       if (newIndebtedPeople.length > 0) {
         // Database saves these with a mongo id. We have to remove it to be able to edit the record.
-        const indebtedPeopleWithoutId = newIndebtedPeople.map((person) => {
-          // eslint-disable-next-line @typescript-eslint/naming-convention
-          const { _id, ...restValuesPerson } = person;
-          return restValuesPerson;
-        });
+        const indebtedPeopleWithoutId = newIndebtedPeople.map(getIndebtedPeopleWithoutId);
         addIndebtedPeopleForEdit(indebtedPeopleWithoutId);
       }
 
       setInitialValues(newInitialValues);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [recordToBeEdited?.category.categoryName, edit, isCredit]);
+  }, [recordToBeEdited?.category?.categoryName, edit, isCredit]);
 
   // Fetch budgets if they are not fetched yet
   useEffect(() => {
@@ -159,11 +157,12 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
         newLinkedBudgets = [];
       }
     }
+    const indebtedPeopleWithoutId = indebtedPeople.map(getIndebtedPeopleWithoutId);
     const newValues = {
       ...values,
       date: values.date.toDate(),
       amount: amountToNumber,
-      indebtedPeople,
+      indebtedPeople: indebtedPeopleWithoutId,
       account: (selectedAccount?._id ?? ''),
       typeOfRecord: 'expense',
       // If linked budgets has a value, then send the value in the array, if not, send it empty
@@ -196,13 +195,14 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
 
     const newAmount = verifyAmountEndsPeriod(initialAmount.current);
     const amountToNumber = Number(newAmount);
+    const indebtedPeopleWithoutId = indebtedPeople.map(getIndebtedPeopleWithoutId);
 
     const newValues = {
       ...values,
       // Pass value to type Date
       date: newDate.toDate(),
       amount: amountToNumber,
-      indebtedPeople,
+      indebtedPeople: indebtedPeopleWithoutId,
       account: selectedAccount?._id ?? '',
       typeOfRecord: 'expense',
       linkedBudgets: newLinkedBudgets,
@@ -267,12 +267,12 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
                   <Field
                     type="checkbox"
                     checked={values.isPaid}
-                    label="Transaction paid (Optional)"
+                    label="Transacción pagada (Opcional)"
                     name="isPaid"
                     component={Switch}
                   />
               )}
-                label="Transaction paid"
+                label="Transacción pagada (Opcional)"
               />
               ) }
               <ShowIndebtedPeopleContainer>
@@ -282,7 +282,9 @@ const ExpenseTemplate = ({ edit = false, typeOfRecord }: ExpenseTemplateProps) =
                   modifyIndebtedPerson={fetchPersonToModify}
                 />
                 <FlexContainer justifyContent="center">
-                  <SecondaryButtonForm variant="contained" onClick={() => openAddPersonModal(values)} size="medium">Add Person</SecondaryButtonForm>
+                  <SecondaryButtonForm variant="contained" onClick={() => openAddPersonModal(values)} size="medium">
+                    Agregar persona
+                  </SecondaryButtonForm>
                 </FlexContainer>
               </ShowIndebtedPeopleContainer>
               <ActionButtonPanel

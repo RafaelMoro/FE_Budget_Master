@@ -23,12 +23,11 @@ const userData = {
 
 describe('<CreateAccount />', () => {
   const history = createMemoryHistory();
-
   let title: HTMLElement | null = null;
   let description: HTMLElement | null = null;
 
   // Inputs
-  let firstNameInput: HTMLElement | null = null;
+  let nameInputs: HTMLElement[] | null = null;
   let middleNameInput: HTMLElement | null = null;
   let lastNameInput: HTMLElement | null = null;
   let emailInput: HTMLElement | null = null;
@@ -53,13 +52,14 @@ describe('<CreateAccount />', () => {
     });
 
     test('Render first view with title, description, inputs: First name, middle name and last name, buttons: cancel and next', () => {
-      title = screen.getByRole('heading', { name: /create account/i });
-      description = screen.getByText(/fill the following information to create your account\./i);
-      firstNameInput = screen.getByRole('textbox', { name: /first name/i });
-      middleNameInput = screen.getByRole('textbox', { name: /middle name/i });
-      lastNameInput = screen.getByRole('textbox', { name: /last name/i });
-      nextButton = screen.getByRole('button', { name: /next/i });
-      cancelButton = screen.getByRole('link', { name: /cancel/i });
+      title = screen.getByRole('heading', { name: /crear cuenta/i });
+      description = screen.getByText(/llene la siguiente información para crear su cuenta\./i);
+      nameInputs = screen.getAllByRole('textbox', { name: /nombre/i });
+      const [firstNameInput] = nameInputs;
+      middleNameInput = screen.getByRole('textbox', { name: /segundo nombre \(opcional\)/i });
+      lastNameInput = screen.getByRole('textbox', { name: /apellido/i });
+      nextButton = screen.getByRole('button', { name: /siguiente/i });
+      cancelButton = screen.getByRole('link', { name: /cancelar/i });
 
       expect(title).toBeInTheDocument();
       expect(description).toBeInTheDocument();
@@ -72,9 +72,10 @@ describe('<CreateAccount />', () => {
 
     test(`Render second view with title, description, inputs:
     email, password and confirm password, buttons: return and create account`, async () => {
-      firstNameInput = screen.getByRole('textbox', { name: /first name/i });
-      lastNameInput = screen.getByRole('textbox', { name: /last name/i });
-      nextButton = screen.getByRole('button', { name: /next/i });
+      nameInputs = screen.getAllByRole('textbox', { name: /nombre/i });
+      const [firstNameInput] = nameInputs;
+      lastNameInput = screen.getByRole('textbox', { name: /apellido/i });
+      nextButton = screen.getByRole('button', { name: /siguiente/i });
 
       // Go to the next view.
       userEvent.type(firstNameInput, userData.firstName);
@@ -82,13 +83,13 @@ describe('<CreateAccount />', () => {
       fireEvent.click(nextButton);
 
       await waitFor(() => {
-        title = screen.getByRole('heading', { name: /create account/i });
-        description = screen.getByText(/fill the following information to create your account\./i);
-        emailInput = screen.getByRole('textbox', { name: /email/i });
-        passwordInput = screen.getByRole('textbox', { name: /email/i });
-        confirmPasswordInput = screen.getByLabelText(/confirm password/i);
-        createAccountButton = screen.getByRole('button', { name: /create account/i });
-        returnButton = screen.getByRole('button', { name: /return/i });
+        title = screen.getByRole('heading', { name: /crear cuenta/i });
+        description = screen.getByText(/llene la siguiente información para crear su cuenta\./i);
+        emailInput = screen.getByRole('textbox', { name: /correo electrónico/i });
+        passwordInput = screen.getByTestId('password-input');
+        confirmPasswordInput = screen.getByTestId('confirm-password-input');
+        createAccountButton = screen.getByRole('button', { name: /crear cuenta/i });
+        returnButton = screen.getByRole('button', { name: /regresar/i });
 
         expect(title).toBeInTheDocument();
         expect(description).toBeInTheDocument();
@@ -97,31 +98,6 @@ describe('<CreateAccount />', () => {
         expect(confirmPasswordInput).toBeInTheDocument();
         expect(returnButton).toBeInTheDocument();
         expect(createAccountButton).toBeInTheDocument();
-      });
-    });
-
-    test('Render the third view LoadingCreateAccount component', async () => {
-      firstNameInput = screen.getByRole('textbox', { name: /first name/i });
-      lastNameInput = screen.getByRole('textbox', { name: /last name/i });
-      nextButton = screen.getByRole('button', { name: /next/i });
-
-      // Go to the next view.
-      userEvent.type(firstNameInput, userData.firstName);
-      userEvent.type(lastNameInput, userData.lastName);
-      fireEvent.click(nextButton);
-
-      // WIP
-      await waitFor(async () => {
-        emailInput = screen.getByRole('textbox', { name: /email/i });
-        passwordInput = screen.getByRole('textbox', { name: /email/i });
-        confirmPasswordInput = screen.getByLabelText(/confirm password/i);
-        createAccountButton = screen.getByRole('button', { name: /create account/i });
-
-        userEvent.type(emailInput, userData.email);
-        userEvent.type(passwordInput, userData.password);
-        userEvent.type(confirmPasswordInput, userData.confirmPassword);
-
-        fireEvent.click(createAccountButton);
       });
     });
   });

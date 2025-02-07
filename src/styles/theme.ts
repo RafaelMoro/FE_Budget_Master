@@ -17,7 +17,7 @@ declare module '@mui/material' {
 }
 
 export const appTheme = createTheme({
-  spacing: ['0rem', '0.4rem', '0.8rem', '1.6rem', '3.2rem', '6.4rem'],
+  spacing: ['0rem', '0.4rem', '0.8rem', '1.6rem', '3.2rem', '6.4rem', '8rem', '9.6rem', '11.2rem', '12.8rem', '14.4rem', '16rem'],
   palette: {
     mode: 'light',
     primary: {

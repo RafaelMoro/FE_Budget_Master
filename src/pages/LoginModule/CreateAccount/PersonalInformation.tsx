@@ -37,27 +37,27 @@ const PersonalInformation = ({ goNext, counterView, direction }: PersonalInforma
               name="firstName"
               type="text"
               variant="standard"
-              label="First Name"
+              label="Nombre"
             />
             <Field
               component={InputForm}
               name="middleName"
               type="text"
               variant="standard"
-              label="Middle Name (Optional)"
+              label="Segundo Nombre (Opcional)"
             />
             <Field
               component={InputForm}
               name="lastName"
               type="text"
               variant="standard"
-              label="Last Name"
+              label="Apellido"
             />
             <FormActionButtons>
-              <AnchorButton to={returnRoute}>
-                <CancelButton variant="contained" size="medium">Cancel</CancelButton>
+              <AnchorButton title="Cancelar. Volver al inicio de sesion" to={returnRoute}>
+                <CancelButton variant="contained" size="medium">Cancelar</CancelButton>
               </AnchorButton>
-              <PrimaryButton variant="contained" onClick={submitForm} size="medium">Next</PrimaryButton>
+              <PrimaryButton variant="contained" onClick={submitForm} size="medium">Siguiente</PrimaryButton>
             </FormActionButtons>
           </FormContainer>
         </AnimateBox>

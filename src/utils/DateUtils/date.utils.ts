@@ -77,11 +77,11 @@ export const getTwoMonthBeforeLastMonth = () => {
   if (currentMonth === 0) {
     numberToSubtract = 7;
   }
-  if (currentMonth === 11) {
-    numberToSubtract = 8;
+  if (currentMonth === 1) {
+    numberToSubtract = 6;
   }
-  if (currentMonth === 10) {
-    numberToSubtract = 9;
+  if (currentMonth === 2) {
+    numberToSubtract = 5;
   }
 
   const passedMonth = currentMonth + numberToSubtract;
@@ -98,13 +98,23 @@ export const getRemainingDays = (endDate: string) => {
   return restingDays;
 };
 
+export const getMonthName = (date: Date) => {
+  const month = date.getMonth();
+  return MONTHS[month];
+};
+
+export const getMonth = (dateToFormat: string) => {
+  // Transforming into date because came as string due non serializable redux state
+  const date = new Date(dateToFormat);
+  return getMonthName(date);
+};
+
 export const transformDateToMonthDay = (dateToFormat: string) => {
   // Transforming into date because came as string due non serializable redux state
   const date = new Date(dateToFormat);
-  const month = date.getMonth();
+  const month = getMonthName(date);
   const day = date.getDate();
-
-  return `${MONTHS[month]} ${day}`;
+  return `${month} ${day}`;
 };
 
 export const formatDateToDDMMYYYY = (date: Date) => {

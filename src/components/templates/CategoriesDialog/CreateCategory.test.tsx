@@ -8,7 +8,7 @@ describe('CreateCategory', () => {
   const goBackAction = jest.fn();
   const updateError = jest.fn();
   const changeSelectCategoryIconFn = jest.fn();
-
+  const categoryName = 'Food and Drink';
   const veryLongCategoryName = 'Very long category name with a lot of characters and description that does not really matter but I need keep it long';
 
   test('Show category and subcategory input, add subcategory, cancel, edit button and subcategories list', () => {
@@ -85,5 +85,26 @@ describe('CreateCategory', () => {
 
     await act(async () => userEvent.click(submitButton));
     expect(await screen.findByText(/por favor, ingrese una categoría con menos de 80 caracteres/i)).toBeInTheDocument();
+  });
+
+  test('Given a user creating a category with no subcategories, show error message', async () => {
+    renderWithProviders(
+      <CreateCategory
+        changeSelectCategoryIconFn={changeSelectCategoryIconFn}
+        goBackAction={goBackAction}
+        updateError={updateError}
+      />,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    const submitButton = screen.getByRole('button', { name: /crear/i });
+    const categoryNameInput = screen.getByRole('textbox', { name: /título de la categoría/i });
+    await act(async () => userEvent.type(categoryNameInput, categoryName));
+    await waitFor(() => {
+      expect(categoryNameInput).toHaveValue(categoryName);
+    });
+    await act(async () => userEvent.click(submitButton));
+
+    expect(await screen.findByText(/por favor, agregue al menos una subcategoría/i)).toBeInTheDocument();
   });
 });

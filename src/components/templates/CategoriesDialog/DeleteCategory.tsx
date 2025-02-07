@@ -34,7 +34,7 @@ const DeleteCategory = ({ categoryToDelete, goBackAction, updateError }: DeleteC
 
   return (
     <>
-      { closeAlert && (<AlertMessageSection description={WARNING_MESSAGE_DELETE_CATEGORY} onClose={() => setCloseAlert(false)} />)}
+      { closeAlert && (<AlertMessageSection state="warning" description={WARNING_MESSAGE_DELETE_CATEGORY} onClose={() => setCloseAlert(false)} />)}
       <FlexContainer justifyContent="space-between">
         <SecondaryButton onClick={goBackAction}>Cancelar</SecondaryButton>
         <CancelButton onClick={handleSubmit}>

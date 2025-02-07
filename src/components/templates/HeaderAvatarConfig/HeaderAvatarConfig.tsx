@@ -3,22 +3,20 @@ import {
   IconButton, Menu, Typography, Tooltip,
 } from '@mui/material';
 import { Avatar, MenuItem } from '../../../styles';
-import { CategoriesDialog } from '../CategoriesDialog';
-import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { toggleCategoryDialog } from '../../../redux/slices/userInterface.slice';
 
 interface HeaderAvatarConfigProps {
   initials: string | undefined;
-  signOut: () => void
+  signOut: () => void;
+  toggleCategoriesDialog: () => {
+    payload: undefined;
+    type: 'userInterface/toggleCategoryDialog';
+  };
 }
 
-const HeaderAvatarConfig = ({ initials, signOut }: HeaderAvatarConfigProps) => {
-  const dispatch = useAppDispatch();
-  const openCategoryDialog = useAppSelector((state) => state.userInterface.openCategoriesDialog);
+const HeaderAvatarConfig = ({ initials, signOut, toggleCategoriesDialog }: HeaderAvatarConfigProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const currentInitials = initials ?? 'DE';
 
-  const toggleCategoriesDialog = () => dispatch(toggleCategoryDialog());
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -58,7 +56,6 @@ const HeaderAvatarConfig = ({ initials, signOut }: HeaderAvatarConfigProps) => {
         <MenuItem onClick={handleOpenCategories}>Categorías</MenuItem>
         <MenuItem onClick={signOut}>Cerrar sesión</MenuItem>
       </Menu>
-      <CategoriesDialog onClose={toggleCategoriesDialog} open={openCategoryDialog} />
     </>
   );
 };

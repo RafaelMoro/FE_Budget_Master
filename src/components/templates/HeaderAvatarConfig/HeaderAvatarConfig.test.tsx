@@ -4,15 +4,16 @@ import userEvent from '@testing-library/user-event';
 import { HeaderAvatarConfig } from './HeaderAvatarConfig';
 
 describe('<HeaderAvatarConfig />', () => {
+  const toggleCategoriesDialog = jest.fn();
   test('Show Avatar with initials', () => {
     const signOut = jest.fn();
-    render(<HeaderAvatarConfig initials="JD" signOut={signOut} />);
+    render(<HeaderAvatarConfig toggleCategoriesDialog={toggleCategoriesDialog} initials="JD" signOut={signOut} />);
     screen.getByText(/jd/i);
   });
 
   test('Click on avatar and open menu', async () => {
     const signOut = jest.fn();
-    render(<HeaderAvatarConfig initials="JD" signOut={signOut} />);
+    render(<HeaderAvatarConfig toggleCategoriesDialog={toggleCategoriesDialog} initials="JD" signOut={signOut} />);
 
     const button = screen.getByRole('button', { name: /open-configuration-button/i });
     await act(async () => userEvent.click(button));
@@ -23,7 +24,7 @@ describe('<HeaderAvatarConfig />', () => {
 
   test('Click on avatar, then open menu, then click on "cerrar sesión" and sign out function is called', async () => {
     const signOut = jest.fn();
-    render(<HeaderAvatarConfig initials="JD" signOut={signOut} />);
+    render(<HeaderAvatarConfig toggleCategoriesDialog={toggleCategoriesDialog} initials="JD" signOut={signOut} />);
 
     const button = screen.getByRole('button', { name: /open-configuration-button/i });
     await act(async () => userEvent.click(button));

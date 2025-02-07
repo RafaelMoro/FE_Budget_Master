@@ -18,10 +18,11 @@ interface LoggedUserDrawerProps {
   activeBudgetsPage: boolean;
   toggleDrawer: () => void;
   signOut: () => void;
+  openCategoriesDialog: () => void;
 }
 
 const LoggedUserDrawer = ({
-  open, activeBudgetsPage, activeDashboardPage, toggleDrawer, signOut,
+  open, activeBudgetsPage, activeDashboardPage, toggleDrawer, signOut, openCategoriesDialog,
 }: LoggedUserDrawerProps) => (
   <Drawer anchor="bottom" open={open}>
     <DrawerMenu>
@@ -37,7 +38,7 @@ const LoggedUserDrawer = ({
         </ActiveDrawerMenuLink>
       </UserDrawerList>
       <UserDrawerList title="Configuración" open={false}>
-        <ListItemButton>
+        <ListItemButton onClick={openCategoriesDialog}>
           <ListItemText primary="Categorías" />
         </ListItemButton>
       </UserDrawerList>

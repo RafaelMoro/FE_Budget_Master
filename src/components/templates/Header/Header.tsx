@@ -4,7 +4,7 @@ import {
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { useAppSelector } from '../../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { useLogin, useGuestUser } from '../../../hooks';
 import {
   BUDGETS_ROUTE, DASHBOARD_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE,
@@ -22,11 +22,15 @@ import {
   HeaderContainer, HeaderNav, HeaderNavAnchor, HeaderShadow,
 } from './Header.styled';
 import { HeaderAvatarConfig } from '../HeaderAvatarConfig';
+import { CategoriesDialog } from '../CategoriesDialog';
+import { toggleCategoryDialog } from '../../../redux/slices/userInterface.slice';
 
 const Header = ({ isLandingPage = false }: HeaderProps) => {
   const location = useLocation();
   const { signOut, initials } = useLogin();
   const { isGuestUser, userLoggedOn } = useGuestUser();
+  const dispatch = useAppDispatch();
+  const openCategoryDialog = useAppSelector((state) => state.userInterface.openCategoriesDialog);
   const windowSize = useAppSelector((state) => state.userInterface.windowSize);
   const isMobile = windowSize === 'Mobile';
   const isDesktop = windowSize === 'Desktop';
@@ -38,6 +42,12 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
   const toggleNotLoggedDrawer = () => setOpenNotLoggedDrawer((prevState) => !prevState);
   const toggleLoggedDrawer = () => setOpenLoggedDrawer((prevState) => !prevState);
   const toggleHamburguerMenu = (!isGuestUser && userLoggedOn) ? toggleLoggedDrawer : toggleNotLoggedDrawer;
+
+  const toggleCategoriesDialog = () => dispatch(toggleCategoryDialog());
+  const openCategoriesDialog = () => {
+    toggleLoggedDrawer();
+    toggleCategoriesDialog();
+  };
 
   const handleGuestUserModalMobile = () => {
     toggleNotLoggedDrawer();
@@ -59,7 +69,7 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
             </HeaderNav>
           ) }
           { (!isGuestUser && userLoggedOn && isDesktop) && (
-            <HeaderAvatarConfig signOut={signOut} initials={initials} />
+            <HeaderAvatarConfig toggleCategoriesDialog={toggleCategoriesDialog} signOut={signOut} initials={initials} />
           ) }
           {/** TODO: Change this to use avatar */}
           { (!isGuestUser && !userLoggedOn && !isMobile) && (
@@ -92,12 +102,14 @@ const Header = ({ isLandingPage = false }: HeaderProps) => {
       <NotLoggedDrawer open={openNotLoggedDrawer} toggleDrawer={toggleNotLoggedDrawer} handleGuestUser={handleGuestUserModalMobile} />
       <LoggedUserDrawer
         open={openLoggedDrawer}
+        openCategoriesDialog={openCategoriesDialog}
         activeBudgetsPage={activeBudgetsPage}
         activeDashboardPage={activeDashboardPage}
         toggleDrawer={toggleLoggedDrawer}
         signOut={signOut}
       />
       <GuestUserModal open={openGuestUserModal} onClose={toggleGuestUserModal} />
+      <CategoriesDialog onClose={toggleCategoriesDialog} open={openCategoryDialog} />
     </>
   );
 };

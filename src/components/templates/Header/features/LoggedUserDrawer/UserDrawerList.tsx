@@ -4,12 +4,13 @@ import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { ICON_SIZE } from '../../../../../constants';
 
 interface UserDrawerListProps {
+  open?: boolean;
   title: string;
   children: ReactNode;
 }
 
-const UserDrawerList = ({ children, title }: UserDrawerListProps) => {
-  const [openList, setOpenList] = useState(true);
+const UserDrawerList = ({ children, title, open = true }: UserDrawerListProps) => {
+  const [openList, setOpenList] = useState(open);
   const handleClick = () => setOpenList((prevState) => !prevState);
 
   return (

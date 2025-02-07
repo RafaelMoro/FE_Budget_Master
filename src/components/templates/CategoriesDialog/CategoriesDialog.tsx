@@ -17,6 +17,7 @@ import {
 } from './CategoriesDialog.styled';
 import { ErrorSection } from '../../UI';
 import { SecondaryButton } from '../../../styles';
+import { SelectCategoryIcon } from './SelectCategoryIcon';
 
 const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
   const [action, setAction] = useState<CategoryDialogAction>('show');
@@ -33,6 +34,7 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
   const updateAction = (newAction: CategoryDialogAction) => {
     setAction(newAction);
   };
+  const changeSelectCategoryIcon = () => setAction('addSubcategoryIcon');
   const setActionCreate = () => setAction('create');
   const goBackAction = () => setAction('show');
   const updateError = ({ newTitle, newDescription }: UpdateErrorProps) => {
@@ -78,12 +80,16 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
             goBackAction={goBackAction}
             categoryToEdit={categoryToEdit}
             updateError={updateError}
+            changeSelectCategoryIconFn={changeSelectCategoryIcon}
           />
         ) }
         { action === 'create' && (
-          <CreateCategory goBackAction={goBackAction} updateError={updateError} />
+          <CreateCategory changeSelectCategoryIconFn={changeSelectCategoryIcon} goBackAction={goBackAction} updateError={updateError} />
         )}
         { action === 'delete' && (<DeleteCategory updateError={updateError} goBackAction={goBackAction} categoryToDelete={categoryToDelete} />) }
+        { action === 'addSubcategoryIcon' && (
+          <SelectCategoryIcon />
+        )}
       </CategoriesDialogContainer>
     </Dialog>
   );

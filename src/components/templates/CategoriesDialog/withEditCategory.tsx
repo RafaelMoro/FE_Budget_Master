@@ -10,7 +10,7 @@ import { ERROR_MESSAGE_EDIT_CATEGORY, ERROR_MESSAGE_GENERAL } from '../../../con
 const withEditCategory = (CategoryTemplate: ({
   initialValues, subcategories, isLoading, isSuccess, goBackAction, updateCategories, updateCategoryName, handleSubmit,
 }: CategoryTemplateProps) => ReactElement) => function EditCategoryTemplate({
-  categoryToEdit, goBackAction, updateError,
+  categoryToEdit, goBackAction, updateError, changeSelectCategoryIconFn,
 }: EditCategoryTemplateProps) {
   const userReduxState = useAppSelector((state) => state.user);
   const bearerToken = userReduxState.userInfo?.bearerToken as string;
@@ -55,6 +55,7 @@ const withEditCategory = (CategoryTemplate: ({
   return (
     <CategoryTemplate
       action="edit"
+      changeSelectCategoryIcon={changeSelectCategoryIconFn}
       initialValues={initialValues}
       subcategories={subcategories}
       isLoading={isLoading}

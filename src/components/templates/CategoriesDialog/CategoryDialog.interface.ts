@@ -63,7 +63,8 @@ export interface CategoryTemplateProps {
   isSuccess: boolean;
   goBackAction: () => void;
   updateCategories: (newCategories: string[]) => void;
-  updateCategoryName: (newCategoryName: string) => void
+  updateCategoryName: (newCategoryName: string) => void;
+  changeSelectCategoryIcon: () => void;
   handleSubmit: (values: ManageCategoriesValues) => Promise<void>
 }
 
@@ -71,11 +72,13 @@ export interface EditCategoryTemplateProps {
   categoryToEdit: CategoryUI | null;
   goBackAction: () => void;
   updateError: ({ newTitle, newDescription }: UpdateErrorProps) => void;
+  changeSelectCategoryIconFn: () => void;
 }
 
 export interface CreateCategoryTemplateProps {
   goBackAction: () => void;
   updateError: ({ newTitle, newDescription }: UpdateErrorProps) => void;
+  changeSelectCategoryIconFn: () => void;
 }
 
 export interface DeleteCategoryProps {

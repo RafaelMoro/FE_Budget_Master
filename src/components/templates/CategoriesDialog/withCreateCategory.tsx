@@ -10,7 +10,7 @@ import { ERROR_MESSAGE_CREATE_CATEGORY_TITLE, ERROR_MESSAGE_GENERAL } from '../.
 const withCreateCategory = (CategoryTemplate: ({
   initialValues, subcategories, isLoading, isSuccess, goBackAction, updateCategories, updateCategoryName, handleSubmit,
 }: CategoryTemplateProps) => ReactElement) => function CreateCategoryTemplate({
-  goBackAction, updateError,
+  goBackAction, updateError, changeSelectCategoryIconFn,
 }: CreateCategoryTemplateProps) {
   const userReduxState = useAppSelector((state) => state.user);
   const bearerToken = userReduxState.userInfo?.bearerToken as string;
@@ -50,6 +50,7 @@ const withCreateCategory = (CategoryTemplate: ({
   return (
     <CategoryTemplate
       action="create"
+      changeSelectCategoryIcon={changeSelectCategoryIconFn}
       initialValues={initialValues}
       subcategories={subcategories}
       isLoading={isLoading}

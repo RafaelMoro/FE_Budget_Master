@@ -42,6 +42,7 @@ describe('EditCategory', () => {
   };
   const goBackAction = jest.fn();
   const updateError = jest.fn();
+  const changeSelectCategoryIconFn = jest.fn();
   const veryLongCategoryName = 'Very long category name with a lot of characters and description that does not really matter but I need keep it long';
   const newSubcategory = 'new subcategory 1';
 
@@ -53,7 +54,12 @@ describe('EditCategory', () => {
 
   test('Show category and subcategory input, add subcategory, cancel, edit button and subcategories list', () => {
     renderWithProviders(
-      <EditCategory categoryToEdit={categoryToEdit} goBackAction={goBackAction} updateError={updateError} />,
+      <EditCategory
+        changeSelectCategoryIconFn={changeSelectCategoryIconFn}
+        categoryToEdit={categoryToEdit}
+        goBackAction={goBackAction}
+        updateError={updateError}
+      />,
       { preloadedState: { user: userInitialState } },
     );
 
@@ -69,7 +75,12 @@ describe('EditCategory', () => {
 
   test('Given a user leaving empty the category name, show error message', async () => {
     renderWithProviders(
-      <EditCategory categoryToEdit={categoryToEdit} goBackAction={goBackAction} updateError={updateError} />,
+      <EditCategory
+        changeSelectCategoryIconFn={changeSelectCategoryIconFn}
+        categoryToEdit={categoryToEdit}
+        goBackAction={goBackAction}
+        updateError={updateError}
+      />,
       { preloadedState: { user: userInitialState } },
     );
 
@@ -86,7 +97,12 @@ describe('EditCategory', () => {
 
   test('Given a user editing a category name with less than 3 characters, show error message', async () => {
     renderWithProviders(
-      <EditCategory categoryToEdit={categoryToEdit} goBackAction={goBackAction} updateError={updateError} />,
+      <EditCategory
+        changeSelectCategoryIconFn={changeSelectCategoryIconFn}
+        categoryToEdit={categoryToEdit}
+        goBackAction={goBackAction}
+        updateError={updateError}
+      />,
       { preloadedState: { user: userInitialState } },
     );
 
@@ -104,7 +120,12 @@ describe('EditCategory', () => {
 
   test('Given a user editing a category name with more than 80 characters, show error message', async () => {
     renderWithProviders(
-      <EditCategory categoryToEdit={categoryToEdit} goBackAction={goBackAction} updateError={updateError} />,
+      <EditCategory
+        changeSelectCategoryIconFn={changeSelectCategoryIconFn}
+        categoryToEdit={categoryToEdit}
+        goBackAction={goBackAction}
+        updateError={updateError}
+      />,
       { preloadedState: { user: userInitialState } },
     );
 
@@ -128,7 +149,12 @@ describe('EditCategory', () => {
     };
 
     renderWithProviders(
-      <EditCategory categoryToEdit={category} goBackAction={goBackAction} updateError={updateError} />,
+      <EditCategory
+        changeSelectCategoryIconFn={changeSelectCategoryIconFn}
+        categoryToEdit={category}
+        goBackAction={goBackAction}
+        updateError={updateError}
+      />,
       { preloadedState: { user: userInitialState } },
     );
 
@@ -150,7 +176,12 @@ describe('EditCategory', () => {
     };
 
     renderWithProviders(
-      <EditCategory categoryToEdit={category} goBackAction={goBackAction} updateError={updateError} />,
+      <EditCategory
+        changeSelectCategoryIconFn={changeSelectCategoryIconFn}
+        categoryToEdit={category}
+        goBackAction={goBackAction}
+        updateError={updateError}
+      />,
       { preloadedState: { user: userInitialState } },
     );
 
@@ -168,7 +199,12 @@ describe('EditCategory', () => {
   test('Given a user editing the whole category, show tick mark in the submit button', async () => {
     fetchMock.once(JSON.stringify(successfulEditCategoriesReponse));
     renderWithProviders(
-      <EditCategory categoryToEdit={categoryToEdit} goBackAction={goBackAction} updateError={updateError} />,
+      <EditCategory
+        changeSelectCategoryIconFn={changeSelectCategoryIconFn}
+        categoryToEdit={categoryToEdit}
+        goBackAction={goBackAction}
+        updateError={updateError}
+      />,
       { preloadedState: { user: userInitialState } },
     );
 

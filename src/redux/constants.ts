@@ -11,7 +11,7 @@ export const LOGIN_FIXED_CACHED_KEY = 'login-info';
 export const BUDGETS_NOT_FOUND_MESSAGE = 'Budgets not found';
 
 /** Backend Endpoints */
-export const GET_CATEGORIES = '/categories';
+export const CATEGORIES_REST_ENDPOINT = '/categories';
 export const BUDGETS_ROUTE_BE = '/budgets';
 
 // Records

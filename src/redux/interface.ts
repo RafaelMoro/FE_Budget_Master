@@ -5,4 +5,5 @@ export interface UserInterfaceInitialState {
   notification: GlobalNotification;
   windowSize: WindowSizeValues;
   hasSignedOn: boolean;
+  openCategoriesDialog: boolean;
 }

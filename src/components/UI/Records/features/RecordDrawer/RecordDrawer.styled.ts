@@ -88,3 +88,7 @@ export const DrawerChipContainer = styled(ChipContainer)`
   display: grid;
   grid-template-rows: 1fr 1fr;
 `;
+
+export const AlertMessageContainer = styled.div`
+  grid-column: 1 / 3;
+`;

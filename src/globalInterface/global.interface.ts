@@ -8,6 +8,7 @@ export interface UserInfo {
   lastName: string;
   email: string;
   sub: string;
+  initials?: string;
 }
 
 export interface Actions {
@@ -20,7 +21,6 @@ export interface User {
   bearerToken: string;
   accessToken: string;
 }
-
 export const TYPE_OF_ACCOUNTS = ['Crédito', 'Débito', 'Vales de comida', 'Vales de restaurante', 'Cuenta de ahorro'] as const;
 export type AccountType = typeof TYPE_OF_ACCOUNTS[number];
 
@@ -105,6 +105,12 @@ export interface Category {
   icon: string;
 }
 
+export interface CategoryUI {
+  category: string;
+  categoryId: string;
+  subcategories: string[];
+}
+
 export type TypeBudget = 'one-time' | 'periodic';
 export type PeriodBudget = 'weekly' | 'bi-weekly' | 'montly' | 'daily' | 'yearly';
 
@@ -161,7 +167,7 @@ export interface AccountRecord {
   date: Date;
   fullDate: string;
   formattedTime: string;
-  category: Category;
+  category: Category | null;
   subCategory: string;
   tag: string[];
   indebtedPeople: IndebtedPeople[];

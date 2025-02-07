@@ -13,6 +13,7 @@ import {
   InputAdornment as InputAdornmentMUI,
   FormControlLabel as FormControlLabelMUI,
   ToggleButton as ToggleButtonMui,
+  Avatar as MuiAvatar,
   Typography,
 } from '@mui/material';
 import { DateTimePicker as DateTimePickerMUI } from '@mui/x-date-pickers';
@@ -141,6 +142,11 @@ export const TransparentButton = styled(Button)`
   color: inherit;
 `;
 
+export const Avatar = styled(MuiAvatar)`
+  background-color: ${AppColors.complementary};
+  color: ${AppColors.white};
+`;
+
 // **** Paragraphs
 
 export const ParagraphBold = styled(Typography)`
@@ -266,6 +272,15 @@ export const Chip = styled(ChipMUI, { shouldForwardProp: (props) => props !== 'c
   & .MuiChip-label {
     ${createResponsiveProps({ fontSize: 'Sub' })}
   }
+`;
+
+export const LongChip = styled(ChipMUI, { shouldForwardProp: (props) => props !== 'chipColor' })`
+color: ${AppColors.black};
+border-color: ${({ chipColor }: ChipProps) => (chipColor ?? AppColors.primary)};
+
+& .MuiChip-label {
+  ${createResponsiveProps({ fontSize: 'Sub' })}
+}
 `;
 
 export const MobileChip = styled(Chip)`

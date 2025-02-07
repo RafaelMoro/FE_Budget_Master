@@ -30,6 +30,16 @@ export const ERROR_MESSAGE_USER_NOT_FOUND = 'El correo electrónico no está reg
 export const ERROR_MESSAGE_FETCH_CATEGORIES = 'No fue posible obtener sus categorias. Por favor, intente de nuevo más tarde.';
 export const ERROR_CREATE_LOCAL_CATEGORIES = 'No fue posible crear sus categorias. Por favor, intente de nuevo más tarde.';
 
+/** Errors for Categories module */
+export const ERROR_MESSAGE_EDIT_CATEGORY = 'No fue posible editar su categoría. Por favor, intente de nuevo más tarde.';
+export const ERROR_MESSAGE_CREATE_CATEGORY_TITLE = 'No fue posible crear su categoría.';
+export const ERROR_MESSAGE_DELETE_CATEGORY = 'No fue posible eliminar su categoría.';
+export const ERROR_MESSAGE_FETCH_CATEGORY = 'No fue posible obtener sus categorías.';
+export const WARNING_MESSAGE_MISSING_CATEGORY_TITLE = 'La categoria relacionada a esta transacción no existe.';
+export const WARNING_MESSAGE_MISSING_CATEGORY_DESCRIPTION = 'Por favor, edite esta transacción para seleccionar una nueva categoría';
+export const WARNING_MESSAGE_DELETE_CATEGORY = `Si elimina esta categoría y tiene transacciones relacionadas a la categoría,
+estas aparecerán como categoría no encontrada.`;
+
 /** Success Login Module */
 export const SUCCESS_PASSWORD_RESET_TITLE = 'Contraseña reestablecida correctamente';
 export const SUCCESS_PASSWORD_RESET_DESC = 'Ahora puede iniciar sesión con su nueva contraseña.';
@@ -38,6 +48,7 @@ export const SUCCESS_FORGOT_PASSWORD_TITLE = 'Correo electrónico enviado.';
 export const SUCCESS_FORGOT_PASSWORD_DESC = 'Por favor, revise su correo electrónico y siga las instrucciones. Redirigiendo a la página de inicio de sesión.';
 
 export const ZERO_CURRENCY = '$0.00';
+export const ICON_SIZE = { fontSize: '2.5rem' };
 
 const FOOD_AND_DRINK_CATEGORY: Category = {
   _id: 'local-category-1',

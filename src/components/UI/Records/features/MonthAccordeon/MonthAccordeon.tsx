@@ -4,6 +4,7 @@ import {
 } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { ListExpandableContainer } from '../../Records.styled';
+import { ICON_SIZE } from '../../../../../constants';
 
 interface MonthAccordeonProps {
   opened?: boolean;
@@ -18,7 +19,6 @@ const MonthAccordeon = ({
   opened = false, children, title, color, onClickCallback = () => {}, accountId,
 }: MonthAccordeonProps) => {
   const [openCollapse, setOpenCollapse] = useState<boolean>(opened);
-  const iconSize = { fontSize: '2.5rem' };
 
   const open = () => setOpenCollapse(true);
   const close = () => setOpenCollapse(false);
@@ -44,7 +44,7 @@ const MonthAccordeon = ({
     <>
       <ListExpandableContainer color={color} onClick={handleClick}>
         <Typography>{title}</Typography>
-        {openCollapse ? <ExpandLess sx={iconSize} /> : <ExpandMore sx={iconSize} />}
+        {openCollapse ? <ExpandLess sx={ICON_SIZE} /> : <ExpandMore sx={ICON_SIZE} />}
       </ListExpandableContainer>
       <Collapse in={openCollapse} timeout="auto" unmountOnExit>
         <List component="div">

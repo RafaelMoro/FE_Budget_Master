@@ -1,5 +1,6 @@
 import {
-  Divider, Drawer, Typography,
+  Divider, Drawer, ListItemButton, Typography,
+  ListItemText,
 } from '@mui/material';
 
 import { BUDGETS_ROUTE, DASHBOARD_ROUTE } from '../../../../../pages/RoutesConstants';
@@ -34,6 +35,11 @@ const LoggedUserDrawer = ({
         <ActiveDrawerMenuLink active={activeBudgetsPage} to={BUDGETS_ROUTE}>
           <Typography>Budgets</Typography>
         </ActiveDrawerMenuLink>
+      </UserDrawerList>
+      <UserDrawerList title="Configuración" open={false}>
+        <ListItemButton>
+          <ListItemText primary="Categorías" />
+        </ListItemButton>
       </UserDrawerList>
       <Divider style={{ width: '100%' }} />
       <TransparentButton data-testid="log-out-button" onClick={signOut}>

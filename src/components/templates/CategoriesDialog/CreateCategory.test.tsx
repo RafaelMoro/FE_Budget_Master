@@ -9,6 +9,8 @@ describe('CreateCategory', () => {
   const updateError = jest.fn();
   const changeSelectCategoryIconFn = jest.fn();
 
+  const veryLongCategoryName = 'Very long category name with a lot of characters and description that does not really matter but I need keep it long';
+
   test('Show category and subcategory input, add subcategory, cancel, edit button and subcategories list', () => {
     renderWithProviders(
       <CreateCategory
@@ -62,5 +64,26 @@ describe('CreateCategory', () => {
 
     await act(async () => userEvent.click(submitButton));
     expect(await screen.findByText(/por favor, ingrese una categoría de más de 3 caracteres/i)).toBeInTheDocument();
+  });
+
+  test('Given a user editing a category name with more than 80 characters, show error message', async () => {
+    renderWithProviders(
+      <CreateCategory
+        changeSelectCategoryIconFn={changeSelectCategoryIconFn}
+        goBackAction={goBackAction}
+        updateError={updateError}
+      />,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    const categoryNameInput = screen.getByRole('textbox', { name: /título de la categoría/i });
+    const submitButton = screen.getByRole('button', { name: /crear/i });
+    await act(async () => userEvent.type(categoryNameInput, veryLongCategoryName));
+    await waitFor(() => {
+      expect(categoryNameInput).toHaveValue(veryLongCategoryName);
+    });
+
+    await act(async () => userEvent.click(submitButton));
+    expect(await screen.findByText(/por favor, ingrese una categoría con menos de 80 caracteres/i)).toBeInTheDocument();
   });
 });

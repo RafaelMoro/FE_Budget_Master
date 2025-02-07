@@ -5,9 +5,9 @@ import {
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
 import { ICON_SIZE } from '../../../constants';
+import { CategoriesListDialogProps } from './CategoryDialog.interface';
 import { SubcategoriesListDialog } from './SubcategoriesListDialog';
 import { CategoryText } from './CategoriesDialog.styled';
-import { CategoriesListDialogProps } from './CategoryDialog.interface';
 
 const CategoriesListDialog = ({
   categoryName, subCategories, categoryId, updateAction, updateEditCategory, updateCategoryToDelete,

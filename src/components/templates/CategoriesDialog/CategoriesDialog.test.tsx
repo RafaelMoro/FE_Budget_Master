@@ -6,7 +6,7 @@ import { renderWithProviders } from '../../../tests/CustomWrapperRedux';
 import { CategoriesDialog } from './CategoriesDialog';
 import { userInitialState } from '../../UI/Account/Account.mocks';
 import { ERROR_MESSAGE_FETCH_CATEGORY, ERROR_MESSAGE_GENERAL } from '../../../constants';
-import { failedResponseFetchCategories } from '../../UI/Records/Record.mocks';
+import { failedResponseFetchCategories, successfulResponseFetchCategories } from '../../UI/Records/Record.mocks';
 
 describe('<CategoriesDialog />', () => {
   const onClose = jest.fn();
@@ -41,6 +41,29 @@ describe('<CategoriesDialog />', () => {
     expect(
       screen.getByText(/puede crear una nueva categoría, ingresando su nombre y seleccionando las subcategorías que desea agregar\./i),
     ).toBeInTheDocument();
+  });
+
+  test('Given a user editing a category, show the appropiate title and description', async () => {
+    fetchMock.once(JSON.stringify(successfulResponseFetchCategories));
+    renderWithProviders(
+      <CategoriesDialog onClose={onClose} open />,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    expect(await screen.findByRole('button', { name: /Food and Drink/i })).toBeInTheDocument();
+    const categoryButton = screen.getByRole('button', { name: /Food and Drink/i });
+    await act(async () => userEvent.click(categoryButton));
+
+    expect(await screen.findByRole('button', { name: /boton-editar-categoria-food and drink/i }));
+    const editCategoryButton = screen.getByRole('button', { name: /boton-editar-categoria-food and drink/i });
+    await act(async () => userEvent.click(editCategoryButton));
+
+    expect(await screen.findByRole('heading', { name: /editar categoría/i })).toBeInTheDocument();
+    const description = screen.getByText(
+      // eslint-disable-next-line max-len
+      /puede cambiar el nombre de la categoría, agregar subcategoría, o bien, eliminar una subcategoría dando click en el botón en forma de x que está junto a la subcategoría/i,
+    );
+    expect(description).toBeInTheDocument();
   });
 
   test('Given an error while fetching categories, show error message', async () => {

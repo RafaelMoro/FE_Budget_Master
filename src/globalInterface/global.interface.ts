@@ -167,7 +167,7 @@ export interface AccountRecord {
   date: Date;
   fullDate: string;
   formattedTime: string;
-  category: Category;
+  category: Category | null;
   subCategory: string;
   tag: string[];
   indebtedPeople: IndebtedPeople[];

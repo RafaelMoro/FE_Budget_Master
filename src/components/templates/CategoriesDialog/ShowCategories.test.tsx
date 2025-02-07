@@ -5,7 +5,11 @@ import fetchMock from 'jest-fetch-mock';
 
 import { renderWithProviders } from '../../../tests/CustomWrapperRedux';
 import { userInitialState } from '../../UI/Account/Account.mocks';
-import { successfulResponseFetchCategories, failedResponseFetchCategories } from '../../UI/Records/Record.mocks';
+import {
+  successfulResponseFetchCategories,
+  failedResponseFetchCategories,
+  successfulResponseFetchCategoriesEmpty,
+} from '../../UI/Records/Record.mocks';
 import { ShowCategories } from './ShowCategories';
 
 describe('<ShowCategories />', () => {
@@ -65,5 +69,21 @@ describe('<ShowCategories />', () => {
     );
 
     expect(await screen.findByText(/error al cargar categorías/i)).toBeInTheDocument();
+  });
+
+  test('Given a user with no categories, show message and button to create a category', async () => {
+    fetchMock.once(JSON.stringify(successfulResponseFetchCategoriesEmpty));
+    renderWithProviders(
+      <ShowCategories
+        setActionCreate={setActionCreate}
+        updateAction={updateAction}
+        updateCategoryToDelete={updateCategoryToDelete}
+        updateCategoryToEdit={updateCategoryToEdit}
+      />,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    expect(await screen.findByText(/No tiene categorías creadas aún. Empiece creando una categoría\./i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /crear categoría/i })).toBeInTheDocument();
   });
 });

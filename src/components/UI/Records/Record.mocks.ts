@@ -310,6 +310,15 @@ export const successfulResponseFetchCategories = {
   success: true,
   version: '2.0.0',
 };
+export const successfulResponseFetchCategoriesEmpty = {
+  data: {
+    categories: [],
+  },
+  error: null,
+  message: null,
+  success: true,
+  version: '2.0.0',
+};
 export const failedResponseFetchCategories = {
   data: null,
   error: {

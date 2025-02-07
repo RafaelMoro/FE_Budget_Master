@@ -12,6 +12,7 @@ export const getInitialUserInterfaceState = ({ newWindowSize }: { newWindowSize:
   },
   windowSize: newWindowSize,
   hasSignedOn: false,
+  openCategoriesDialog: false,
 });
 
 export const getUserMock = ({ isGuestUser = false }: { isGuestUser?: boolean }): UserInitialState => ({

@@ -8,6 +8,14 @@ import { GetMockExpenseProps } from './interface';
 
 export const mockRecords: AnyRecord[] = [];
 
+export const CATEGORY_NOT_FOUND: Category = {
+  _id: 'category-not-found-1',
+  categoryName: 'Categoría no encontrada',
+  icon: 'newCategory',
+  subCategories: ['Sin subcategoría'],
+  __v: 0,
+};
+
 export const mockExpense: AnyRecord = {
   _id: '123-456',
   userId: '987-654',

@@ -5,7 +5,9 @@ import fetchMock from 'jest-fetch-mock';
 import { renderWithProviders } from '../../../tests/CustomWrapperRedux';
 import { CategoriesDialog } from './CategoriesDialog';
 import { userInitialState } from '../../UI/Account/Account.mocks';
-import { ERROR_MESSAGE_EDIT_CATEGORY, ERROR_MESSAGE_FETCH_CATEGORY, ERROR_MESSAGE_GENERAL } from '../../../constants';
+import {
+  ERROR_MESSAGE_CREATE_CATEGORY_TITLE, ERROR_MESSAGE_EDIT_CATEGORY, ERROR_MESSAGE_FETCH_CATEGORY, ERROR_MESSAGE_GENERAL,
+} from '../../../constants';
 import { failedCreateEditCategoriesReponse, failedResponseFetchCategories, successfulResponseFetchCategories } from '../../UI/Records/Record.mocks';
 
 describe('<CategoriesDialog />', () => {
@@ -43,6 +45,35 @@ describe('<CategoriesDialog />', () => {
     expect(
       screen.getByText(/puede crear una nueva categoría, ingresando su nombre y seleccionando las subcategorías que desea agregar\./i),
     ).toBeInTheDocument();
+  });
+
+  test('Given a user creating a category and fails the creation, show the appropiate error message', async () => {
+    fetchMock.once(JSON.stringify(successfulResponseFetchCategories));
+    fetchMock.mockRejectedValueOnce(JSON.stringify(failedCreateEditCategoriesReponse));
+    const categoryName = 'Food and Drink';
+    renderWithProviders(
+      <CategoriesDialog onClose={onClose} open />,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    const createCategoryButton = screen.getByRole('button', { name: /crear categoría/i });
+    await act(async () => userEvent.click(createCategoryButton));
+
+    expect(await screen.findByRole('heading', { name: /crear categoría/i })).toBeInTheDocument();
+    const categoryNameInput = screen.getByRole('textbox', { name: /título de la categoría/i });
+    await act(async () => userEvent.type(categoryNameInput, categoryName));
+
+    const submitButton = screen.getByRole('button', { name: /crear/i });
+    const subcategoryInput = screen.getByRole('textbox', { name: /subcategoría$/i });
+    const addSubcategoryButton = screen.getByRole('button', { name: /agregar subcategoría/i });
+
+    await act(async () => userEvent.type(subcategoryInput, newSubcategory));
+    await act(async () => userEvent.click(addSubcategoryButton));
+    await act(async () => userEvent.click(submitButton));
+
+    expect(await screen.findByRole('heading', { name: /categorías/i })).toBeInTheDocument();
+    expect(screen.getByText(ERROR_MESSAGE_CREATE_CATEGORY_TITLE)).toBeInTheDocument();
+    expect(screen.getByText(ERROR_MESSAGE_GENERAL)).toBeInTheDocument();
   });
 
   test('Given a user editing a category, show the appropiate title and description', async () => {

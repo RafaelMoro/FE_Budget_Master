@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 import { AppIcon } from '../Icons';
-import { CloseIconButton, ErrorContainer, ErrorIconContainer } from './ErrorSection.styled';
+import { CloseIconButton, ErrorContainer, ErrorIconContainer } from './AlertMessageSection.styled';
 import { AppColors } from '../../../styles';
 
 interface ErrorSectionProps {
@@ -10,7 +10,7 @@ interface ErrorSectionProps {
   hideIcon?: boolean;
 }
 
-const ErrorSection = ({
+const AlertMessageSection = ({
   title, description, onClose, hideIcon,
 }: ErrorSectionProps) => (
   <ErrorContainer>
@@ -27,4 +27,4 @@ const ErrorSection = ({
   </ErrorContainer>
 );
 
-export { ErrorSection };
+export { AlertMessageSection };

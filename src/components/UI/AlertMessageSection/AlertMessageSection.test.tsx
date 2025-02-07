@@ -1,14 +1,14 @@
 import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ErrorSection } from './ErrorSection';
+import { AlertMessageSection } from './AlertMessageSection';
 
-describe('ErrorSection', () => {
+describe('AlertMessageSection', () => {
   const title = "There's an error while editing your category";
   const description = 'Please try again later. If the error persists, contact support with the error code.';
   const onClose = jest.fn();
 
   test('Show error section with description, close button and icon', () => {
-    render(<ErrorSection description={description} onClose={onClose} />);
+    render(<AlertMessageSection description={description} onClose={onClose} />);
 
     expect(screen.getByText(description)).toBeInTheDocument();
     expect(screen.queryByText(title)).not.toBeInTheDocument();
@@ -19,19 +19,19 @@ describe('ErrorSection', () => {
   });
 
   test('If a title is passed to the component, it should be shown', () => {
-    render(<ErrorSection description={description} title={title} onClose={onClose} />);
+    render(<AlertMessageSection description={description} title={title} onClose={onClose} />);
 
     expect(screen.getByText(title)).toBeInTheDocument();
   });
 
   test('If the icon will be hidden, it should not be shown', () => {
-    render(<ErrorSection description={description} title={title} onClose={onClose} hideIcon />);
+    render(<AlertMessageSection description={description} title={title} onClose={onClose} hideIcon />);
 
     expect(screen.queryByTestId('ErrorOutlineOutlinedIcon')).not.toBeInTheDocument();
   });
 
   test('Given a user clicking on the close button, the onClose function should be called', async () => {
-    render(<ErrorSection description={description} title={title} onClose={onClose} />);
+    render(<AlertMessageSection description={description} title={title} onClose={onClose} />);
 
     const closeButton = screen.getByRole('button', {
       name: /boton-cerrar-error/i,

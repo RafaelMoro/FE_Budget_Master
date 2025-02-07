@@ -15,7 +15,7 @@ import { CATEGORY_DIALOG_ACTIONS } from './CategoryDialog.constant';
 import {
   CloseIconButton, CategoriesDialogContainer, GoBackIconButton, WarningText,
 } from './CategoriesDialog.styled';
-import { ErrorSection } from '../../UI';
+import { AlertMessageSection } from '../../UI';
 import { SecondaryButton } from '../../../styles';
 import { SelectCategoryIcon } from './SelectCategoryIcon';
 
@@ -59,7 +59,7 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
         </CloseIconButton>
         <Typography variant="h4" align="center">{CATEGORY_DIALOG_ACTIONS[action].title}</Typography>
         { error.showError && (
-          <ErrorSection onClose={resetError} title={error.title} description={error.description} />
+          <AlertMessageSection onClose={resetError} title={error.title} description={error.description} />
         )}
         <Typography>
           {CATEGORY_DIALOG_ACTIONS[action].description}

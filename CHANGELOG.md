@@ -1,3 +1,9 @@
+## v1.12.0 (2025-02-07)
+
+### Pull Requests
+[#64](https://github.com/RafaelMoro/FE_Budget_Master/pull/64) | Add subcategories dialog
+
+
 ## v1.11.0 (2025-02-03)
 
 ### Pull Requests

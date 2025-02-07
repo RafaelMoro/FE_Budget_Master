@@ -1,19 +1,13 @@
 import { Typography } from '@mui/material';
 import { AppIcon } from '../Icons';
-import { CloseIconButton, ErrorContainer, ErrorIconContainer } from './AlertMessageSection.styled';
+import { CloseIconButton, AlertMessageContainer, ErrorIconContainer } from './AlertMessageSection.styled';
 import { AppColors } from '../../../styles';
-
-interface ErrorSectionProps {
-  description: string;
-  onClose: () => void;
-  title?: string;
-  hideIcon?: boolean;
-}
+import { AlertMessageSectionProps } from './AlertMessage.interface';
 
 const AlertMessageSection = ({
-  title, description, onClose, hideIcon,
-}: ErrorSectionProps) => (
-  <ErrorContainer>
+  title, description, onClose, hideIcon, state = 'error',
+}: AlertMessageSectionProps) => (
+  <AlertMessageContainer state={state}>
     <CloseIconButton aria-label="boton-cerrar-error" onClick={onClose}>
       <AppIcon icon="Close" />
     </CloseIconButton>
@@ -24,7 +18,7 @@ const AlertMessageSection = ({
     ) }
     { title && (<Typography variant="subtitle1" align="center">{title}</Typography>) }
     <Typography>{description}</Typography>
-  </ErrorContainer>
+  </AlertMessageContainer>
 );
 
 export { AlertMessageSection };

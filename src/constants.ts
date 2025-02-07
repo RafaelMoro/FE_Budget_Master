@@ -34,6 +34,8 @@ export const ERROR_CREATE_LOCAL_CATEGORIES = 'No fue posible crear sus categoria
 export const ERROR_MESSAGE_EDIT_CATEGORY = 'No fue posible editar su categoría. Por favor, intente de nuevo más tarde.';
 export const ERROR_MESSAGE_CREATE_CATEGORY_TITLE = 'No fue posible crear su categoría.';
 export const ERROR_MESSAGE_DELETE_CATEGORY = 'No fue posible eliminar su categoría.';
+export const WARNING_MESSAGE_MISSING_CATEGORY_TITLE = 'La categoria relacionada a esta transacción no existe.';
+export const WARNING_MESSAGE_MISSING_CATEGORY_DESCRIPTION = 'Por favor, edite esta transacción para seleccionar una nueva categoría';
 
 /** Success Login Module */
 export const SUCCESS_PASSWORD_RESET_TITLE = 'Contraseña reestablecida correctamente';

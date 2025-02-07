@@ -1,16 +1,31 @@
 import styled from '@emotion/styled';
+import { motion } from 'framer-motion';
 import {
-  ListItemText, IconButton,
-  Typography,
+  ListItemText, IconButton, Typography,
 } from '@mui/material';
+
 import { appTheme } from '../../../styles/theme';
 import { AppColors, responsiveBreakpoints } from '../../../styles';
+import { blinkAnimation } from '../../../styles/animations/blink';
 
 export const CategoriesDialogContainer = styled.div`
   display: grid;
   padding: ${appTheme.spacing(3)};
   grid-template-columns: 1fr;
   gap: ${appTheme.spacing(3)};
+`;
+
+export const CategoriesSkeletonContainer = styled(motion.article)`
+  background-color: ${AppColors.white};
+  transition: 0.3s;
+`;
+
+export const ContentPlaceholder = styled.div`
+  width: 100%;
+  height: 2rem;
+  background-color: ${AppColors.bgColorGrey};
+  border-radius: 10px;
+  ${blinkAnimation}
 `;
 
 export const CloseIconButton = styled(IconButton)`

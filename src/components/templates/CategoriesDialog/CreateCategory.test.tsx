@@ -4,6 +4,30 @@ import { renderWithProviders } from '../../../tests/CustomWrapperRedux';
 import { userInitialState } from '../../UI/Account/Account.mocks';
 import { CreateCategory } from './CategoryTemplate';
 
+const twentySubcategories = [
+  'one subcategory',
+  'two subcategory',
+  'three',
+  'four',
+  'five',
+  'six subcategory',
+  'seven',
+  'eight',
+  'nine',
+  'ten subcategory',
+  'eleven',
+  'twelve',
+  'thirteen',
+  'fourteen',
+  'fifteen',
+  'sixteen',
+  'seventeen',
+  'eighteen',
+  'nineteen',
+  'twenty',
+  'twenty one',
+];
+
 describe('CreateCategory', () => {
   const goBackAction = jest.fn();
   const updateError = jest.fn();
@@ -107,4 +131,56 @@ describe('CreateCategory', () => {
 
     expect(await screen.findByText(/por favor, agregue al menos una subcategoría/i)).toBeInTheDocument();
   });
+
+  test('Given a user adding 21 subcategories, show error message', async () => {
+    renderWithProviders(
+      <CreateCategory
+        changeSelectCategoryIconFn={changeSelectCategoryIconFn}
+        goBackAction={goBackAction}
+        updateError={updateError}
+      />,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    const categoryNameInput = screen.getByRole('textbox', { name: /título de la categoría/i });
+    await act(async () => userEvent.type(categoryNameInput, categoryName));
+    const subcategoryInput = screen.getByRole('textbox', { name: /subcategoría$/i });
+    const addSubcategoryButton = screen.getByRole('button', { name: /agregar subcategoría/i });
+
+    // eslint-disable-next-line no-restricted-syntax
+    for await (const currentSubcategory of twentySubcategories) {
+      await act(async () => userEvent.type(subcategoryInput, currentSubcategory));
+      await act(async () => userEvent.click(addSubcategoryButton));
+    }
+
+    const submitButton = screen.getByRole('button', { name: /crear/i });
+    await act(async () => userEvent.click(submitButton));
+
+    expect(await screen.findByText(/por favor, agregue menos de 20 subcategorías/i)).toBeInTheDocument();
+  });
+
+  // test('Given a user editing the whole category, show tick mark in the submit button', async () => {
+  //   fetchMock.once(JSON.stringify(successfulEditCategoriesReponse));
+  //   renderWithProviders(
+  //     <EditCategory
+  //       changeSelectCategoryIconFn={changeSelectCategoryIconFn}
+  //       categoryToEdit={categoryToEdit}
+  //       goBackAction={goBackAction}
+  //       updateError={updateError}
+  //     />,
+  //     { preloadedState: { user: userInitialState } },
+  //   );
+
+  //   const categoryNameInput = screen.getByRole('textbox', { name: /título de la categoría/i });
+  //   const submitButton = screen.getByRole('button', { name: /editar/i });
+  //   const subcategoryInput = screen.getByRole('textbox', { name: /subcategoría$/i });
+  //   const addSubcategoryButton = screen.getByRole('button', { name: /agregar subcategoría/i });
+
+  //   await act(async () => userEvent.type(categoryNameInput, ' 2'));
+  //   await act(async () => userEvent.type(subcategoryInput, newSubcategory));
+  //   await act(async () => userEvent.click(addSubcategoryButton));
+  //   await act(async () => userEvent.click(submitButton));
+
+  //   expect(await screen.findByTestId('DoneOutlinedIcon')).toBeInTheDocument();
+  // });
 });

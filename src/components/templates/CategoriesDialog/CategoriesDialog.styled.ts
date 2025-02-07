@@ -4,7 +4,7 @@ import {
   Typography,
 } from '@mui/material';
 import { appTheme } from '../../../styles/theme';
-import { AppColors } from '../../../styles';
+import { AppColors, responsiveBreakpoints } from '../../../styles';
 
 export const CategoriesDialogContainer = styled.div`
   display: grid;
@@ -54,8 +54,12 @@ export const SubcategoryTitle = styled(Typography)`
 
 export const SubcategoriesContainerChips = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: ${appTheme.spacing(2)};
+
+  @media ${responsiveBreakpoints.tabletAndDesktop} {
+    grid-template-columns: repeat(2, 1fr);
+    }
 `;
 
 export const EditCategoryButtonContainer = styled.div`

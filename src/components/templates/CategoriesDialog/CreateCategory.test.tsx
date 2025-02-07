@@ -1,4 +1,5 @@
-import { screen } from '@testing-library/react';
+import { screen, act } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from '../../../tests/CustomWrapperRedux';
 import { userInitialState } from '../../UI/Account/Account.mocks';
 import { CreateCategory } from './CategoryTemplate';
@@ -24,5 +25,21 @@ describe('CreateCategory', () => {
     expect(screen.getByText(/subcategorías:/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /cancelar/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /crear/i })).toBeInTheDocument();
+  });
+
+  test('Given a user leaving empty the category name, show error message', async () => {
+    renderWithProviders(
+      <CreateCategory
+        changeSelectCategoryIconFn={changeSelectCategoryIconFn}
+        goBackAction={goBackAction}
+        updateError={updateError}
+      />,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    const submitButton = screen.getByRole('button', { name: /crear/i });
+
+    await act(async () => userEvent.click(submitButton));
+    expect(await screen.findByText(/por favor, ingrese un nombre de categoría/i)).toBeInTheDocument();
   });
 });

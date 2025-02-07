@@ -7,8 +7,11 @@ import { CategoryUI } from '../../../globalInterface';
 import { ShowCategoriesProps } from './CategoryDialog.interface';
 import { useCategories } from '../../../hooks';
 import { CategoriesListDialog } from './CategoriesListDialog';
+import { SecondaryButton } from '../../../styles';
 
-const ShowCategories = ({ updateAction, updateCategoryToEdit, updateCategoryToDelete }: ShowCategoriesProps) => {
+const ShowCategories = ({
+  updateAction, updateCategoryToEdit, updateCategoryToDelete, setActionCreate,
+}: ShowCategoriesProps) => {
   const {
     currentData, isError, isFetching, isSuccess,
   } = useCategories();
@@ -48,6 +51,12 @@ const ShowCategories = ({ updateAction, updateCategoryToEdit, updateCategoryToDe
               <Typography>Error al cargar categorías</Typography>
             )
           }
+      { (categories.length === 0 && isSuccess) && (
+        <>
+          <Typography>No tiene categorías creadas aún. Empiece creando una categoría.</Typography>
+          <SecondaryButton onClick={setActionCreate}>Crear categoría</SecondaryButton>
+        </>
+      )}
       {
             (categories.length > 0) && categories.map(({ category, subcategories, categoryId }) => (
               <CategoriesListDialog

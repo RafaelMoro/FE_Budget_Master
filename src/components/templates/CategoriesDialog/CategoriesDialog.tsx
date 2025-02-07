@@ -73,7 +73,12 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
           </WarningText>
         ) }
         { action === 'show' && (
-          <ShowCategories updateCategoryToDelete={updateCategoryToDelete} updateCategoryToEdit={updateCategoryToEdit} updateAction={updateAction} />
+          <ShowCategories
+            updateCategoryToDelete={updateCategoryToDelete}
+            updateCategoryToEdit={updateCategoryToEdit}
+            updateAction={updateAction}
+            setActionCreate={setActionCreate}
+          />
         ) }
         { action === 'edit' && (
           <EditCategory

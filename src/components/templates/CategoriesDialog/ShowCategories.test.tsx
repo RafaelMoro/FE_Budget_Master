@@ -12,6 +12,7 @@ describe('<ShowCategories />', () => {
   const updateAction = jest.fn();
   const updateCategoryToDelete = jest.fn();
   const updateCategoryToEdit = jest.fn();
+  const setActionCreate = jest.fn();
 
   beforeEach(() => {
     fetchMock.resetMocks();
@@ -21,7 +22,12 @@ describe('<ShowCategories />', () => {
 
   test('Show loading categories state', () => {
     renderWithProviders(
-      <ShowCategories updateAction={updateAction} updateCategoryToDelete={updateCategoryToDelete} updateCategoryToEdit={updateCategoryToEdit} />,
+      <ShowCategories
+        setActionCreate={setActionCreate}
+        updateAction={updateAction}
+        updateCategoryToDelete={updateCategoryToDelete}
+        updateCategoryToEdit={updateCategoryToEdit}
+      />,
       { preloadedState: { user: userInitialState } },
     );
 
@@ -31,7 +37,12 @@ describe('<ShowCategories />', () => {
   test('Show categories and subcategories fetched', async () => {
     fetchMock.once(JSON.stringify(successfulResponseFetchCategories));
     renderWithProviders(
-      <ShowCategories updateAction={updateAction} updateCategoryToDelete={updateCategoryToDelete} updateCategoryToEdit={updateCategoryToEdit} />,
+      <ShowCategories
+        setActionCreate={setActionCreate}
+        updateAction={updateAction}
+        updateCategoryToDelete={updateCategoryToDelete}
+        updateCategoryToEdit={updateCategoryToEdit}
+      />,
       { preloadedState: { user: userInitialState } },
     );
 
@@ -44,7 +55,12 @@ describe('<ShowCategories />', () => {
   test('Give the case where the fetch of categories failed, show error message', async () => {
     fetchMock.mockRejectedValueOnce(JSON.stringify(failedResponseFetchCategories));
     renderWithProviders(
-      <ShowCategories updateAction={updateAction} updateCategoryToDelete={updateCategoryToDelete} updateCategoryToEdit={updateCategoryToEdit} />,
+      <ShowCategories
+        setActionCreate={setActionCreate}
+        updateAction={updateAction}
+        updateCategoryToDelete={updateCategoryToDelete}
+        updateCategoryToEdit={updateCategoryToEdit}
+      />,
       { preloadedState: { user: userInitialState } },
     );
 

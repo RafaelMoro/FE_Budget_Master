@@ -36,6 +36,8 @@ export const ERROR_MESSAGE_CREATE_CATEGORY_TITLE = 'No fue posible crear su cate
 export const ERROR_MESSAGE_DELETE_CATEGORY = 'No fue posible eliminar su categoría.';
 export const WARNING_MESSAGE_MISSING_CATEGORY_TITLE = 'La categoria relacionada a esta transacción no existe.';
 export const WARNING_MESSAGE_MISSING_CATEGORY_DESCRIPTION = 'Por favor, edite esta transacción para seleccionar una nueva categoría';
+export const WARNING_MESSAGE_DELETE_CATEGORY = `Si elimina esta categoría y tiene transacciones relacionadas a la categoría,
+estas aparecerán como categoría no encontrada.`;
 
 /** Success Login Module */
 export const SUCCESS_PASSWORD_RESET_TITLE = 'Contraseña reestablecida correctamente';

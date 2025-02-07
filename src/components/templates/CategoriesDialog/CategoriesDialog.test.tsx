@@ -66,6 +66,28 @@ describe('<CategoriesDialog />', () => {
     expect(description).toBeInTheDocument();
   });
 
+  test('Given a user deleting a category, show the appropiate title and description', async () => {
+    fetchMock.once(JSON.stringify(successfulResponseFetchCategories));
+    renderWithProviders(
+      <CategoriesDialog onClose={onClose} open />,
+      { preloadedState: { user: userInitialState } },
+    );
+
+    expect(await screen.findByRole('button', { name: /Food and Drink/i })).toBeInTheDocument();
+    const categoryButton = screen.getByRole('button', { name: /Food and Drink/i });
+    await act(async () => userEvent.click(categoryButton));
+
+    expect(await screen.findByRole('button', { name: /boton-eliminar-categoria-food and drink/i }));
+    const deleteCategoryButton = screen.getByRole('button', { name: /boton-eliminar-categoria-food and drink/i });
+    await act(async () => userEvent.click(deleteCategoryButton));
+
+    expect(await screen.findByRole('heading', { name: /eliminar categoría/i })).toBeInTheDocument();
+    const description = screen.getByText(
+      /si elimina esta categoría y tiene transacciones relacionadas a la categoría, estas aparecerán como categoría no encontrada\./i,
+    );
+    expect(description).toBeInTheDocument();
+  });
+
   test('Given an error while fetching categories, show error message', async () => {
     fetchMock.mockRejectedValueOnce(JSON.stringify(failedResponseFetchCategories));
     renderWithProviders(

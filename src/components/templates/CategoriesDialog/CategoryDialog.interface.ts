@@ -23,6 +23,8 @@ export interface ShowCategoriesProps {
   updateCategoryToEdit: (newCategory: CategoryUI | null) => void;
   updateCategoryToDelete: (categoryId: string) => void;
   setActionCreate: () => void;
+  error: boolean;
+  updateError: ({ newTitle, newDescription }: UpdateErrorProps) => void;
 }
 
 export interface CategoriesListDialogProps {

@@ -9,9 +9,10 @@ import { useCategories } from '../../../hooks';
 import { CategoriesListDialog } from './CategoriesListDialog';
 import { SecondaryButton } from '../../../styles';
 import { CategoriesSkeleton } from './CategoriesSkeleton';
+import { ERROR_MESSAGE_FETCH_CATEGORY, ERROR_MESSAGE_GENERAL } from '../../../constants';
 
 const ShowCategories = ({
-  updateAction, updateCategoryToEdit, updateCategoryToDelete, setActionCreate,
+  updateAction, updateCategoryToEdit, updateCategoryToDelete, setActionCreate, updateError, error,
 }: ShowCategoriesProps) => {
   const {
     currentData, isError, isFetching, isSuccess,
@@ -34,6 +35,13 @@ const ShowCategories = ({
     }
   }, [currentData, isSuccess]);
 
+  useEffect(() => {
+    // The condition means that the error is not shown yet but there's an error
+    if (isError && !error) {
+      updateError({ newTitle: ERROR_MESSAGE_FETCH_CATEGORY, newDescription: ERROR_MESSAGE_GENERAL });
+    }
+  }, [error, isError, updateError]);
+
   return (
     <List
       sx={{
@@ -46,11 +54,6 @@ const ShowCategories = ({
             (categories.length === 0 && isFetching) && Array.from({ length: 10 }).map((_, index) => (
               <CategoriesSkeleton key={`${index + 1}-skeleton`} />
             ))
-          }
-      {
-            (categories.length === 0 && isError) && (
-              <Typography>Error al cargar categorías</Typography>
-            )
           }
       { (categories.length === 0 && isSuccess) && (
         <>

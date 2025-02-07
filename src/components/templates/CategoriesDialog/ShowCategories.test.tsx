@@ -1,4 +1,4 @@
-import { screen, act } from '@testing-library/react';
+import { screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import fetchMock from 'jest-fetch-mock';
@@ -17,6 +17,8 @@ describe('<ShowCategories />', () => {
   const updateCategoryToDelete = jest.fn();
   const updateCategoryToEdit = jest.fn();
   const setActionCreate = jest.fn();
+  const updateError = jest.fn();
+  const error = false;
 
   beforeEach(() => {
     fetchMock.resetMocks();
@@ -31,6 +33,8 @@ describe('<ShowCategories />', () => {
         updateAction={updateAction}
         updateCategoryToDelete={updateCategoryToDelete}
         updateCategoryToEdit={updateCategoryToEdit}
+        updateError={updateError}
+        error={error}
       />,
       { preloadedState: { user: userInitialState } },
     );
@@ -47,6 +51,8 @@ describe('<ShowCategories />', () => {
         updateAction={updateAction}
         updateCategoryToDelete={updateCategoryToDelete}
         updateCategoryToEdit={updateCategoryToEdit}
+        updateError={updateError}
+        error={error}
       />,
       { preloadedState: { user: userInitialState } },
     );
@@ -57,7 +63,7 @@ describe('<ShowCategories />', () => {
     expect(await screen.findByText(/restaurants/i)).toBeInTheDocument();
   });
 
-  test('Give the case where the fetch of categories failed, show error message', async () => {
+  test('Give the case where the fetch of categories failed, updateError is called', async () => {
     fetchMock.mockRejectedValueOnce(JSON.stringify(failedResponseFetchCategories));
     renderWithProviders(
       <ShowCategories
@@ -65,11 +71,15 @@ describe('<ShowCategories />', () => {
         updateAction={updateAction}
         updateCategoryToDelete={updateCategoryToDelete}
         updateCategoryToEdit={updateCategoryToEdit}
+        updateError={updateError}
+        error={error}
       />,
       { preloadedState: { user: userInitialState } },
     );
 
-    expect(await screen.findByText(/error al cargar categorías/i)).toBeInTheDocument();
+    await waitFor(() => {
+      expect(updateError).toHaveBeenCalled();
+    });
   });
 
   test('Given a user with no categories, show message and button to create a category', async () => {
@@ -80,6 +90,8 @@ describe('<ShowCategories />', () => {
         updateAction={updateAction}
         updateCategoryToDelete={updateCategoryToDelete}
         updateCategoryToEdit={updateCategoryToEdit}
+        updateError={updateError}
+        error={error}
       />,
       { preloadedState: { user: userInitialState } },
     );

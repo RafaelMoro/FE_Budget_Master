@@ -77,6 +77,8 @@ const CategoriesDialog = ({ open, onClose }: CategoriesModalProps) => {
             updateCategoryToDelete={updateCategoryToDelete}
             updateCategoryToEdit={updateCategoryToEdit}
             updateAction={updateAction}
+            error={error.showError}
+            updateError={updateError}
             setActionCreate={setActionCreate}
           />
         ) }

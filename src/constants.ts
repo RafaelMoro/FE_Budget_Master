@@ -169,7 +169,7 @@ const KIDS_CATEGORY: Category = {
   __v: 0,
   categoryName: 'Niños',
   subCategories: [
-    'Pensión alimenticiat',
+    'Pensión alimenticia',
     'Necesidades básicas',
     'Clases particulares',
     'Juguetes',

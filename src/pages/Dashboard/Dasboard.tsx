@@ -5,7 +5,9 @@ import { useNotification } from '../../hooks/useNotification';
 import { useDashboardActions } from '../../components/UI/SpeedDial/useDashboardActions';
 import { useAppSelector } from '../../redux/hooks';
 import { ViewAccounts } from '../../components/UI/Account';
-import { Notification, RecordList, SpeedDial } from '../../components/UI';
+import {
+  Notification, ReactHelmet, RecordList, SpeedDial,
+} from '../../components/UI';
 import { Header } from '../../components/templates/Header';
 import { useBackToTopButton } from '../../hooks/useBackToTopButton';
 import { useSyncLoginInfo } from '../../hooks/useSyncLoginInfo';
@@ -16,7 +18,8 @@ import {
 import { useResizeWindow } from '../../hooks/useResizeWindow';
 import { useLogin } from '../../hooks/useLogin';
 import { useGuestUser } from '../../hooks';
-import { LOGIN_ROUTE } from '../RoutesConstants';
+import { DASHBOARD_COMPLETE_ROUTE, LOGIN_ROUTE } from '../RoutesConstants';
+import { DASHBOARD_META_DESCRIPTION, DASHBOARD_META_TITLE } from '../../constants';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -56,6 +59,7 @@ const Dashboard = () => {
 
   return (
     <>
+      <ReactHelmet metaTitle={DASHBOARD_META_TITLE} metaDescription={DASHBOARD_META_DESCRIPTION} completeURL={DASHBOARD_COMPLETE_ROUTE} />
       <Header />
       <DashboardContainer>
         {globalNotification.showNotification && (

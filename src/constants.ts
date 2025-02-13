@@ -1,13 +1,6 @@
 import { Category } from './globalInterface';
-import { LOGIN_ROUTE } from './pages/RoutesConstants';
 
 export const BUDGET_MASTER_LANDING = 'https://budget-master.space';
-
-// App URL
-export const APP_URL = 'https://app.budget-master.space';
-
-// App Routes with complete URL
-export const LOGIN_APP_ROUTE = `${APP_URL}${LOGIN_ROUTE}`;
 
 export const BACKEND_ENV_URI = process.env.REACT_APP_BACKEND_URI;
 export const BACKEND_LOCAL_URI = 'http://localhost:6006/';

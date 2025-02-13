@@ -4,6 +4,7 @@ import {
 } from 'formik';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 import { useGuestUser, useSyncLoginInfo, useLogin } from '../../../hooks';
 import { LoginSchema } from '../../../validationsSchemas';
@@ -14,6 +15,7 @@ import {
   Main, LoginCard, LogoContainer,
   FormLoginTitle, FormInstructions, LoginInput, ForgotPasswordLink,
 } from './Login.styled';
+import { LOGIN_APP_ROUTE } from '../../RoutesConstants';
 
 const Login = () => {
   const location = useLocation();
@@ -40,6 +42,11 @@ const Login = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Login | Budget Master App</title>
+        <link rel="canonical" href={LOGIN_APP_ROUTE} />
+        <meta name="description" content="Login page of Budget Master App" />
+      </Helmet>
       {notification && (
         <Notification
           title={notificationInfo.current.title}

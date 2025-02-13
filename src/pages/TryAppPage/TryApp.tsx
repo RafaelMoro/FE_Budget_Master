@@ -2,8 +2,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Typography } from '@mui/material';
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
+import { Helmet } from 'react-helmet-async';
 
-import { DASHBOARD_ROUTE } from '../RoutesConstants';
+import { DASHBOARD_ROUTE, TRY_APP_COMPLETE_ROUTE } from '../RoutesConstants';
 import { useGuestUser, useSyncLoginInfo } from '../../hooks';
 import {
   BrandTitle, PrimaryButton, SecondaryButton,
@@ -47,31 +48,38 @@ const TryApp = () => {
   }, [isGuestUser, userLoggedOn]);
 
   return (
-    <Main>
-      <GoBackAnchor to={returnRoute} title="Volver atrás hacia Budget Master">
-        <ArrowBackIosNewOutlinedIcon />
-        Volver atrás
-      </GoBackAnchor>
-      <Typography variant="h1">
-        Bienvenido a
-        {' '}
-        <BrandTitle>
-          Budget Master
-        </BrandTitle>
-      </Typography>
-      <Description>Para probar la aplicación podemos cargar datos de prueba o puedes decidir crear todos los datos por ti mismo.</Description>
-      <ActionsContainer>
-        <ImageWithData src={tryAppWithDataImage} alt="Budget Master App with data screenshot" />
-        <PrimaryButtonContainer>
-          <PrimaryButton type="button" onClick={handleOwnData}>Usar mis propios datos</PrimaryButton>
-        </PrimaryButtonContainer>
-        <ImageWithNoData src={tryAppEmptyAccountImage} alt="Budget Master App with no data screenshot" />
-        <SecondaryButtonContainer>
-          <SecondaryButton type="button" onClick={handleSampleData}>Usar datos de muestra</SecondaryButton>
-        </SecondaryButtonContainer>
-      </ActionsContainer>
-      <SkipStepButton variant="text" onClick={handleOwnData}>Omitir este paso</SkipStepButton>
-    </Main>
+    <>
+      <Helmet>
+        <title>Try App | Budget Master App</title>
+        <link rel="canonical" href={TRY_APP_COMPLETE_ROUTE} />
+        <meta name="description" content="Try App page of Budget Master App" />
+      </Helmet>
+      <Main>
+        <GoBackAnchor to={returnRoute} title="Volver atrás hacia Budget Master">
+          <ArrowBackIosNewOutlinedIcon />
+          Volver atrás
+        </GoBackAnchor>
+        <Typography variant="h1">
+          Bienvenido a
+          {' '}
+          <BrandTitle>
+            Budget Master
+          </BrandTitle>
+        </Typography>
+        <Description>Para probar la aplicación podemos cargar datos de prueba o puedes decidir crear todos los datos por ti mismo.</Description>
+        <ActionsContainer>
+          <ImageWithData src={tryAppWithDataImage} alt="Budget Master App with data screenshot" />
+          <PrimaryButtonContainer>
+            <PrimaryButton type="button" onClick={handleOwnData}>Usar mis propios datos</PrimaryButton>
+          </PrimaryButtonContainer>
+          <ImageWithNoData src={tryAppEmptyAccountImage} alt="Budget Master App with no data screenshot" />
+          <SecondaryButtonContainer>
+            <SecondaryButton type="button" onClick={handleSampleData}>Usar datos de muestra</SecondaryButton>
+          </SecondaryButtonContainer>
+        </ActionsContainer>
+        <SkipStepButton variant="text" onClick={handleOwnData}>Omitir este paso</SkipStepButton>
+      </Main>
+    </>
   );
 };
 

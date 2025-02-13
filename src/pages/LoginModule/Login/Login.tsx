@@ -91,10 +91,10 @@ const Login = () => {
                     }}
                   />
                   <ForgotPasswordLink
-                    title="¿Olvidé mi contraseña? Iniciar proceso de recuperar contraseña"
+                    title="¿Olvidaste tu contraseña? Iniciar proceso de recuperar contraseña"
                     to="/forgot-password"
                   >
-                    Ha olvidado su contraseña?
+                    ¿Olvidaste tu contraseña?
                   </ForgotPasswordLink>
                 </CardContent>
                 <LoginButtons

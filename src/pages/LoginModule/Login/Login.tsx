@@ -4,11 +4,10 @@ import {
 } from 'formik';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 
 import { useGuestUser, useSyncLoginInfo, useLogin } from '../../../hooks';
 import { LoginSchema } from '../../../validationsSchemas';
-import { Notification } from '../../../components/UI';
+import { Notification, ReactHelmet } from '../../../components/UI';
 import { TogglePasswordAdornment } from '../../../components/UI/TogglePasswordAdornment';
 import { BrandLogoName, LoginButtons } from '../../../components/templates';
 import {
@@ -43,11 +42,7 @@ const Login = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{LOGIN_META_TITLE}</title>
-        <link rel="canonical" href={LOGIN_APP_ROUTE} />
-        <meta name="description" content={LOGIN_META_DESCRIPTION} />
-      </Helmet>
+      <ReactHelmet metaTitle={LOGIN_META_TITLE} metaDescription={LOGIN_META_DESCRIPTION} completeURL={LOGIN_APP_ROUTE} />
       {notification && (
         <Notification
           title={notificationInfo.current.title}

@@ -8,6 +8,11 @@ export const POST_METHOD = 'POST';
 export const PUT_METHOD = 'PUT';
 export const DELETE_METHOD = 'DELETE';
 
+/** SEO */
+export const LOGIN_META_TITLE = 'Budget Master | Login - La mejor app de presupuesto familiar';
+// eslint-disable-next-line max-len
+export const LOGIN_META_DESCRIPTION = 'Organiza tus finanzas con la mejor app de presupuesto familiar. Controla gastos, ahorra más y mejora tu economía. ¡Inicia sesión ahora!';
+
 /** Errors */
 export const NETWORK_CATCH_ERROR = 'Network Error';
 export const JWT_EXPIRED_CATCH_ERROR = 'jwt expired';

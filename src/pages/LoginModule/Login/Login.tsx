@@ -16,6 +16,7 @@ import {
   FormLoginTitle, FormInstructions, LoginInput, ForgotPasswordLink,
 } from './Login.styled';
 import { LOGIN_APP_ROUTE } from '../../RoutesConstants';
+import { LOGIN_META_DESCRIPTION, LOGIN_META_TITLE } from '../../../constants';
 
 const Login = () => {
   const location = useLocation();
@@ -43,9 +44,9 @@ const Login = () => {
   return (
     <>
       <Helmet>
-        <title>Login | Budget Master App</title>
+        <title>{LOGIN_META_TITLE}</title>
         <link rel="canonical" href={LOGIN_APP_ROUTE} />
-        <meta name="description" content="Login page of Budget Master App" />
+        <meta name="description" content={LOGIN_META_DESCRIPTION} />
       </Helmet>
       {notification && (
         <Notification

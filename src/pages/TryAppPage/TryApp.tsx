@@ -2,7 +2,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Typography } from '@mui/material';
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
-import { Helmet } from 'react-helmet-async';
 
 import { DASHBOARD_ROUTE, TRY_APP_COMPLETE_ROUTE } from '../RoutesConstants';
 import { useGuestUser, useSyncLoginInfo } from '../../hooks';
@@ -18,6 +17,7 @@ import {
 import tryAppEmptyAccountImage from '../../assets/try-app/try-app-empty-account.webp';
 import tryAppWithDataImage from '../../assets/try-app/try-app-with-data.webp';
 import { BUDGET_MASTER_LANDING, TRY_APP_META_DESCRIPTION, TRY_APP_META_TITLE } from '../../constants';
+import { ReactHelmet } from '../../components/UI';
 
 const TryApp = () => {
   const location = useLocation();
@@ -49,11 +49,7 @@ const TryApp = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{TRY_APP_META_TITLE}</title>
-        <link rel="canonical" href={TRY_APP_COMPLETE_ROUTE} />
-        <meta name="description" content={TRY_APP_META_DESCRIPTION} />
-      </Helmet>
+      <ReactHelmet metaTitle={TRY_APP_META_TITLE} metaDescription={TRY_APP_META_DESCRIPTION} completeURL={TRY_APP_COMPLETE_ROUTE} />
       <Main>
         <GoBackAnchor to={returnRoute} title="Volver atrás hacia Budget Master">
           <ArrowBackIosNewOutlinedIcon />

@@ -17,7 +17,7 @@ import {
 } from './TryApp.styled';
 import tryAppEmptyAccountImage from '../../assets/try-app/try-app-empty-account.webp';
 import tryAppWithDataImage from '../../assets/try-app/try-app-with-data.webp';
-import { BUDGET_MASTER_LANDING } from '../../constants';
+import { BUDGET_MASTER_LANDING, TRY_APP_META_DESCRIPTION, TRY_APP_META_TITLE } from '../../constants';
 
 const TryApp = () => {
   const location = useLocation();
@@ -50,9 +50,9 @@ const TryApp = () => {
   return (
     <>
       <Helmet>
-        <title>Try App | Budget Master App</title>
+        <title>{TRY_APP_META_TITLE}</title>
         <link rel="canonical" href={TRY_APP_COMPLETE_ROUTE} />
-        <meta name="description" content="Try App page of Budget Master App" />
+        <meta name="description" content={TRY_APP_META_DESCRIPTION} />
       </Helmet>
       <Main>
         <GoBackAnchor to={returnRoute} title="Volver atrás hacia Budget Master">

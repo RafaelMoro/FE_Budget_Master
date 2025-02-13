@@ -12,6 +12,9 @@ export const DELETE_METHOD = 'DELETE';
 export const LOGIN_META_TITLE = 'Budget Master | Login - La mejor app de presupuesto familiar';
 // eslint-disable-next-line max-len
 export const LOGIN_META_DESCRIPTION = 'Organiza tus finanzas con la mejor app de presupuesto familiar. Controla gastos, ahorra más y mejora tu economía. ¡Inicia sesión ahora!';
+export const TRY_APP_META_TITLE = 'Budget Master | Try app - Best daily expense tracking app';
+// eslint-disable-next-line max-len
+export const TRY_APP_META_DESCRIPTION = 'Lleva el control de tus gastos con la mejor expense tracker app. Disponible para Android para usarse en la web, fácil de usar y gratuita. ¡Pruebala ahora!';
 
 /** Errors */
 export const NETWORK_CATCH_ERROR = 'Network Error';

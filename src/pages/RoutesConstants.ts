@@ -15,3 +15,4 @@ export const EDIT_RECORD_ROUTE = '/edit-record';
 // Complete URLs
 export const LOGIN_APP_ROUTE = `${APP_URL}${LOGIN_ROUTE}`;
 export const TRY_APP_COMPLETE_ROUTE = `${APP_URL}${TRY_APP_ROUTE}`;
+export const REGISTER_APP_COMPLETE_ROUTE = `${APP_URL}${REGISTER_ROUTE}`;

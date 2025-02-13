@@ -15,6 +15,9 @@ export const LOGIN_META_DESCRIPTION = 'Organiza tus finanzas con la mejor app de
 export const TRY_APP_META_TITLE = 'Budget Master | Try app - Best daily expense tracking app';
 // eslint-disable-next-line max-len
 export const TRY_APP_META_DESCRIPTION = 'Lleva el control de tus gastos con la mejor expense tracker app. Disponible para Android para usarse en la web, fácil de usar y gratuita. ¡Pruebala ahora!';
+export const REGISTER_META_TITLE = 'Budget Master | Registrate: App finanzas personales para iOS';
+// eslint-disable-next-line max-len
+export const REGISTER_META_DESCRIPTION = 'Gestiona tu dinero con la mejor app de finanzas personales para iPhone listo para la web. Registra gastos, y crea presupuestos en la palma de tu mano.';
 
 /** Errors */
 export const NETWORK_CATCH_ERROR = 'Network Error';

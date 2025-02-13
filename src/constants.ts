@@ -18,6 +18,9 @@ export const TRY_APP_META_DESCRIPTION = 'Lleva el control de tus gastos con la m
 export const REGISTER_META_TITLE = 'Budget Master | Registrate: App finanzas personales para iOS';
 // eslint-disable-next-line max-len
 export const REGISTER_META_DESCRIPTION = 'Gestiona tu dinero con la mejor app de finanzas personales para iPhone listo para la web. Registra gastos, y crea presupuestos en la palma de tu mano.';
+export const FORGOT_PASSWORD_META_TITLE = 'Budget Master | ¿Olvide mi contraseña?';
+// eslint-disable-next-line max-len
+export const FORGOT_PASSWORD_META_DESCRIPTION = ' Recupera el acceso a tu herramienta de control de gastos para PC gratis y sigue gestionando tu dinero de manera sencilla y segura. ¡Hazlo en segundos!';
 
 /** Errors */
 export const NETWORK_CATCH_ERROR = 'Network Error';

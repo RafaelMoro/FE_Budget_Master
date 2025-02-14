@@ -7,17 +7,19 @@ import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 
 import { useNotification } from '../../../hooks/useNotification';
 import { useForgotPasswordMutation } from '../../../redux/slices/User/actions/forgotPassword';
-import { LOGIN_ROUTE } from '../../RoutesConstants';
+import { FORGOT_PASSWORD_COMPLETE_ROUTE, LOGIN_ROUTE } from '../../RoutesConstants';
 import {
   ERROR_MESSAGE_GENERAL, ERROR_TITLE_GENERAL, USER_NOT_FOUND_CATCH_ERROR, SUCCESS_FORGOT_PASSWORD_DESC, SUCCESS_FORGOT_PASSWORD_TITLE,
   ERROR_MESSAGE_USER_NOT_FOUND,
+  FORGOT_PASSWORD_META_TITLE,
+  FORGOT_PASSWORD_META_DESCRIPTION,
 } from '../../../constants';
 import { GeneralError, MockedError } from '../../../globalInterface';
 import { ForgotPasswordValues } from './interface';
 import { SystemStateEnum } from '../../../enums';
 import { ForgotPasswordSchema } from '../../../validationsSchemas/login.schema';
 import { ActionButtonPanel } from '../../../components/templates';
-import { Notification } from '../../../components/UI';
+import { Notification, ReactHelmet } from '../../../components/UI';
 import {
   Main, MainContainer, FormContainer, FormTitle, FormDescription,
 } from './ForgotPassword.styled';
@@ -79,6 +81,11 @@ const ForgotPassword = (): ReactElement => {
 
   return (
     <>
+      <ReactHelmet
+        metaTitle={FORGOT_PASSWORD_META_TITLE}
+        metaDescription={FORGOT_PASSWORD_META_DESCRIPTION}
+        completeURL={FORGOT_PASSWORD_COMPLETE_ROUTE}
+      />
       {notification && (
       <Notification
         title={notificationInfo.current.title}

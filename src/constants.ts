@@ -8,6 +8,28 @@ export const POST_METHOD = 'POST';
 export const PUT_METHOD = 'PUT';
 export const DELETE_METHOD = 'DELETE';
 
+/** SEO */
+
+export const LOGIN_META_TITLE = 'Budget Master | Login - La mejor app de presupuesto familiar';
+// eslint-disable-next-line max-len
+export const LOGIN_META_DESCRIPTION = 'Organiza tus finanzas con la mejor app de presupuesto familiar. Controla gastos, ahorra más y mejora tu economía. ¡Inicia sesión ahora!';
+
+export const TRY_APP_META_TITLE = 'Budget Master | Try app - Best daily expense tracking app';
+// eslint-disable-next-line max-len
+export const TRY_APP_META_DESCRIPTION = 'Lleva el control de tus gastos con la mejor expense tracker app. Disponible para Android para usarse en la web, fácil de usar y gratuita. ¡Pruebala ahora!';
+
+export const REGISTER_META_TITLE = 'Budget Master | Registrate: App finanzas personales para iOS';
+// eslint-disable-next-line max-len
+export const REGISTER_META_DESCRIPTION = 'Gestiona tu dinero con la mejor app de finanzas personales para iPhone listo para la web. Registra gastos, y crea presupuestos en la palma de tu mano.';
+
+export const FORGOT_PASSWORD_META_TITLE = 'Budget Master | ¿Olvide mi contraseña?';
+// eslint-disable-next-line max-len
+export const FORGOT_PASSWORD_META_DESCRIPTION = ' Recupera el acceso a tu herramienta de control de gastos para PC gratis y sigue gestionando tu dinero de manera sencilla y segura. ¡Hazlo en segundos!';
+
+export const DASHBOARD_META_TITLE = ' Budget Master | Panel de administración';
+// eslint-disable-next-line max-len
+export const DASHBOARD_META_DESCRIPTION = 'Bienvenido al best personal expense tracker app. Desde este panel de administración organiza tus finanzas y analiza gastos con facilidad. ¡Accede ahora!';
+
 /** Errors */
 export const NETWORK_CATCH_ERROR = 'Network Error';
 export const JWT_EXPIRED_CATCH_ERROR = 'jwt expired';

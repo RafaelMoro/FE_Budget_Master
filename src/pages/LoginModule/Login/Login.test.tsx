@@ -4,8 +4,8 @@ import {
 import userEvent from '@testing-library/user-event';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import fetchMock from 'jest-fetch-mock';
+import { HelmetProvider } from 'react-helmet-async';
 
 import { Login } from './Login';
 import { WrapperRedux } from '../../../tests/WrapperRedux';
@@ -53,7 +53,9 @@ describe('<Login />', () => {
     render(
       <WrapperRedux>
         <Router location={history.location} navigator={history}>
-          <Login />
+          <HelmetProvider>
+            <Login />
+          </HelmetProvider>
         </Router>
       </WrapperRedux>,
     );
@@ -108,7 +110,9 @@ describe('Test Login re routes', () => {
     render(
       <WrapperRedux>
         <Router location={history.location} navigator={history}>
-          <Login />
+          <HelmetProvider>
+            <Login />
+          </HelmetProvider>
         </Router>
       </WrapperRedux>,
     );
@@ -129,7 +133,9 @@ describe('Test Login re routes', () => {
     render(
       <WrapperRedux>
         <Router location={history.location} navigator={history}>
-          <Login />
+          <HelmetProvider>
+            <Login />
+          </HelmetProvider>
         </Router>
       </WrapperRedux>,
     );
@@ -158,7 +164,9 @@ describe('Test Login re routes', () => {
     render(
       <WrapperRedux>
         <Router location={history.location} navigator={history}>
-          <Login />
+          <HelmetProvider>
+            <Login />
+          </HelmetProvider>
         </Router>
       </WrapperRedux>,
     );

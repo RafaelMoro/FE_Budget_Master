@@ -5,3 +5,4 @@ export * from './Error';
 export * from './SelectInput';
 export * from './SpeedDial';
 export * from './AlertMessageSection';
+export * from './ReactHelmet';

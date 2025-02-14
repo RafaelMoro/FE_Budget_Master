@@ -7,13 +7,15 @@ import { useLocation } from 'react-router-dom';
 
 import { useGuestUser, useSyncLoginInfo, useLogin } from '../../../hooks';
 import { LoginSchema } from '../../../validationsSchemas';
-import { Notification } from '../../../components/UI';
+import { Notification, ReactHelmet } from '../../../components/UI';
 import { TogglePasswordAdornment } from '../../../components/UI/TogglePasswordAdornment';
 import { BrandLogoName, LoginButtons } from '../../../components/templates';
 import {
   Main, LoginCard, LogoContainer,
   FormLoginTitle, FormInstructions, LoginInput, ForgotPasswordLink,
 } from './Login.styled';
+import { LOGIN_APP_ROUTE } from '../../RoutesConstants';
+import { LOGIN_META_DESCRIPTION, LOGIN_META_TITLE } from '../../../constants';
 
 const Login = () => {
   const location = useLocation();
@@ -40,6 +42,7 @@ const Login = () => {
 
   return (
     <>
+      <ReactHelmet metaTitle={LOGIN_META_TITLE} metaDescription={LOGIN_META_DESCRIPTION} completeURL={LOGIN_APP_ROUTE} />
       {notification && (
         <Notification
           title={notificationInfo.current.title}
@@ -88,10 +91,10 @@ const Login = () => {
                     }}
                   />
                   <ForgotPasswordLink
-                    title="¿Olvidé mi contraseña? Iniciar proceso de recuperar contraseña"
+                    title="¿Olvidaste tu contraseña? Iniciar proceso de recuperar contraseña"
                     to="/forgot-password"
                   >
-                    Ha olvidado su contraseña?
+                    ¿Olvidaste tu contraseña?
                   </ForgotPasswordLink>
                 </CardContent>
                 <LoginButtons

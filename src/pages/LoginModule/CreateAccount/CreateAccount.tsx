@@ -3,7 +3,9 @@ import {
   ReactElement, useRef, useState,
 } from 'react';
 
-import { ERROR_MESSAGE_GENERAL, ERROR_MESSAGE_EMAIL_EXISTS, ERROR_CATCH_USER_CREATED } from '../../../constants';
+import {
+  ERROR_MESSAGE_GENERAL, ERROR_MESSAGE_EMAIL_EXISTS, ERROR_CATCH_USER_CREATED, REGISTER_META_TITLE, REGISTER_META_DESCRIPTION,
+} from '../../../constants';
 import {
   CreateUserValues, CreateUserValuesMutation, GoNextProps, PersonalInfoFormValues, UserAndPasswordFormValues,
 } from './interface';
@@ -21,7 +23,8 @@ import { useLogin } from '../../../hooks';
 import {
   LoadingFormAnimated, ResultFormAnimated, ErrorResultFormAnimated, SuccessResultFormAnimated,
 } from '../../../components/templates';
-import { LOGIN_ROUTE } from '../../RoutesConstants';
+import { LOGIN_ROUTE, REGISTER_APP_COMPLETE_ROUTE } from '../../RoutesConstants';
+import { ReactHelmet } from '../../../components/UI';
 
 const initialValuesCreateAccountForm = {
   email: '',
@@ -88,46 +91,49 @@ const CreateAccount = ():ReactElement => {
   };
 
   return (
-    <Main>
-      <MainContainer>
-        <FormTitle variant="h1">Crear cuenta</FormTitle>
-        <FormDescription>Llene la siguiente información para crear su cuenta.</FormDescription>
-        <PersonalInformation goNext={goNext} counterView={counterView} direction={direction} />
-        <UserAndPassword
-          goBack={goPreviousView}
-          goNext={goNext}
-          counterView={counterView}
-          direction={direction}
-        />
-        <LoadingFormAnimated text="Su cuenta está siendo creada. Por favor, espere..." order={2} counterView={counterView} direction={direction} />
-        { (!isLoadingUser || isLoadingCategories) && (
-          <ResultFormAnimated
+    <>
+      <ReactHelmet metaTitle={REGISTER_META_TITLE} metaDescription={REGISTER_META_DESCRIPTION} completeURL={REGISTER_APP_COMPLETE_ROUTE} />
+      <Main>
+        <MainContainer>
+          <FormTitle variant="h1">Crear cuenta</FormTitle>
+          <FormDescription>Llene la siguiente información para crear su cuenta.</FormDescription>
+          <PersonalInformation goNext={goNext} counterView={counterView} direction={direction} />
+          <UserAndPassword
+            goBack={goPreviousView}
+            goNext={goNext}
             counterView={counterView}
             direction={direction}
-            order={3}
-            isError={isErrorCategories || isErrorUser}
-            onError={
-              () => (
-                <ErrorResultFormAnimated
-                  redirectRoute={LOGIN_ROUTE}
-                  secondaryButtonText="Ir al inicio de sesión"
-                  primaryButtonText="Volver a intentar"
-                  error={errorText}
-                  resetCounterView={resetCounterView}
-                />
-              )
-            }
-            onSuccess={() => (
-              <SuccessResultFormAnimated
-                title="Su cuenta ha sido creada."
-                buttonText="Go to Login"
-                redirectRoute={LOGIN_ROUTE}
-              />
-            )}
           />
-        )}
-      </MainContainer>
-    </Main>
+          <LoadingFormAnimated text="Su cuenta está siendo creada. Por favor, espere..." order={2} counterView={counterView} direction={direction} />
+          { (!isLoadingUser || isLoadingCategories) && (
+            <ResultFormAnimated
+              counterView={counterView}
+              direction={direction}
+              order={3}
+              isError={isErrorCategories || isErrorUser}
+              onError={
+                () => (
+                  <ErrorResultFormAnimated
+                    redirectRoute={LOGIN_ROUTE}
+                    secondaryButtonText="Ir al inicio de sesión"
+                    primaryButtonText="Volver a intentar"
+                    error={errorText}
+                    resetCounterView={resetCounterView}
+                  />
+                )
+              }
+              onSuccess={() => (
+                <SuccessResultFormAnimated
+                  title="Su cuenta ha sido creada."
+                  buttonText="Go to Login"
+                  redirectRoute={LOGIN_ROUTE}
+                />
+              )}
+            />
+          )}
+        </MainContainer>
+      </Main>
+    </>
   );
 };
 

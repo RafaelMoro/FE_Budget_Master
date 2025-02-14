@@ -4,6 +4,7 @@ import {
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import userEvent from '@testing-library/user-event';
+import { HelmetProvider } from 'react-helmet-async';
 
 import { CreateAccount } from './CreateAccount';
 import { WrapperRedux } from '../../../tests/WrapperRedux';
@@ -45,7 +46,9 @@ describe('<CreateAccount />', () => {
       render(
         <WrapperRedux>
           <Router location={history.location} navigator={history}>
-            <CreateAccount />
+            <HelmetProvider>
+              <CreateAccount />
+            </HelmetProvider>
           </Router>
         </WrapperRedux>,
       );

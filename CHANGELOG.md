@@ -1,3 +1,15 @@
+## v1.12.2 (2025-02-14)
+
+### Pull Requests
+[#67](https://github.com/RafaelMoro/FE_Budget_Master/pull/67) | Add React helmet and add meta data
+
+
+## v1.12.1 (2025-02-12)
+
+### Pull Requests
+[#66](https://github.com/RafaelMoro/FE_Budget_Master/pull/66) | Fix typo in local category
+
+
 ## v1.12.0 (2025-02-07)
 
 ### Pull Requests

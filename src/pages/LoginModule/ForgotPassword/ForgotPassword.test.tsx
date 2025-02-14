@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import fetchMock from 'jest-fetch-mock';
+import { HelmetProvider } from 'react-helmet-async';
 
 import { ForgotPassword } from './ForgotPassword';
 import { WrapperRedux } from '../../../tests/WrapperRedux';
@@ -42,7 +43,9 @@ describe('Reset password page tests', () => {
     render(
       <WrapperRedux>
         <Router location={history.location} navigator={history}>
-          <ForgotPassword />
+          <HelmetProvider>
+            <ForgotPassword />
+          </HelmetProvider>
         </Router>
       </WrapperRedux>,
     );
@@ -65,7 +68,9 @@ describe('Reset password page tests', () => {
       render(
         <WrapperRedux>
           <Router location={history.location} navigator={history}>
-            <ForgotPassword />
+            <HelmetProvider>
+              <ForgotPassword />
+            </HelmetProvider>
           </Router>
         </WrapperRedux>,
       );
@@ -108,7 +113,9 @@ describe('Reset password page tests', () => {
     render(
       <WrapperRedux>
         <Router location={history.location} navigator={history}>
-          <ForgotPassword />
+          <HelmetProvider>
+            <ForgotPassword />
+          </HelmetProvider>
         </Router>
       </WrapperRedux>,
     );
@@ -136,7 +143,9 @@ describe('Reset password page tests', () => {
     render(
       <WrapperRedux>
         <Router location={history.location} navigator={history}>
-          <ForgotPassword />
+          <HelmetProvider>
+            <ForgotPassword />
+          </HelmetProvider>
         </Router>
       </WrapperRedux>,
     );

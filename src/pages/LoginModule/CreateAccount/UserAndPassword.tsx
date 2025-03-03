@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Field, Formik } from 'formik';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import { AnimateBox } from '../../../animations/AnimateBox';
 import { UserAndPasswordProps } from './interface';
@@ -17,6 +18,7 @@ const initialValuesUserAndPassword = {
 const UserAndPassword = ({
   goBack, goNext, counterView, direction,
 }: UserAndPasswordProps) => {
+  const { REACT_APP_RECAPTCHA_KEY } = process.env;
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const toggleShowPassword = () => setShowPassword(!showPassword);
 
@@ -60,6 +62,7 @@ const UserAndPassword = ({
                 endAdornment: <TogglePasswordAdornment showPassword={showPassword} toggleShowPassword={toggleShowPassword} />,
               }}
             />
+            <ReCAPTCHA sitekey={REACT_APP_RECAPTCHA_KEY ?? ''} />
             <FormActionButtons>
               <CancelButton variant="contained" onClick={goBack} size="medium">Regresar</CancelButton>
               <PrimaryButton variant="contained" onClick={submitForm} size="medium">Crear Cuenta</PrimaryButton>
